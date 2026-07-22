@@ -78,6 +78,7 @@ func _physics_process(delta: float) -> void:
 			_process_active(delta)
 		State.STUNNED:
 			velocity = Vector2.ZERO
+			
 
 	move_and_slide()
 	_handle_collisions()
