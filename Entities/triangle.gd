@@ -25,7 +25,7 @@ enum State { IDLE, ACTIVE, STUNNED }
 enum Mode { DASH, BOUNCE }
 
 var state: State = State.IDLE
-var mode: Mode = Mode.BOUNCE
+var mode: Mode = Mode.DASH
 
 var move_timer: float = 0.0
 var cooldown_timer: float = 0.0
@@ -79,7 +79,10 @@ func _physics_process(delta: float) -> void:
 		State.STUNNED:
 			velocity = Vector2.ZERO
 			
-
+	if mode == Mode.BOUNCE:
+		$Sprite2D.animation = "BounceState"
+	else:
+		$Sprite2D.animation = "Dash"
 	move_and_slide()
 	_handle_collisions()
 	_check_window_bounds()

@@ -46,6 +46,7 @@ debug_color = Color(0.70154667, 0.49091738, 3.85046e-07, 0.41960785)
 [node name="Timers" type="Node" parent="." unique_id=2056986045]
 
 [node name="HyperTimer" type="Timer" parent="Timers" unique_id=2104633763]
+wait_time = 3.0
 one_shot = true
 autostart = true
 

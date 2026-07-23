@@ -2,17 +2,49 @@
 
 [ext_resource type="Script" uid="uid://pjrosdsmens3" path="res://Entities/triangle.gd" id="1_4roi2"]
 [ext_resource type="Texture2D" uid="uid://bnnsllh8pc2pv" path="res://Assets/Textures/player_dash.png" id="2_cbtp0"]
+[ext_resource type="Texture2D" uid="uid://bu2ojf3q3dtl7" path="res://Assets/Textures/Bounce_Frame_1.png" id="2_ic6l0"]
+[ext_resource type="Texture2D" uid="uid://ca6otm8qqigmd" path="res://Assets/Textures/player_bounce.png" id="3_1l35o"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4ayxd"]
+animations = [{
+"frames": [{
+"duration": 15.0,
+"texture": ExtResource("3_1l35o")
+}],
+"loop": 1,
+"name": &"BounceClick",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 5.0,
+"texture": ExtResource("2_ic6l0")
+}],
+"loop": 1,
+"name": &"BounceState",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_cbtp0")
+}],
+"loop": 1,
+"name": &"Dash",
+"speed": 5.0
+}]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_k0nfw"]
-points = PackedVector2Array(30, 0, -26, -30, -27, 28)
+points = PackedVector2Array(34.999985, -1.5258789e-05, -26, -30, -27, 28)
 
 [node name="Triangle" type="CharacterBody2D" unique_id=669404060]
 position = Vector2(84, 82)
 script = ExtResource("1_4roi2")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=751581771]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1606221345]
 position = Vector2(1.0000005, -0.9999995)
-texture = ExtResource("2_cbtp0")
+sprite_frames = SubResource("SpriteFrames_4ayxd")
+animation = &"BounceState"
+autoplay = "BounceClick"
+frame_progress = 0.25463504
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1685188489]
 position = Vector2(1.5258789e-05, -0.99998474)
