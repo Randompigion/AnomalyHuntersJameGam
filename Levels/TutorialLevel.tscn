@@ -16,11 +16,6 @@ script = ExtResource("1_tji7q")
 [node name="Triangle" parent="." unique_id=669404060 instance=ExtResource("1_0l1gj")]
 position = Vector2(0, 0)
 collision_mask = 31
-bounce_force = 500.0
-bounce_speed_retention = 0.9
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=495087526]
-position = Vector2(593, 320)
 
 [node name="Enemy" type="CharacterBody2D" parent="." unique_id=200284296]
 position = Vector2(723, 306)
@@ -46,9 +41,4 @@ debug_color = Color(0.70154667, 0.49091738, 3.85046e-07, 0.41960785)
 
 [node name="Timers" type="Node" parent="." unique_id=2056986045]
 
-[node name="HyperTimer" type="Timer" parent="Timers" unique_id=2104633763]
-wait_time = 5.0
-one_shot = true
-
 [connection signal="body_entered" from="Enemy/KillZone" to="Enemy" method="_on_kill_zone_body_entered"]
-[connection signal="timeout" from="Timers/HyperTimer" to="." method="_on_hyper_timer_timeout"]
