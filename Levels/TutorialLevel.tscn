@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cxiim7kb0j2td" path="res://Assets/Textures/enemies/alarmguy.png" id="4_tji7q"]
 [ext_resource type="PackedScene" uid="uid://crnq3mfkg43su" path="res://Entities/cursor.tscn" id="6_0tje5"]
 [ext_resource type="PackedScene" uid="uid://bdk457fu7ular" path="res://Entities/prune_walls.tscn" id="7_2rs8b"]
+[ext_resource type="Script" uid="uid://cmc3as7jogpi4" path="res://Levels/ChunkedSpaceBackground.gd" id="9_ism6p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pc3i1"]
 size = Vector2(102.94092, 102.94098)
@@ -62,5 +63,8 @@ shape = SubResource("RectangleShape2D_82po7")
 
 [node name="Prune_walls" parent="." unique_id=97728551 instance=ExtResource("7_2rs8b")]
 position = Vector2(1103, 515)
+
+[node name="SpaceBackgroundManager" type="Node2D" parent="." unique_id=962824130]
+script = ExtResource("9_ism6p")
 
 [connection signal="body_entered" from="Enemy/KillZone" to="Enemy" method="_on_kill_zone_body_entered"]

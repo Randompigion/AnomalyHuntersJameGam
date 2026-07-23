@@ -1,10 +1,10 @@
 extends CharacterBody2D
 
-@export var speed = 750.0
-@export var dash_speed = 1750
-@export var friction = 500
+@export var speed = 450.0
+@export var dash_speed = 750
+@export var friction = 200
 @export var bounce_speed_retention = 0.6
-@export var stun_duration = 0.5
+@export var stun_duration = 1.5
 @export var max_hp: int = 3
 
 @export var bounce_lock_duration = 0.2
