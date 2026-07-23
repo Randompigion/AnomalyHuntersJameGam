@@ -39,7 +39,7 @@ script = ExtResource("1_4roi2")
 position = Vector2(1.0000005, -0.9999995)
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_4ayxd")
-animation = &"bounce"
+animation = &"dash"
 autoplay = "dash"
 
 [node name="stickbox" type="CollisionPolygon2D" parent="." unique_id=155991292]
