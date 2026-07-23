@@ -53,13 +53,8 @@ func _physics_process(delta: float) -> void:
 		
 	if Input.is_action_just_pressed("toggle_mode"):
 		_toggle_mode()
-<<<<<<< HEAD
 		
-	if can_move:	
-=======
-
 	if can_move:
->>>>>>> 354ee05 (Fix bouncing and add hypertime effect during bounce mode)
 		if dashing:
 			velocity = dash_speed * dash_direction
 		elif bounce_lock:
@@ -72,11 +67,9 @@ func _physics_process(delta: float) -> void:
 				velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
 	else:
 		velocity = Vector2.ZERO
-<<<<<<< HEAD
 		
 	move_and_slide()
 	_handle_wall_collisions()
-=======
 
 	if dashing and mode == Mode.BOUNCE:
 		var collision := move_and_collide(velocity * delta)
@@ -94,7 +87,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		move_and_slide()
 		_handle_wall_collisions()
->>>>>>> 354ee05 (Fix bouncing and add hypertime effect during bounce mode)
 
 func _toggle_mode() -> void:
 	if mode == Mode.DASH:
@@ -117,7 +109,6 @@ func _handle_wall_collisions() -> void:
 		var collision := get_slide_collision(i)
 		var collider := collision.get_collider()
 		var normal := collision.get_normal()
-<<<<<<< HEAD
 
 		if collider and collider.is_in_group("enemy"):
 			if dashing and mode == Mode.DASH:
@@ -136,7 +127,7 @@ func _handle_wall_collisions() -> void:
 				velocity = Vector2.ZERO
 				_apply_stun()
 			break
-=======
+
 		if collider and collider.is_in_group("enemy") and mode == Mode.DASH:
 			_kill_enemy(collider)
 			continue
@@ -149,7 +140,6 @@ func _handle_wall_collisions() -> void:
 			velocity = Vector2.ZERO
 			_apply_stun()
 		break
->>>>>>> 354ee05 (Fix bouncing and add hypertime effect during bounce mode)
 
 func _kill_enemy(enemy: Node) -> void:
 	if enemy.has_method("die"):
