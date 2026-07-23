@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://clu42du2dffit"]
 
 [ext_resource type="Script" uid="uid://pjrosdsmens3" path="res://Entities/triangle.gd" id="1_4roi2"]
-[ext_resource type="Texture2D" uid="uid://bnnsllh8pc2pv" path="res://Assets/PlayerTextures/player_dash.png" id="2_cbtp0"]
-[ext_resource type="Texture2D" uid="uid://bu2ojf3q3dtl7" path="res://Assets/PlayerTextures/Bounce_Frame_1.png" id="2_ic6l0"]
-[ext_resource type="Texture2D" uid="uid://ca6otm8qqigmd" path="res://Assets/PlayerTextures/player_bounce.png" id="3_1l35o"]
-[ext_resource type="AudioStream" uid="uid://bfxhr4dd1mah7" path="res://Sfx/dash.mp3" id="5_v4sx1"]
+[ext_resource type="Texture2D" uid="uid://bnnsllh8pc2pv" path="res://Assets/Textures/player/player_dash.png" id="2_cbtp0"]
+[ext_resource type="Texture2D" uid="uid://bu2ojf3q3dtl7" path="res://Assets/Textures/player/Bounce_Frame_1.png" id="2_ic6l0"]
+[ext_resource type="Texture2D" uid="uid://ca6otm8qqigmd" path="res://Assets/Textures/player/player_bounce.png" id="3_1l35o"]
+[ext_resource type="AudioStream" uid="uid://bfxhr4dd1mah7" path="res://Assets/Sounds/dash.mp3" id="5_v4sx1"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4ayxd"]
 animations = [{

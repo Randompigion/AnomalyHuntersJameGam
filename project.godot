@@ -13,7 +13,7 @@ config_version=5
 config/name="Countdown"
 run/main_scene="uid://hvnoe06rysw5"
 config/features=PackedStringArray("4.7", "GL Compatibility")
-config/icon="res://Assets/PlayerTextures/icon.svg"
+config/icon="res://Assets/Textures/icon.svg"
 
 [display]
 
