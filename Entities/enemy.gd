@@ -1,24 +1,33 @@
 extends CharacterBody2D
+
 var player
 var direction
-const SPEED = 50
+const SPEED = 200
 
 func _ready() -> void:
-	player = $"../Triangle"
+	player = get_node_or_null("../Triangle") 
+	add_to_group("enemy")
 
-#I set the enemies up so they can only be able to sense the player, and just check if it enters and kills itself.
-#We might want to replace this, but it should allow us to quickly test.
 func _on_kill_zone_body_entered(body: Node2D) -> void:
-	queue_free()
+	if body == player:
+		if player.dashing and player.mode == player.Mode.DASH:
+			die()
+		else:
+			player.take_damage(1)
 
-#The player calls this signal, however it doesn't call it yet. Maybe we can do on body enter check if has this?
 func die():
-	#Put animation here when done!
 	queue_free()
 
-#walk to player
 func _physics_process(delta: float) -> void:
-	direction = (player.global_position - position).normalized
-	#I'm too tired to figure this out, but basically it needs to do this equation and itll work.
-#	velocity = (direction * SPEED) * delta
+	if player:
+		direction = (player.global_position - global_position).normalized()
+		velocity = direction * SPEED
+		
 	move_and_slide()
+	
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		if collider == player:
+			if not player.dashing and player.has_method("take_damage"):
+				player.take_damage(1)

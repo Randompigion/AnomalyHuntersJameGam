@@ -1,229 +1,185 @@
 extends CharacterBody2D
 
-const WINDOW_WIDTH: float = 1152.0
-const WINDOW_HEIGHT: float = 648.0
+@export var speed = 750.0
+@export var dash_speed = 1750
+@export var friction = 500
+@export var bounce_speed_retention = 0.6
+@export var stun_duration = 0.5
+@export var max_hp: int = 3
 
-const COLOR_BOUNCE_IDLE: Color = Color(1, 1, 1)
-const COLOR_BOUNCE_ACTIVE: Color = Color(0.3, 0.9, 1)
-const COLOR_DASH_MODE: Color = Color(1, 0.15, 0.15)
-const COLOR_STUNNED: Color = Color(1, 0.6, 0.1)
-
-@export var dash_max_distance: float = 500.0
-@export var dash_min_distance: float = 40.0
-@export var dash_speed: float = 1900.0
-@export var dash_arrival_threshold: float = 14.0
-
-@export var bounce_force: float = 280.0
-@export var bounce_speed_retention: float = 0.3
-@export var bounce_max_speed: float = 750.0
-
-@export var idle_friction: float = 2500.0
-@export var stun_duration: float = 0.3
-@export var point_cone_degrees: float = 40.0
-
-enum State { IDLE, ACTIVE, STUNNED }
+@export var bounce_lock_duration = 0.2
+@export var hypertime_scale = 1.75
+@export var hypertime_duration = 5.0
+var hp: int = max_hp
+var is_invincible: bool = false
+var dashing = false
+var direction: Vector2 = Vector2.ZERO
+var dash_direction: Vector2 = Vector2.RIGHT
+var can_move = true
+var can_dash = true
+var bounce_lock = false
 enum Mode { DASH, BOUNCE }
+var mode: Mode = Mode.DASH
 
-var state: State = State.IDLE
-var mode: Mode = Mode.BOUNCE
+@onready var sprite: AnimatedSprite2D = $Sprite2D
+@onready var stun_timer: Timer = $stunt_timer
 
-var move_timer: float = 0.0
-var cooldown_timer: float = 0.0
-var stun_timer: float = 0.0
-var move_direction: Vector2 = Vector2.RIGHT
-var aim_direction: Vector2 = Vector2.RIGHT
-var dash_target_position: Vector2 = Vector2.ZERO
+func _ready() -> void:
+	hp = max_hp
+	stun_timer.one_shot = true
+	if not stun_timer.timeout.is_connected(_on_stun_timer_timeout):
+		stun_timer.timeout.connect(_on_stun_timer_timeout)
 
-signal moved(direction: Vector2, used_mode: Mode)
-signal bounced(new_direction: Vector2)
-signal stunned()
-signal enemy_killed(enemy: Node)
-signal cooldown_ready()
-signal mode_changed(new_mode: Mode)
+@warning_ignore("unused_parameter")
+func _process(delta: float) -> void:
+	if mode == Mode.DASH:
+		if not dashing:
+			look_at(get_global_mouse_position())
+	else: # BOUNCE mode
+		if velocity.length() > 1.0:
+			rotation = lerp_angle(rotation, velocity.angle(), 20 * delta)
 
+@warning_ignore("unused_parameter")
+func _physics_process(delta: float) -> void:
+	if Input.is_action_just_pressed("dash") and can_dash:
+		dashing = true
+		dash_direction = (get_global_mouse_position() - global_position).normalized()
+		rotation = dash_direction.angle()
+		if $AudioStreamPlayer2D.playing == false: # Optional: prevents overlapping sounds
+			$AudioStreamPlayer2D.play()
+		can_dash = false
+		$dash_timer.start()
+		$dash_cooldown.start()
+		
+	if Input.is_action_just_pressed("toggle_mode"):
+		_toggle_mode()
+		
+	if can_move:
+		if dashing:
+			velocity = dash_speed * dash_direction
+		elif bounce_lock:
+			velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+		else:
+			if Input.is_action_pressed("propel"):
+				var dir = (get_global_mouse_position() - global_position).normalized()
+				velocity = speed * dir
+			else:
+				velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+	else:
+		velocity = Vector2.ZERO
+		
+	move_and_slide()
+	_handle_wall_collisions()
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.pressed:
-		if event.button_index == MOUSE_BUTTON_RIGHT:
-			_toggle_mode()
-			return
-		if event.button_index == MOUSE_BUTTON_LEFT \
-		and state == State.IDLE \
-		and cooldown_timer <= 0.0:
-			_start_move()
-
+	if dashing and mode == Mode.BOUNCE:
+		var collision := move_and_collide(velocity * delta)
+		if collision:
+			var collider := collision.get_collider()
+			if collider and collider.is_in_group("enemy"):
+				_kill_enemy(collider)
+			else:
+				velocity = velocity.bounce(collision.get_normal()) * bounce_speed_retention
+				dash_direction = velocity.normalized()
+				rotation = dash_direction.angle()
+				dashing = false
+				bounce_lock = true
+				get_tree().create_timer(bounce_lock_duration).timeout.connect(func(): bounce_lock = false)
+	else:
+		move_and_slide()
+		_handle_wall_collisions()
 
 func _toggle_mode() -> void:
-	if mode == Mode.BOUNCE:
-		mode = Mode.DASH
-	else:
+	if mode == Mode.DASH:
 		mode = Mode.BOUNCE
-	if state == State.IDLE:
-		_apply_idle_color()
-	mode_changed.emit(mode)
-
-
-func _apply_idle_color() -> void:
-	modulate = COLOR_DASH_MODE if mode == Mode.DASH else COLOR_BOUNCE_IDLE
-
-
-func _physics_process(delta: float) -> void:
-	_update_aim()
-	_update_timers(delta)
-
-	match state:
-		State.IDLE:
-			velocity = velocity.move_toward(Vector2.ZERO, idle_friction * delta)
-		State.ACTIVE:
-			_process_active(delta)
-		State.STUNNED:
-			velocity = Vector2.ZERO
-			
-
-	move_and_slide()
-	_handle_collisions()
-	_check_window_bounds()
-
-
-func _update_aim() -> void:
-	if state == State.STUNNED:
-		return
-	aim_direction = (get_global_mouse_position() - global_position).normalized()
-	if state == State.IDLE:
-		rotation = aim_direction.angle()
-
-
-func _update_timers(delta: float) -> void:
-	if cooldown_timer > 0.0:
-		cooldown_timer = max(cooldown_timer - delta, 0.0)
-		if cooldown_timer == 0.0:
-			cooldown_ready.emit()
-
-	if state == State.STUNNED:
-		stun_timer -= delta
-		if stun_timer <= 0.0:
-			_set_state(State.IDLE)
-
-
-func _set_state(new_state: State) -> void:
-	state = new_state
-	match state:
-		State.IDLE:
-			_apply_idle_color()
-			scale = Vector2.ONE
-		State.ACTIVE:
-			modulate = COLOR_DASH_MODE if mode == Mode.DASH else COLOR_BOUNCE_ACTIVE
-			scale = Vector2(1.15, 0.85)
-		State.STUNNED:
-			modulate = COLOR_STUNNED
-			scale = Vector2(0.85, 0.85)
-
-
-func _start_move() -> void:
-	move_direction = aim_direction
-	rotation = move_direction.angle()
-	_set_state(State.ACTIVE)
-
-	if mode == Mode.DASH:
-		var raw_distance: float = global_position.distance_to(get_global_mouse_position())
-		var clamped_distance: float = clampf(raw_distance, dash_min_distance, dash_max_distance)
-		dash_target_position = global_position + move_direction * clamped_distance
-		velocity = move_direction * dash_speed
+		Engine.time_scale = hypertime_scale
+		if sprite.sprite_frames and sprite.sprite_frames.has_animation("bounce"):
+			sprite.play("bounce")
+		get_tree().create_timer(hypertime_duration, true, false, true).timeout.connect(_end_hypertime)
 	else:
-		velocity = move_direction * bounce_force
+		_end_hypertime()
 
-	moved.emit(move_direction, mode)
+func _end_hypertime() -> void:
+	mode = Mode.DASH
+	Engine.time_scale = 1.0
+	if sprite.sprite_frames and sprite.sprite_frames.has_animation("dash"):
+		sprite.play("dash")
 
-
-func _process_active(delta: float) -> void:
-	if mode == Mode.DASH:
-		if global_position.distance_to(dash_target_position) <= dash_arrival_threshold:
-			_finish_move()
-	else:
-		move_timer -= delta
-
-
-func _finish_move() -> void:
-	_set_state(State.IDLE)
-	cooldown_timer = 0.0
-	velocity = Vector2.ZERO
-
-
-func _handle_collisions() -> void:
-	if state != State.ACTIVE:
-		return
-
+func _handle_wall_collisions() -> void:
 	for i in get_slide_collision_count():
 		var collision := get_slide_collision(i)
 		var collider := collision.get_collider()
 		var normal := collision.get_normal()
 
-		var hit_angle_deg: float = rad_to_deg(move_direction.angle_to(-normal))
-		var is_point_hit: bool = absf(hit_angle_deg) <= (point_cone_degrees * 0.5)
-
 		if collider and collider.is_in_group("enemy"):
-			if is_point_hit:
+			if dashing and mode == Mode.DASH:
 				_kill_enemy(collider)
+			elif not dashing:
+				take_damage(1)
+			continue
+		
+		if dashing:
+			if mode == Mode.BOUNCE:
+				velocity = velocity.bounce(normal) * bounce_speed_retention
+				dash_direction = velocity.normalized()
+				rotation = dash_direction.angle()
 			else:
-				_bounce_off(normal)
-		elif collider and collider.is_in_group("spiky_enemy"):
-			_bounce_off(normal)
+				dashing = false
+				velocity = Vector2.ZERO
+				_apply_stun()
+			break
+
+		if collider and collider.is_in_group("enemy") and mode == Mode.DASH:
+			_kill_enemy(collider)
+			continue
+		if mode == Mode.BOUNCE:
+			velocity = velocity.bounce(normal) * bounce_speed_retention
+			dash_direction = velocity.normalized()
+			rotation = dash_direction.angle()
 		else:
-			_hit_wall(normal)
+			dashing = false
+			velocity = Vector2.ZERO
+			_apply_stun()
 		break
 
-
-func _hit_wall(normal: Vector2) -> void:
-	if mode == Mode.DASH:
-		_stun()
-	else:
-		_bounce_off(normal)
-
-
-func _check_window_bounds() -> void:
-	if global_position.x <= 0.0:
-		global_position.x = 0.0
-		_hit_wall(Vector2.RIGHT)
-	elif global_position.x >= WINDOW_WIDTH:
-		global_position.x = WINDOW_WIDTH
-		_hit_wall(Vector2.LEFT)
-
-	if global_position.y <= 0.0:
-		global_position.y = 0.0
-		_hit_wall(Vector2.DOWN)
-	elif global_position.y >= WINDOW_HEIGHT:
-		global_position.y = WINDOW_HEIGHT
-		_hit_wall(Vector2.UP)
-
-
 func _kill_enemy(enemy: Node) -> void:
-	enemy_killed.emit(enemy)
 	if enemy.has_method("die"):
 		enemy.die()
-	elif enemy is Node:
+	else:
 		enemy.queue_free()
 
-
-func _bounce_off(normal: Vector2) -> void:
-	if state != State.ACTIVE:
+func take_damage(amount: int) -> void:
+	if is_invincible:
 		return
+		
+	hp -= amount
+	print("HP: ", hp)
+	
+	if hp <= 0:
+		print("GAME OVER")
+		get_tree().reload_current_scene()
+	else:
+		is_invincible = true
+		sprite.modulate.a = 0.5
+		await get_tree().create_timer(1.0).timeout
+		sprite.modulate.a = 1.0
+		is_invincible = false
 
-	velocity = velocity.bounce(normal) * bounce_speed_retention
-	velocity = velocity.limit_length(bounce_max_speed)
-	move_direction = velocity.normalized()
-	rotation = move_direction.angle()
+func _apply_stun() -> void:
+	can_move = false
+	stun_timer.stop()
+	stun_timer.start(stun_duration)
 
-	bounced.emit(move_direction)
+func _on_stun_timer_timeout() -> void:
+	can_move = true
 
+func _on_dash_timer_timeout() -> void:
+	dashing = false
 
-func _stun() -> void:
-	global_position -= velocity.normalized() * 2.0
-	_set_state(State.STUNNED)
-	stun_timer = stun_duration
+func _on_dash_cooldown_timeout() -> void:
+	can_dash = true
+	
+func hazard_kill() -> void:
+	# We'll have to add here a respawn or something
+	global_position = Vector2.ZERO
 	velocity = Vector2.ZERO
-	cooldown_timer = 0.0
-	stunned.emit()
-
-
-func get_cooldown_ratio() -> float:
-	return 0.0 if state == State.IDLE else 1.0
+	dashing = false
