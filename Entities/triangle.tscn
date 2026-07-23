@@ -55,7 +55,6 @@ position_smoothing_enabled = true
 wait_time = 0.3
 
 [node name="dash_cooldown" type="Timer" parent="." unique_id=1388899622]
-wait_time = 3.0
 
 [node name="bouncebox" type="CollisionPolygon2D" parent="." unique_id=520423963]
 position = Vector2(1, 0.7168244)
@@ -71,6 +70,7 @@ pitch_scale = 3.35
 attenuation = 0.46651652
 
 [node name="stunt_timer" type="Timer" parent="." unique_id=1534631604]
+wait_time = 3.0
 one_shot = true
 
 [connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]

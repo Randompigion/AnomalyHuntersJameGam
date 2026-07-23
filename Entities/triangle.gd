@@ -1,7 +1,7 @@
 extends CharacterBody2D
-@export var speed = 300.0
-@export var dash_speed = 3000
-@export var friction = 2
+@export var speed = 750.0
+@export var dash_speed = 1450
+@export var friction = 500
 @export var bounce_speed_retention = 0.6
 @export var stun_duration = 0.5
 var dashing = false
@@ -44,7 +44,7 @@ func _physics_process(delta: float) -> void:
 				var dir = (get_global_mouse_position() - global_position).normalized()
 				velocity = speed * dir
 			else:
-				velocity = 0 * direction
+				velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
 	else:
 		velocity = Vector2.ZERO
 	move_and_slide()
