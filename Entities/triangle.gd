@@ -132,3 +132,9 @@ func _on_dash_timer_timeout() -> void:
 
 func _on_dash_cooldown_timeout() -> void:
 	can_dash = true
+	
+func hazard_kill() -> void:
+	# We'll have to add here a respawn or something
+	global_position = Vector2.ZERO
+	velocity = Vector2.ZERO
+	dashing = false

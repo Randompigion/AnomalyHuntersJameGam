@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bn1525ulmm017" path="res://Assets/Textures/icon.svg" id="3_5c8bj"]
 [ext_resource type="Texture2D" uid="uid://cxiim7kb0j2td" path="res://Assets/Textures/enemies/alarmguy.png" id="4_tji7q"]
 [ext_resource type="PackedScene" uid="uid://crnq3mfkg43su" path="res://Entities/cursor.tscn" id="6_0tje5"]
+[ext_resource type="PackedScene" uid="uid://bdk457fu7ular" path="res://Entities/prune_walls.tscn" id="7_2rs8b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pc3i1"]
 size = Vector2(102.94092, 102.94098)
@@ -58,5 +59,8 @@ shape = SubResource("RectangleShape2D_82po7")
 [node name="cursor" parent="." unique_id=1436806802 instance=ExtResource("6_0tje5")]
 
 [node name="Timers" type="Node" parent="." unique_id=2056986045]
+
+[node name="Prune_walls" parent="." unique_id=97728551 instance=ExtResource("7_2rs8b")]
+position = Vector2(1103, 515)
 
 [connection signal="body_entered" from="Enemy/KillZone" to="Enemy" method="_on_kill_zone_body_entered"]
