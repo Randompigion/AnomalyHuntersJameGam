@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://cxiim7kb0j2td" path="res://Assets/Textures/enemies/alarmguy.png" id="4_tji7q"]
 [ext_resource type="PackedScene" uid="uid://crnq3mfkg43su" path="res://Entities/cursor.tscn" id="6_0tje5"]
 [ext_resource type="PackedScene" uid="uid://bdk457fu7ular" path="res://Entities/prune_walls.tscn" id="7_2rs8b"]
+[ext_resource type="PackedScene" uid="uid://c6ylojwgct72c" path="res://Entities/shooter_enemy.tscn" id="8_wjxcd"]
 [ext_resource type="Script" uid="uid://cmc3as7jogpi4" path="res://Levels/ChunkedSpaceBackground.gd" id="9_ism6p"]
 [ext_resource type="Script" uid="uid://by57ttr5jcqc1" path="res://Levels/time_left.gd" id="11_fy7dx"]
 [ext_resource type="FontFile" uid="uid://cwhrnc44j65uh" path="res://Assets/PixelOperator8.ttf" id="12_ggei0"]
@@ -45,7 +46,7 @@ texture = ExtResource("4_djxhu")
 shape = SubResource("CircleShape2D_pc3i1")
 
 [node name="Enemy" type="CharacterBody2D" parent="." unique_id=200284296]
-position = Vector2(723, 306)
+position = Vector2(728, 287.00003)
 scale = Vector2(0.68000126, 0.68000126)
 collision_layer = 4
 script = ExtResource("2_tji7q")
@@ -75,7 +76,7 @@ scale = Vector2(6.0625, 1)
 texture = ExtResource("3_5c8bj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1628912657]
-position = Vector2(732.75, 5.5)
+position = Vector2(728, 2)
 shape = SubResource("RectangleShape2D_82po7")
 
 [node name="cursor" parent="." unique_id=1436806802 instance=ExtResource("6_0tje5")]
@@ -112,5 +113,8 @@ autostart = true
 stream = ExtResource("14_3ksry")
 volume_db = 24.0
 autoplay = true
+
+[node name="ShooterEnemy" parent="." unique_id=1749464398 instance=ExtResource("8_wjxcd")]
+position = Vector2(365.00003, 227.00003)
 
 [connection signal="body_entered" from="Enemy/KillZone" to="Enemy" method="_on_kill_zone_body_entered"]

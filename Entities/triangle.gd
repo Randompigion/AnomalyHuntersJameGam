@@ -67,9 +67,6 @@ func _physics_process(delta: float) -> void:
 				velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
 	else:
 		velocity = Vector2.ZERO
-		
-	move_and_slide()
-	_handle_wall_collisions()
 
 	if dashing and mode == Mode.BOUNCE:
 		var collision := move_and_collide(velocity * delta)
@@ -105,32 +102,18 @@ func _end_hypertime() -> void:
 		sprite.play("dash")
 
 func _handle_wall_collisions() -> void:
+	if not dashing:
+		return
 	for i in get_slide_collision_count():
 		var collision := get_slide_collision(i)
 		var collider := collision.get_collider()
 		var normal := collision.get_normal()
 
 		if collider and collider.is_in_group("enemy"):
-			if dashing and mode == Mode.DASH:
+			if mode == Mode.DASH:
 				_kill_enemy(collider)
-			elif not dashing:
-				take_damage(1)
 			continue
-		
-		if dashing:
-			if mode == Mode.BOUNCE:
-				velocity = velocity.bounce(normal) * bounce_speed_retention
-				dash_direction = velocity.normalized()
-				rotation = dash_direction.angle()
-			else:
-				dashing = false
-				velocity = Vector2.ZERO
-				_apply_stun()
-			break
 
-		if collider and collider.is_in_group("enemy") and mode == Mode.DASH:
-			_kill_enemy(collider)
-			continue
 		if mode == Mode.BOUNCE:
 			velocity = velocity.bounce(normal) * bounce_speed_retention
 			dash_direction = velocity.normalized()
