@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://cmc3as7jogpi4" path="res://Levels/ChunkedSpaceBackground.gd" id="9_ism6p"]
 [ext_resource type="Script" uid="uid://by57ttr5jcqc1" path="res://Levels/time_left.gd" id="11_fy7dx"]
 [ext_resource type="FontFile" uid="uid://cwhrnc44j65uh" path="res://Assets/PixelOperator8.ttf" id="12_ggei0"]
+[ext_resource type="Script" uid="uid://dl5pk2mfo3ojw" path="res://Levels/spawner.gd" id="13_ggei0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pc3i1"]
 radius = 46.647614
@@ -98,5 +99,12 @@ theme_override_fonts/font = ExtResource("12_ggei0")
 theme_override_font_sizes/font_size = 128
 text = "2:00"
 horizontal_alignment = 1
+
+[node name="spawner" type="Node2D" parent="." unique_id=185982828]
+script = ExtResource("13_ggei0")
+
+[node name="Timer" type="Timer" parent="spawner" unique_id=871561852]
+wait_time = 10.0
+autostart = true
 
 [connection signal="body_entered" from="Enemy/KillZone" to="Enemy" method="_on_kill_zone_body_entered"]
