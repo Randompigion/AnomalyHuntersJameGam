@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://clu42du2dffit" path="res://Entities/triangle.tscn" id="1_0l1gj"]
 [ext_resource type="Script" uid="uid://dhujgshj4oobi" path="res://Levels/tutorial_level.gd" id="1_tji7q"]
 [ext_resource type="Script" uid="uid://61r1dw5vrtv" path="res://Entities/enemy.gd" id="2_tji7q"]
-[ext_resource type="Texture2D" uid="uid://bn1525ulmm017" path="res://Assets/Textures/icon.svg" id="3_5c8bj"]
+[ext_resource type="Texture2D" uid="uid://bn1525ulmm017" path="res://Assets/PlayerTextures/icon.svg" id="3_5c8bj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pc3i1"]
 size = Vector2(102.94092, 102.94098)
@@ -15,11 +15,6 @@ script = ExtResource("1_tji7q")
 
 [node name="Triangle" parent="." unique_id=669404060 instance=ExtResource("1_0l1gj")]
 collision_mask = 31
-bounce_force = 500.0
-bounce_speed_retention = 0.9
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=495087526]
-position = Vector2(593, 320)
 
 [node name="Enemy" type="CharacterBody2D" parent="." unique_id=200284296]
 position = Vector2(723, 306)
@@ -45,9 +40,4 @@ debug_color = Color(0.70154667, 0.49091738, 3.85046e-07, 0.41960785)
 
 [node name="Timers" type="Node" parent="." unique_id=2056986045]
 
-[node name="HyperTimer" type="Timer" parent="Timers" unique_id=2104633763]
-wait_time = 5.0
-one_shot = true
-
 [connection signal="body_entered" from="Enemy/KillZone" to="Enemy" method="_on_kill_zone_body_entered"]
-[connection signal="timeout" from="Timers/HyperTimer" to="." method="_on_hyper_timer_timeout"]

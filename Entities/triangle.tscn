@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://clu42du2dffit"]
 
 [ext_resource type="Script" uid="uid://pjrosdsmens3" path="res://Entities/triangle.gd" id="1_4roi2"]
-[ext_resource type="Texture2D" uid="uid://bnnsllh8pc2pv" path="res://Assets/Textures/player_dash.png" id="2_cbtp0"]
-[ext_resource type="Texture2D" uid="uid://bu2ojf3q3dtl7" path="res://Assets/Textures/Bounce_Frame_1.png" id="2_ic6l0"]
-[ext_resource type="Texture2D" uid="uid://ca6otm8qqigmd" path="res://Assets/Textures/player_bounce.png" id="3_1l35o"]
+[ext_resource type="Texture2D" uid="uid://bnnsllh8pc2pv" path="res://Assets/PlayerTextures/player_dash.png" id="2_cbtp0"]
+[ext_resource type="Texture2D" uid="uid://bu2ojf3q3dtl7" path="res://Assets/PlayerTextures/Bounce_Frame_1.png" id="2_ic6l0"]
+[ext_resource type="Texture2D" uid="uid://ca6otm8qqigmd" path="res://Assets/PlayerTextures/player_bounce.png" id="3_1l35o"]
+[ext_resource type="AudioStream" uid="uid://bfxhr4dd1mah7" path="res://Sfx/dash.mp3" id="5_v4sx1"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4ayxd"]
 animations = [{
@@ -32,20 +33,43 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_k0nfw"]
-points = PackedVector2Array(34.999985, -1.5258789e-05, -26, -30, -27, 28)
-
 [node name="Triangle" type="CharacterBody2D" unique_id=669404060]
-position = Vector2(84, 82)
 script = ExtResource("1_4roi2")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1606221345]
 position = Vector2(1.0000005, -0.9999995)
 sprite_frames = SubResource("SpriteFrames_4ayxd")
 animation = &"BounceState"
-autoplay = "BounceClick"
-frame_progress = 0.25463504
+autoplay = "Dash"
+frame_progress = 0.050638456
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1685188489]
-position = Vector2(1.5258789e-05, -0.99998474)
-shape = SubResource("ConvexPolygonShape2D_k0nfw")
+[node name="stickbox" type="CollisionPolygon2D" parent="." unique_id=155991292]
+position = Vector2(-9.271509, 5.0000005)
+scale = Vector2(1.4627731, 1.2425828)
+polygon = PackedVector2Array(30, -5, 26, -11, 20, -12, 20, 2, 26, 0)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=210832893]
+zoom = Vector2(0.5, 0.5)
+position_smoothing_enabled = true
+
+[node name="dash_timer" type="Timer" parent="." unique_id=528950344]
+wait_time = 0.3
+
+[node name="dash_cooldown" type="Timer" parent="." unique_id=1388899622]
+wait_time = 3.0
+
+[node name="bouncebox" type="CollisionPolygon2D" parent="." unique_id=520423963]
+position = Vector2(1, 0.7168244)
+scale = Vector2(1, 1.0168269)
+polygon = PackedVector2Array(20, -10, 20, 7, -24, 25, -31, 18, -22, -1, -31, -21, -25, -27)
+
+[node name="hurtbox" type="CollisionPolygon2D" parent="." unique_id=2095867258]
+polygon = PackedVector2Array(-25, 24, 32, 4, 32, -7, -25, -26, -31, -20, -22, -2, -30, 18)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=849410662]
+stream = ExtResource("5_v4sx1")
+pitch_scale = 3.35
+attenuation = 0.46651652
+
+[connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="dash_cooldown" to="." method="_on_dash_cooldown_timeout"]

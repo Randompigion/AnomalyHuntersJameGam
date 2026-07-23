@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bu2ojf3q3dtl7"
-path="res://.godot/imported/Bounce_Frame_1.png-5c8d35c6b33b222c3d75418fe71b8e0b.ctex"
+path="res://.godot/imported/Bounce_Frame_1.png-932fac68308ddfcaff431b81d3447c98.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/Bounce_Frame_1.png"
-dest_files=["res://.godot/imported/Bounce_Frame_1.png-5c8d35c6b33b222c3d75418fe71b8e0b.ctex"]
+source_file="res://Assets/PlayerTextures/Bounce_Frame_1.png"
+dest_files=["res://.godot/imported/Bounce_Frame_1.png-932fac68308ddfcaff431b81d3447c98.ctex"]
 
 [params]
 

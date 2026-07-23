@@ -1,0 +1,60 @@
+[gd_scene format=3 uid="uid://clu42du2dffit"]
+
+[ext_resource type="Script" uid="uid://pjrosdsmens3" path="res://Entities/triangle.gd" id="1_4roi2"]
+[ext_resource type="Texture2D" uid="uid://bnnsllh8pc2pv" path="res://Assets/Textures/player_dash.png" id="2_cbtp0"]
+[ext_resource type="Texture2D" uid="uid://bu2ojf3q3dtl7" path="res://Assets/Textures/Bounce_Frame_1.png" id="2_ic6l0"]
+[ext_resource type="Texture2D" uid="uid://ca6otm8qqigmd" path="res://Assets/Textures/player_bounce.png" id="3_1l35o"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4ayxd"]
+animations = [{
+"frames": [{
+"duration": 15.0,
+"texture": ExtResource("3_1l35o")
+}],
+"loop": 1,
+"name": &"BounceClick",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 5.0,
+"texture": ExtResource("2_ic6l0")
+}],
+"loop": 1,
+"name": &"BounceState",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_cbtp0")
+}],
+"loop": 1,
+"name": &"Dash",
+"speed": 5.0
+}]
+
+[node name="Triangle" type="CharacterBody2D" unique_id=669404060]
+script = ExtResource("1_4roi2")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1606221345]
+position = Vector2(1.0000005, -0.9999995)
+sprite_frames = SubResource("SpriteFrames_4ayxd")
+animation = &"Dash"
+autoplay = "Dash"
+frame_progress = 0.23895341
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="." unique_id=155991292]
+position = Vector2(1.5258789e-05, 1.5258789e-05)
+polygon = PackedVector2Array(30.999985, -1.5258789e-05, 26.999985, -7.0000153, -23.000015, -25.000015, -29.000015, -20.000015, -21.000015, -1.5258789e-05, -30.000015, 15.999985, -23.000015, 23.999985, 27.999985, 5.9999847)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=210832893]
+zoom = Vector2(0.5, 0.5)
+position_smoothing_enabled = true
+
+[node name="dash_timer" type="Timer" parent="." unique_id=528950344]
+wait_time = 0.2
+
+[node name="dash_cooldown" type="Timer" parent="." unique_id=1388899622]
+wait_time = 5.0
+
+[connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="dash_cooldown" to="." method="_on_dash_cooldown_timeout"]
