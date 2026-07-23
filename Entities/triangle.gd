@@ -81,6 +81,7 @@ func _physics_process(delta: float) -> void:
 			
 	if mode == Mode.BOUNCE:
 		$Sprite2D.animation = "BounceState"
+		$"..".hyper_time()
 	else:
 		$Sprite2D.animation = "Dash"
 	move_and_slide()

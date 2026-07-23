@@ -46,8 +46,8 @@ debug_color = Color(0.70154667, 0.49091738, 3.85046e-07, 0.41960785)
 [node name="Timers" type="Node" parent="." unique_id=2056986045]
 
 [node name="HyperTimer" type="Timer" parent="Timers" unique_id=2104633763]
+wait_time = 5.0
 one_shot = true
-autostart = true
 
 [connection signal="body_entered" from="Enemy/KillZone" to="Enemy" method="_on_kill_zone_body_entered"]
 [connection signal="timeout" from="Timers/HyperTimer" to="." method="_on_hyper_timer_timeout"]
