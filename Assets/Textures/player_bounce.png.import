@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://m3sdtg4hau6i"
-path="res://.godot/imported/AlarmGuy.png-7cab56371085b7d4a942f195c76e7a8d.ctex"
+uid="uid://ca6otm8qqigmd"
+path="res://.godot/imported/player_bounce.png-c017352749857f132b5af201ab695e5a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/AlarmGuy.png"
-dest_files=["res://.godot/imported/AlarmGuy.png-7cab56371085b7d4a942f195c76e7a8d.ctex"]
+source_file="res://Assets/Textures/player_bounce.png"
+dest_files=["res://.godot/imported/player_bounce.png-c017352749857f132b5af201ab695e5a.ctex"]
 
 [params]
 
