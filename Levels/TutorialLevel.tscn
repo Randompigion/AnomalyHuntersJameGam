@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://crnq3mfkg43su" path="res://Entities/cursor.tscn" id="6_0tje5"]
 [ext_resource type="PackedScene" uid="uid://bdk457fu7ular" path="res://Entities/prune_walls.tscn" id="7_2rs8b"]
 [ext_resource type="Script" uid="uid://cmc3as7jogpi4" path="res://Levels/ChunkedSpaceBackground.gd" id="9_ism6p"]
+[ext_resource type="Script" uid="uid://by57ttr5jcqc1" path="res://Levels/time_left.gd" id="11_fy7dx"]
+[ext_resource type="FontFile" uid="uid://cwhrnc44j65uh" path="res://Assets/PixelOperator8.ttf" id="12_ggei0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pc3i1"]
 radius = 46.647614
@@ -83,5 +85,22 @@ position = Vector2(1103, 515)
 
 [node name="SpaceBackgroundManager" type="Node2D" parent="." unique_id=962824130]
 script = ExtResource("9_ism6p")
+
+[node name="Time Left" type="Node" parent="." unique_id=1301317357]
+script = ExtResource("11_fy7dx")
+
+[node name="Label" type="Label" parent="Time Left" unique_id=861436376]
+offset_left = -215.0
+offset_top = 480.0
+offset_right = 201.0
+offset_bottom = 655.0
+theme_override_fonts/font = ExtResource("12_ggei0")
+theme_override_font_sizes/font_size = 128
+text = "2:00"
+horizontal_alignment = 1
+
+[node name="Timer" type="Timer" parent="Time Left" unique_id=1131257429]
+wait_time = 120.0
+one_shot = true
 
 [connection signal="body_entered" from="Enemy/KillZone" to="Enemy" method="_on_kill_zone_body_entered"]

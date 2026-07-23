@@ -3,7 +3,7 @@ extends Node2D
 @export var master_seed: int = 1337
 @export var chunk_size: int = 1024
 @export var render_radius: int = 5
-@export var pixel_scale: int = 100
+@export var pixel_scale: int = 40
 @export var use_threads: bool = true
 
 var active_chunks: Dictionary = {}

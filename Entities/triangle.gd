@@ -150,19 +150,16 @@ func _kill_enemy(enemy: Node) -> void:
 func take_damage(amount: int) -> void:
 	if is_invincible:
 		return
-		
-	hp -= amount
-	print("HP: ", hp)
 	
-	if hp <= 0:
-		print("GAME OVER")
-		get_tree().reload_current_scene()
-	else:
-		is_invincible = true
-		sprite.modulate.a = 0.5
-		await get_tree().create_timer(1.0).timeout
-		sprite.modulate.a = 1.0
-		is_invincible = false
+	dashing = false
+	velocity = Vector2.ZERO
+	_apply_stun()
+	
+	is_invincible = true
+	sprite.modulate.a = 0.5
+	await get_tree().create_timer(1.0).timeout
+	sprite.modulate.a = 1.0
+	is_invincible = false
 
 func _apply_stun() -> void:
 	can_move = false

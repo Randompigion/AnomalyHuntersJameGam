@@ -13,7 +13,7 @@ func _on_kill_zone_body_entered(body: Node2D) -> void:
 		if player.dashing and player.mode == player.Mode.DASH:
 			die()
 		else:
-			player.apply_stun()
+			player.take_damage(1)
 
 func die():
 	queue_free()
@@ -29,5 +29,5 @@ func _physics_process(delta: float) -> void:
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
 		if collider == player:
-			if not player.dashing and player.has_method("apply_stun"):
-				player.apply_stun()
+			if not player.dashing and player.has_method("take_damage"):
+				player.take_damage(1)
