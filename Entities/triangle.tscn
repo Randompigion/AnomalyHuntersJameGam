@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://clu42du2dffit"]
 
 [ext_resource type="Script" uid="uid://pjrosdsmens3" path="res://Entities/triangle.gd" id="1_4roi2"]
-[ext_resource type="Texture2D" uid="uid://bnnsllh8pc2pv" path="res://Assets/Textures/player/player_dash.png" id="2_cbtp0"]
-[ext_resource type="Texture2D" uid="uid://ca6otm8qqigmd" path="res://Assets/Textures/player/player_bounce.png" id="3_1l35o"]
+[ext_resource type="Texture2D" uid="uid://kl27cwc3l6i3" path="res://Assets/Textures/player/player_dash.png" id="2_cbtp0"]
+[ext_resource type="Texture2D" uid="uid://0vn4tabg5t2k" path="res://Assets/Textures/player/player_bounce.png" id="3_1l35o"]
 [ext_resource type="AudioStream" uid="uid://bfxhr4dd1mah7" path="res://Assets/Sounds/dash.mp3" id="5_v4sx1"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4ayxd"]
@@ -20,7 +20,7 @@ animations = [{
 "texture": ExtResource("3_1l35o")
 }],
 "loop": 1,
-"name": &"bounce",
+"name": &"BounceState",
 "speed": 5.0
 }, {
 "frames": [{
@@ -28,7 +28,7 @@ animations = [{
 "texture": ExtResource("2_cbtp0")
 }],
 "loop": 1,
-"name": &"dash",
+"name": &"Dash",
 "speed": 5.0
 }]
 
@@ -37,9 +37,10 @@ script = ExtResource("1_4roi2")
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1606221345]
 position = Vector2(1.0000005, -0.9999995)
+scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_4ayxd")
-animation = &"bounce"
-autoplay = "dash"
+animation = &"Dash"
+autoplay = "Dash"
 
 [node name="stickbox" type="CollisionPolygon2D" parent="." unique_id=155991292]
 position = Vector2(-9.271509, 5.0000005)
@@ -68,9 +69,6 @@ polygon = PackedVector2Array(-25, 24, 32, 4, 32, -7, -25, -26, -31, -20, -22, -2
 stream = ExtResource("5_v4sx1")
 pitch_scale = 3.35
 attenuation = 0.46651652
-
-[node name="stunt_timer" type="Timer" parent="." unique_id=1534631604]
-one_shot = true
 
 [connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="dash_cooldown" to="." method="_on_dash_cooldown_timeout"]
