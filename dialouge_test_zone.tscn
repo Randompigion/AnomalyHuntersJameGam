@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://coprak24cxroy"]
+
+[ext_resource type="Script" uid="uid://k7i56kuvdj0r" path="res://dialouge_test_zone.gd" id="1_c6bcw"]
+[ext_resource type="PackedScene" uid="uid://bfxkrskqmx2y8" path="res://DialougeManager.tscn" id="2_rhm3e"]
+
+[node name="DialougeTestZone" type="Node2D" unique_id=1295445674]
+script = ExtResource("1_c6bcw")
+
+[node name="Dialouge" parent="." unique_id=933938014 instance=ExtResource("2_rhm3e")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1740321033]
+zoom = Vector2(0.5, 0.5)
+position_smoothing_enabled = true
