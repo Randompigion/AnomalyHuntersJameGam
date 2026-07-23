@@ -4,10 +4,15 @@
 [ext_resource type="Script" uid="uid://dhujgshj4oobi" path="res://Levels/tutorial_level.gd" id="1_tji7q"]
 [ext_resource type="Script" uid="uid://61r1dw5vrtv" path="res://Entities/enemy.gd" id="2_tji7q"]
 [ext_resource type="Texture2D" uid="uid://bn1525ulmm017" path="res://Assets/Textures/icon.svg" id="3_5c8bj"]
+[ext_resource type="Script" uid="uid://cyd6d3dmca85n" path="res://Levels/circle.gd" id="3_ism6p"]
+[ext_resource type="Texture2D" uid="uid://clcihy7oxg70i" path="res://Assets/Textures/npcs/circle.png" id="4_djxhu"]
 [ext_resource type="Texture2D" uid="uid://cxiim7kb0j2td" path="res://Assets/Textures/enemies/alarmguy.png" id="4_tji7q"]
 [ext_resource type="PackedScene" uid="uid://crnq3mfkg43su" path="res://Entities/cursor.tscn" id="6_0tje5"]
 [ext_resource type="PackedScene" uid="uid://bdk457fu7ular" path="res://Entities/prune_walls.tscn" id="7_2rs8b"]
 [ext_resource type="Script" uid="uid://cmc3as7jogpi4" path="res://Levels/ChunkedSpaceBackground.gd" id="9_ism6p"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pc3i1"]
+radius = 46.647614
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pc3i1"]
 size = Vector2(102.94092, 102.94098)
@@ -22,6 +27,18 @@ script = ExtResource("1_tji7q")
 
 [node name="Triangle" parent="." unique_id=669404060 instance=ExtResource("1_0l1gj")]
 collision_mask = 31
+
+[node name="Circle" type="CharacterBody2D" parent="." unique_id=1601745926]
+position = Vector2(-172, 0)
+collision_layer = 32
+script = ExtResource("3_ism6p")
+
+[node name="Sprite2D" type="Sprite2D" parent="Circle" unique_id=1538952892]
+scale = Vector2(0.38125, 0.38125)
+texture = ExtResource("4_djxhu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Circle" unique_id=1726376650]
+shape = SubResource("CircleShape2D_pc3i1")
 
 [node name="Enemy" type="CharacterBody2D" parent="." unique_id=200284296]
 position = Vector2(723, 306)
