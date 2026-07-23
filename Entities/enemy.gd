@@ -1,7 +1,7 @@
 extends CharacterBody2D
 var player
 var direction
-const SPEED = 50
+const SPEED = 200
 
 func _ready() -> void:
 	player = $"../Triangle"

@@ -26,7 +26,6 @@ func _process(delta: float) -> void:
 
 @warning_ignore("unused_parameter")
 func _physics_process(delta: float) -> void:
-	direction = Input.get_vector("left","right","up","down")
 	if Input.is_action_just_pressed("dash") and can_dash:
 		dashing = true
 		dash_direction = (get_global_mouse_position() - global_position).normalized()
@@ -41,7 +40,11 @@ func _physics_process(delta: float) -> void:
 		if dashing:
 			velocity = dash_speed * dash_direction
 		else:
-			velocity = speed * direction
+			if Input.is_action_pressed("propel"):
+				var dir = (get_global_mouse_position() - global_position).normalized()
+				velocity = speed * dir
+			else:
+				velocity = 0 * direction
 	else:
 		velocity = Vector2.ZERO
 	move_and_slide()
