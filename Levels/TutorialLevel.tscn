@@ -99,8 +99,4 @@ theme_override_font_sizes/font_size = 128
 text = "2:00"
 horizontal_alignment = 1
 
-[node name="Timer" type="Timer" parent="Time Left" unique_id=1131257429]
-wait_time = 120.0
-one_shot = true
-
 [connection signal="body_entered" from="Enemy/KillZone" to="Enemy" method="_on_kill_zone_body_entered"]

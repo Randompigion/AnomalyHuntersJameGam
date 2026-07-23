@@ -16,6 +16,7 @@ func _on_kill_zone_body_entered(body: Node2D) -> void:
 			player.take_damage(1)
 
 func die():
+	$"../Time Left".add_time(10)
 	queue_free()
 
 func _physics_process(delta: float) -> void:
