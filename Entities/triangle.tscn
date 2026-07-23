@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://clu42du2dffit"]
 
 [ext_resource type="Script" uid="uid://pjrosdsmens3" path="res://Entities/triangle.gd" id="1_4roi2"]
-[ext_resource type="Texture2D" uid="uid://bn1525ulmm017" path="res://icon.svg" id="2_6snes"]
+[ext_resource type="Texture2D" uid="uid://bnnsllh8pc2pv" path="res://Assets/Textures/player_dash.png" id="2_cbtp0"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_k0nfw"]
 points = PackedVector2Array(30, 0, -26, -30, -27, 28)
@@ -12,8 +12,7 @@ script = ExtResource("1_4roi2")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=751581771]
 position = Vector2(1.0000005, -0.9999995)
-scale = Vector2(0.484375, 0.484375)
-texture = ExtResource("2_6snes")
+texture = ExtResource("2_cbtp0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1685188489]
 position = Vector2(1.5258789e-05, -0.99998474)

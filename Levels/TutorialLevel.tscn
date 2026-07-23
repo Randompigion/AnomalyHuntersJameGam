@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://clu42du2dffit" path="res://Entities/triangle.tscn" id="1_0l1gj"]
 [ext_resource type="Script" uid="uid://61r1dw5vrtv" path="res://Entities/enemy.gd" id="2_tji7q"]
-[ext_resource type="Texture2D" uid="uid://bn1525ulmm017" path="res://icon.svg" id="3_5c8bj"]
+[ext_resource type="Texture2D" uid="uid://bn1525ulmm017" path="res://Assets/Textures/icon.svg" id="3_5c8bj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pc3i1"]
 size = Vector2(102.94092, 102.94098)
