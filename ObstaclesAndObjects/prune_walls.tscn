@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://2jrtmmbanw0b"]
+
+[ext_resource type="Script" uid="uid://dxmgqsisdpw60" path="res://area_2d.gd" id="1_pqtf8"]
+[ext_resource type="Shader" uid="uid://b1w5sm33pytma" path="res://Shaders/Red_glow.gdshader" id="2_44e3w"]
+[ext_resource type="Texture2D" uid="uid://bn1525ulmm017" path="res://Assets/Textures/icon.svg" id="3_7shq7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_82po7"]
+size = Vector2(117, 115)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_28fpf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5fwtu"]
+size = Vector2(126, 128)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rthk2"]
+shader = ExtResource("2_44e3w")
+shader_parameter/glow_color = Color(1, 0.1, 0.1, 1)
+shader_parameter/glow_strength = 1.5
+shader_parameter/pulse_speed = 2.0
+shader_parameter/outline_width = 0.01
+
+[node name="Prune_walls" type="Node2D" unique_id=97728551]
+position = Vector2(1103, 515)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2118536931]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=366608948]
+position = Vector2(0.5, 1.5)
+shape = SubResource("RectangleShape2D_82po7")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=423356198]
+script = ExtResource("1_pqtf8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1064147202]
+material = SubResource("ShaderMaterial_28fpf")
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_5fwtu")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2023043500]
+material = SubResource("ShaderMaterial_rthk2")
+position = Vector2(0, 1)
+texture = ExtResource("3_7shq7")

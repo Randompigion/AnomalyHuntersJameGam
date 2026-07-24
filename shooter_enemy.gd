@@ -53,7 +53,7 @@ func _physics_process(delta: float) -> void:
 	_check_should_relocate()
 
 
-func _process_moving(delta: float) -> void:
+func _process_moving(_delta: float) -> void:
 	if nav_agent.is_navigation_finished():
 		state = State.HOLDING
 		velocity = Vector2.ZERO

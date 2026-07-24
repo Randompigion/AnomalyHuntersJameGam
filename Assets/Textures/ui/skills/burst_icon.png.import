@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3tvhq2mcq2p2"
-path="res://.godot/imported/tutorialboss.png-354b767fd1d4adc0b24973b214619f09.ctex"
+uid="uid://d2xbffcc4v8pi"
+path="res://.godot/imported/burst_icon.png-ba1e8dd819c80f8e1be229398ae73ac4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/enemies/tutorialboss.png"
-dest_files=["res://.godot/imported/tutorialboss.png-354b767fd1d4adc0b24973b214619f09.ctex"]
+source_file="res://Assets/Textures/ui/skills/burst_icon.png"
+dest_files=["res://.godot/imported/burst_icon.png-ba1e8dd819c80f8e1be229398ae73ac4.ctex"]
 
 [params]
 

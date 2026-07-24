@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://cygok7elyblmi"]
+
+[ext_resource type="Texture2D" uid="uid://cspbs1fpv220p" path="res://Assets/Textures/enemies/spike_wall.png" id="1_85c7r"]
+[ext_resource type="Script" uid="uid://d2ueyl4dbnyen" path="res://Levels/spikes.gd" id="2_727sa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ayxd"]
+size = Vector2(62, 244)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ggs6p"]
+size = Vector2(15, 224)
+
+[node name="BounceKillWall" type="RigidBody2D" unique_id=1846962551 groups=["soft_side"]]
+collision_layer = 2
+gravity_scale = 0.0
+linear_damp = 70.0
+angular_damp = 50.0
+
+[node name="Texture" type="Sprite2D" parent="." unique_id=1196625038]
+position = Vector2(18, 476.5)
+scale = Vector2(0.325, 0.3921875)
+texture = ExtResource("1_85c7r")
+
+[node name="SoftSide" type="CollisionShape2D" parent="." unique_id=899732242 groups=["soft_side"]]
+position = Vector2(28, 476)
+shape = SubResource("RectangleShape2D_4ayxd")
+
+[node name="Spikes" type="Area2D" parent="." unique_id=222734278]
+script = ExtResource("2_727sa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes" unique_id=1526710865]
+position = Vector2(-6.5, 476)
+shape = SubResource("RectangleShape2D_ggs6p")

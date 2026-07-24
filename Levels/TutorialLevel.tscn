@@ -1,17 +1,18 @@
-[gd_scene format=3 uid="uid://hvnoe06rysw5"]
+[gd_scene format=3 uid="uid://djf7k0tw00ne0"]
 
 [ext_resource type="PackedScene" uid="uid://clu42du2dffit" path="res://Entities/triangle.tscn" id="1_0l1gj"]
 [ext_resource type="Script" uid="uid://dhujgshj4oobi" path="res://Levels/tutorial_level.gd" id="1_tji7q"]
 [ext_resource type="Script" uid="uid://61r1dw5vrtv" path="res://Entities/enemy.gd" id="2_tji7q"]
 [ext_resource type="Texture2D" uid="uid://bn1525ulmm017" path="res://Assets/Textures/icon.svg" id="3_5c8bj"]
-[ext_resource type="Texture2D" uid="uid://cxiim7kb0j2td" path="res://Assets/Textures/enemies/alarmguy.png" id="4_tji7q"]
+[ext_resource type="Texture2D" uid="uid://d33cj0py1rk53" path="res://Assets/Textures/enemies/tutorial_enemy.png" id="5_53hwb"]
 [ext_resource type="PackedScene" uid="uid://crnq3mfkg43su" path="res://Systems/Cursor/cursor.tscn" id="6_0tje5"]
-[ext_resource type="PackedScene" uid="uid://bdk457fu7ular" path="res://Entities/prune_walls.tscn" id="7_2rs8b"]
+[ext_resource type="PackedScene" uid="uid://c0sw18di2ogl2" path="res://Entities/prune_walls.tscn" id="7_2rs8b"]
 [ext_resource type="FontFile" uid="uid://fsbors10b7bh" path="res://Assets/Textures/ui/fonts/GoofyGoober.ttf" id="8_ctwm6"]
 [ext_resource type="PackedScene" uid="uid://c6ylojwgct72c" path="res://Entities/shooter_enemy.tscn" id="8_wjxcd"]
 [ext_resource type="Script" uid="uid://cmc3as7jogpi4" path="res://Levels/ChunkedSpaceBackground.gd" id="9_ism6p"]
 [ext_resource type="Script" uid="uid://u6gq3mopm0mq" path="res://Levels/camera_shake.gd" id="10_3a2eq"]
 [ext_resource type="Script" uid="uid://by57ttr5jcqc1" path="res://Levels/time_left.gd" id="11_fy7dx"]
+[ext_resource type="PackedScene" uid="uid://4n68niwvspg0" path="res://Entities/tutorial_enemy.tscn" id="12_53hwb"]
 [ext_resource type="FontFile" uid="uid://cwhrnc44j65uh" path="res://Assets/Textures/ui/fonts/PixelOperator8.ttf" id="12_ggei0"]
 [ext_resource type="Script" uid="uid://dl5pk2mfo3ojw" path="res://Levels/spawner.gd" id="13_ggei0"]
 [ext_resource type="AudioStream" uid="uid://dcowsd8k1sg0l" path="res://Assets/Audio/BGM/bgm_retro_arcade.ogg" id="14_3ksry"]
@@ -72,7 +73,7 @@ script = ExtResource("2_tji7q")
 [node name="Sprite2D" type="Sprite2D" parent="Enemy" unique_id=918940545]
 modulate = Color(0.98763007, 0.6124308, 0.7294911, 1)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_tji7q")
+texture = ExtResource("5_53hwb")
 
 [node name="KillZone" type="Area2D" parent="Enemy" unique_id=529807981]
 
@@ -124,6 +125,9 @@ script = ExtResource("10_3a2eq")
 
 [node name="ShooterEnemy" parent="Entities" unique_id=1749464398 instance=ExtResource("8_wjxcd")]
 position = Vector2(365.00003, 227.00003)
+
+[node name="TutorialEnemy" parent="Entities" unique_id=1732316148 instance=ExtResource("12_53hwb")]
+position = Vector2(-516.99994, -292.99997)
 
 [node name="Obstacles" type="Node" parent="." unique_id=325095098]
 

@@ -25,7 +25,7 @@ func die():
 	$"../TimeLeft".add_time(10)
 	$"../Entities/Triangle/Camera2D2".trigger_shake()
 	queue_free()
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if player:
 		direction = (player.global_position - global_position).normalized()
 		velocity = direction * SPEED

@@ -96,21 +96,21 @@ func _on_chunk_generated(coord: Vector2i, img: Image) -> void:
 	add_child(sprite)
 	active_chunks[coord] = sprite
 
-static func generate_chunk_image(chunk_coord: Vector2i, chunk_size: int, master_seed: int, options: Dictionary = {}) -> Image:
+static func generate_chunk_image(chunk_coord: Vector2i, p_chunk_size: int, p_master_seed: int, options: Dictionary = {}) -> Image:
 	var px_scale: int = options.get("pixel_scale", 6)
 	var dither: bool = options.get("dither", true)
 
-	var sw = int(ceil(float(chunk_size) / px_scale))
-	var sh = int(ceil(float(chunk_size) / px_scale))
-	
-	var chunk_seed = _ih(chunk_coord.x, chunk_coord.y, master_seed)
-	
-	var pal = PALS[_ih(0, 0, master_seed) % PALS.size()]
+	var sw = int(ceil(float(p_chunk_size) / px_scale))
+	var sh = int(ceil(float(p_chunk_size) / px_scale))
+
+	var chunk_seed = _ih(chunk_coord.x, chunk_coord.y, p_master_seed)
+
+	var pal = PALS[_ih(0, 0, p_master_seed) % PALS.size()]
 	var nSeeds = []
 	for i in range(pal["layers"].size()):
-		nSeeds.append(_ih(i, 100, master_seed))
-	var dSeed = _ih(200, 0, master_seed)
-	var wSeed = _ih(300, 0, master_seed)
+		nSeeds.append(_ih(i, 100, p_master_seed))
+	var dSeed = _ih(200, 0, p_master_seed)
+	var wSeed = _ih(300, 0, p_master_seed)
 	
 	var sc = 0.0025
 	var bayer_mapped = []
@@ -207,7 +207,7 @@ static func generate_chunk_image(chunk_coord: Vector2i, chunk_size: int, master_
 	var img := Image.create_from_data(sw, sh, false, Image.FORMAT_RGBA8, data)
 
 	if px_scale > 1:
-		img.resize(chunk_size, chunk_size, Image.INTERPOLATE_NEAREST)
+		img.resize(p_chunk_size, p_chunk_size, Image.INTERPOLATE_NEAREST)
 		
 	return img
 

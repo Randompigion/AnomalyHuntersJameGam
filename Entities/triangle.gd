@@ -28,21 +28,33 @@ func _ready() -> void:
 	stun_timer.one_shot = true
 	if not stun_timer.timeout.is_connected(_on_stun_timer_timeout):
 		stun_timer.timeout.connect(_on_stun_timer_timeout)
+	dir = (get_global_mouse_position() - global_position).normalized()
+
+var dir = Vector2.ZERO
+var input = "a" #a - auto, m - mouse, c - controller
 
 @warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
 	if mode == Mode.DASH:
 		if not dashing:
-			look_at(get_global_mouse_position())
+			if dir != Vector2.ZERO:
+				rotation = dir.angle()
 	else: # BOUNCE mode
-		if velocity.length() > 1.0:
-			rotation = lerp_angle(rotation, velocity.angle(), 20 * delta)
-
+		if not bounce_lock:
+			if dir != Vector2.ZERO:
+				rotation = lerp_angle(rotation, dir.angle(), 20 * delta)
+			
 @warning_ignore("unused_parameter")
 func _physics_process(delta: float) -> void:
+	var controller_dir := Input.get_vector("left", "right", "up", "down")
+	if controller_dir != Vector2.ZERO and (input == "a" or input == "c"):
+		dir = controller_dir
+	elif input == "a" or input == "m":
+		dir = (get_global_mouse_position() - global_position).normalized()
 	if Input.is_action_just_pressed("dash") and can_dash and can_move:
 		dashing = true
-		dash_direction = (get_global_mouse_position() - global_position).normalized()
+		dash_direction = dir
+		
 		rotation = dash_direction.angle()
 		if $AudioStreamPlayer2D.playing == false: # Optional: prevents overlapping sounds
 			$AudioStreamPlayer2D.play()
@@ -60,7 +72,6 @@ func _physics_process(delta: float) -> void:
 			velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
 		else:
 			if Input.is_action_pressed("propel"):
-				var dir = (get_global_mouse_position() - global_position).normalized()
 				velocity = speed * dir
 			else:
 				velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
@@ -136,7 +147,7 @@ func take_damage(amount: int) -> void:
 	velocity = Vector2.ZERO
 	_apply_stun()
 	$Camera2D2.trigger_shake()
-	$"../../TimeLeft".subtract_time(10)
+	$"../../TimeLeft".subtract_time(amount * 10)
 	
 	is_invincible = true
 	sprite.modulate.a = 0.5
