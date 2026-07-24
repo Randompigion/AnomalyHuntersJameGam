@@ -159,7 +159,7 @@ parameters/looping = true
 [node name="SpaceBackgroundManager" type="Node2D" parent="LevelParts" unique_id=962824130]
 script = ExtResource("9_ism6p")
 
-[node name="BounceKillWall" type="RigidBody2D" parent="." unique_id=276450696]
+[node name="BounceKillWall" type="RigidBody2D" parent="." unique_id=276450696 groups=["soft_side"]]
 collision_layer = 2
 gravity_scale = 0.0
 linear_damp = 70.0
@@ -170,7 +170,7 @@ position = Vector2(18, 476.5)
 scale = Vector2(0.325, 0.3921875)
 texture = ExtResource("15_ctwm6")
 
-[node name="SoftSide" type="CollisionShape2D" parent="BounceKillWall" unique_id=206831605]
+[node name="SoftSide" type="CollisionShape2D" parent="BounceKillWall" unique_id=206831605 groups=["soft_side"]]
 position = Vector2(28, 476)
 shape = SubResource("RectangleShape2D_4ayxd")
 

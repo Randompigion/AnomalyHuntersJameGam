@@ -40,7 +40,7 @@ func _process(delta: float) -> void:
 
 @warning_ignore("unused_parameter")
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("dash") and can_dash:
+	if Input.is_action_just_pressed("dash") and can_dash and can_move:
 		dashing = true
 		dash_direction = (get_global_mouse_position() - global_position).normalized()
 		rotation = dash_direction.angle()
@@ -70,17 +70,14 @@ func _physics_process(delta: float) -> void:
 	if dashing and mode == Mode.BOUNCE:
 		var collision := move_and_collide(velocity * delta)
 		if collision:
-			var collider := collision.get_collider()
-			if collider and collider.is_in_group("enemy"):
-				_kill_enemy(collider)
-			else:
-				velocity = velocity.bounce(collision.get_normal()) * bounce_speed_retention
-				dash_direction = velocity.normalized()
-				rotation = dash_direction.angle()
-				dashing = false
-				bounce_lock = true
-				_play_bounce()
-				get_tree().create_timer(bounce_lock_duration).timeout.connect(func(): bounce_lock = false)
+			# BOUNCE mode never kills enemies on contact - always bounce, like a wall.
+			velocity = velocity.bounce(collision.get_normal()) * bounce_speed_retention
+			dash_direction = velocity.normalized()
+			rotation = dash_direction.angle()
+			dashing = false
+			bounce_lock = true
+			_play_bounce()
+			get_tree().create_timer(bounce_lock_duration).timeout.connect(func(): bounce_lock = false)
 	else:
 		move_and_slide()
 		_handle_wall_collisions()
