@@ -2,7 +2,7 @@ extends Node2D
 var dialogue_text =  [""]
 var dialogue_speaker =  [""]
 var dialogue_sprite =  [""]
-const textboxlocation = preload("res://DialougeManager.tscn")
+const textboxlocation = preload("res://Systems/Dialouge/DialougeManager.tscn")
 
 
 # I've set it so you just need to change the parameters and give that signal
