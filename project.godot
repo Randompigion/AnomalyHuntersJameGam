@@ -21,7 +21,7 @@ config/icon="res://Assets/Textures/icon.svg"
 
 [autoload]
 
-Sfx="*res://sfx.gd"
+Sfx="*res://Systems/Audio/sfx.gd"
 
 [display]
 
