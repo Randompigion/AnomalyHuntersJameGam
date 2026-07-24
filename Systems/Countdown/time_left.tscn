@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://oyxscbdrv47i"]
+
+[ext_resource type="Script" uid="uid://by57ttr5jcqc1" path="res://Levels/time_left.gd" id="1_m4hi5"]
+[ext_resource type="FontFile" uid="uid://cwhrnc44j65uh" path="res://Assets/Textures/ui/fonts/PixelOperator8.ttf" id="2_ydg06"]
+[ext_resource type="FontFile" uid="uid://fsbors10b7bh" path="res://Assets/Textures/ui/fonts/GoofyGoober.ttf" id="3_n375d"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3ksry"]
+font = ExtResource("3_n375d")
+font_size = 27
+font_color = Color(0.9098039, 0.09019608, 1, 1)
+outline_size = 2
+outline_color = Color(0.4361593, 0.030211769, 0.5708664, 1)
+shadow_size = 10
+shadow_color = Color(0, 1, 1, 1)
+
+[node name="TimeLeft" type="Node" unique_id=209138868]
+script = ExtResource("1_m4hi5")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1719929674]
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=2003126832]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -208.0
+offset_top = 30.0
+offset_right = 208.0
+offset_bottom = 205.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_ydg06")
+theme_override_font_sizes/font_size = 128
+text = "2:00"
+label_settings = SubResource("LabelSettings_3ksry")
+horizontal_alignment = 1
