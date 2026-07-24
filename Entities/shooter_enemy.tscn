@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://c6ylojwgct72c"]
 
 [ext_resource type="Script" uid="uid://c85hxg5ogvioj" path="res://shooter_enemy.gd" id="1_6yvf0"]
-[ext_resource type="Texture2D" uid="uid://cxiim7kb0j2td" path="res://Assets/Textures/enemies/alarmguy.png" id="2_6m15j"]
 [ext_resource type="PackedScene" uid="uid://drytfobpdkmi3" path="res://Entities/missile.tscn" id="2_eyk68"]
+[ext_resource type="Texture2D" uid="uid://d0smcqdujodhg" path="res://Assets/Textures/enemies/spike_enemy.png" id="3_6m15j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pc3i1"]
 size = Vector2(141.17636, 157.35266)
@@ -21,8 +21,8 @@ missile_scene = ExtResource("2_eyk68")
 modulate = Color(0.98763007, 0.6124308, 0.7294911, 1)
 position = Vector2(-1.470581, -3.8146973e-06)
 rotation = -1.5707964
-scale = Vector2(0.88878554, 0.88878554)
-texture = ExtResource("2_6m15j")
+scale = Vector2(3, 3)
+texture = ExtResource("3_6m15j")
 
 [node name="KillZone" type="Area2D" parent="." unique_id=501541827]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3tvhq2mcq2p2"
-path="res://.godot/imported/tutorialboss.png-354b767fd1d4adc0b24973b214619f09.ctex"
+uid="uid://7mgsmwc2pbo3"
+path="res://.godot/imported/tutorial_boss.png-459e80b47b5516b0b5f4468281f696e5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/enemies/tutorialboss.png"
-dest_files=["res://.godot/imported/tutorialboss.png-354b767fd1d4adc0b24973b214619f09.ctex"]
+source_file="res://Assets/Textures/enemies/tutorial_boss.png"
+dest_files=["res://.godot/imported/tutorial_boss.png-459e80b47b5516b0b5f4468281f696e5.ctex"]
 
 [params]
 
