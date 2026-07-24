@@ -4,8 +4,13 @@ var player
 var direction
 const SPEED = 200
 
+const DEATH_SOUNDS := [
+	preload("res://Assets/Audio/SFX/Enemies/sfx_enemy_death_a.wav"),
+	preload("res://Assets/Audio/SFX/Enemies/sfx_enemy_death_b.wav"),
+]
+
 func _ready() -> void:
-	player = get_node_or_null("../Triangle") 
+	player = get_node_or_null("../Entities/Triangle") 
 	add_to_group("enemy")
 
 func _on_kill_zone_body_entered(body: Node2D) -> void:
@@ -16,7 +21,8 @@ func _on_kill_zone_body_entered(body: Node2D) -> void:
 			player.take_damage(1)
 
 func die():
-	$"../Time Left".add_time(10)
+	Sfx.play(DEATH_SOUNDS.pick_random())
+	$"../TimeLeft".add_time(10)
 	queue_free()
 
 func _physics_process(delta: float) -> void:

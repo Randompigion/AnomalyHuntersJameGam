@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var enemy_template: Node2D = $"../Enemy"
+@onready var enemy_template: Node2D = $"../../Enemy"
 @onready var timer: Timer = $Timer
 
 func _ready() -> void:

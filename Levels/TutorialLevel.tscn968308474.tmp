@@ -26,46 +26,35 @@ size = Vector2(758.5, 119)
 [node name="TutorialLevel" type="Node2D" unique_id=242093086]
 script = ExtResource("1_tji7q")
 
-[node name="Circle" parent="." unique_id=1528943898 instance=ExtResource("14_ctwm6")]
+[node name="Timers" type="Node" parent="." unique_id=2056986045]
+
+[node name="Entities" type="Node" parent="." unique_id=1455784909]
+
+[node name="Circle" parent="Entities" unique_id=1528943898 instance=ExtResource("14_ctwm6")]
 position = Vector2(-124, 0)
 
-[node name="Enemy" type="CharacterBody2D" parent="." unique_id=200284296]
+[node name="Enemy" type="CharacterBody2D" parent="Entities" unique_id=200284296]
 position = Vector2(728, 287.00003)
 scale = Vector2(0.68000126, 0.68000126)
 collision_layer = 4
 script = ExtResource("2_tji7q")
 
-[node name="Sprite2D" type="Sprite2D" parent="Enemy" unique_id=918940545]
+[node name="Sprite2D" type="Sprite2D" parent="Entities/Enemy" unique_id=918940545]
 modulate = Color(0.98763007, 0.6124308, 0.7294911, 1)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("4_tji7q")
 
-[node name="KillZone" type="Area2D" parent="Enemy" unique_id=529807981]
+[node name="KillZone" type="Area2D" parent="Entities/Enemy" unique_id=529807981]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy/KillZone" unique_id=442504005]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Enemy/KillZone" unique_id=442504005]
 scale = Vector2(0.9999999, 0.9999999)
 shape = SubResource("RectangleShape2D_pc3i1")
 debug_color = Color(0.81223476, 0.3731758, 0.45894426, 0.41960785)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy" unique_id=1651069695]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entities/Enemy" unique_id=1651069695]
 scale = Vector2(0.9999999, 0.9999999)
 shape = SubResource("RectangleShape2D_3b47u")
 debug_color = Color(0.70154667, 0.49091738, 3.85046e-07, 0.41960785)
-
-[node name="TimeLeft" type="Node" parent="." unique_id=1301317357]
-script = ExtResource("11_fy7dx")
-
-[node name="Label" type="Label" parent="TimeLeft" unique_id=861436376]
-offset_left = -215.0
-offset_top = 480.0
-offset_right = 201.0
-offset_bottom = 655.0
-theme_override_fonts/font = ExtResource("12_ggei0")
-theme_override_font_sizes/font_size = 128
-text = "2:00"
-horizontal_alignment = 1
-
-[node name="Entities" type="Node" parent="." unique_id=1455784909]
 
 [node name="Triangle" parent="Entities" unique_id=669404060 instance=ExtResource("1_0l1gj")]
 collision_mask = 31
@@ -103,10 +92,23 @@ autostart = true
 [node name="SpaceBackgroundManager" type="Node2D" parent="LevelParts" unique_id=962824130]
 script = ExtResource("9_ism6p")
 
+[node name="Time Left" type="Node" parent="LevelParts" unique_id=1301317357]
+script = ExtResource("11_fy7dx")
+
+[node name="Label" type="Label" parent="LevelParts/Time Left" unique_id=861436376]
+offset_left = -215.0
+offset_top = 480.0
+offset_right = 201.0
+offset_bottom = 655.0
+theme_override_fonts/font = ExtResource("12_ggei0")
+theme_override_font_sizes/font_size = 128
+text = "2:00"
+horizontal_alignment = 1
+
 [node name="Music" type="AudioStreamPlayer" parent="LevelParts" unique_id=1164203136]
 stream = ExtResource("14_3ksry")
 volume_db = -6.0
 autoplay = true
 parameters/looping = true
 
-[connection signal="body_entered" from="Enemy/KillZone" to="Enemy" method="_on_kill_zone_body_entered"]
+[connection signal="body_entered" from="Entities/Enemy/KillZone" to="Entities/Enemy" method="_on_kill_zone_body_entered"]
