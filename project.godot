@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="Countdown"
-run/main_scene="uid://hvnoe06rysw5"
+run/main_scene="uid://djf7k0tw00ne0"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://Assets/Textures/icon.svg"
 
