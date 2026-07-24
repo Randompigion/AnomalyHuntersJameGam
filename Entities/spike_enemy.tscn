@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://btom6c0vo0wji"]
 
-[ext_resource type="Script" uid="uid://byqpiwrcmed27" path="res://Entities/shooter_enemy.gd" id="1_g0vfg"]
+[ext_resource type="Script" uid="uid://4fdctqccnh5q" path="res://Entities/spike_enemy.tscn.gd" id="1_g0vfg"]
 [ext_resource type="Texture2D" uid="uid://d0smcqdujodhg" path="res://Assets/Textures/enemies/spike_enemy.png" id="2_xuhe8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_82po7"]

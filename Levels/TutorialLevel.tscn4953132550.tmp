@@ -190,7 +190,7 @@ position = Vector2(-526, 266)
 position = Vector2(512, 538)
 
 [node name="ShooterEnemy" parent="." unique_id=1749464398 instance=ExtResource("8_wjxcd")]
-position = Vector2(-3.9999995, -1.9999993)
+position = Vector2(-247.99998, 206.99998)
 
 [connection signal="body_entered" from="Enemy/KillZone" to="Enemy" method="_on_kill_zone_body_entered"]
 [connection signal="timeout" from="Enemy/AttackCooldown" to="Enemy" method="_on_attack_cooldown_timeout"]

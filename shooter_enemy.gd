@@ -32,7 +32,7 @@ var burst_timer: float = 0.0
 
 
 func _ready() -> void:
-	player = $"../Triangle"
+	player = $"../Entities/Triangle"
 	add_to_group("enemy")
 	_pick_new_vantage_point()
 
@@ -148,9 +148,9 @@ func _fire_missile() -> void:
 
 
 func die() -> void:
-	$"../Triangle/Camera2D2".trigger_shake()
+	$"../Entities/Triangle/Camera2D2".trigger_shake()
 	Sfx.play(DEATH_SOUNDS.pick_random())
-	$"../../TimeLeft".add_time(10)
+	$"../TimeLeft".add_time(10)
 	queue_free()
 	
 	
