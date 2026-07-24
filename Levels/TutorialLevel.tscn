@@ -26,6 +26,8 @@ size = Vector2(758.5, 119)
 [node name="TutorialLevel" type="Node2D" unique_id=242093086]
 script = ExtResource("1_tji7q")
 
+[node name="cursor" parent="." unique_id=1436806802 instance=ExtResource("6_0tje5")]
+
 [node name="Circle" parent="." unique_id=1528943898 instance=ExtResource("14_ctwm6")]
 position = Vector2(-124, 0)
 
@@ -90,8 +92,6 @@ position = Vector2(728, 2)
 shape = SubResource("RectangleShape2D_82po7")
 
 [node name="LevelParts" type="Node" parent="." unique_id=228985078]
-
-[node name="cursor" parent="LevelParts" unique_id=1436806802 instance=ExtResource("6_0tje5")]
 
 [node name="spawner" type="Node2D" parent="LevelParts" unique_id=185982828]
 script = ExtResource("13_ggei0")

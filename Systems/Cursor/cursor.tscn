@@ -2,7 +2,33 @@
 
 [ext_resource type="Texture2D" uid="uid://b58cisbx58tlr" path="res://Assets/Textures/ui/cursor/cursor.png" id="1_4lfd3"]
 [ext_resource type="Script" uid="uid://cvuc4c51m6bg" path="res://Systems/Cursor/cursor.gd" id="2_mn8y0"]
+[ext_resource type="Texture2D" uid="uid://vgt2mketgdjt" path="res://Assets/Textures/ui/cursor/cursor_bounce.png" id="3_8pidm"]
+[ext_resource type="Texture2D" uid="uid://b5yv1ospoy886" path="res://Assets/Textures/ui/cursor/cursor_dash.png" id="4_0ykfq"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4ayxd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_8pidm")
+}],
+"loop": 1,
+"name": &"Bounce",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_0ykfq")
+}],
+"loop": 1,
+"name": &"Dash",
+"speed": 5.0
+}]
 
 [node name="cursor" type="Sprite2D" unique_id=1436806802]
 texture = ExtResource("1_4lfd3")
 script = ExtResource("2_mn8y0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2145720281]
+sprite_frames = SubResource("SpriteFrames_4ayxd")
+animation = &"Dash"
+autoplay = "Dash"
