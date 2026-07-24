@@ -107,6 +107,7 @@ script = ExtResource("9_ism6p")
 stream = ExtResource("14_3ksry")
 volume_db = -6.0
 autoplay = true
+bus = &"Music"
 parameters/looping = true
 
 [connection signal="body_entered" from="Enemy/KillZone" to="Enemy" method="_on_kill_zone_body_entered"]
