@@ -8,6 +8,7 @@
 size = Vector2(141.17636, 157.35266)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3b47u"]
+size = Vector2(105.88217, 105.882164)
 
 [node name="ShooterEnemy" type="CharacterBody2D" unique_id=1749464398]
 position = Vector2(1.0000005, 2.9999998)
@@ -32,8 +33,13 @@ shape = SubResource("RectangleShape2D_pc3i1")
 debug_color = Color(0.81223476, 0.3731758, 0.45894426, 0.41960785)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=727608177]
+position = Vector2(13.235263, -1.4705865)
 scale = Vector2(0.9999999, 0.9999999)
 shape = SubResource("RectangleShape2D_3b47u")
 debug_color = Color(0.70154667, 0.49091738, 3.85046e-07, 0.41960785)
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1559709499]
+
+[node name="LineOfSightRay" type="RayCast2D" parent="." unique_id=2098760959]
 
 [connection signal="body_entered" from="KillZone" to="." method="_on_kill_zone_body_entered"]

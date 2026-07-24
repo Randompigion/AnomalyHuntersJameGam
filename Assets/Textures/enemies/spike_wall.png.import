@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0881tmk8w1kk"
-path="res://.godot/imported/option4_pressed.png-0c13afc32c10dd45421e6d6208335851.ctex"
+uid="uid://cspbs1fpv220p"
+path="res://.godot/imported/spike_wall.png-921fb115c99eb9d8410737908662fa6b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Menu/option4_pressed.png"
-dest_files=["res://.godot/imported/option4_pressed.png-0c13afc32c10dd45421e6d6208335851.ctex"]
+source_file="res://Assets/Textures/enemies/spike_wall.png"
+dest_files=["res://.godot/imported/spike_wall.png-921fb115c99eb9d8410737908662fa6b.ctex"]
 
 [params]
 
