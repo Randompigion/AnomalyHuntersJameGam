@@ -2,7 +2,7 @@ extends Sprite2D
 var player
 var counter = 0
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	position = get_global_mouse_position()
 	if Input.is_action_just_pressed("toggle_mode"):
 		counter += 1

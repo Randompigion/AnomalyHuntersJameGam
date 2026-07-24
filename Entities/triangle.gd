@@ -28,8 +28,9 @@ func _ready() -> void:
 	stun_timer.one_shot = true
 	if not stun_timer.timeout.is_connected(_on_stun_timer_timeout):
 		stun_timer.timeout.connect(_on_stun_timer_timeout)
+	dir = (get_global_mouse_position() - global_position).normalized()
 
-var dir = (get_global_mouse_position() - global_position).normalized()
+var dir = Vector2.ZERO
 var input = "a" #a - auto, m - mouse, c - controller
 
 @warning_ignore("unused_parameter")
@@ -146,7 +147,7 @@ func take_damage(amount: int) -> void:
 	velocity = Vector2.ZERO
 	_apply_stun()
 	$Camera2D2.trigger_shake()
-	$"../../TimeLeft".subtract_time(10)
+	$"../../TimeLeft".subtract_time(amount * 10)
 	
 	is_invincible = true
 	sprite.modulate.a = 0.5

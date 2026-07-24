@@ -24,7 +24,7 @@ func die():
 	Sfx.play(DEATH_SOUNDS.pick_random())
 	$"../Triangle/Camera2D2".trigger_shake()
 	queue_free()
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
