@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://cyd6d3dmca85n" path="res://Levels/circle.gd" id="3_ism6p"]
 [ext_resource type="Texture2D" uid="uid://clcihy7oxg70i" path="res://Assets/Textures/npcs/circle.png" id="4_djxhu"]
 [ext_resource type="Texture2D" uid="uid://cxiim7kb0j2td" path="res://Assets/Textures/enemies/alarmguy.png" id="4_tji7q"]
-[ext_resource type="PackedScene" uid="uid://crnq3mfkg43su" path="res://Entities/cursor.tscn" id="6_0tje5"]
+[ext_resource type="PackedScene" uid="uid://crnq3mfkg43su" path="res://Systems/Cursor/cursor.tscn" id="6_0tje5"]
 [ext_resource type="PackedScene" uid="uid://bdk457fu7ular" path="res://Entities/prune_walls.tscn" id="7_2rs8b"]
 [ext_resource type="PackedScene" uid="uid://c6ylojwgct72c" path="res://Entities/shooter_enemy.tscn" id="8_wjxcd"]
 [ext_resource type="Script" uid="uid://cmc3as7jogpi4" path="res://Levels/ChunkedSpaceBackground.gd" id="9_ism6p"]

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://coprak24cxroy"]
 
-[ext_resource type="Script" uid="uid://k7i56kuvdj0r" path="res://dialouge_test_zone.gd" id="1_c6bcw"]
-[ext_resource type="PackedScene" uid="uid://bfxkrskqmx2y8" path="res://DialougeManager.tscn" id="2_rhm3e"]
+[ext_resource type="Script" uid="uid://k7i56kuvdj0r" path="res://Systems/Dialouge/dialouge_test_zone.gd" id="1_c6bcw"]
+[ext_resource type="PackedScene" uid="uid://bfxkrskqmx2y8" path="res://Systems/Dialouge/DialougeManager.tscn" id="2_rhm3e"]
 
 [node name="DialougeTestZone" type="Node2D" unique_id=1295445674]
 script = ExtResource("1_c6bcw")

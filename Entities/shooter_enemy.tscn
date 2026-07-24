@@ -19,6 +19,7 @@ missile_scene = ExtResource("2_eyk68")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=85119432]
 modulate = Color(0.98763007, 0.6124308, 0.7294911, 1)
 position = Vector2(-1.470581, -3.8146973e-06)
+rotation = -1.5707964
 scale = Vector2(0.88878554, 0.88878554)
 texture = ExtResource("2_6m15j")
 
