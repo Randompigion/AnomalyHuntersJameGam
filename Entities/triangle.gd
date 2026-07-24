@@ -30,6 +30,7 @@ func _ready() -> void:
 		stun_timer.timeout.connect(_on_stun_timer_timeout)
 
 var dir = (get_global_mouse_position() - global_position).normalized()
+var input = "a" #a - auto, m - mouse, c - controller
 
 @warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
@@ -45,9 +46,9 @@ func _process(delta: float) -> void:
 @warning_ignore("unused_parameter")
 func _physics_process(delta: float) -> void:
 	var controller_dir := Input.get_vector("left", "right", "up", "down")
-	if controller_dir != Vector2.ZERO:
+	if controller_dir != Vector2.ZERO and (input == "a" or input == "c"):
 		dir = controller_dir
-	else:
+	elif input == "a" or input == "m":
 		dir = (get_global_mouse_position() - global_position).normalized()
 	if Input.is_action_just_pressed("dash") and can_dash and can_move:
 		dashing = true
