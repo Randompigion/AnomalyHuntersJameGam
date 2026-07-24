@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://crnq3mfkg43su"]
 
-[ext_resource type="Texture2D" uid="uid://b58cisbx58tlr" path="res://Assets/Textures/ui/cursor.png" id="1_4lfd3"]
+[ext_resource type="Texture2D" uid="uid://b58cisbx58tlr" path="res://Assets/Textures/ui/cursor/cursor.png" id="1_4lfd3"]
 [ext_resource type="Script" uid="uid://cvuc4c51m6bg" path="res://Systems/Cursor/cursor.gd" id="2_mn8y0"]
 
 [node name="cursor" type="Sprite2D" unique_id=1436806802]
