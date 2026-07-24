@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dpoquu6cakaa2" path="res://Entities/circle.tscn" id="14_ctwm6"]
 [ext_resource type="Texture2D" uid="uid://cspbs1fpv220p" path="res://Assets/Textures/enemies/spike_wall.png" id="15_ctwm6"]
 [ext_resource type="Script" uid="uid://d2ueyl4dbnyen" path="res://Levels/spikes.gd" id="18_re0cg"]
+[ext_resource type="PackedScene" uid="uid://vkfw2y641iss" path="res://Entities/change_scene.tscn" id="19_qeo6u"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_3ksry"]
 resource_local_to_scene = true
@@ -179,6 +180,9 @@ script = ExtResource("18_re0cg")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BounceKillWall/Spikes" unique_id=1972880251]
 position = Vector2(-6.5, 476)
 shape = SubResource("RectangleShape2D_ggs6p")
+
+[node name="ChangeScene" parent="." unique_id=1821069760 instance=ExtResource("19_qeo6u")]
+position = Vector2(-526, 266)
 
 [connection signal="body_entered" from="Enemy/KillZone" to="Enemy" method="_on_kill_zone_body_entered"]
 [connection signal="timeout" from="Enemy/AttackCooldown" to="Enemy" method="_on_attack_cooldown_timeout"]
