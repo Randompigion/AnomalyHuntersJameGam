@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cfab1qxv5l0xn"]
 
 [ext_resource type="Script" uid="uid://61r1dw5vrtv" path="res://Entities/enemy.gd" id="1_8x2xb"]
-[ext_resource type="Texture2D" uid="uid://d33cj0py1rk53" path="res://Assets/Textures/enemies/tutorial_enemy.png" id="2_8x2xb"]
+[ext_resource type="Texture2D" uid="uid://bn1525ulmm017" path="res://Assets/Textures/icon.svg" id="2_8x2xb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pc3i1"]
 size = Vector2(102.94092, 102.94098)
@@ -16,7 +16,7 @@ script = ExtResource("1_8x2xb")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=7682331]
 modulate = Color(0.98763007, 0.6124308, 0.7294911, 1)
-scale = Vector2(0.5, 0.5)
+scale = Vector2(0.915979, 0.75967693)
 texture = ExtResource("2_8x2xb")
 
 [node name="KillZone" type="Area2D" parent="." unique_id=1037207263]
