@@ -97,11 +97,11 @@ func _on_chunk_generated(coord: Vector2i, img: Image) -> void:
 	active_chunks[coord] = sprite
 
 static func generate_chunk_image(chunk_coord: Vector2i, chunk_size: int, master_seed: int, options: Dictionary = {}) -> Image:
-	var pixel_scale: int = options.get("pixel_scale", 6)
+	var px_scale: int = options.get("pixel_scale", 6)
 	var dither: bool = options.get("dither", true)
-	
-	var sw = int(ceil(float(chunk_size) / pixel_scale))
-	var sh = int(ceil(float(chunk_size) / pixel_scale))
+
+	var sw = int(ceil(float(chunk_size) / px_scale))
+	var sh = int(ceil(float(chunk_size) / px_scale))
 	
 	var chunk_seed = _ih(chunk_coord.x, chunk_coord.y, master_seed)
 	
@@ -206,8 +206,8 @@ static func generate_chunk_image(chunk_coord: Vector2i, chunk_size: int, master_
 
 	var img := Image.create_from_data(sw, sh, false, Image.FORMAT_RGBA8, data)
 
-	if pixel_scale > 1:
-		img.resize(chunk_size, chunk_size, 0)
+	if px_scale > 1:
+		img.resize(chunk_size, chunk_size, Image.INTERPOLATE_NEAREST)
 		
 	return img
 
