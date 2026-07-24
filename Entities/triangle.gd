@@ -23,7 +23,6 @@ var mode: Mode = Mode.DASH
 
 @onready var sprite: AnimatedSprite2D = $Sprite2D
 @onready var stun_timer: Timer = $stunt_timer
-@onready var bounce_sound: AudioStreamPlayer2D = $BounceSound
 
 func _ready() -> void:
 	hp = max_hp
@@ -81,7 +80,6 @@ func _physics_process(delta: float) -> void:
 				rotation = dash_direction.angle()
 				dashing = false
 				bounce_lock = true
-				_play_bounce()
 				get_tree().create_timer(bounce_lock_duration).timeout.connect(func(): bounce_lock = false)
 	else:
 		move_and_slide()
@@ -120,16 +118,11 @@ func _handle_wall_collisions() -> void:
 			velocity = velocity.bounce(normal) * bounce_speed_retention
 			dash_direction = velocity.normalized()
 			rotation = dash_direction.angle()
-			_play_bounce()
 		else:
 			dashing = false
 			velocity = Vector2.ZERO
 			_apply_stun()
 		break
-
-func _play_bounce() -> void:
-	if bounce_sound.stream:
-		bounce_sound.play()
 
 func _kill_enemy(enemy: Node) -> void:
 	if enemy.has_method("die"):

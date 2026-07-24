@@ -19,6 +19,7 @@ func _on_kill_zone_body_entered(body: Node2D) -> void:
 			die()
 		else:
 			player.take_damage(1)
+			die()
 
 func die():
 	Sfx.play(DEATH_SOUNDS.pick_random())
@@ -38,3 +39,4 @@ func _physics_process(delta: float) -> void:
 		if collider == player:
 			if not player.dashing and player.has_method("take_damage"):
 				player.take_damage(1)
+				die()
