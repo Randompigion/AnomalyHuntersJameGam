@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ciy4ttwjvdppx"
-path="res://.godot/imported/player_dash.png-ccfbf276e6380f8c7ecbd464d18f981e.ctex"
+uid="uid://hdjhlv5cxqks"
+path="res://.godot/imported/spiked_triangle_bounce.png-32fd4a500c88089229bcf4f4c3154d72.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/player/player_dash.png"
-dest_files=["res://.godot/imported/player_dash.png-ccfbf276e6380f8c7ecbd464d18f981e.ctex"]
+source_file="res://Assets/Textures/player/spiked_triangle_bounce.png"
+dest_files=["res://.godot/imported/spiked_triangle_bounce.png-32fd4a500c88089229bcf4f4c3154d72.ctex"]
 
 [params]
 
