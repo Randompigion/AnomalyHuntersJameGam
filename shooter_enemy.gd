@@ -11,6 +11,11 @@ const BURST_COOLDOWN: float = 4.5
 
 @export var missile_scene: PackedScene
 
+const DEATH_SOUNDS := [
+	preload("res://Assets/Audio/SFX/Enemies/sfx_enemy_death_a.wav"),
+	preload("res://Assets/Audio/SFX/Enemies/sfx_enemy_death_b.wav"),
+]
+
 var player: Node2D
 var burst_cooldown_timer: float = 0.0
 var burst_shots_remaining: int = 0
@@ -69,4 +74,5 @@ func _fire_missile() -> void:
 
 
 func die() -> void:
+	Sfx.play(DEATH_SOUNDS.pick_random())
 	queue_free()

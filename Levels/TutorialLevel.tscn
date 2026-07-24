@@ -14,7 +14,7 @@
 [ext_resource type="Script" uid="uid://by57ttr5jcqc1" path="res://Levels/time_left.gd" id="11_fy7dx"]
 [ext_resource type="FontFile" uid="uid://cwhrnc44j65uh" path="res://Assets/PixelOperator8.ttf" id="12_ggei0"]
 [ext_resource type="Script" uid="uid://dl5pk2mfo3ojw" path="res://Levels/spawner.gd" id="13_ggei0"]
-[ext_resource type="AudioStream" uid="uid://cgkdvqcb1on45" path="res://audiomass-output-2_XS8PiyWq.mp3" id="14_3ksry"]
+[ext_resource type="AudioStream" uid="uid://dcowsd8k1sg0l" path="res://Assets/Audio/BGM/bgm_retro_arcade.ogg" id="14_3ksry"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pc3i1"]
 radius = 46.647614
@@ -109,9 +109,9 @@ script = ExtResource("13_ggei0")
 wait_time = 10.0
 autostart = true
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1164203136]
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=1164203136]
 stream = ExtResource("14_3ksry")
-volume_db = 24.0
+volume_db = -6.0
 autoplay = true
 
 [node name="ShooterEnemy" parent="." unique_id=1749464398 instance=ExtResource("8_wjxcd")]
