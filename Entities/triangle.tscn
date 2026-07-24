@@ -6,8 +6,11 @@
 [ext_resource type="AudioStream" uid="uid://x31a54fy0kw7" path="res://Assets/Audio/SFX/Player/sfx_player_dash_a.mp3" id="5_v4sx1"]
 [ext_resource type="AudioStream" uid="uid://dmercsex6k7kj" path="res://Assets/Audio/SFX/Player/sfx_player_bounce.wav" id="6_bounce"]
 [ext_resource type="Texture2D" uid="uid://cbm281jaqtmu3" path="res://Assets/Textures/Effects/Burst.png" id="6_yfysr"]
+[ext_resource type="Texture2D" uid="uid://kly8xun3f4ln" path="res://Assets/Textures/Effects/Bounce1.png" id="7_p1awi"]
 [ext_resource type="Texture2D" uid="uid://dl5hn1btro5a0" path="res://Assets/Textures/Effects/Burst2.png" id="7_wobkw"]
+[ext_resource type="Texture2D" uid="uid://dl6lccw32aa04" path="res://Assets/Textures/Effects/Bounce2.png" id="8_mefwt"]
 [ext_resource type="Texture2D" uid="uid://w388e3i5fgy8" path="res://Assets/Textures/Effects/Burst3.png" id="8_oh7yv"]
+[ext_resource type="Texture2D" uid="uid://dlxa015m1e1t1" path="res://Assets/Textures/Effects/Bounce3.png" id="9_n3j46"]
 [ext_resource type="Texture2D" uid="uid://dvxb2w0hifns6" path="res://Assets/Textures/Effects/Null.png" id="9_p1awi"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4ayxd"]
@@ -39,6 +42,26 @@ animations = [{
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pc3i1"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_p1awi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_p1awi")
+}, {
+"duration": 1.5,
+"texture": ExtResource("8_mefwt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_n3j46")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_p1awi")
+}],
+"loop": 0,
+"name": &"Bounce",
+"speed": 16.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("9_p1awi")
@@ -109,10 +132,12 @@ one_shot = true
 
 [node name="Effects" type="AnimatedSprite2D" parent="." unique_id=2071686635]
 unique_name_in_owner = true
-position = Vector2(62, -5)
+position = Vector2(32.000004, 0)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_pc3i1")
-animation = &"Kill"
+animation = &"Bounce"
+frame = 4
+frame_progress = 1.0
 
 [connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="dash_cooldown" to="." method="_on_dash_cooldown_timeout"]

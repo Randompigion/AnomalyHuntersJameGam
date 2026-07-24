@@ -117,6 +117,8 @@ horizontal_alignment = 1
 
 [node name="Triangle" parent="Entities" unique_id=669404060 instance=ExtResource("1_0l1gj")]
 collision_mask = 255
+speed = 700.0
+bounce_speed_retention = 0.7
 
 [node name="Camera2D2" type="Camera2D" parent="Entities/Triangle" unique_id=646350420]
 zoom = Vector2(0.5, 0.5)
@@ -190,7 +192,7 @@ position = Vector2(-526, 266)
 position = Vector2(512, 538)
 
 [node name="ShooterEnemy" parent="." unique_id=1749464398 instance=ExtResource("8_wjxcd")]
-position = Vector2(-3.9999995, -1.9999993)
+position = Vector2(-196.99998, 225.99998)
 
 [connection signal="body_entered" from="Enemy/KillZone" to="Enemy" method="_on_kill_zone_body_entered"]
 [connection signal="timeout" from="Enemy/AttackCooldown" to="Enemy" method="_on_attack_cooldown_timeout"]

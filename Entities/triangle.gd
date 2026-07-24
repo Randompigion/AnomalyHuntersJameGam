@@ -88,6 +88,7 @@ func _physics_process(delta: float) -> void:
 			rotation = dash_direction.angle()
 			dashing = false
 			bounce_lock = true
+			$%Effects.play("Bounce")
 			_play_bounce()
 			get_tree().create_timer(bounce_lock_duration).timeout.connect(func(): bounce_lock = false)
 	else:
@@ -128,7 +129,6 @@ func _handle_wall_collisions() -> void:
 		if collider and collider.is_in_group("enemy"):
 			if mode == Mode.DASH:
 				_kill_enemy(collider)
-				%Effects.play("Kill")
 			continue
 
 		if mode == Mode.BOUNCE:
@@ -148,6 +148,7 @@ func _play_bounce() -> void:
 		bounce_sound.play()
 
 func _kill_enemy(enemy: Node) -> void:
+	%Effects.play("Kill")
 	if enemy.has_method("die"):
 		enemy.die()
 	else:

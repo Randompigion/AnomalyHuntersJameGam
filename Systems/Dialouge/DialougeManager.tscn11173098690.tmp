@@ -1,27 +1,16 @@
 [gd_scene format=3 uid="uid://bfxkrskqmx2y8"]
 
-[ext_resource type="FontFile" uid="uid://fsbors10b7bh" path="res://Assets/Textures/ui/fonts/GoofyGoober.ttf" id="1_oq6e8"]
 [ext_resource type="Script" uid="uid://b3kbrxnthj8v5" path="res://label.gd" id="1_rvfvs"]
 [ext_resource type="Texture2D" uid="uid://7mgsmwc2pbo3" path="res://Assets/Textures/enemies/tutorial_boss.png" id="2_m01g8"]
-[ext_resource type="Texture2D" uid="uid://b6f3k1f4cymvb" path="res://Assets/Textures/ui/hud/skill_slot_long_active.png" id="3_mxtqe"]
 [ext_resource type="Texture2D" uid="uid://clcihy7oxg70i" path="res://Assets/Textures/npcs/circle.png" id="3_rlnfl"]
 [ext_resource type="Texture2D" uid="uid://ciy4ttwjvdppx" path="res://Assets/Textures/player/player_dash.png" id="4_fmlwy"]
 [ext_resource type="Texture2D" uid="uid://c8hx8eut586yl" path="res://Assets/Textures/ui/hud/Dialouge_Large.png" id="6_mxtqe"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_pc3i1"]
-font = ExtResource("1_oq6e8")
-font_size = 40
-outline_size = 3
-outline_color = Color(0.08627451, 0.59607846, 0.7058824, 1)
-shadow_size = 2
-
-[sub_resource type="LabelSettings" id="LabelSettings_mxtqe"]
-font = ExtResource("1_oq6e8")
-font_size = 55
-font_color = Color(0, 1, 1, 1)
-outline_size = 3
-outline_color = Color(0.08627451, 0.59607846, 0.7058824, 1)
-shadow_size = 2
+font_size = 50
+font_color = Color(0, 0, 0, 1)
+outline_size = 1
+outline_color = Color(0.6474297, 0.007952836, 0.31082237, 1)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_pc3i1"]
 animations = [{
@@ -57,10 +46,11 @@ animations = [{
 
 [node name="Textbox" type="Label" unique_id=933938014]
 custom_minimum_size = Vector2(1, 1)
-offset_left = -964.0
-offset_top = 353.0
-offset_right = 933.0
-offset_bottom = 620.0
+offset_left = -1149.0
+offset_top = 307.0
+offset_right = 1016.0
+offset_bottom = 574.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "This is a Sample Text! It doesn't show up in game but helps plan the layouts and text! This is a Sample Text! It doesn't show up in game but helps plan the layouts and text! This is a Sample Text! It doesn't show up in game but helps plan the layouts and text!"
 label_settings = SubResource("LabelSettings_pc3i1")
 autowrap_mode = 3
@@ -70,22 +60,21 @@ script = ExtResource("1_rvfvs")
 unique_name_in_owner = true
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 0
-offset_left = -113.0
-offset_top = -99.999985
-offset_right = 447.0
-offset_bottom = 41.000015
-rotation = -0.17411917
+offset_top = -83.0
+offset_right = 560.0
+offset_bottom = 58.0
 text = "SampleName
 "
-label_settings = SubResource("LabelSettings_mxtqe")
+label_settings = SubResource("LabelSettings_pc3i1")
 autowrap_mode = 3
 
-[node name="NameBG" type="Sprite2D" parent="NameLabel" unique_id=725917264]
+[node name="NameRec" type="ColorRect" parent="NameLabel" unique_id=101613383]
 z_index = -1
-position = Vector2(201.43298, 30.37732)
-rotation = 0.0060933214
-scale = Vector2(4.3515625, 2.34375)
-texture = ExtResource("3_mxtqe")
+layout_mode = 0
+offset_left = -3.0
+offset_top = 3.0
+offset_right = 568.8662
+offset_bottom = 70.0
 
 [node name="Delay" type="Timer" parent="." unique_id=1097737404]
 unique_name_in_owner = true
@@ -103,17 +92,8 @@ animation = &"Null"
 
 [node name="TextBG" type="Sprite2D" parent="." unique_id=100982087]
 z_index = -2
-position = Vector2(954.50006, 78.999985)
-scale = Vector2(1.431875, 0.5558333)
+position = Vector2(1062.8749, 110.49999)
+scale = Vector2(1.5514061, 0.6616667)
 texture = ExtResource("6_mxtqe")
-
-[node name="ColorRect" type="ColorRect" parent="." unique_id=2075991106]
-z_index = -5
-layout_mode = 0
-offset_left = -420.0
-offset_top = -1337.0
-offset_right = 2332.0
-offset_bottom = 595.0
-color = Color(0, 0, 0, 0.3137255)
 
 [connection signal="timeout" from="Delay" to="." method="_on_delay_timeout"]
