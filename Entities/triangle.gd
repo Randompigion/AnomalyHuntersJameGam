@@ -8,8 +8,6 @@ extends CharacterBody2D
 @export var max_hp: int = 3
 
 @export var bounce_lock_duration = 0.2
-@export var hypertime_scale = 1.75
-@export var hypertime_duration = 5.0
 var hp: int = max_hp
 var is_invincible: bool = false
 var dashing = false
@@ -23,6 +21,7 @@ var mode: Mode = Mode.DASH
 
 @onready var sprite: AnimatedSprite2D = $Sprite2D
 @onready var stun_timer: Timer = $stunt_timer
+@onready var bounce_sound: AudioStreamPlayer2D = $BounceSound
 
 func _ready() -> void:
 	hp = max_hp
@@ -80,6 +79,7 @@ func _physics_process(delta: float) -> void:
 				rotation = dash_direction.angle()
 				dashing = false
 				bounce_lock = true
+				_play_bounce()
 				get_tree().create_timer(bounce_lock_duration).timeout.connect(func(): bounce_lock = false)
 	else:
 		move_and_slide()
@@ -88,18 +88,13 @@ func _physics_process(delta: float) -> void:
 func _toggle_mode() -> void:
 	if mode == Mode.DASH:
 		mode = Mode.BOUNCE
-		Engine.time_scale = hypertime_scale
 		if sprite.sprite_frames and sprite.sprite_frames.has_animation("bounce"):
 			sprite.play("bounce")
-		get_tree().create_timer(hypertime_duration, true, false, true).timeout.connect(_end_hypertime)
 	else:
-		_end_hypertime()
+		mode = Mode.DASH
+		if sprite.sprite_frames and sprite.sprite_frames.has_animation("dash"):
+			sprite.play("dash")
 
-func _end_hypertime() -> void:
-	mode = Mode.DASH
-	Engine.time_scale = 1.0
-	if sprite.sprite_frames and sprite.sprite_frames.has_animation("dash"):
-		sprite.play("dash")
 
 func _handle_wall_collisions() -> void:
 	if not dashing:
@@ -118,11 +113,17 @@ func _handle_wall_collisions() -> void:
 			velocity = velocity.bounce(normal) * bounce_speed_retention
 			dash_direction = velocity.normalized()
 			rotation = dash_direction.angle()
+			_play_bounce()
 		else:
 			dashing = false
 			velocity = Vector2.ZERO
-			_apply_stun()
+			take_damage(1)
 		break
+
+func _play_bounce() -> void:
+	if bounce_sound.stream:
+		$Camera2D2.trigger_shake()
+		bounce_sound.play()
 
 func _kill_enemy(enemy: Node) -> void:
 	if enemy.has_method("die"):
@@ -137,6 +138,8 @@ func take_damage(amount: int) -> void:
 	dashing = false
 	velocity = Vector2.ZERO
 	_apply_stun()
+	$Camera2D2.trigger_shake()
+	$"../../TimeLeft".subtract_time(10)
 	
 	is_invincible = true
 	sprite.modulate.a = 0.5

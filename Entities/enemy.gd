@@ -3,6 +3,7 @@ extends CharacterBody2D
 var player
 var direction
 const SPEED = 200
+var can_damage = true
 
 const DEATH_SOUNDS := [
 	preload("res://Assets/Audio/SFX/Enemies/sfx_enemy_death_a.wav"),
@@ -17,13 +18,18 @@ func _on_kill_zone_body_entered(body: Node2D) -> void:
 	if body == player:
 		if player.dashing and player.mode == player.Mode.DASH:
 			die()
+			
 		else:
-			player.take_damage(1)
-			die()
+			if can_damage:
+				player.take_damage(1)
+				can_damage = false
+				$AttackCooldown.start()
+				
 
 func die():
 	Sfx.play(DEATH_SOUNDS.pick_random())
 	$"../TimeLeft".add_time(10)
+	$"../Entities/Triangle/Camera2D2".trigger_shake()
 	queue_free()
 
 func _physics_process(delta: float) -> void:
@@ -38,5 +44,11 @@ func _physics_process(delta: float) -> void:
 		var collider = collision.get_collider()
 		if collider == player:
 			if not player.dashing and player.has_method("take_damage"):
-				player.take_damage(1)
-				die()
+				if can_damage:
+					player.take_damage(1)
+					can_damage = false
+					$AttackCooldown.start()
+
+
+func _on_attack_cooldown_timeout() -> void:
+	can_damage = true

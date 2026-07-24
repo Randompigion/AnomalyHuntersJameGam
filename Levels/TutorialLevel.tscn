@@ -7,8 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://cxiim7kb0j2td" path="res://Assets/Textures/enemies/alarmguy.png" id="4_tji7q"]
 [ext_resource type="PackedScene" uid="uid://crnq3mfkg43su" path="res://Systems/Cursor/cursor.tscn" id="6_0tje5"]
 [ext_resource type="PackedScene" uid="uid://bdk457fu7ular" path="res://Entities/prune_walls.tscn" id="7_2rs8b"]
+[ext_resource type="FontFile" uid="uid://fsbors10b7bh" path="res://Assets/Textures/ui/fonts/GoofyGoober.ttf" id="8_ctwm6"]
 [ext_resource type="PackedScene" uid="uid://c6ylojwgct72c" path="res://Entities/shooter_enemy.tscn" id="8_wjxcd"]
 [ext_resource type="Script" uid="uid://cmc3as7jogpi4" path="res://Levels/ChunkedSpaceBackground.gd" id="9_ism6p"]
+[ext_resource type="Script" uid="uid://u6gq3mopm0mq" path="res://Levels/camera_shake.gd" id="10_3a2eq"]
 [ext_resource type="Script" uid="uid://by57ttr5jcqc1" path="res://Levels/time_left.gd" id="11_fy7dx"]
 [ext_resource type="FontFile" uid="uid://cwhrnc44j65uh" path="res://Assets/Textures/ui/fonts/PixelOperator8.ttf" id="12_ggei0"]
 [ext_resource type="Script" uid="uid://dl5pk2mfo3ojw" path="res://Levels/spawner.gd" id="13_ggei0"]
@@ -26,6 +28,15 @@ sample_partition_type = 1
 size = Vector2(102.94092, 102.94098)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3b47u"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3ksry"]
+font = ExtResource("8_ctwm6")
+font_size = 27
+font_color = Color(0.9098039, 0.09019608, 1, 1)
+outline_size = 2
+outline_color = Color(0.4361593, 0.030211769, 0.5708664, 1)
+shadow_size = 10
+shadow_color = Color(0, 1, 1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_82po7"]
 size = Vector2(758.5, 119)
@@ -66,24 +77,41 @@ scale = Vector2(0.9999999, 0.9999999)
 shape = SubResource("RectangleShape2D_3b47u")
 debug_color = Color(0.70154667, 0.49091738, 3.85046e-07, 0.41960785)
 
+[node name="AttackCooldown" type="Timer" parent="Enemy" unique_id=2078348694]
+wait_time = 3.5
+one_shot = true
+
 [node name="TimeLeft" type="Node" parent="." unique_id=1301317357]
 script = ExtResource("11_fy7dx")
 
-[node name="Label" type="Label" parent="TimeLeft" unique_id=861436376]
-offset_left = -215.0
-offset_top = 480.0
-offset_right = 201.0
-offset_bottom = 655.0
+[node name="CanvasLayer" type="CanvasLayer" parent="TimeLeft" unique_id=254047363]
+
+[node name="Label" type="Label" parent="TimeLeft/CanvasLayer" unique_id=861436376]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -208.0
+offset_top = 30.0
+offset_right = 208.0
+offset_bottom = 205.0
+grow_horizontal = 2
+size_flags_horizontal = 4
 theme_override_fonts/font = ExtResource("12_ggei0")
 theme_override_font_sizes/font_size = 128
 text = "2:00"
+label_settings = SubResource("LabelSettings_3ksry")
 horizontal_alignment = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="Entities" type="Node" parent="." unique_id=1455784909]
 
 [node name="Triangle" parent="Entities" unique_id=669404060 instance=ExtResource("1_0l1gj")]
 collision_mask = 31
+
+[node name="Camera2D2" type="Camera2D" parent="Entities/Triangle" unique_id=646350420]
+zoom = Vector2(0.5, 0.5)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+script = ExtResource("10_3a2eq")
 
 [node name="ShooterEnemy" parent="Entities" unique_id=1749464398 instance=ExtResource("8_wjxcd")]
 position = Vector2(365.00003, 227.00003)
@@ -123,3 +151,4 @@ parameters/looping = true
 script = ExtResource("9_ism6p")
 
 [connection signal="body_entered" from="Enemy/KillZone" to="Enemy" method="_on_kill_zone_body_entered"]
+[connection signal="timeout" from="Enemy/AttackCooldown" to="Enemy" method="_on_attack_cooldown_timeout"]

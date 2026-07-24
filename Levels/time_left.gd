@@ -1,6 +1,6 @@
 extends Node
 
-@onready var label = $Label
+@onready var label = $CanvasLayer/Label
 
 var time_left: float = 120.0
 
@@ -18,7 +18,13 @@ func time_left_to_live():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	time_left -= delta
-	label.text = "%02d:%02d" % time_left_to_live()
+	label.text = "Time Until Full Corruption: " + "%02d:%02d" % time_left_to_live()
 
 func add_time(x):
-	time_left += x
+	if time_left < 120:
+		time_left += x
+	else:
+		pass
+	
+func subtract_time(x):
+	time_left -= x

@@ -35,6 +35,9 @@ animations = [{
 
 [node name="Triangle" type="CharacterBody2D" unique_id=669404060]
 script = ExtResource("1_4roi2")
+speed = 750.0
+dash_speed = 1200
+bounce_speed_retention = 1.1
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1606221345]
 position = Vector2(1.0000005, -0.9999995)
@@ -47,10 +50,6 @@ autoplay = "dash"
 position = Vector2(-9.271509, 5.0000005)
 scale = Vector2(1.4627731, 1.2425828)
 polygon = PackedVector2Array(30, -5, 26, -11, 20, -12, 20, 2, 26, 0)
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=210832893]
-zoom = Vector2(0.5, 0.5)
-position_smoothing_enabled = true
 
 [node name="dash_timer" type="Timer" parent="." unique_id=528950344]
 wait_time = 0.3

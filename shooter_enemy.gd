@@ -1,5 +1,10 @@
 extends CharacterBody2D
 
+const DEATH_SOUNDS := [
+	preload("res://Assets/Audio/SFX/Enemies/sfx_enemy_death_a.wav"),
+	preload("res://Assets/Audio/SFX/Enemies/sfx_enemy_death_b.wav"),
+]
+
 @export var move_speed: float = 150.0
 @export var preferred_distance_min: float = 180.0
 @export var preferred_distance_max: float = 260.0
@@ -143,4 +148,9 @@ func _fire_missile() -> void:
 
 
 func die() -> void:
+	$"../Triangle/Camera2D2".trigger_shake()
+	Sfx.play(DEATH_SOUNDS.pick_random())
+	$"../../TimeLeft".add_time(10)
 	queue_free()
+	
+	
