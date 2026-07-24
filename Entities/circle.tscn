@@ -4,9 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://clcihy7oxg70i" path="res://Assets/Textures/npcs/circle.png" id="1_w1d38"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ayxd"]
-radius = 15.033297
+radius = 292.43802
 
 [node name="Circle" type="CharacterBody2D" unique_id=1528943898]
+scale = Vector2(0.5, 0.5)
 script = ExtResource("1_uihlg")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=900090865]
@@ -14,5 +15,5 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_w1d38")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=211604599]
+scale = Vector2(0.25, 0.25)
 shape = SubResource("CircleShape2D_4ayxd")
-disabled = true

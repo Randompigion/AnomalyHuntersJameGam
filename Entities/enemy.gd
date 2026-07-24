@@ -10,7 +10,7 @@ const DEATH_SOUNDS := [
 ]
 
 func _ready() -> void:
-	player = get_node_or_null("../Triangle") 
+	player = get_node_or_null("../Entities/Triangle") 
 	add_to_group("enemy")
 
 func _on_kill_zone_body_entered(body: Node2D) -> void:
@@ -22,7 +22,7 @@ func _on_kill_zone_body_entered(body: Node2D) -> void:
 
 func die():
 	Sfx.play(DEATH_SOUNDS.pick_random())
-	$"../Time Left".add_time(10)
+	$"../TimeLeft".add_time(10)
 	queue_free()
 
 func _physics_process(delta: float) -> void:
