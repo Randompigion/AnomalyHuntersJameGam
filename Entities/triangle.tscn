@@ -68,9 +68,11 @@ polygon = PackedVector2Array(-25, 24, 32, 4, 32, -7, -25, -26, -31, -20, -22, -2
 stream = ExtResource("5_v4sx1")
 pitch_scale = 3.35
 attenuation = 0.46651652
+bus = &"SFX"
 
 [node name="BounceSound" type="AudioStreamPlayer2D" parent="." unique_id=849410663]
 stream = ExtResource("6_bounce")
+bus = &"SFX"
 
 [node name="stunt_timer" type="Timer" parent="." unique_id=1534631604]
 wait_time = 3.0

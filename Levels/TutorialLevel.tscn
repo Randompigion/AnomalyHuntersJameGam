@@ -145,6 +145,7 @@ autostart = true
 stream = ExtResource("14_3ksry")
 volume_db = -6.0
 autoplay = true
+bus = &"Music"
 parameters/looping = true
 
 [node name="SpaceBackgroundManager" type="Node2D" parent="LevelParts" unique_id=962824130]
