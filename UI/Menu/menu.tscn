@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://cjp4jtcm2kqrv"]
 
 [ext_resource type="Script" uid="uid://c7dya4lkcs0rk" path="res://UI/Menu/menu.gd" id="1_4hy44"]
-[ext_resource type="Texture2D" uid="uid://b1rvdemwo8py7" path="res://Assets/Menu/option1.png" id="1_lti8b"]
-[ext_resource type="Texture2D" uid="uid://igdtgn16gtme" path="res://Assets/Menu/option3.png" id="1_mae5d"]
-[ext_resource type="Texture2D" uid="uid://csw7l4j253qwn" path="res://Assets/Menu/option2.png" id="2_4hy44"]
+[ext_resource type="Texture2D" uid="uid://b1rvdemwo8py7" path="res://Assets/Textures/ui/pause_menu/option1.png" id="1_lti8b"]
+[ext_resource type="Texture2D" uid="uid://igdtgn16gtme" path="res://Assets/Textures/ui/pause_menu/option3.png" id="1_mae5d"]
+[ext_resource type="Texture2D" uid="uid://csw7l4j253qwn" path="res://Assets/Textures/ui/pause_menu/option2.png" id="2_4hy44"]
 [ext_resource type="ButtonGroup" uid="uid://dunf4ldps3mcd" path="res://UI/Menu/mainButtons.tres" id="2_kk3ma"]
-[ext_resource type="Texture2D" uid="uid://c08rup67fkr1u" path="res://Assets/Menu/option3_pressed.png" id="3_ytr4m"]
-[ext_resource type="Texture2D" uid="uid://dcvvpkx2n00aj" path="res://Assets/Menu/option2_pressed.png" id="5_l48gv"]
-[ext_resource type="Texture2D" uid="uid://bgnpb5mkqlxu6" path="res://Assets/Menu/option1_pressed.png" id="7_ecwwl"]
+[ext_resource type="Texture2D" uid="uid://c08rup67fkr1u" path="res://Assets/Textures/ui/pause_menu/option3_pressed.png" id="3_ytr4m"]
+[ext_resource type="Texture2D" uid="uid://dcvvpkx2n00aj" path="res://Assets/Textures/ui/pause_menu/option2_pressed.png" id="5_l48gv"]
+[ext_resource type="Texture2D" uid="uid://bgnpb5mkqlxu6" path="res://Assets/Textures/ui/pause_menu/option1_pressed.png" id="7_ecwwl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4hy44"]
 bg_color = Color(0.65628535, 0.6562854, 0.6562853, 1)
