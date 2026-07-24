@@ -16,6 +16,9 @@
 [ext_resource type="Script" uid="uid://dl5pk2mfo3ojw" path="res://Levels/spawner.gd" id="13_ggei0"]
 [ext_resource type="AudioStream" uid="uid://dcowsd8k1sg0l" path="res://Assets/Audio/BGM/bgm_retro_arcade.ogg" id="14_3ksry"]
 [ext_resource type="PackedScene" uid="uid://dpoquu6cakaa2" path="res://Entities/circle.tscn" id="14_ctwm6"]
+[ext_resource type="Texture2D" uid="uid://cspbs1fpv220p" path="res://Assets/Textures/enemies/spike_wall.png" id="15_ctwm6"]
+[ext_resource type="Script" uid="uid://d2ueyl4dbnyen" path="res://Levels/spikes.gd" id="18_re0cg"]
+[ext_resource type="PackedScene" uid="uid://vkfw2y641iss" path="res://Entities/change_scene.tscn" id="19_qeo6u"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_3ksry"]
 resource_local_to_scene = true
@@ -41,6 +44,12 @@ shadow_color = Color(0, 1, 1, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_82po7"]
 size = Vector2(758.5, 119)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ayxd"]
+size = Vector2(62, 244)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ggs6p"]
+size = Vector2(15, 224)
+
 [node name="TutorialLevel" type="Node2D" unique_id=242093086]
 script = ExtResource("1_tji7q")
 
@@ -57,7 +66,7 @@ position = Vector2(-124, 0)
 [node name="Enemy" type="CharacterBody2D" parent="." unique_id=200284296]
 position = Vector2(728, 287.00003)
 scale = Vector2(0.68000126, 0.68000126)
-collision_layer = 4
+collision_layer = 7
 script = ExtResource("2_tji7q")
 
 [node name="Sprite2D" type="Sprite2D" parent="Enemy" unique_id=918940545]
@@ -105,7 +114,7 @@ horizontal_alignment = 1
 [node name="Entities" type="Node" parent="." unique_id=1455784909]
 
 [node name="Triangle" parent="Entities" unique_id=669404060 instance=ExtResource("1_0l1gj")]
-collision_mask = 31
+collision_mask = 255
 
 [node name="Camera2D2" type="Camera2D" parent="Entities/Triangle" unique_id=646350420]
 zoom = Vector2(0.5, 0.5)
@@ -145,11 +154,35 @@ autostart = true
 stream = ExtResource("14_3ksry")
 volume_db = -6.0
 autoplay = true
-bus = &"Music"
 parameters/looping = true
 
 [node name="SpaceBackgroundManager" type="Node2D" parent="LevelParts" unique_id=962824130]
 script = ExtResource("9_ism6p")
+
+[node name="BounceKillWall" type="RigidBody2D" parent="." unique_id=276450696]
+collision_layer = 2
+gravity_scale = 0.0
+linear_damp = 70.0
+angular_damp = 50.0
+
+[node name="Texture" type="Sprite2D" parent="BounceKillWall" unique_id=2030400473]
+position = Vector2(18, 476.5)
+scale = Vector2(0.325, 0.3921875)
+texture = ExtResource("15_ctwm6")
+
+[node name="SoftSide" type="CollisionShape2D" parent="BounceKillWall" unique_id=206831605]
+position = Vector2(28, 476)
+shape = SubResource("RectangleShape2D_4ayxd")
+
+[node name="Spikes" type="Area2D" parent="BounceKillWall" unique_id=1834445893]
+script = ExtResource("18_re0cg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BounceKillWall/Spikes" unique_id=1972880251]
+position = Vector2(-6.5, 476)
+shape = SubResource("RectangleShape2D_ggs6p")
+
+[node name="ChangeScene" parent="." unique_id=1821069760 instance=ExtResource("19_qeo6u")]
+position = Vector2(-526, 266)
 
 [connection signal="body_entered" from="Enemy/KillZone" to="Enemy" method="_on_kill_zone_body_entered"]
 [connection signal="timeout" from="Enemy/AttackCooldown" to="Enemy" method="_on_attack_cooldown_timeout"]

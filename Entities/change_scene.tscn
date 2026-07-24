@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://vkfw2y641iss"]
+
+[ext_resource type="Script" uid="uid://7prsobrui13d" path="res://Entities/area_2d.gd" id="2_6eu0q"]
+[ext_resource type="Texture2D" uid="uid://bn1525ulmm017" path="res://Assets/Textures/icon.svg" id="2_6eyrd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_82po7"]
+size = Vector2(112, 113)
+
+[node name="ChangeScene" type="Node2D" unique_id=1821069760]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2072480177]
+texture = ExtResource("2_6eyrd")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=226305572]
+script = ExtResource("2_6eu0q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=486386032]
+position = Vector2(2, -2.5)
+shape = SubResource("RectangleShape2D_82po7")
