@@ -1,19 +1,19 @@
 [gd_scene format=3 uid="uid://drytfobpdkmi3"]
 
 [ext_resource type="Script" uid="uid://cyrfmcleqow38" path="res://missile.gd" id="1_dn7g3"]
-[ext_resource type="Texture2D" uid="uid://bn1525ulmm017" path="res://Assets/Textures/icon.svg" id="2_d2plr"]
+[ext_resource type="Texture2D" uid="uid://ya73f3d21tgm" path="res://Assets/Textures/player/bullet.png" id="2_dn7g3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_82po7"]
-size = Vector2(32, 11)
+size = Vector2(30, 17)
 
 [node name="Missile" type="Area2D" unique_id=803181640]
 script = ExtResource("1_dn7g3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1334778292]
-position = Vector2(0, -0.5)
+position = Vector2(-1, -0.5)
 shape = SubResource("RectangleShape2D_82po7")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=281377740]
 position = Vector2(-0.50000095, -0.5000007)
-scale = Vector2(0.25781247, 0.08593749)
-texture = ExtResource("2_d2plr")
+scale = Vector2(2, 2)
+texture = ExtResource("2_dn7g3")

@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dhujgshj4oobi" path="res://Levels/tutorial_level.gd" id="1_tji7q"]
 [ext_resource type="Script" uid="uid://61r1dw5vrtv" path="res://Entities/enemy.gd" id="2_tji7q"]
 [ext_resource type="Texture2D" uid="uid://bn1525ulmm017" path="res://Assets/Textures/icon.svg" id="3_5c8bj"]
-[ext_resource type="Texture2D" uid="uid://cxiim7kb0j2td" path="res://Assets/Textures/enemies/alarmguy.png" id="4_tji7q"]
+[ext_resource type="Texture2D" uid="uid://d33cj0py1rk53" path="res://Assets/Textures/enemies/tutorial_enemy.png" id="5_53hwb"]
 [ext_resource type="PackedScene" uid="uid://crnq3mfkg43su" path="res://Systems/Cursor/cursor.tscn" id="6_0tje5"]
 [ext_resource type="PackedScene" uid="uid://bdk457fu7ular" path="res://Entities/prune_walls.tscn" id="7_2rs8b"]
 [ext_resource type="FontFile" uid="uid://fsbors10b7bh" path="res://Assets/Textures/ui/fonts/GoofyGoober.ttf" id="8_ctwm6"]
@@ -73,7 +73,7 @@ script = ExtResource("2_tji7q")
 [node name="Sprite2D" type="Sprite2D" parent="Enemy" unique_id=918940545]
 modulate = Color(0.98763007, 0.6124308, 0.7294911, 1)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("4_tji7q")
+texture = ExtResource("5_53hwb")
 
 [node name="KillZone" type="Area2D" parent="Enemy" unique_id=529807981]
 
