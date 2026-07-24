@@ -1,5 +1,6 @@
 extends Control
 
+
 @onready var panels: Control = $Panels
 @onready var main_buttons: Control = $MainButtons
 @onready var menu_label: Label = $MenuLabel
@@ -23,7 +24,8 @@ extends Control
 @export var music_audio_bus: String
 @export var sfx_audio_bus: String
 
-var menu_color = Color(0.809, 0.0, 0.186)
+
+var menu_color = Color("ffffffff")
 var is_darker: bool = false
 var is_hovering: bool = false
 var rand_offset: Vector2
@@ -37,7 +39,9 @@ var sfx_bus_id
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	menu_color = Color("ce002fff")
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
+	menu_label.set("theme_override_colors/font_color", menu_color)
 	main_buttons.modulate = menu_color
 	panels.modulate = menu_color
 	play_panel.visible = true
@@ -171,3 +175,14 @@ func _on_sfx_slider_value_changed(value: float) -> void:
 func _on_music_slider_value_changed(value: float) -> void:
 	var db = linear_to_db(value)
 	AudioServer.set_bus_volume_db(music_bus_id, db)
+
+
+func _on_color_picker_button_color_changed(color: Color) -> void:
+	menu_color = color
+	change_color(menu_color)
+
+
+func change_color(_color) -> void:
+	menu_label.set("theme_override_colors/font_color", menu_color)
+	main_buttons.modulate = menu_color
+	panels.modulate = menu_color
