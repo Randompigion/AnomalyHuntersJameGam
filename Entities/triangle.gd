@@ -128,6 +128,7 @@ func _handle_wall_collisions() -> void:
 		if collider and collider.is_in_group("enemy"):
 			if mode == Mode.DASH:
 				_kill_enemy(collider)
+				%Effects.play("Kill")
 			continue
 
 		if mode == Mode.BOUNCE:
