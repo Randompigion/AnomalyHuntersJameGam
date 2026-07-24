@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://u6gq3mopm0mq" path="res://Levels/camera_shake.gd" id="10_fg3y6"]
 [ext_resource type="PackedScene" uid="uid://2jrtmmbanw0b" path="res://ObstaclesAndObjects/prune_walls.tscn" id="10_wenv2"]
 [ext_resource type="PackedScene" uid="uid://cfab1qxv5l0xn" path="res://Entities/melee_enemy.tscn" id="11_8lo6y"]
-[ext_resource type="PackedScene" uid="uid://c6ylojwgct72c" path="res://Entities/shooter_enemy.tscn" id="11_a0op7"]
 [ext_resource type="PackedScene" uid="uid://4n68niwvspg0" path="res://Entities/tutorial_enemy.tscn" id="12_n52as"]
 [ext_resource type="Texture2D" uid="uid://bn1525ulmm017" path="res://Assets/Textures/icon.svg" id="14_s4vsl"]
 [ext_resource type="PackedScene" uid="uid://dalm655w7fluw" path="res://ObstaclesAndObjects/spawner.tscn" id="14_wenv2"]
@@ -52,9 +51,6 @@ zoom = Vector2(0.5, 0.5)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 script = ExtResource("10_fg3y6")
-
-[node name="ShooterEnemy" parent="Entities" unique_id=1749464398 instance=ExtResource("11_a0op7")]
-position = Vector2(365.00003, 227.00003)
 
 [node name="TutorialEnemy" parent="Entities" unique_id=1732316148 instance=ExtResource("12_n52as")]
 position = Vector2(-516.99994, -292.99997)

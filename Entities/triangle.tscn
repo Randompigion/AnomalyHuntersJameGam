@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://clu42du2dffit"]
 
 [ext_resource type="Script" uid="uid://pjrosdsmens3" path="res://Entities/triangle.gd" id="1_4roi2"]
-[ext_resource type="Texture2D" uid="uid://bw38507erwnep" path="res://Assets/Textures/player/player_dash.png" id="2_cbtp0"]
-[ext_resource type="Texture2D" uid="uid://boqvrjo70nqrm" path="res://Assets/Textures/player/player_bounce.png" id="3_1l35o"]
+[ext_resource type="Texture2D" uid="uid://ciy4ttwjvdppx" path="res://Assets/Textures/player/player_dash.png" id="2_cbtp0"]
+[ext_resource type="Texture2D" uid="uid://c1jsdgicatm2r" path="res://Assets/Textures/player/player_bounce.png" id="3_1l35o"]
 [ext_resource type="AudioStream" uid="uid://x31a54fy0kw7" path="res://Assets/Audio/SFX/Player/sfx_player_dash_a.mp3" id="5_v4sx1"]
 [ext_resource type="AudioStream" uid="uid://dmercsex6k7kj" path="res://Assets/Audio/SFX/Player/sfx_player_bounce.wav" id="6_bounce"]
 
@@ -37,9 +37,6 @@ animations = [{
 collision_layer = 65535
 collision_mask = 65535
 script = ExtResource("1_4roi2")
-speed = 750.0
-dash_speed = 1200
-bounce_speed_retention = 1.1
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1606221345]
 position = Vector2(1.0000005, -0.9999995)

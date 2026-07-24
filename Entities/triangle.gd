@@ -5,6 +5,7 @@ extends CharacterBody2D
 @export var friction = 200
 @export var bounce_speed_retention = 0.6
 @export var stun_duration = 1.5
+@export var heavy_stun_duration = 3.0
 @export var max_hp: int = 3
 
 @export var bounce_lock_duration = 0.2
@@ -112,6 +113,18 @@ func _handle_wall_collisions() -> void:
 		var collider := collision.get_collider()
 		var normal := collision.get_normal()
 
+		if collider and collider.is_in_group("spiky_enemy"):
+			if mode == Mode.DASH:
+				dashing = false
+				velocity = Vector2.ZERO
+				_apply_heavy_stun()
+			else:
+				velocity = velocity.bounce(normal) * bounce_speed_retention
+				dash_direction = velocity.normalized()
+				rotation = dash_direction.angle()
+				_play_bounce()
+			break
+
 		if collider and collider.is_in_group("enemy"):
 			if mode == Mode.DASH:
 				_kill_enemy(collider)
@@ -159,6 +172,11 @@ func _apply_stun() -> void:
 	can_move = false
 	stun_timer.stop()
 	stun_timer.start(stun_duration)
+
+func _apply_heavy_stun() -> void:
+	can_move = false
+	stun_timer.stop()
+	stun_timer.start(heavy_stun_duration)
 
 func _on_stun_timer_timeout() -> void:
 	can_move = true
