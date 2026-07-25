@@ -18,6 +18,10 @@ extends CharacterBody2D
 @export var chain_kill_time_cost = 5
 @export var chain_kill_restore_ratio = 0.3
 
+@export var blink_dash_count = 3
+@export var blink_dash_speed = 450
+@export var blink_dash_time_cost = 20
+
 @export var bounce_lock_duration = 0.2
 @export var bounce_push_force: float = 2.0
 @export var bounce_spin_force: float = 0.08
@@ -38,6 +42,9 @@ var can_chain_kill = true
 var chain_kill_charges = 0
 var chain_dash_active = false
 var chain_kill_prev_dash_speed = 1050
+var can_blink_dash = true
+var blink_charges = 0
+var blink_prev_speed = 750
 var bounce_lock = false
 enum Mode { DASH, BOUNCE, SPIKEY }
 var mode: Mode = Mode.DASH
@@ -80,15 +87,20 @@ func _physics_process(delta: float) -> void:
 	elif input == "a" or input == "m":
 		dir = (get_global_mouse_position() - global_position).normalized()
 	if Input.is_action_just_pressed("dash") and can_dash and can_move:
-		dashing = true
-		dash_direction = dir
-		rotation = dash_direction.angle()
-		$AudioStreamPlayer2D.play()
-		can_dash = false
-		$dash_timer.start()
-		$dash_cooldown.start()
-		if chain_kill_charges > 0:
-			_spend_chain_kill_dash()
+		if blink_charges > 0:
+			_blink()
+			can_dash = false
+			$dash_cooldown.start()
+		else:
+			dashing = true
+			dash_direction = dir
+			rotation = dash_direction.angle()
+			$AudioStreamPlayer2D.play()
+			can_dash = false
+			$dash_timer.start()
+			$dash_cooldown.start()
+			if chain_kill_charges > 0:
+				_spend_chain_kill_dash()
 
 	if Input.is_action_just_pressed("toggle_mode"):
 		_toggle_mode()
@@ -178,7 +190,25 @@ func speed_boost():
 		$AbilityTimers/Cooldowns/SpeedBoostCooldown.start()
 		
 func blink_dash():
-	print("blink dash!")
+	if can_blink_dash:
+		can_blink_dash = false
+		blink_charges = blink_dash_count
+		blink_prev_speed = speed
+		speed = blink_dash_speed
+		var time_left = get_tree().get_first_node_in_group("time_left")
+		if time_left:
+			time_left.subtract_time(blink_dash_time_cost)
+		$AbilityTimers/Cooldowns/BlinkDashCooldown.start()
+
+func _blink() -> void:
+	var max_distance: float = dash_speed * $dash_timer.wait_time
+	var offset: Vector2 = (get_global_mouse_position() - global_position).limit_length(max_distance)
+	move_and_collide(offset)
+	velocity = Vector2.ZERO
+	$AudioStreamPlayer2D.play()
+	blink_charges -= 1
+	if blink_charges <= 0:
+		speed = blink_prev_speed
 	
 func chain_kill():
 	if can_chain_kill:
@@ -412,3 +442,7 @@ func _on_stun_save_cooldown_timeout() -> void:
 
 func _on_chain_kill_cooldown_timeout() -> void:
 	can_chain_kill = true
+
+
+func _on_blink_dash_cooldown_timeout() -> void:
+	can_blink_dash = true
