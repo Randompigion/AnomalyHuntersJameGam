@@ -17,20 +17,6 @@ source_geometry_mode = 1
 [node name="Triangle" parent="." unique_id=669404060 instance=ExtResource("2_sbeil")]
 position = Vector2(461.99997, 394.00003)
 scale = Vector2(1.355, 1.355)
-speed = null
-dash_speed = null
-friction = null
-bounce_speed_retention = null
-stun_duration = null
-heavy_stun_duration = null
-max_hp = null
-bounce_lock_duration = null
-bounce_push_force = null
-bounce_spin_force = null
-bounce_max_spin = null
-vulnerable_knockback_force = null
-vulnerable_knockback_lock_duration = null
-vulnerable_invuln_duration = null
 
 [node name="Camera2D2" type="Camera2D" parent="Triangle" unique_id=2037348135]
 zoom = Vector2(0.5, 0.5)

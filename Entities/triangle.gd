@@ -52,8 +52,8 @@ var blink_charges = 0
 var blink_prev_speed = 750
 var bounce_lock = false
 var knockback_lock = false
-enum Mode { DASH, BOUNCE, SPIKEY }
-
+enum Mode {DASH, BOUNCE, SPIKEY }
+var mode
 @onready var sprite: AnimatedSprite2D = $Sprite2D
 @onready var stun_timer: Timer = $stunt_timer
 @onready var bounce_sound: AudioStreamPlayer2D = $BounceSound
