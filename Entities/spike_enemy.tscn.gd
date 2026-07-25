@@ -72,6 +72,7 @@ func _start_charge() -> void:
 	charge_direction = (player.global_position - global_position).normalized()
 	overshoot_target = player.global_position + charge_direction * charge_overshoot_distance
 	velocity = charge_direction * charge_speed
+	$AudioStreamPlayer2D.play()
 
 
 func _process_charging(delta: float) -> void:

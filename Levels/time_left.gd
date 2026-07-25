@@ -22,12 +22,12 @@ func _process(delta: float) -> void:
 
 func add_time(x):
 	if time_left < 120:
-		$AddTimeSfx
+		$AddTimeSfx.play()
 		time_left += x
 	else:
 		pass
 	
 func subtract_time(x):
-	$SubtractTimeSfx
+	$SubtractTimeSfx.play()
 	time_left -= x
 	

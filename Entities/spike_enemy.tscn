@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://4fdctqccnh5q" path="res://Entities/spike_enemy.tscn.gd" id="1_g0vfg"]
 [ext_resource type="Texture2D" uid="uid://d0smcqdujodhg" path="res://Assets/Textures/enemies/spike_enemy.png" id="2_xuhe8"]
+[ext_resource type="AudioStream" uid="uid://dpqmjtoqae66a" path="res://Assets/Audio/SFX/Player/sfx_player_dash_b.wav" id="3_xuhe8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_82po7"]
 radius = 46.389652
@@ -23,6 +24,12 @@ wait_time = 2.0
 [node name="OvershootPeriod" type="Timer" parent="." unique_id=1640136985]
 wait_time = 1.5
 one_shot = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1146168833]
+stream = ExtResource("3_xuhe8")
+volume_db = 8.0
+max_distance = 200.0
+attenuation = 0.34151006
 
 [connection signal="timeout" from="HitCooldown" to="." method="_on_hit_cooldown_timeout"]
 [connection signal="timeout" from="OvershootPeriod" to="." method="_on_overshoot_period_timeout"]
