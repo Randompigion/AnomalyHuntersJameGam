@@ -18,6 +18,7 @@
 [ext_resource type="AudioStream" uid="uid://73d12qfx1da0" path="res://Assets/Audio/SFX/UI/sfx_ui_error.wav" id="15_5uuys"]
 [ext_resource type="AudioStream" uid="uid://83kqg3nw8vpf" path="res://Assets/Audio/SFX/UI/sfx_ui_hover.wav" id="16_to3yq"]
 [ext_resource type="AudioStream" uid="uid://cehm4jfukhcp5" path="res://Assets/Audio/SFX/UI/sfx_ui_select.wav" id="17_10uw0"]
+[ext_resource type="Texture2D" uid="uid://bc6hgxjwk6kg1" path="res://Assets/Textures/ui/text_box.png" id="19_to3yq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4hy44"]
 bg_color = Color(0.654902, 0.654902, 0.654902, 1)
@@ -301,10 +302,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -454.4527
-offset_top = -117.00001
-offset_right = -92.4527
-offset_bottom = 116.999985
+offset_left = -454.851
+offset_top = -143.58813
+offset_right = -92.85101
+offset_bottom = 90.41185
 grow_horizontal = 0
 grow_vertical = 2
 
@@ -416,6 +417,254 @@ bus = &"SFX"
 [node name="SfxUiSelect" type="AudioStreamPlayer2D" parent="." unique_id=327670159]
 stream = SubResource("AudioStreamRandomizer_to3yq")
 bus = &"SFX"
+
+[node name="Textboxes" type="Node2D" parent="." unique_id=1751689725]
+z_index = 4096
+
+[node name="PolySpikes" type="NinePatchRect" parent="Textboxes" unique_id=1033849355]
+visible = false
+offset_left = 807.0
+offset_top = 273.0
+offset_right = 1092.0
+offset_bottom = 543.0
+texture = ExtResource("19_to3yq")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 30
+
+[node name="Label" type="Label" parent="Textboxes/PolySpikes" unique_id=1271378058]
+texture_filter = 1
+custom_minimum_size = Vector2(100, 0)
+custom_maximum_size = Vector2(250, -1)
+layout_mode = 0
+offset_left = 21.0
+offset_top = 17.0
+offset_right = 271.0
+offset_bottom = 254.0
+theme_override_font_sizes/font_size = 14
+text = "POLY SPIKES
+Adds SPIKES to TRIANGLE so it will KILL anything that contacts it (including spiked enemy). Drawback: 30% Reduced Movement Speed + No Dash while skill is ACTIVE. This lasts for 15 seconds and reduces timer by 35 seconds when skill ends. Cooldown: 10 seconds"
+autowrap_mode = 3
+
+[node name="ChainKill" type="NinePatchRect" parent="Textboxes" unique_id=1165905820]
+visible = false
+offset_left = 474.0
+offset_top = 436.0
+offset_right = 786.0
+offset_bottom = 633.0
+texture = ExtResource("19_to3yq")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 30
+
+[node name="Label" type="Label" parent="Textboxes/ChainKill" unique_id=1965591030]
+texture_filter = 1
+custom_minimum_size = Vector2(100, 0)
+custom_maximum_size = Vector2(300, -1)
+layout_mode = 0
+offset_left = 18.0
+offset_top = 12.0
+offset_right = 313.0
+offset_bottom = 211.0
+theme_override_font_sizes/font_size = 14
+text = "CHAIN KILL
+For the next 5 dashes, DASHING into an enemy will SLASH the 2 NEAREST enemies as well. Drawback: Timer reduces by 5 seconds/dash + Dash Speed is reduced + Chained enemy kills have less time restoration. Cooldown: 15 Seconds
+"
+autowrap_mode = 3
+
+[node name="BlastDash" type="NinePatchRect" parent="Textboxes" unique_id=1492250660]
+visible = false
+offset_left = 816.0
+offset_top = 263.0
+offset_right = 1113.0
+offset_bottom = 580.0
+texture = ExtResource("19_to3yq")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 30
+
+[node name="Label" type="Label" parent="Textboxes/BlastDash" unique_id=1229955453]
+texture_filter = 1
+custom_minimum_size = Vector2(80, 0)
+custom_maximum_size = Vector2(300, -1)
+layout_mode = 0
+offset_left = 17.0
+offset_top = 19.0
+offset_right = 291.0
+offset_bottom = 292.0
+theme_override_font_sizes/font_size = 14
+text = "BLAST DASH
+For the next THREE dashes, DASHING into a wall no longer STUNS, but instead creates a SHOCKWAVE that KILLS all nearby enemies (excluding spike enemy) and pushes back PROJECTILES. Drawback: Reduced Dash Movement Speed + No Bounce while skill is Active. Reduces timer by 10 seconds per dash until skill runs out. Cooldown: 5 seconds (Doesn't start until all 3 blast dashes are used)"
+autowrap_mode = 3
+
+[node name="SpeedBoost" type="NinePatchRect" parent="Textboxes" unique_id=1251841929]
+visible = false
+offset_left = 474.0
+offset_top = 436.0
+offset_right = 813.0
+offset_bottom = 633.0
+texture = ExtResource("19_to3yq")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 30
+
+[node name="Label" type="Label" parent="Textboxes/SpeedBoost" unique_id=1346639226]
+texture_filter = 1
+custom_minimum_size = Vector2(110, 0)
+custom_maximum_size = Vector2(310, -1)
+layout_mode = 0
+offset_left = 17.0
+offset_top = 17.0
+offset_right = 327.0
+offset_bottom = 182.0
+theme_override_font_sizes/font_size = 14
+text = "SPEED BOOST
+Increases DASH SPEED, BOUNCE SPEED, and base SPEED by 50%. Drawback: Somewhat uncontrollable, especially in windy levels. This lasts for 10 seconds and reduces timer by 20 seconds when skill deactivates. Cooldown:  15 seconds"
+autowrap_mode = 3
+
+[node name="TemporalTargetKill" type="NinePatchRect" parent="Textboxes" unique_id=259118959]
+visible = false
+offset_left = 802.0
+offset_top = 356.0
+offset_right = 1099.0
+offset_bottom = 615.0
+texture = ExtResource("19_to3yq")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 30
+
+[node name="Label" type="Label" parent="Textboxes/TemporalTargetKill" unique_id=1311129180]
+texture_filter = 1
+custom_minimum_size = Vector2(80, 0)
+custom_maximum_size = Vector2(280, -1)
+layout_mode = 0
+offset_left = 17.0
+offset_top = 19.0
+offset_right = 283.0
+offset_bottom = 238.0
+theme_override_font_sizes/font_size = 14
+text = "Temporal Target Kill - Time FREEZES for 5 seconds allowing you to CLICK on any enemy within VIEW. Once time RESUMES, all enemies that were clicked gets SLASHED and DIES. Drawback: Timer is reduced by 45 seconds + enemy deaths only restore 15% of normal time restoration. Cooldown: 25 seconds"
+autowrap_mode = 3
+
+[node name="StunSave" type="NinePatchRect" parent="Textboxes" unique_id=1129003275]
+visible = false
+offset_left = 492.0
+offset_top = 433.0
+offset_right = 789.0
+offset_bottom = 635.0
+texture = ExtResource("19_to3yq")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 30
+
+[node name="Label" type="Label" parent="Textboxes/StunSave" unique_id=90355750]
+texture_filter = 1
+custom_minimum_size = Vector2(80, 0)
+custom_maximum_size = Vector2(280, -1)
+layout_mode = 0
+offset_left = 17.0
+offset_top = 19.0
+offset_right = 297.0
+offset_bottom = 184.0
+theme_override_font_sizes/font_size = 14
+text = "STUN SAVE
+Stuns from ALL ENEMY attacks and DASHING into a WALL are disabled. Drawback: +10 Second Timer reduction when an enemy hits you or when dashing into a wall. This lasts for 10 seconds. Cooldown: 8 seconds"
+autowrap_mode = 3
+
+[node name="SlideBounce" type="NinePatchRect" parent="Textboxes" unique_id=640117041]
+visible = false
+offset_left = 483.0
+offset_top = 433.0
+offset_right = 811.0
+offset_bottom = 635.0
+texture = ExtResource("19_to3yq")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 30
+
+[node name="Label" type="Label" parent="Textboxes/SlideBounce" unique_id=216591521]
+texture_filter = 1
+custom_minimum_size = Vector2(80, 0)
+custom_maximum_size = Vector2(320, -1)
+layout_mode = 0
+offset_left = 17.0
+offset_top = 19.0
+offset_right = 337.0
+offset_bottom = 202.0
+theme_override_font_sizes/font_size = 14
+text = "SLIDE BOUNCE
+BOUNCE slides you PERPENDICULAR to a surface at HIGH SPEEDS instead of BOUNCING off of it. Drawback: Can no longer bounce spike wall objects. This lasts for 20 seconds and reduces the timer by 10 seconds. Cooldown: 5 Seconds
+"
+autowrap_mode = 3
+
+[node name="BlinkDash" type="NinePatchRect" parent="Textboxes" unique_id=1308536526]
+visible = false
+offset_left = 456.0
+offset_top = 433.0
+offset_right = 811.0
+offset_bottom = 635.0
+texture = ExtResource("19_to3yq")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 30
+
+[node name="Label" type="Label" parent="Textboxes/BlinkDash" unique_id=1016838309]
+texture_filter = 1
+custom_minimum_size = Vector2(80, 0)
+custom_maximum_size = Vector2(340, -1)
+layout_mode = 0
+offset_left = 14.0
+offset_top = 14.0
+offset_right = 354.0
+offset_bottom = 215.0
+theme_override_font_sizes/font_size = 14
+text = "BLINK DASH
+TELEPORT wherever you CLICK for THREE DASHES instead of dashing. Drawback: Range is only as far as a normal dash will take you + base movement speed is reduced until the ability ends + impossible to dash kill enemies. Timer is reduced by 20 seconds. Cooldown: 8 seconds
+"
+autowrap_mode = 3
+
+[node name="IGYB" type="NinePatchRect" parent="Textboxes" unique_id=901735551]
+visible = false
+offset_left = 804.0
+offset_top = 340.0
+offset_right = 1061.0
+offset_bottom = 598.0
+texture = ExtResource("19_to3yq")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 30
+
+[node name="Label" type="Label" parent="Textboxes/IGYB" unique_id=1380799178]
+texture_filter = 1
+custom_minimum_size = Vector2(80, 0)
+custom_maximum_size = Vector2(250, -1)
+layout_mode = 0
+offset_left = 17.0
+offset_top = 19.0
+offset_right = 267.0
+offset_bottom = 236.0
+theme_override_font_sizes/font_size = 14
+text = "I GOT YOUR BACK
+CIRCLE emits a yellow FORCEFIELD that can SURVIVE three MELEE or PROJECTILE hits, or two CHARGE attacks. Drawback:  Enemy hit cooldown is reduced + enemy movement speed is increased + can't kill enemies with dash. Cooldown: 2 Seconds"
+autowrap_mode = 3
 
 [connection signal="pressed" from="Panels/PlayPanel/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="Panels/PlayPanel/ExitButton" to="." method="_on_exit_button_pressed"]
