@@ -19,6 +19,7 @@ func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")
 	if not player:
 		player = get_tree().root.find_child("Triangle", true, false)
+	nav_agent.velocity_computed.connect(_on_velocity_computed)
 
 func _on_kill_zone_body_entered(body: Node2D) -> void:
 	if body == player:
@@ -53,9 +54,10 @@ func _physics_process(delta: float) -> void:
 		var target_direction: Vector2 = global_position.direction_to(next_path_pos)
 		current_direction = current_direction.lerp(target_direction, TURN_RATE * delta).normalized()
 		direction = current_direction
-		velocity = direction * SPEED
+		var desired_velocity: Vector2 = direction * SPEED
+		nav_agent.set_velocity(desired_velocity)
 	else:
-		velocity = velocity.move_toward(Vector2.ZERO, SPEED * delta)
+		nav_agent.set_velocity(Vector2.ZERO)
 	rotation = global_position.angle_to_point(player.global_position)
 	var impact_velocity = velocity
 	move_and_slide()
@@ -69,6 +71,9 @@ func _physics_process(delta: float) -> void:
 					player.take_damage(1)
 					can_damage = false
 					$AttackCooldown.start()
+
+func _on_velocity_computed(safe_velocity: Vector2) -> void:
+	velocity = safe_velocity
 
 func _on_attack_cooldown_timeout() -> void:
 	can_damage = true

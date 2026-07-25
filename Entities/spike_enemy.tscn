@@ -33,6 +33,7 @@ attenuation = 0.34151006
 bus = &"SFX"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=891156906]
+avoidance_enabled = true
 radius = 80.27
 
 [connection signal="timeout" from="HitCooldown" to="." method="_on_hit_cooldown_timeout"]

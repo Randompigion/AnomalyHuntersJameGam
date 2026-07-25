@@ -43,6 +43,7 @@ var burst_timer: float = 0.0
 func _ready() -> void:
 	player = $"../Triangle"
 	add_to_group("enemy")
+	nav_agent.velocity_computed.connect(_on_velocity_computed)
 	_pick_new_vantage_point()
 
 
@@ -65,17 +66,22 @@ func _physics_process(delta: float) -> void:
 func _process_moving(delta: float) -> void:
 	if nav_agent.is_navigation_finished():
 		state = State.HOLDING
-		velocity = Vector2.ZERO
+		nav_agent.set_velocity(Vector2.ZERO)
 		return
 
 	var next_path_pos: Vector2 = nav_agent.get_next_path_position()
 	var target_direction: Vector2 = global_position.direction_to(next_path_pos)
 	current_direction = current_direction.lerp(target_direction, TURN_RATE * delta).normalized()
-	velocity = current_direction * move_speed
+	var desired_velocity: Vector2 = current_direction * move_speed
+	nav_agent.set_velocity(desired_velocity)
+	rotation = current_direction.angle()
+
+
+func _on_velocity_computed(safe_velocity: Vector2) -> void:
+	velocity = safe_velocity
 	var impact_velocity := velocity
 	move_and_slide()
 	Push.apply_slides(self, impact_velocity, push_force)
-	rotation = current_direction.angle()
 
 
 func _process_holding(delta: float) -> void:
