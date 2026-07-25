@@ -92,6 +92,8 @@ func _check_player_hit() -> void:
 		if collider == player:
 			if player.has_method("take_damage"):
 				player.take_damage(1)
+				can_hit = false
+				$HitCooldown.start()
 				velocity = -(player.global_position - global_position).normalized() * 100
 			$OvershootPeriod.start()
 			return

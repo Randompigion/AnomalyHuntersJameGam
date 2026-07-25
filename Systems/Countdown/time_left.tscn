@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://oyxscbdrv47i"]
 
-[ext_resource type="Script" uid="uid://by57ttr5jcqc1" path="res://Levels/time_left.gd" id="1_m4hi5"]
+[ext_resource type="Script" uid="uid://by57ttr5jcqc1" path="res://Systems/Countdown/time_left.gd" id="1_m4hi5"]
 [ext_resource type="FontFile" uid="uid://cwhrnc44j65uh" path="res://Assets/Textures/ui/fonts/PixelOperator8.ttf" id="2_ydg06"]
 [ext_resource type="FontFile" uid="uid://fsbors10b7bh" path="res://Assets/Textures/ui/fonts/GoofyGoober.ttf" id="3_n375d"]
 [ext_resource type="AudioStream" uid="uid://bbxpg7akprhcd" path="res://Assets/Audio/SFX/System/sfx_timer_up.wav" id="4_n375d"]
