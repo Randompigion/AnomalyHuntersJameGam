@@ -666,6 +666,86 @@ text = "I GOT YOUR BACK
 CIRCLE emits a yellow FORCEFIELD that can SURVIVE three MELEE or PROJECTILE hits, or two CHARGE attacks. Drawback:  Enemy hit cooldown is reduced + enemy movement speed is increased + can't kill enemies with dash. Cooldown: 2 Seconds"
 autowrap_mode = 3
 
+[node name="DashUnlimited" type="NinePatchRect" parent="Textboxes" unique_id=993525076]
+visible = false
+offset_left = 506.0
+offset_top = 451.0
+offset_right = 763.0
+offset_bottom = 564.0
+texture = ExtResource("19_to3yq")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 30
+
+[node name="Label" type="Label" parent="Textboxes/DashUnlimited" unique_id=2087564450]
+texture_filter = 1
+custom_minimum_size = Vector2(80, 0)
+custom_maximum_size = Vector2(250, -1)
+layout_mode = 0
+offset_left = 17.0
+offset_top = 19.0
+offset_right = 267.0
+offset_bottom = 236.0
+theme_override_font_sizes/font_size = 14
+text = "DASH UNLIMITED
+Player can dash infinitely with no cooldown. Zero Drawbacks, Always Active."
+autowrap_mode = 3
+
+[node name="LimiterOff" type="NinePatchRect" parent="Textboxes" unique_id=1856009358]
+visible = false
+offset_left = 506.0
+offset_top = 451.0
+offset_right = 763.0
+offset_bottom = 611.0
+texture = ExtResource("19_to3yq")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 30
+
+[node name="Label" type="Label" parent="Textboxes/LimiterOff" unique_id=587777555]
+texture_filter = 1
+custom_minimum_size = Vector2(80, 0)
+custom_maximum_size = Vector2(250, -1)
+layout_mode = 0
+offset_left = 17.0
+offset_top = 19.0
+offset_right = 267.0
+offset_bottom = 236.0
+theme_override_font_sizes/font_size = 14
+text = "LIMITER OFF
+Speed and Strength across all qualities are cranked up as high as the player can control it. Zero Drawbacks, Always Active."
+autowrap_mode = 3
+
+[node name="AbilityMaximum2" type="NinePatchRect" parent="Textboxes" unique_id=1608951021]
+offset_left = 506.0
+offset_top = 451.0
+offset_right = 771.0
+offset_bottom = 564.0
+texture = ExtResource("19_to3yq")
+region_rect = Rect2(0, 0, 96, 96)
+patch_margin_left = 15
+patch_margin_top = 15
+patch_margin_right = 15
+patch_margin_bottom = 30
+
+[node name="Label" type="Label" parent="Textboxes/AbilityMaximum2" unique_id=1027321166]
+texture_filter = 1
+custom_minimum_size = Vector2(80, 0)
+custom_maximum_size = Vector2(250, -1)
+layout_mode = 0
+offset_left = 17.0
+offset_top = 19.0
+offset_right = 267.0
+offset_bottom = 236.0
+theme_override_font_sizes/font_size = 14
+text = "DASH UNLIMITED
+Player can dash infinitely with no cooldown. Zero Drawbacks, Always Active."
+autowrap_mode = 3
+
 [connection signal="pressed" from="Panels/PlayPanel/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="Panels/PlayPanel/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="value_changed" from="Panels/VolumePanel/MasterSlider" to="." method="_on_master_slider_value_changed"]

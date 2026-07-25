@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InventoryItem" format=3 uid="uid://dv4unw2friukc"]
+
+[ext_resource type="Script" uid="uid://drwsv0ukjlv5f" path="res://InventoryItem.gd" id="1_ls7jg"]
+[ext_resource type="Texture2D" uid="uid://bwbmt5huqcag2" path="res://Assets/Textures/ui/skills/chain_icon.png" id="2_h3vyw"]
+
+[resource]
+script = ExtResource("1_ls7jg")
+name = "ChainKill"
+texture = ExtResource("2_h3vyw")
+metadata/_custom_type_script = "uid://drwsv0ukjlv5f"

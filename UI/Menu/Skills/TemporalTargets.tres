@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InventoryItem" format=3 uid="uid://3cbs7w3nxmxx"]
+
+[ext_resource type="Script" uid="uid://drwsv0ukjlv5f" path="res://InventoryItem.gd" id="1_f8b7s"]
+[ext_resource type="Texture2D" uid="uid://d2xbffcc4v8pi" path="res://Assets/Textures/ui/skills/burst_icon.png" id="2_qo5ny"]
+
+[resource]
+script = ExtResource("1_f8b7s")
+name = "TemporalTargets"
+texture = ExtResource("2_qo5ny")
+metadata/_custom_type_script = "uid://drwsv0ukjlv5f"

@@ -12,9 +12,9 @@ size = Vector2(15, 224)
 [node name="BounceKillWall" type="RigidBody2D" unique_id=1846962551 groups=["soft_side"]]
 collision_layer = 2
 gravity_scale = 0.0
-inertia = 40000.0
+inertia = 20000.0
 linear_damp = 0.8
-angular_damp = 25.0
+angular_damp = 0.8
 
 [node name="Texture" type="Sprite2D" parent="." unique_id=1196625038]
 position = Vector2(18, 476.5)
