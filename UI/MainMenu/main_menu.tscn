@@ -88,7 +88,6 @@ offset_right = 40.0
 offset_bottom = 90.0
 
 [node name="PlayPanel" type="Panel" parent="Panels" unique_id=1675661559]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5

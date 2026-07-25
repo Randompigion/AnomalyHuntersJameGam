@@ -5,7 +5,7 @@ extends Node
 var time_left: float = 120.0
 
 func _ready() -> void:
-	pass
+	add_to_group("time_left")
 	
 func time_left_to_live():
 	var minutes = floor(time_left/60)
