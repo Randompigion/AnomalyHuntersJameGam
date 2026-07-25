@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://c08rup67fkr1u" path="res://Assets/Textures/ui/pause_menu/option3_pressed.png" id="3_ytr4m"]
 [ext_resource type="Texture2D" uid="uid://clkj08dqxokvp" path="res://Assets/Textures/ui/cursor/cursor_dash.png" id="4_2yih0"]
 [ext_resource type="Script" uid="uid://b6a2t24c0qafu" path="res://UI/Menu/color_picker_button.gd" id="4_avu7c"]
-[ext_resource type="PackedScene" uid="uid://cwvbcbfy6cyjr" path="res://UI/Menu/inventory_gui.tscn" id="5_2yih0"]
 [ext_resource type="Texture2D" uid="uid://dcvvpkx2n00aj" path="res://Assets/Textures/ui/pause_menu/option2_pressed.png" id="5_l48gv"]
 [ext_resource type="Texture2D" uid="uid://bgnpb5mkqlxu6" path="res://Assets/Textures/ui/pause_menu/option1_pressed.png" id="7_ecwwl"]
 [ext_resource type="Texture2D" uid="uid://diu5yom60ukvj" path="res://Assets/Textures/ui/pause_menu/option4.png" id="9_aqva8"]
@@ -25,9 +24,6 @@ border_color = Color(0.4392157, 0.4392157, 0.4392157, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nrnbx"]
 bg_color = Color(0.40832943, 0.4083295, 0.40832937, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h1wq0"]
-bg_color = Color(0.40784314, 0.40784314, 0.40784314, 1)
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_avu7c"]
 thickness = 8
@@ -97,10 +93,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -125.59642
-offset_top = -117.34093
-offset_right = 133.40356
-offset_bottom = -65.34093
+offset_left = -120.79933
+offset_top = -71.37833
+offset_right = 138.20068
+offset_bottom = -19.378326
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_nrnbx")
@@ -114,31 +110,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -125.59642
-offset_top = -34.299637
-offset_right = 133.40356
-offset_bottom = 17.700363
+offset_left = -120.79933
+offset_top = 11.662964
+offset_right = 138.20068
+offset_bottom = 63.662964
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_nrnbx")
 text = "Exit"
-
-[node name="SaveButton" type="Button" parent="Panels/PlayPanel" unique_id=2065332412]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -125.59642
-offset_top = 41.52066
-offset_right = 133.40356
-offset_bottom = 93.520645
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_h1wq0")
-text = "Save"
 
 [node name="VolumePanel" type="Panel" parent="Panels" unique_id=678919820]
 unique_name_in_owner = true
@@ -233,10 +212,7 @@ theme_override_font_sizes/font_size = 25
 text = "Music"
 
 [node name="SettingsPanel" type="Panel" parent="Panels" unique_id=92768274]
-<<<<<<< HEAD
 unique_name_in_owner = true
-=======
->>>>>>> 17362d90d0a974db982f0bf20d8f1738ca26d951
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -271,11 +247,8 @@ color = Color(0.80784315, 0, 0.18431373, 1)
 script = ExtResource("4_avu7c")
 
 [node name="SkillsPanel" type="Panel" parent="Panels" unique_id=2046141314]
-<<<<<<< HEAD
 unique_name_in_owner = true
 visible = false
-=======
->>>>>>> 17362d90d0a974db982f0bf20d8f1738ca26d951
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -289,20 +262,6 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.1465292, 1.1078826)
 theme_override_styles/panel = SubResource("StyleBoxFlat_4hy44")
-
-[node name="InventoryGUI" parent="Panels/SkillsPanel" unique_id=956439353 instance=ExtResource("5_2yih0")]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -449.21982
-offset_top = -117.00001
-offset_right = -87.21973
-offset_bottom = 116.999985
-grow_horizontal = 0
-grow_vertical = 2
 
 [node name="MainButtons" type="Control" parent="." unique_id=1060669825]
 unique_name_in_owner = true

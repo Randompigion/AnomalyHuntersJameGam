@@ -24,7 +24,7 @@ extends Control
 @export var sfx_audio_bus: String
 
 
-var menu_color = Color("ce002fff")
+var menu_color = Color("ffffffff")
 var is_hovering: bool = false
 var rand_offset: Vector2
 var this: TextureButton
@@ -37,7 +37,8 @@ var sfx_bus_id
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
+	menu_color = Color("ce002fff")
 	menu_label.set("theme_override_colors/font_color", menu_color)
 	main_buttons.modulate = menu_color
 	panels.modulate = menu_color

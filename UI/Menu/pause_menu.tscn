@@ -6,7 +6,6 @@
 [node name="PauseMenu" type="CanvasLayer" unique_id=1870181315]
 process_mode = 3
 layer = 10
-visible = false
 script = ExtResource("1_pause")
 
 [node name="Menu" parent="." unique_id=1049263407 instance=ExtResource("2_menu")]

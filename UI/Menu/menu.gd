@@ -49,7 +49,10 @@ func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 	menu_label.set("theme_override_colors/font_color", menu_color)
 	main_buttons.modulate = menu_color
-	panels.modulate = menu_color
+	play_panel.modulate = menu_color
+	volume_panel.modulate = menu_color
+	settings_panel.modulate = menu_color
+	skills_panel.self_modulate = menu_color
 	play_panel.visible = true
 	volume_panel.visible = false
 	settings_panel.visible = false
@@ -147,32 +150,32 @@ func _on_play_button_toggled(_toggled_on: bool) -> void:
 	selected = play_button
 	element = selected.get_index()
 	visible(element)
+	menu_label.text = "Menu"
 
 
 func _on_volume_button_toggled(_toggled_on: bool) -> void:
 	selected = volume_button
 	element = selected.get_index()
 	visible(element)
+	menu_label.text = "Sound Control"
 
 
 func _on_settings_button_toggled(_toggled_on: bool) -> void:
 	selected = settings_button
 	element = selected.get_index()
 	visible(element)
+	menu_label.text = "Settings"
 
 
 func _on_skills_button_toggled(toggled_on: bool) -> void:
 	selected = skills_button
 	element = selected.get_index()
 	visible(element)
+	menu_label.text = "Skills"
 
 
 func _on_exit_button_pressed() -> void:
 	get_tree().quit()
-
-
-func _on_save_button_pressed() -> void:
-	pass # Replace with function body.
 
 
 func _on_resume_button_pressed() -> void:
@@ -203,4 +206,7 @@ func _on_color_picker_button_color_changed(color: Color) -> void:
 func change_color(_color) -> void:
 	menu_label.set("theme_override_colors/font_color", menu_color)
 	main_buttons.modulate = menu_color
-	panels.modulate = menu_color
+	play_panel.modulate = menu_color
+	volume_panel.modulate = menu_color
+	settings_panel.modulate = menu_color
+	skills_panel.self_modulate = menu_color
