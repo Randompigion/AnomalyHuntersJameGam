@@ -11,6 +11,10 @@
 [ext_resource type="Script" uid="uid://b6a2t24c0qafu" path="res://UI/Menu/color_picker_button.gd" id="4_avu7c"]
 [ext_resource type="Texture2D" uid="uid://dcvvpkx2n00aj" path="res://Assets/Textures/ui/pause_menu/option2_pressed.png" id="5_l48gv"]
 [ext_resource type="Texture2D" uid="uid://bgnpb5mkqlxu6" path="res://Assets/Textures/ui/pause_menu/option1_pressed.png" id="7_ecwwl"]
+[ext_resource type="AudioStream" uid="uid://bkiont7kj2mcr" path="res://Assets/Audio/SFX/UI/sfx_ui_back.wav" id="12_6e3uo"]
+[ext_resource type="AudioStream" uid="uid://73d12qfx1da0" path="res://Assets/Audio/SFX/UI/sfx_ui_error.wav" id="13_8h8a5"]
+[ext_resource type="AudioStream" uid="uid://83kqg3nw8vpf" path="res://Assets/Audio/SFX/UI/sfx_ui_hover.wav" id="14_xron6"]
+[ext_resource type="AudioStream" uid="uid://cehm4jfukhcp5" path="res://Assets/Audio/SFX/UI/sfx_ui_select.wav" id="15_dwn5o"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4hy44"]
 bg_color = Color(0.654902, 0.654902, 0.654902, 1)
@@ -33,6 +37,26 @@ thickness = 8
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_2yih0"]
 color = Color(0.7708395, 0.77083945, 0.77083945, 1)
 thickness = 8
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5k0c3"]
+random_pitch = 1.0293022
+streams_count = 1
+stream_0/stream = ExtResource("12_6e3uo")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_4kjws"]
+random_pitch = 1.0293022
+streams_count = 1
+stream_0/stream = ExtResource("13_8h8a5")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_myei6"]
+random_pitch = 1.0293022
+streams_count = 1
+stream_0/stream = ExtResource("14_xron6")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_shcrt"]
+random_pitch = 1.0293022
+streams_count = 1
+stream_0/stream = ExtResource("15_dwn5o")
 
 [node name="MainMenu" type="Control" unique_id=297465843]
 layout_mode = 3
@@ -369,6 +393,22 @@ button_group = ExtResource("2_kk3ma")
 texture_normal = ExtResource("1_mae5d")
 texture_pressed = ExtResource("3_ytr4m")
 stretch_mode = 4
+
+[node name="SfxUiBack" type="AudioStreamPlayer2D" parent="." unique_id=289886077]
+stream = SubResource("AudioStreamRandomizer_5k0c3")
+bus = &"SFX"
+
+[node name="SfxUiError" type="AudioStreamPlayer2D" parent="." unique_id=361156704]
+stream = SubResource("AudioStreamRandomizer_4kjws")
+bus = &"SFX"
+
+[node name="SfxUiHover" type="AudioStreamPlayer2D" parent="." unique_id=1692282040]
+stream = SubResource("AudioStreamRandomizer_myei6")
+bus = &"SFX"
+
+[node name="SfxUiSelect" type="AudioStreamPlayer2D" parent="." unique_id=1183928570]
+stream = SubResource("AudioStreamRandomizer_shcrt")
+bus = &"SFX"
 
 [connection signal="pressed" from="Panels/PlayPanel/StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="Panels/PlayPanel/CreditsButton" to="." method="_on_credits_button_pressed"]

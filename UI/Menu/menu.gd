@@ -20,6 +20,10 @@ signal resume_requested
 @onready var play_og_position: Vector2 = play_button.position
 @onready var skills_og_position: Vector2 = skills_button.position
 @onready var menu = menu_label.get_owner()
+@onready var back_sfx: AudioStreamPlayer2D = $SfxUiBack
+@onready var error_sfx: AudioStreamPlayer2D = $SfxUiError
+@onready var hover_sfx: AudioStreamPlayer2D = $SfxUiHover
+@onready var select_sfx: AudioStreamPlayer2D = $SfxUiSelect
 
 @export var shake: float = 4.0
 @export var min_offset: float = 2.0
@@ -42,6 +46,7 @@ var music_bus_id
 var sfx_bus_id
 
 func _ready() -> void:
+	$Dim.visible = true
 	menu.visible = false
 	get_tree().paused = false
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -95,6 +100,7 @@ func visible(element) -> void:
 
 
 func _on_settings_button_mouse_entered() -> void:
+	hover_sfx.play()
 	is_hovering = true
 	this = settings_button
 	shaking(this, settings_og_position)
@@ -108,6 +114,7 @@ func _on_settings_button_mouse_exited() -> void:
 
 
 func _on_volume_button_mouse_entered() -> void:
+	hover_sfx.play()
 	is_hovering = true
 	this = volume_button
 	shaking(this, volume_og_position)
@@ -121,6 +128,7 @@ func _on_volume_button_mouse_exited() -> void:
 
 
 func _on_play_button_mouse_entered() -> void:
+	hover_sfx.play()
 	is_hovering = true
 	this = play_button
 	shaking(this, play_og_position)
@@ -134,6 +142,7 @@ func _on_play_button_mouse_exited() -> void:
 
 
 func _on_skills_button_mouse_entered() -> void:
+	hover_sfx.play()
 	is_hovering = true
 	this = skills_button
 	shaking(this, skills_og_position)
@@ -147,6 +156,7 @@ func _on_skills_button_mouse_exited() -> void:
 
 
 func _on_play_button_toggled(_toggled_on: bool) -> void:
+	select_sfx.play()
 	selected = play_button
 	element = selected.get_index()
 	visible(element)
@@ -154,6 +164,7 @@ func _on_play_button_toggled(_toggled_on: bool) -> void:
 
 
 func _on_volume_button_toggled(_toggled_on: bool) -> void:
+	select_sfx.play()
 	selected = volume_button
 	element = selected.get_index()
 	visible(element)
@@ -161,6 +172,7 @@ func _on_volume_button_toggled(_toggled_on: bool) -> void:
 
 
 func _on_settings_button_toggled(_toggled_on: bool) -> void:
+	select_sfx.play()
 	selected = settings_button
 	element = selected.get_index()
 	visible(element)
@@ -168,6 +180,7 @@ func _on_settings_button_toggled(_toggled_on: bool) -> void:
 
 
 func _on_skills_button_toggled(toggled_on: bool) -> void:
+	select_sfx.play()
 	selected = skills_button
 	element = selected.get_index()
 	visible(element)
@@ -175,10 +188,13 @@ func _on_skills_button_toggled(toggled_on: bool) -> void:
 
 
 func _on_exit_button_pressed() -> void:
+	back_sfx.play()
 	get_tree().quit()
 
 
 func _on_resume_button_pressed() -> void:
+	back_sfx.play()
+	$Dim.visible = false
 	menu.visible = false
 	get_tree().paused = false
 

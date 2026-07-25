@@ -82,6 +82,7 @@ shape = SubResource("RectangleShape2D_82po7")
 stream = ExtResource("16_gcd3s")
 volume_db = -6.0
 autoplay = true
+bus = &"Music"
 parameters/looping = true
 
 [node name="SpaceBackgroundManager" type="Node2D" parent="LevelParts" unique_id=962824130]

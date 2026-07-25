@@ -13,6 +13,10 @@
 [ext_resource type="Texture2D" uid="uid://bgnpb5mkqlxu6" path="res://Assets/Textures/ui/pause_menu/option1_pressed.png" id="7_ecwwl"]
 [ext_resource type="Texture2D" uid="uid://diu5yom60ukvj" path="res://Assets/Textures/ui/pause_menu/option4.png" id="9_aqva8"]
 [ext_resource type="Texture2D" uid="uid://b0881tmk8w1kk" path="res://Assets/Textures/ui/pause_menu/option4_pressed.png" id="10_hyp5l"]
+[ext_resource type="AudioStream" uid="uid://bkiont7kj2mcr" path="res://Assets/Audio/SFX/UI/sfx_ui_back.wav" id="14_w5wmu"]
+[ext_resource type="AudioStream" uid="uid://73d12qfx1da0" path="res://Assets/Audio/SFX/UI/sfx_ui_error.wav" id="15_5uuys"]
+[ext_resource type="AudioStream" uid="uid://83kqg3nw8vpf" path="res://Assets/Audio/SFX/UI/sfx_ui_hover.wav" id="16_to3yq"]
+[ext_resource type="AudioStream" uid="uid://cehm4jfukhcp5" path="res://Assets/Audio/SFX/UI/sfx_ui_select.wav" id="17_10uw0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4hy44"]
 bg_color = Color(0.654902, 0.654902, 0.654902, 1)
@@ -36,12 +40,39 @@ thickness = 8
 color = Color(0.7708395, 0.77083945, 0.77083945, 1)
 thickness = 8
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_q50f7"]
+random_pitch = 1.0293022
+streams_count = 1
+stream_0/stream = ExtResource("14_w5wmu")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5uuys"]
+random_pitch = 1.0293022
+streams_count = 1
+stream_0/stream = ExtResource("15_5uuys")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_w5wmu"]
+random_pitch = 1.0293022
+streams_count = 1
+stream_0/stream = ExtResource("16_to3yq")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_to3yq"]
+random_pitch = 1.0293022
+streams_count = 1
+stream_0/stream = ExtResource("17_10uw0")
+
 [node name="Menu" type="Control" unique_id=1616494859]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 0
 mouse_filter = 2
 script = ExtResource("1_4hy44")
+
+[node name="Dim" type="ColorRect" parent="." unique_id=1463758988]
+layout_mode = 0
+offset_right = 1150.0
+offset_bottom = 645.0
+color = Color(0.076835774, 0.07683585, 0.0768358, 0.5529412)
+metadata/_edit_use_anchors_ = true
 
 [node name="MenuLabel" type="Label" parent="." unique_id=1178105422]
 unique_name_in_owner = true
@@ -355,6 +386,22 @@ button_group = ExtResource("2_kk3ma")
 texture_normal = ExtResource("9_aqva8")
 texture_pressed = ExtResource("10_hyp5l")
 stretch_mode = 4
+
+[node name="SfxUiBack" type="AudioStreamPlayer2D" parent="." unique_id=1954459622]
+stream = SubResource("AudioStreamRandomizer_q50f7")
+bus = &"SFX"
+
+[node name="SfxUiError" type="AudioStreamPlayer2D" parent="." unique_id=2129539198]
+stream = SubResource("AudioStreamRandomizer_5uuys")
+bus = &"SFX"
+
+[node name="SfxUiHover" type="AudioStreamPlayer2D" parent="." unique_id=507846303]
+stream = SubResource("AudioStreamRandomizer_w5wmu")
+bus = &"SFX"
+
+[node name="SfxUiSelect" type="AudioStreamPlayer2D" parent="." unique_id=327670159]
+stream = SubResource("AudioStreamRandomizer_to3yq")
+bus = &"SFX"
 
 [connection signal="pressed" from="Panels/PlayPanel/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="Panels/PlayPanel/ExitButton" to="." method="_on_exit_button_pressed"]
