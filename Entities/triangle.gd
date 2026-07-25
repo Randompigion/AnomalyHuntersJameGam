@@ -16,6 +16,11 @@ extends CharacterBody2D
 @export var bounce_push_force: float = 2.0
 @export var bounce_spin_force: float = 0.08
 @export var bounce_max_spin: float = 6.0
+
+@export var vulnerable_knockback_force: float = 1400.0
+@export var vulnerable_knockback_lock_duration: float = 0.3
+@export var vulnerable_invuln_duration: float = 1.5
+
 var hp: int = max_hp
 var is_invincible: bool = false
 var dashing = false
@@ -24,6 +29,7 @@ var dash_direction: Vector2 = Vector2.RIGHT
 var can_move = true
 var can_dash = true
 var bounce_lock = false
+var knockback_lock = false
 enum Mode { DASH, BOUNCE }
 var mode: Mode = Mode.DASH
 
@@ -79,6 +85,8 @@ func _physics_process(delta: float) -> void:
 	if can_move:
 		if dashing:
 			velocity = dash_speed * dash_direction
+		elif knockback_lock:
+			velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
 		elif bounce_lock:
 			velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
 		else:
@@ -198,6 +206,26 @@ func take_damage(amount: int) -> void:
 	is_invincible = true
 	sprite.modulate.a = 0.5
 	await get_tree().create_timer(1.0).timeout
+	sprite.modulate.a = 1.0
+	is_invincible = false
+
+func apply_vulnerable_knockback(away_direction: Vector2) -> void:
+	if is_invincible:
+		return
+
+	dashing = false
+	knockback_lock = true
+	velocity = away_direction.normalized() * vulnerable_knockback_force
+	rotation = away_direction.angle()
+	$Camera2D2.trigger_shake()
+	Sfx.play(STUN_SOUNDS.pick_random())
+
+	is_invincible = true
+	sprite.modulate.a = 0.5
+
+	get_tree().create_timer(vulnerable_knockback_lock_duration).timeout.connect(func(): knockback_lock = false)
+
+	await get_tree().create_timer(vulnerable_invuln_duration).timeout
 	sprite.modulate.a = 1.0
 	is_invincible = false
 
