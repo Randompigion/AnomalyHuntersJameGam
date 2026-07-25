@@ -1,0 +1,32 @@
+extends Button
+
+@onready var backgroundSprite: Sprite2D = $background
+@onready var container: CenterContainer = $CenterContainer
+
+@onready var inventory = preload("res://UI/Menu/playerInventory.tres")
+
+var itemGui: ItemsGUI
+var index: int
+
+func insert(isg: ItemsGUI):
+	itemGui = isg
+	container.add_child(itemGui)
+	if !itemGui.inventoryItem || inventory.items[index] == itemGui.inventoryItem:
+		return
+	
+	inventory.insertItem(index, itemGui.inventoryItem)
+	
+func takeItem():
+	var item = itemGui
+	
+	inventory.removeSlot(itemGui.inventoryItem)
+	
+	container.remove_child(itemGui)
+	itemGui = null
+	
+	return item
+	
+func isEmpty():
+	return !itemGui
+		
+		

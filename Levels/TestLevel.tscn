@@ -14,6 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://dcowsd8k1sg0l" path="res://Assets/Audio/BGM/bgm_retro_arcade.ogg" id="16_gcd3s"]
 [ext_resource type="PackedScene" uid="uid://cygok7elyblmi" path="res://ObstaclesAndObjects/bounce_kill_wall.tscn" id="16_jfium"]
 [ext_resource type="Script" uid="uid://cmc3as7jogpi4" path="res://Levels/ChunkedSpaceBackground.gd" id="17_8sbpl"]
+[ext_resource type="PackedScene" uid="uid://7fan8v5wrpob" path="res://UI/SkillSlots/visible_skill_slots.tscn" id="17_wenv2"]
 [ext_resource type="PackedScene" uid="uid://vkfw2y641iss" path="res://Entities/change_scene.tscn" id="20_lp5k8"]
 [ext_resource type="PackedScene" path="res://UI/Menu/pause_menu.tscn" id="21_pause"]
 
@@ -92,4 +93,17 @@ position = Vector2(-526, 266)
 
 [node name="BounceKillWall" parent="." unique_id=1846962551 instance=ExtResource("16_jfium")]
 
-[node name="PauseMenu" parent="." instance=ExtResource("21_pause")]
+[node name="PauseMenu" parent="." unique_id=1801261525 instance=ExtResource("21_pause")]
+
+[node name="SkillSlotOverlay" type="CanvasLayer" parent="." unique_id=1170597012]
+
+[node name="SkillSlots" parent="SkillSlotOverlay" unique_id=1000498607 instance=ExtResource("17_wenv2")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = -121.0
+offset_right = 297.0
+offset_bottom = -57.0
+grow_vertical = 0
+scale = Vector2(1.2, 1.2)

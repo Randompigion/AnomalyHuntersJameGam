@@ -1,5 +1,9 @@
 extends CharacterBody2D
 
+@export var inventory: Inventory
+
+
+
 @export var speed = 750.0
 @export var dash_speed = 1050
 @export var friction = 200

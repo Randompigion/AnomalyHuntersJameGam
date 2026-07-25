@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InventoryItem" format=3 uid="uid://b7ysgftfr57cx"]
+
+[ext_resource type="Script" uid="uid://drwsv0ukjlv5f" path="res://InventoryItem.gd" id="1_4kpbr"]
+[ext_resource type="Texture2D" uid="uid://bt237qaadmhte" path="res://Assets/Textures/ui/skills/pierce_icon.png" id="2_0tcwi"]
+
+[resource]
+script = ExtResource("1_4kpbr")
+name = "BlastDash"
+texture = ExtResource("2_0tcwi")
+metadata/_custom_type_script = "uid://drwsv0ukjlv5f"

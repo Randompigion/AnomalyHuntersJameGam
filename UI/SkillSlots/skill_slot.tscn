@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://td33c41nah73"]
+
+[ext_resource type="Script" uid="uid://c0xtu5o4r6liu" path="res://UI/SkillSlots/skill_slot.gd" id="1_ndoki"]
+[ext_resource type="Texture2D" uid="uid://35j2hru6vjv0" path="res://Assets/Textures/ui/hud/skill_slot_active.png" id="2_ndoki"]
+[ext_resource type="PackedScene" uid="uid://dfqle42b1yeoi" path="res://UI/Menu/items_gui.tscn" id="3_scmdj"]
+
+[node name="SkillSlot" type="Button" unique_id=686352741]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(64, 64)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1088.0
+offset_bottom = -584.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ndoki")
+
+[node name="background" type="Sprite2D" parent="." unique_id=1607574138]
+texture = ExtResource("2_ndoki")
+centered = false
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1001362593]
+custom_minimum_size = Vector2(65, 65)
+layout_mode = 0
+offset_right = 65.0
+offset_bottom = 65.0
+
+[node name="Panel" parent="CenterContainer" unique_id=588660235 instance=ExtResource("3_scmdj")]
+layout_mode = 2

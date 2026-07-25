@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dfqle42b1yeoi"]
+
+[ext_resource type="Script" uid="uid://2ugwha3m7ql3" path="res://UI/Menu/items_gui.gd" id="1_npp0a"]
+
+[node name="Panel" type="Panel" unique_id=588660235]
+script = ExtResource("1_npp0a")
+
+[node name="item" type="Sprite2D" parent="." unique_id=1024305247]

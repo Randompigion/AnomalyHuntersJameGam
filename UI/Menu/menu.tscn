@@ -4,11 +4,12 @@
 [ext_resource type="Texture2D" uid="uid://b1rvdemwo8py7" path="res://Assets/Textures/ui/pause_menu/option1.png" id="1_lti8b"]
 [ext_resource type="Texture2D" uid="uid://igdtgn16gtme" path="res://Assets/Textures/ui/pause_menu/option3.png" id="1_mae5d"]
 [ext_resource type="Texture2D" uid="uid://csw7l4j253qwn" path="res://Assets/Textures/ui/pause_menu/option2.png" id="2_4hy44"]
-[ext_resource type="Texture2D" uid="uid://b58cisbx58tlr" path="res://Assets/Textures/ui/cursor/cursor.png" id="2_hyp5l"]
+[ext_resource type="Texture2D" uid="uid://ctotsshm234vg" path="res://Assets/Textures/ui/cursor/cursor.png" id="2_hyp5l"]
 [ext_resource type="ButtonGroup" uid="uid://dunf4ldps3mcd" path="res://UI/Menu/mainButtons.tres" id="2_kk3ma"]
 [ext_resource type="Texture2D" uid="uid://c08rup67fkr1u" path="res://Assets/Textures/ui/pause_menu/option3_pressed.png" id="3_ytr4m"]
-[ext_resource type="Texture2D" uid="uid://b5yv1ospoy886" path="res://Assets/Textures/ui/cursor/cursor_dash.png" id="4_2yih0"]
+[ext_resource type="Texture2D" uid="uid://clkj08dqxokvp" path="res://Assets/Textures/ui/cursor/cursor_dash.png" id="4_2yih0"]
 [ext_resource type="Script" uid="uid://b6a2t24c0qafu" path="res://UI/Menu/color_picker_button.gd" id="4_avu7c"]
+[ext_resource type="PackedScene" uid="uid://cwvbcbfy6cyjr" path="res://UI/Menu/inventory_gui.tscn" id="5_2yih0"]
 [ext_resource type="Texture2D" uid="uid://dcvvpkx2n00aj" path="res://Assets/Textures/ui/pause_menu/option2_pressed.png" id="5_l48gv"]
 [ext_resource type="Texture2D" uid="uid://bgnpb5mkqlxu6" path="res://Assets/Textures/ui/pause_menu/option1_pressed.png" id="7_ecwwl"]
 [ext_resource type="Texture2D" uid="uid://diu5yom60ukvj" path="res://Assets/Textures/ui/pause_menu/option4.png" id="9_aqva8"]
@@ -230,6 +231,7 @@ theme_override_font_sizes/font_size = 25
 text = "Music"
 
 [node name="SettingsPanel" type="Panel" parent="Panels" unique_id=92768274]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -263,7 +265,6 @@ color = Color(0.80784315, 0, 0.18431373, 1)
 script = ExtResource("4_avu7c")
 
 [node name="SkillsPanel" type="Panel" parent="Panels" unique_id=2046141314]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -277,6 +278,20 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.1465292, 1.1078826)
 theme_override_styles/panel = SubResource("StyleBoxFlat_4hy44")
+
+[node name="InventoryGUI" parent="Panels/SkillsPanel" unique_id=956439353 instance=ExtResource("5_2yih0")]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -449.21982
+offset_top = -117.00001
+offset_right = -87.21973
+offset_bottom = 116.999985
+grow_horizontal = 0
+grow_vertical = 2
 
 [node name="MainButtons" type="Control" parent="." unique_id=1060669825]
 anchors_preset = 0
