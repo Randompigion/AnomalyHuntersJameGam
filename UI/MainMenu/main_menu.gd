@@ -180,3 +180,10 @@ func change_color(_color) -> void:
 	main_buttons.modulate = menu_color
 	panels.modulate = menu_color
 	background.modulate = menu_color
+
+func _on_credits_button_mouse_entered() -> void:
+	hover_sfx.play()
+
+
+func _on_start_button_mouse_entered() -> void:
+	hover_sfx.play()
