@@ -16,3 +16,13 @@ texture = ExtResource("2_xuhe8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=224536264]
 shape = SubResource("CircleShape2D_82po7")
+
+[node name="HitCooldown" type="Timer" parent="." unique_id=920333432]
+wait_time = 2.0
+
+[node name="OvershootPeriod" type="Timer" parent="." unique_id=1640136985]
+wait_time = 1.5
+one_shot = true
+
+[connection signal="timeout" from="HitCooldown" to="." method="_on_hit_cooldown_timeout"]
+[connection signal="timeout" from="OvershootPeriod" to="." method="_on_overshoot_period_timeout"]
