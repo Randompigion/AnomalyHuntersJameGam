@@ -111,3 +111,4 @@ func _on_hit_cooldown_timeout() -> void:
 
 func _on_overshoot_period_timeout() -> void:
 	velocity = charge_direction * 0
+	state = State.IDLE
