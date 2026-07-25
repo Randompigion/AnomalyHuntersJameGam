@@ -23,8 +23,11 @@ var direction: Vector2 = Vector2.ZERO
 var dash_direction: Vector2 = Vector2.RIGHT
 var can_move = true
 var can_dash = true
+var can_toggle = true
+var can_speed_boost = true
+var can_poly_spike = true
 var bounce_lock = false
-enum Mode { DASH, BOUNCE }
+enum Mode { DASH, BOUNCE, SPIKEY }
 var mode: Mode = Mode.DASH
 
 @onready var sprite: AnimatedSprite2D = $Sprite2D
@@ -119,26 +122,75 @@ func use_skill(index: int) -> void:
 	if !item or item.name == "": return
 
 	match item.name:
-		"BlastDash":       print("blast dash!")
-		"PolySpikes":      print("poly spikes!")
-		"SpeedBoost":      print("speed boost!")
-		"BlinkDash":       print("blink dash!")
-		"ChainKill":       print("chain kill!")
-		"GotYourBack":     print("got your back!")
-		"SlideBounce":     print("slide bounce!")
-		"StunSave":        print("stun save!")
-		"TemporalTargets": print("temporal targets!")
+		"BlastDash":       blast_dash()
+		"PolySpikes":      poly_spikes()
+		"SpeedBoost":      speed_boost()
+		"BlinkDash":       blink_dash()
+		"ChainKill":       chain_kill()
+		"GotYourBack":     got_your_back()
+		"SlideBounce":     slide_bounce()
+		"StunSave":        stun_save()
+		"TemporalTargets": temporal_targets()
 		_: push_warning("No ability hooked up for: %s" % item.name)
 
-func _toggle_mode() -> void:
+func blast_dash():
+	print("blast dash!")
+
+func poly_spikes():
 	if mode == Mode.DASH:
-		mode = Mode.BOUNCE
-		if sprite.sprite_frames and sprite.sprite_frames.has_animation("bounce"):
-			sprite.play("bounce")
-	else:
-		mode = Mode.DASH
-		if sprite.sprite_frames and sprite.sprite_frames.has_animation("dash"):
-			sprite.play("dash")
+		if sprite.sprite_frames and sprite.sprite_frames.has_animation("spikeydash"):
+				sprite.play("spikeydash")
+	if mode == Mode.BOUNCE:
+		if sprite.sprite_frames and sprite.sprite_frames.has_animation("spikeybounce"):
+				sprite.play("spikeybounce")
+	sprite.scale = Vector2(1.55, 1.55)
+	mode = Mode.SPIKEY
+	can_dash = false
+	can_toggle = false
+	speed = 550
+	$AbilityTimers/ActivationTime/PolySpikes.start()
+	can_poly_spike = false
+	$AbilityTimers/Cooldowns/PolySpikesCooldown.start()
+	
+	
+func speed_boost():
+	if can_speed_boost:
+		speed = 1250
+		dash_speed = 1550
+		bounce_speed_retention = 1.5
+		can_speed_boost = false
+		print("huzzaf")
+		$AbilityTimers/ActivationTime/SpeedBoost.start()
+		$AbilityTimers/Cooldowns/SpeedBoostCooldown.start()
+		
+func blink_dash():
+	print("blink dash!")
+	
+func chain_kill():
+	print("chain kill!")
+	
+func got_your_back():
+	print("got your back!")
+	
+func slide_bounce():
+	print("slide bounce!")
+	
+func stun_save():
+	print("stun save!")
+	
+func temporal_targets():
+	print("temporal targets!")
+
+func _toggle_mode() -> void:
+	if can_toggle:
+		if mode == Mode.DASH:
+			mode = Mode.BOUNCE
+			if sprite.sprite_frames and sprite.sprite_frames.has_animation("bounce"):
+				sprite.play("bounce")
+		else:
+			mode = Mode.DASH
+			if sprite.sprite_frames and sprite.sprite_frames.has_animation("dash"):
+				sprite.play("dash")
 
 func _handle_wall_collisions() -> void:
 	if not dashing:
@@ -246,3 +298,31 @@ func hazard_kill() -> void:
 	global_position = Vector2.ZERO
 	velocity = Vector2.ZERO
 	dashing = false
+
+
+func _on_speed_boost_timeout() -> void:
+	speed = 750
+	dash_speed = 1050
+	bounce_speed_retention = 0.6
+	var time_left = get_tree().get_first_node_in_group("time_left")
+	if time_left:
+		time_left.subtract_time(20)
+	
+
+func _on_poly_spikes_timeout() -> void:
+	sprite.play("dash")
+	sprite.scale = Vector2(0.3, 0.3)
+	mode = Mode.DASH
+	can_dash = true
+	can_toggle = true
+	speed = 550
+	var time_left = get_tree().get_first_node_in_group("time_left")
+	if time_left:
+		time_left.subtract_time(35)
+
+func _on_speed_boost_cooldown_timeout() -> void:
+	can_speed_boost = true
+
+
+func _on_poly_spikes_cooldown_timeout() -> void:
+	can_poly_spike = true
