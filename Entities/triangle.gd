@@ -118,7 +118,17 @@ func use_skill(index: int) -> void:
 	var item: InventoryItem = inventory.items[index]
 	if !item or item.name == "": return
 
-	print("slot ", index + 1, " contains: ", item.name)
+	match item.name:
+		"BlastDash":       print("blast dash!")
+		"PolySpikes":      print("poly spikes!")
+		"SpeedBoost":      print("speed boost!")
+		"BlinkDash":       print("blink dash!")
+		"ChainKill":       print("chain kill!")
+		"GotYourBack":     print("got your back!")
+		"SlideBounce":     print("slide bounce!")
+		"StunSave":        print("stun save!")
+		"TemporalTargets": print("temporal targets!")
+		_: push_warning("No ability hooked up for: %s" % item.name)
 
 func _toggle_mode() -> void:
 	if mode == Mode.DASH:
