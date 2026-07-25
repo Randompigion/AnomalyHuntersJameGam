@@ -1,12 +1,14 @@
 extends CharacterBody2D
 
-@export var charge_interval: float = 10.0
-@export var charge_speed: float = 900.0
+@export var charge_interval: float = 8.0
+@export var charge_speed: float = 1240.0
 @export var charge_overshoot_distance: float = 60.0
 @export var recovery_duration: float = 1.0
 @export var recovery_friction: float = 300.0
-@export var wander_speed: float = 90.0
+@export var wander_speed: float = 450.0
 @export var spin_speed_degrees: float = 720.0
+
+var can_hit = true
 
 enum State { IDLE, CHARGING, RECOVERING }
 var state: State = State.IDLE
@@ -18,7 +20,7 @@ var overshoot_target: Vector2 = Vector2.ZERO
 
 
 func _ready() -> void:
-	player = $"../Entities/Triangle"
+	player = $"../Triangle"
 	add_to_group("enemy")
 	add_to_group("spiky_enemy")
 	charge_timer = charge_interval
@@ -35,7 +37,15 @@ func _physics_process(delta: float) -> void:
 			_process_charging(delta)
 		State.RECOVERING:
 			_process_recovering(delta)
-
+	
+	for i in get_slide_collision_count():
+		var collision := get_slide_collision(i)
+		var collider := collision.get_collider()
+		if collider == player:
+			if player.has_method("take_damage") and can_hit == true:
+				player.take_damage(2)
+				can_hit = false
+				$HitCooldown.start()
 	move_and_slide()
 
 	if state == State.CHARGING:
@@ -73,7 +83,8 @@ func _check_player_hit() -> void:
 		if collider == player:
 			if player.has_method("take_damage"):
 				player.take_damage(1)
-			queue_free()
+				velocity = -(player.global_position - global_position).normalized() * 100
+			$OvershootPeriod.start()
 			return
 
 
@@ -92,3 +103,11 @@ func _process_recovering(delta: float) -> void:
 
 func die() -> void:
 	queue_free()
+
+
+func _on_hit_cooldown_timeout() -> void:
+	can_hit = true
+
+
+func _on_overshoot_period_timeout() -> void:
+	velocity = charge_direction * 0

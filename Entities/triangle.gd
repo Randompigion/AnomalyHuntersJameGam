@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
-@export var speed = 450.0
-@export var dash_speed = 750
+@export var speed = 750.0
+@export var dash_speed = 1050
 @export var friction = 200
 @export var bounce_speed_retention = 0.6
 @export var stun_duration = 1.5
@@ -57,8 +57,7 @@ func _physics_process(delta: float) -> void:
 		dash_direction = dir
 		
 		rotation = dash_direction.angle()
-		if $AudioStreamPlayer2D.playing == false: # Optional: prevents overlapping sounds
-			$AudioStreamPlayer2D.play()
+		$AudioStreamPlayer2D.play()
 		can_dash = false
 		$dash_timer.start()
 		$dash_cooldown.start()
