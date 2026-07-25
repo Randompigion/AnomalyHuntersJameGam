@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Inventory" format=3 uid="uid://i5yyt08wj6f0"]
+
+[ext_resource type="Script" uid="uid://drwsv0ukjlv5f" path="res://InventoryItem.gd" id="1_ycpav"]
+[ext_resource type="Resource" uid="uid://b7ysgftfr57cx" path="res://UI/Menu/Skills/BlastDash.tres" id="2_4uhrv"]
+[ext_resource type="Resource" uid="uid://d1asffq5r60mr" path="res://UI/Menu/Skills/PolySpikes.tres" id="3_aitww"]
+[ext_resource type="Resource" uid="uid://dut087rcc4c7x" path="res://UI/Menu/Skills/SpeedBoost.tres" id="4_6bhr3"]
+[ext_resource type="Resource" uid="uid://bkt5nrwtoa5vu" path="res://UI/Menu/Skills/TemporalTargetKill.tres" id="5_kbqn7"]
+[ext_resource type="Script" uid="uid://c8jp7me8fja16" path="res://UI/Menu/inventory.gd" id="6_maeap"]
+
+[resource]
+script = ExtResource("6_maeap")
+items = Array[ExtResource("1_ycpav")]([ExtResource("2_4uhrv"), ExtResource("3_aitww"), ExtResource("4_6bhr3"), ExtResource("5_kbqn7"), null, null, null, null, null, null, null, null])
+metadata/_custom_type_script = "uid://c8jp7me8fja16"

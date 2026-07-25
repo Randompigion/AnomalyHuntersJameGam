@@ -1,5 +1,9 @@
 extends CharacterBody2D
 
+@export var inventory: Inventory
+
+
+
 @export var speed = 750.0
 @export var dash_speed = 1050
 @export var friction = 200
@@ -30,6 +34,7 @@ const STUN_SOUNDS := [
 ]
 
 func _ready() -> void:
+	add_to_group("player")
 	hp = max_hp
 	stun_timer.one_shot = true
 	if not stun_timer.timeout.is_connected(_on_stun_timer_timeout):
@@ -37,7 +42,7 @@ func _ready() -> void:
 	dir = (get_global_mouse_position() - global_position).normalized()
 
 var dir = Vector2.ZERO
-var input = "a" #a - auto, m - mouse, c - controller
+var input = "a"
 
 @warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
@@ -45,11 +50,11 @@ func _process(delta: float) -> void:
 		if not dashing:
 			if dir != Vector2.ZERO:
 				rotation = dir.angle()
-	else: # BOUNCE mode
+	else:
 		if not bounce_lock:
 			if dir != Vector2.ZERO:
 				rotation = lerp_angle(rotation, dir.angle(), 20 * delta)
-			
+
 @warning_ignore("unused_parameter")
 func _physics_process(delta: float) -> void:
 	var controller_dir := Input.get_vector("left", "right", "up", "down")
@@ -60,16 +65,15 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("dash") and can_dash and can_move:
 		dashing = true
 		dash_direction = dir
-		
 		rotation = dash_direction.angle()
 		$AudioStreamPlayer2D.play()
 		can_dash = false
 		$dash_timer.start()
 		$dash_cooldown.start()
-		
+
 	if Input.is_action_just_pressed("toggle_mode"):
 		_toggle_mode()
-		
+
 	if can_move:
 		if dashing:
 			velocity = dash_speed * dash_direction
@@ -87,7 +91,6 @@ func _physics_process(delta: float) -> void:
 		var collision := move_and_collide(velocity * delta)
 		if collision:
 			Push.apply(collision, velocity, bounce_push_force)
-			# BOUNCE mode never kills enemies on contact - always bounce, like a wall.
 			velocity = velocity.bounce(collision.get_normal()) * bounce_speed_retention
 			dash_direction = velocity.normalized()
 			rotation = dash_direction.angle()
@@ -110,7 +113,6 @@ func _toggle_mode() -> void:
 		if sprite.sprite_frames and sprite.sprite_frames.has_animation("dash"):
 			sprite.play("dash")
 
-
 func _handle_wall_collisions() -> void:
 	if not dashing:
 		return
@@ -118,6 +120,21 @@ func _handle_wall_collisions() -> void:
 		var collision := get_slide_collision(i)
 		var collider := collision.get_collider()
 		var normal := collision.get_normal()
+
+		if collider and collider.is_in_group("boss"):
+			if mode == Mode.DASH:
+				var hit_angle: float = (global_position - collider.global_position).angle()
+				var hit_confirmed: bool = collider.try_hit_weak_point(hit_angle)
+				if not hit_confirmed:
+					dashing = false
+					velocity = Vector2.ZERO
+					take_damage(1)
+			else:
+				velocity = velocity.bounce(normal) * bounce_speed_retention
+				dash_direction = velocity.normalized()
+				rotation = dash_direction.angle()
+				_play_bounce()
+			break
 
 		if collider and collider.is_in_group("spiky_enemy"):
 			if mode == Mode.DASH:
@@ -162,14 +179,17 @@ func _kill_enemy(enemy: Node) -> void:
 func take_damage(amount: int) -> void:
 	if is_invincible:
 		return
-	
+
 	dashing = false
 	velocity = Vector2.ZERO
 	_apply_stun()
 	$Camera2D2.trigger_shake()
 	Sfx.play(STUN_SOUNDS.pick_random())
-	$"../../TimeLeft".subtract_time(amount * 10)
-	
+
+	var time_left = get_tree().get_first_node_in_group("time_left")
+	if time_left:
+		time_left.subtract_time(amount * 10)
+
 	is_invincible = true
 	sprite.modulate.a = 0.5
 	await get_tree().create_timer(1.0).timeout
@@ -194,9 +214,8 @@ func _on_dash_timer_timeout() -> void:
 
 func _on_dash_cooldown_timeout() -> void:
 	can_dash = true
-	
+
 func hazard_kill() -> void:
-	# We'll have to add here a respawn or something
 	global_position = Vector2.ZERO
 	velocity = Vector2.ZERO
 	dashing = false

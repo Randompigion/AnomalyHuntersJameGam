@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://7fan8v5wrpob"]
+
+[ext_resource type="PackedScene" uid="uid://td33c41nah73" path="res://UI/SkillSlots/skill_slot.tscn" id="1_2ule1"]
+[ext_resource type="Script" uid="uid://cndiku5xmtww" path="res://UI/SkillSlots/visible_skill_slots.gd" id="1_4m1nw"]
+[ext_resource type="FontFile" uid="uid://fsbors10b7bh" path="res://Assets/Textures/ui/fonts/GoofyGoober.ttf" id="2_um51p"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wenv2"]
+font = ExtResource("2_um51p")
+shadow_size = 5
+shadow_color = Color(0.43888754, 0, 0.17263451, 1)
+
+[node name="SkillSlots" type="HBoxContainer" unique_id=1000498607]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 25
+script = ExtResource("1_4m1nw")
+
+[node name="SkillSlot" parent="." unique_id=686352741 instance=ExtResource("1_2ule1")]
+modulate = Color(1, 0, 0, 0.5882353)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SkillSlot" unique_id=906705367]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = 4.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Q"
+label_settings = SubResource("LabelSettings_wenv2")
+horizontal_alignment = 1
+
+[node name="SkillSlot2" parent="." unique_id=1329422007 instance=ExtResource("1_2ule1")]
+modulate = Color(1, 0, 0, 0.5882353)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SkillSlot2" unique_id=1103404996]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = 4.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "SHIFT"
+label_settings = SubResource("LabelSettings_wenv2")
+horizontal_alignment = 1
+
+[node name="SkillSlot3" parent="." unique_id=1381307546 instance=ExtResource("1_2ule1")]
+modulate = Color(1, 0, 0, 0.5882353)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SkillSlot3" unique_id=1253525552]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = 4.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "E"
+label_settings = SubResource("LabelSettings_wenv2")
+horizontal_alignment = 1

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InventoryItem" format=3 uid="uid://dut087rcc4c7x"]
+
+[ext_resource type="Script" uid="uid://drwsv0ukjlv5f" path="res://InventoryItem.gd" id="1_f2w8v"]
+[ext_resource type="Texture2D" uid="uid://bgtjharrf7aui" path="res://Assets/Textures/ui/skills/dash_icon.png" id="2_gxtso"]
+
+[resource]
+script = ExtResource("1_f2w8v")
+name = "SpeedBoost"
+texture = ExtResource("2_gxtso")
+metadata/_custom_type_script = "uid://drwsv0ukjlv5f"

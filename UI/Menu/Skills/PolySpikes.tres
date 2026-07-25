@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InventoryItem" format=3 uid="uid://d1asffq5r60mr"]
+
+[ext_resource type="Script" uid="uid://drwsv0ukjlv5f" path="res://InventoryItem.gd" id="1_ihwqs"]
+[ext_resource type="Texture2D" uid="uid://cvssrrdhwqs" path="res://Assets/Textures/ui/skills/spike_icon.png" id="2_dpb7k"]
+
+[resource]
+script = ExtResource("1_ihwqs")
+name = "PolySpikes"
+texture = ExtResource("2_dpb7k")
+metadata/_custom_type_script = "uid://drwsv0ukjlv5f"

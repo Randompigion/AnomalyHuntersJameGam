@@ -14,26 +14,27 @@
 [ext_resource type="AudioStream" uid="uid://dcowsd8k1sg0l" path="res://Assets/Audio/BGM/bgm_retro_arcade.ogg" id="16_gcd3s"]
 [ext_resource type="PackedScene" uid="uid://cygok7elyblmi" path="res://ObstaclesAndObjects/bounce_kill_wall.tscn" id="16_jfium"]
 [ext_resource type="Script" uid="uid://cmc3as7jogpi4" path="res://Levels/ChunkedSpaceBackground.gd" id="17_8sbpl"]
+[ext_resource type="PackedScene" uid="uid://7fan8v5wrpob" path="res://UI/SkillSlots/visible_skill_slots.tscn" id="17_wenv2"]
 [ext_resource type="PackedScene" uid="uid://vkfw2y641iss" path="res://Entities/change_scene.tscn" id="20_lp5k8"]
 [ext_resource type="PackedScene" uid="uid://dqti32tgx54ub" path="res://UI/Menu/pause_menu.tscn" id="21_pause"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_3ksry"]
 resource_local_to_scene = true
-vertices = PackedVector2Array(1126.9375, -674.64844, 1210.6094, 658.4297, 1134.1875, 67.71875, 1122.0391, -71.72656, -1060.6797, 634.53906, 355.60938, 67.71875, -1178.8594, -687.59375, 343.46094, -71.72656)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(0, 2, 3), PackedInt32Array(2, 1, 4), PackedInt32Array(5, 2, 4), PackedInt32Array(5, 4, 6), PackedInt32Array(7, 5, 6), PackedInt32Array(7, 6, 0), PackedInt32Array(7, 0, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-1069.8323, 644.45233, 1221.2675, 668.544, 1136.3328, -684.6051, -1189.8047, -697.6548)])
-sample_partition_type = 1
+vertices = PackedVector2Array(1293.1172, -901.3672, 1424.2891, 703.27344, 1149.2109, 85.0625, 1148.8906, -96.0625, -1159.1406, 751.4531, 329.09375, 85.0625, -1404.2813, -787.39844, 328.77344, -96.0625)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(2, 1, 4, 5), PackedInt32Array(5, 4, 6, 7), PackedInt32Array(7, 6, 0, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-1183.0214, 779.968, 1454.6918, 730.7808, 1318.898, -930.54095, -1436.9532, -814.09784)])
 source_geometry_mode = 2
+agent_radius = 28.06
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_82po7"]
-size = Vector2(758.5, 119)
+size = Vector2(764, 125)
 
 [node name="TestLevel" type="Node2D" unique_id=242093086]
 script = ExtResource("1_gp5y3")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1596367850]
 position = Vector2(-11.000004, 4)
-skew = 0.087266445
+skew = 0.0017453292
 navigation_polygon = SubResource("NavigationPolygon_3ksry")
 
 [node name="cursor" parent="." unique_id=1436806802 instance=ExtResource("2_w8qko")]
@@ -58,7 +59,6 @@ position = Vector2(-516.99994, -292.99997)
 scale = Vector2(1, 1)
 
 [node name="Spike_enemy" parent="Entities" unique_id=1347426545 instance=ExtResource("10_wq5b5")]
-visible = true
 position = Vector2(-247, 237)
 
 [node name="Obstacles" type="Node" parent="." unique_id=325095098]
@@ -73,7 +73,7 @@ scale = Vector2(6.0625, 1)
 texture = ExtResource("14_s4vsl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/StaticBody2D" unique_id=1628912657 groups=["navigation_polygon_source_geometry_group"]]
-position = Vector2(728, 2)
+position = Vector2(728, -1.5)
 shape = SubResource("RectangleShape2D_82po7")
 
 [node name="LevelParts" type="Node" parent="." unique_id=228985078]
@@ -95,4 +95,17 @@ position = Vector2(-526, 266)
 [node name="BounceKillWall" parent="." unique_id=1846962551 instance=ExtResource("16_jfium")]
 mass = 1.435
 
-[node name="PauseMenu" parent="." unique_id=1870181315 instance=ExtResource("21_pause")]
+[node name="PauseMenu" parent="." unique_id=1801261525 instance=ExtResource("21_pause")]
+
+[node name="SkillSlotOverlay" type="CanvasLayer" parent="." unique_id=1170597012]
+
+[node name="SkillSlots" parent="SkillSlotOverlay" unique_id=1000498607 instance=ExtResource("17_wenv2")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = -121.0
+offset_right = 297.0
+offset_bottom = -57.0
+grow_vertical = 0
+scale = Vector2(1.2, 1.2)
