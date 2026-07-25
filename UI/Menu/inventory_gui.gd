@@ -32,6 +32,8 @@ func update():
 			
 		itemGui.inventoryItem = inventoryItem
 		itemGui.update()
+		# TEMP: hover a slot to see which skill the icon is.
+		slots[i].tooltip_text = inventoryItem.name
 			
 		
 func onSlotClicked(slot):

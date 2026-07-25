@@ -26,6 +26,8 @@ var can_dash = true
 var can_toggle = true
 var can_speed_boost = true
 var can_poly_spike = true
+var can_stun_save = true
+var stun_save_active = false
 var bounce_lock = false
 enum Mode { DASH, BOUNCE, SPIKEY }
 var mode: Mode = Mode.DASH
@@ -176,7 +178,11 @@ func slide_bounce():
 	print("slide bounce!")
 	
 func stun_save():
-	print("stun save!")
+	if can_stun_save:
+		stun_save_active = true
+		can_stun_save = false
+		$AbilityTimers/ActivationTime/StunSave.start()
+		$AbilityTimers/Cooldowns/StunSaveCooldown.start()
 	
 func temporal_targets():
 	print("temporal targets!")
@@ -276,14 +282,25 @@ func take_damage(amount: int) -> void:
 	is_invincible = false
 
 func _apply_stun() -> void:
+	if stun_save_active:
+		_stun_save_penalty()
+		return
 	can_move = false
 	stun_timer.stop()
 	stun_timer.start(stun_duration)
 
 func _apply_heavy_stun() -> void:
+	if stun_save_active:
+		_stun_save_penalty()
+		return
 	can_move = false
 	stun_timer.stop()
 	stun_timer.start(heavy_stun_duration)
+
+func _stun_save_penalty() -> void:
+	var time_left = get_tree().get_first_node_in_group("time_left")
+	if time_left:
+		time_left.subtract_time(10)
 
 func _on_stun_timer_timeout() -> void:
 	can_move = true
@@ -326,3 +343,11 @@ func _on_speed_boost_cooldown_timeout() -> void:
 
 func _on_poly_spikes_cooldown_timeout() -> void:
 	can_poly_spike = true
+
+
+func _on_stun_save_timeout() -> void:
+	stun_save_active = false
+
+
+func _on_stun_save_cooldown_timeout() -> void:
+	can_stun_save = true

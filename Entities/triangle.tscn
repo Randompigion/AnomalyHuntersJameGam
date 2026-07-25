@@ -165,6 +165,10 @@ wait_time = 15.0
 [node name="PolySpikesCooldown" type="Timer" parent="AbilityTimers/Cooldowns" unique_id=1897337504]
 wait_time = 25.0
 
+[node name="StunSaveCooldown" type="Timer" parent="AbilityTimers/Cooldowns" unique_id=1897337505]
+wait_time = 8.0
+one_shot = true
+
 [node name="ActivationTime" type="Node" parent="AbilityTimers" unique_id=443218669]
 
 [node name="SpeedBoost" type="Timer" parent="AbilityTimers/ActivationTime" unique_id=301278983]
@@ -173,9 +177,15 @@ wait_time = 10.0
 [node name="PolySpikes" type="Timer" parent="AbilityTimers/ActivationTime" unique_id=536185202]
 wait_time = 15.0
 
+[node name="StunSave" type="Timer" parent="AbilityTimers/ActivationTime" unique_id=536185203]
+wait_time = 10.0
+one_shot = true
+
 [connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="dash_cooldown" to="." method="_on_dash_cooldown_timeout"]
 [connection signal="timeout" from="AbilityTimers/Cooldowns/SpeedBoostCooldown" to="." method="_on_speed_boost_cooldown_timeout"]
 [connection signal="timeout" from="AbilityTimers/Cooldowns/PolySpikesCooldown" to="." method="_on_poly_spikes_cooldown_timeout"]
 [connection signal="timeout" from="AbilityTimers/ActivationTime/SpeedBoost" to="." method="_on_speed_boost_timeout"]
 [connection signal="timeout" from="AbilityTimers/ActivationTime/PolySpikes" to="." method="_on_poly_spikes_timeout"]
+[connection signal="timeout" from="AbilityTimers/Cooldowns/StunSaveCooldown" to="." method="_on_stun_save_cooldown_timeout"]
+[connection signal="timeout" from="AbilityTimers/ActivationTime/StunSave" to="." method="_on_stun_save_timeout"]
