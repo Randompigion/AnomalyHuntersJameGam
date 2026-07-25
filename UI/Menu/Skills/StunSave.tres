@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InventoryItem" format=3 uid="uid://btxq7opxo77lr"]
+
+[ext_resource type="Script" uid="uid://drwsv0ukjlv5f" path="res://InventoryItem.gd" id="1_ttew1"]
+[ext_resource type="Texture2D" uid="uid://cvbg8clx3ctoh" path="res://Assets/Textures/ui/skills/resistance_icon.png" id="2_m46bm"]
+
+[resource]
+script = ExtResource("1_ttew1")
+name = "StunSave"
+texture = ExtResource("2_m46bm")
+metadata/_custom_type_script = "uid://drwsv0ukjlv5f"

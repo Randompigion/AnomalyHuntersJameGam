@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InventoryItem" format=3 uid="uid://bp6gb6qrcbvcf"]
+
+[ext_resource type="Script" uid="uid://drwsv0ukjlv5f" path="res://InventoryItem.gd" id="1_rvglw"]
+[ext_resource type="Texture2D" uid="uid://b8kkmup206s8a" path="res://Assets/Textures/ui/skills/force_field_icon.png" id="2_i83th"]
+
+[resource]
+script = ExtResource("1_rvglw")
+name = "GotYourBack"
+texture = ExtResource("2_i83th")
+metadata/_custom_type_script = "uid://drwsv0ukjlv5f"
