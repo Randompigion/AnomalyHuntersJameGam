@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InventoryItem" format=3 uid="uid://cv7v7okjm3b3i"]
+
+[ext_resource type="Script" uid="uid://drwsv0ukjlv5f" path="res://InventoryItem.gd" id="1_t5bl5"]
+[ext_resource type="Texture2D" uid="uid://cmvbq0wpg8yic" path="res://Assets/Textures/ui/skills/slide_icon.png" id="2_iod2t"]
+
+[resource]
+script = ExtResource("1_t5bl5")
+name = "SlideBounce"
+texture = ExtResource("2_iod2t")
+metadata/_custom_type_script = "uid://drwsv0ukjlv5f"
