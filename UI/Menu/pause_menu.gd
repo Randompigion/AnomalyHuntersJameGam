@@ -31,7 +31,7 @@ func pause() -> void:
 	visible = true
 	get_tree().paused = true
 	set_game_cursor_visible(false)
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 
 
 func resume() -> void:

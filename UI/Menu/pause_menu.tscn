@@ -1,20 +1,11 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene format=3 uid="uid://dqti32tgx54ub"]
 
-[ext_resource type="Script" path="res://UI/Menu/pause_menu.gd" id="1_pause"]
-[ext_resource type="PackedScene" path="res://UI/Menu/menu.tscn" id="2_menu"]
+[ext_resource type="Script" uid="uid://t4aaos4ptrx1" path="res://UI/Menu/pause_menu.gd" id="1_pause"]
+[ext_resource type="PackedScene" uid="uid://cjp4jtcm2kqrv" path="res://UI/Menu/menu.tscn" id="2_menu"]
 
-[node name="PauseMenu" type="CanvasLayer"]
+[node name="PauseMenu" type="CanvasLayer" unique_id=1870181315]
 process_mode = 3
 layer = 10
-visible = false
 script = ExtResource("1_pause")
 
-[node name="Dim" type="ColorRect" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0.6)
-
-[node name="Menu" parent="." instance=ExtResource("2_menu")]
+[node name="Menu" parent="." unique_id=1049263407 instance=ExtResource("2_menu")]

@@ -27,9 +27,17 @@ script = ExtResource("3_sbeil")
 [node name="TimeLeft" parent="." unique_id=209138868 instance=ExtResource("4_sajm2")]
 
 [node name="Boss" parent="." unique_id=334736359 groups=["navigation_polygon_source_geometry_group"] instance=ExtResource("1_gdvtn")]
-attack_cooldown = 1.0
+attack_cooldown = 0.65
 missile_scene = ExtResource("5_pj1ej")
+missile_burst_interval = 0.185
+ring_missile_count = 60
+ring_gap_degrees = 90.0
+ring_chance = 0.25
+laser_telegraph_duration = 1.0
+laser_active_duration = 0.7
 laser_count = 8
+laser_width = 40.0
+enemy_spawn_count = 1
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=499360957]
 navigation_polygon = SubResource("NavigationPolygon_82po7")

@@ -30,6 +30,7 @@ stream = ExtResource("3_xuhe8")
 volume_db = 8.0
 max_distance = 200.0
 attenuation = 0.34151006
+bus = &"SFX"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=891156906]
 radius = 80.27

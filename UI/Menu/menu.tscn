@@ -14,6 +14,10 @@
 [ext_resource type="Texture2D" uid="uid://bgnpb5mkqlxu6" path="res://Assets/Textures/ui/pause_menu/option1_pressed.png" id="7_ecwwl"]
 [ext_resource type="Texture2D" uid="uid://diu5yom60ukvj" path="res://Assets/Textures/ui/pause_menu/option4.png" id="9_aqva8"]
 [ext_resource type="Texture2D" uid="uid://b0881tmk8w1kk" path="res://Assets/Textures/ui/pause_menu/option4_pressed.png" id="10_hyp5l"]
+[ext_resource type="AudioStream" uid="uid://bkiont7kj2mcr" path="res://Assets/Audio/SFX/UI/sfx_ui_back.wav" id="14_w5wmu"]
+[ext_resource type="AudioStream" uid="uid://73d12qfx1da0" path="res://Assets/Audio/SFX/UI/sfx_ui_error.wav" id="15_5uuys"]
+[ext_resource type="AudioStream" uid="uid://83kqg3nw8vpf" path="res://Assets/Audio/SFX/UI/sfx_ui_hover.wav" id="16_to3yq"]
+[ext_resource type="AudioStream" uid="uid://cehm4jfukhcp5" path="res://Assets/Audio/SFX/UI/sfx_ui_select.wav" id="17_10uw0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4hy44"]
 bg_color = Color(0.654902, 0.654902, 0.654902, 1)
@@ -26,9 +30,6 @@ border_color = Color(0.4392157, 0.4392157, 0.4392157, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nrnbx"]
 bg_color = Color(0.40832943, 0.4083295, 0.40832937, 1)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h1wq0"]
-bg_color = Color(0.40784314, 0.40784314, 0.40784314, 1)
-
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_avu7c"]
 thickness = 8
 
@@ -40,33 +41,52 @@ thickness = 8
 color = Color(0.7708395, 0.77083945, 0.77083945, 1)
 thickness = 8
 
-[node name="Menu" type="Control" unique_id=1277463647]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_q50f7"]
+random_pitch = 1.0293022
+streams_count = 1
+stream_0/stream = ExtResource("14_w5wmu")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5uuys"]
+random_pitch = 1.0293022
+streams_count = 1
+stream_0/stream = ExtResource("15_5uuys")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_w5wmu"]
+random_pitch = 1.0293022
+streams_count = 1
+stream_0/stream = ExtResource("16_to3yq")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_to3yq"]
+random_pitch = 1.0293022
+streams_count = 1
+stream_0/stream = ExtResource("17_10uw0")
+
+[node name="Menu" type="Control" unique_id=1616494859]
+process_mode = 3
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 32.0
-offset_top = -4.0
-offset_right = 32.0
-offset_bottom = -4.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+mouse_filter = 2
 script = ExtResource("1_4hy44")
-master_audio_bus = "Master"
+
+[node name="Dim" type="ColorRect" parent="." unique_id=1463758988]
+layout_mode = 0
+offset_right = 1150.0
+offset_bottom = 645.0
+color = Color(0.076835774, 0.07683585, 0.0768358, 0.5529412)
+metadata/_edit_use_anchors_ = true
 
 [node name="MenuLabel" type="Label" parent="." unique_id=1178105422]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -54.0
-offset_top = -230.0
-offset_right = 77.0
-offset_bottom = -179.0
+offset_left = 545.0
+offset_top = 65.0
+offset_right = 683.0
+offset_bottom = 116.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.5931336, 0.59313357, 0.59313357, 1)
@@ -74,12 +94,15 @@ theme_override_font_sizes/font_size = 50
 text = "Menu"
 
 [node name="Panels" type="Control" parent="." unique_id=850441274]
+unique_name_in_owner = true
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 589.5
+offset_top = 307.0
+offset_right = 629.5
+offset_bottom = 347.0
 
 [node name="PlayPanel" type="Panel" parent="Panels" unique_id=449300224]
-visible = false
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -95,54 +118,41 @@ scale = Vector2(1.1465292, 1.1078826)
 theme_override_styles/panel = SubResource("StyleBoxFlat_4hy44")
 
 [node name="ResumeButton" type="Button" parent="Panels/PlayPanel" unique_id=1550758597]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -125.59642
-offset_top = -117.34093
-offset_right = 133.40356
-offset_bottom = -65.34093
+offset_left = -120.79933
+offset_top = -71.37833
+offset_right = 138.20068
+offset_bottom = -19.378326
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_nrnbx")
 text = "Resume"
 
 [node name="ExitButton" type="Button" parent="Panels/PlayPanel" unique_id=1457550766]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -125.59642
-offset_top = -34.299637
-offset_right = 133.40356
-offset_bottom = 17.700363
+offset_left = -120.79933
+offset_top = 11.662964
+offset_right = 138.20068
+offset_bottom = 63.662964
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_nrnbx")
 text = "Exit"
 
-[node name="SaveButton" type="Button" parent="Panels/PlayPanel" unique_id=2065332412]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -125.59642
-offset_top = 41.52066
-offset_right = 133.40356
-offset_bottom = 93.520645
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/normal = SubResource("StyleBoxFlat_h1wq0")
-text = "Save"
-
 [node name="VolumePanel" type="Panel" parent="Panels" unique_id=678919820]
+unique_name_in_owner = true
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -159,6 +169,7 @@ scale = Vector2(1.1465292, 1.1078826)
 theme_override_styles/panel = SubResource("StyleBoxFlat_4hy44")
 
 [node name="MasterSlider" type="HSlider" parent="Panels/VolumePanel" unique_id=637092883]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 286.08078
 offset_top = 45.13112
@@ -183,6 +194,7 @@ theme_override_font_sizes/font_size = 25
 text = "Master"
 
 [node name="SFXSlider" type="HSlider" parent="Panels/VolumePanel" unique_id=2060666466]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 286.08078
 offset_top = 130.88026
@@ -207,6 +219,7 @@ theme_override_font_sizes/font_size = 25
 text = "SFX"
 
 [node name="MusicSlider" type="HSlider" parent="Panels/VolumePanel" unique_id=66724876]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = 286.08078
 offset_top = 215.7268
@@ -231,6 +244,7 @@ theme_override_font_sizes/font_size = 25
 text = "Music"
 
 [node name="SettingsPanel" type="Panel" parent="Panels" unique_id=92768274]
+unique_name_in_owner = true
 visible = false
 layout_mode = 1
 anchors_preset = -1
@@ -265,6 +279,7 @@ color = Color(0.80784315, 0, 0.18431373, 1)
 script = ExtResource("4_avu7c")
 
 [node name="SkillsPanel" type="Panel" parent="Panels" unique_id=2046141314]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -286,22 +301,24 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -449.21982
+offset_left = -454.4527
 offset_top = -117.00001
-offset_right = -87.21973
+offset_right = -92.4527
 offset_bottom = 116.999985
 grow_horizontal = 0
 grow_vertical = 2
 
 [node name="MainButtons" type="Control" parent="." unique_id=1060669825]
+unique_name_in_owner = true
 anchors_preset = 0
-offset_left = 328.0
-offset_top = 140.0
-offset_right = 368.0
-offset_bottom = 180.0
+offset_left = 917.5
+offset_top = 447.0
+offset_right = 957.5
+offset_bottom = 487.0
 scale = Vector2(1.8518614, 1.9325137)
 
 [node name="PlayButton" type="TextureButton" parent="MainButtons" unique_id=719912525]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -322,6 +339,7 @@ texture_pressed = ExtResource("7_ecwwl")
 stretch_mode = 4
 
 [node name="VolumeButton" type="TextureButton" parent="MainButtons" unique_id=1437962803]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -342,6 +360,7 @@ texture_pressed = ExtResource("5_l48gv")
 stretch_mode = 4
 
 [node name="SettingsButton" type="TextureButton" parent="MainButtons" unique_id=862944627]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -362,6 +381,7 @@ texture_pressed = ExtResource("3_ytr4m")
 stretch_mode = 4
 
 [node name="SkillsButton" type="TextureButton" parent="MainButtons" unique_id=1734129387]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -381,9 +401,24 @@ texture_normal = ExtResource("9_aqva8")
 texture_pressed = ExtResource("10_hyp5l")
 stretch_mode = 4
 
+[node name="SfxUiBack" type="AudioStreamPlayer2D" parent="." unique_id=1954459622]
+stream = SubResource("AudioStreamRandomizer_q50f7")
+bus = &"SFX"
+
+[node name="SfxUiError" type="AudioStreamPlayer2D" parent="." unique_id=2129539198]
+stream = SubResource("AudioStreamRandomizer_5uuys")
+bus = &"SFX"
+
+[node name="SfxUiHover" type="AudioStreamPlayer2D" parent="." unique_id=507846303]
+stream = SubResource("AudioStreamRandomizer_w5wmu")
+bus = &"SFX"
+
+[node name="SfxUiSelect" type="AudioStreamPlayer2D" parent="." unique_id=327670159]
+stream = SubResource("AudioStreamRandomizer_to3yq")
+bus = &"SFX"
+
 [connection signal="pressed" from="Panels/PlayPanel/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="Panels/PlayPanel/ExitButton" to="." method="_on_exit_button_pressed"]
-[connection signal="pressed" from="Panels/PlayPanel/SaveButton" to="." method="_on_save_button_pressed"]
 [connection signal="value_changed" from="Panels/VolumePanel/MasterSlider" to="." method="_on_master_slider_value_changed"]
 [connection signal="value_changed" from="Panels/VolumePanel/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
 [connection signal="value_changed" from="Panels/VolumePanel/MusicSlider" to="." method="_on_music_slider_value_changed"]

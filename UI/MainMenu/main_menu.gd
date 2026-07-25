@@ -15,6 +15,10 @@ extends Control
 @onready var settings_og_position: Vector2 = settings_button.position
 @onready var volume_og_position: Vector2 = volume_button.position
 @onready var play_og_position: Vector2 = play_button.position
+@onready var back_sfx: AudioStreamPlayer2D = $SfxUiBack
+@onready var error_sfx: AudioStreamPlayer2D = $SfxUiError
+@onready var hover_sfx: AudioStreamPlayer2D = $SfxUiHover
+@onready var select_sfx: AudioStreamPlayer2D = $SfxUiSelect
 
 @export var shake: float = 4.0
 @export var min_offset: float = 2.0
@@ -24,7 +28,7 @@ extends Control
 @export var sfx_audio_bus: String
 
 
-var menu_color = Color("ce002fff")
+var menu_color = Color("ffffffff")
 var is_hovering: bool = false
 var rand_offset: Vector2
 var this: TextureButton
@@ -37,7 +41,8 @@ var sfx_bus_id
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
+	menu_color = Color("ce002fff")
 	menu_label.set("theme_override_colors/font_color", menu_color)
 	main_buttons.modulate = menu_color
 	panels.modulate = menu_color
@@ -73,6 +78,7 @@ func visible(element) -> void:
 
 
 func _on_settings_button_mouse_entered() -> void:
+	hover_sfx.play()
 	is_hovering = true
 	this = settings_button
 	shaking(this, settings_og_position)
@@ -86,6 +92,7 @@ func _on_settings_button_mouse_exited() -> void:
 
 
 func _on_volume_button_mouse_entered() -> void:
+	hover_sfx.play()
 	is_hovering = true
 	this = volume_button
 	shaking(this, volume_og_position)
@@ -99,6 +106,7 @@ func _on_volume_button_mouse_exited() -> void:
 
 
 func _on_play_button_mouse_entered() -> void:
+	hover_sfx.play()
 	is_hovering = true
 	this = play_button
 	shaking(this, play_og_position)
@@ -124,21 +132,25 @@ func _on_volume_button_toggled(_toggled_on: bool) -> void:
 
 
 func _on_settings_button_toggled(_toggled_on: bool) -> void:
+	select_sfx.play()
 	selected = settings_button
 	element = selected.get_index()
 	visible(element)
 
 
 func _on_start_button_pressed() -> void:
+	back_sfx.play()
 	get_tree().change_scene_to_file("res://Levels/TestLevel.tscn")
 
 
 func _on_credits_button_pressed() -> void:
+	select_sfx.play()
 	play_panel.visible = false
 	credits_panel.visible = true
 
 
 func _on_back_button_pressed() -> void:
+	select_sfx.play()
 	credits_panel.visible = false
 	play_panel.visible = true
 
