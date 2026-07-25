@@ -30,6 +30,7 @@ func _ready() -> void:
 	add_to_group("enemy")
 	add_to_group("spiky_enemy")
 	charge_timer = charge_interval
+	nav_agent.velocity_computed.connect(_on_velocity_computed)
 
 func _physics_process(delta: float) -> void:
 	if not player:
@@ -39,9 +40,12 @@ func _physics_process(delta: float) -> void:
 			_process_idle(delta)
 		State.CHARGING:
 			_process_charging(delta)
+			_finish_charging_frame()
 		State.RECOVERING:
 			_process_recovering(delta)
-	
+			_finish_default_frame()
+
+func _finish_charging_frame() -> void:
 	for i in get_slide_collision_count():
 		var collision := get_slide_collision(i)
 		var collider := collision.get_collider()
@@ -53,8 +57,20 @@ func _physics_process(delta: float) -> void:
 	var impact_velocity := velocity
 	move_and_slide()
 	Push.apply_slides(self, impact_velocity, push_force)
-	if state == State.CHARGING:
-		_check_player_hit()
+	_check_player_hit()
+
+func _finish_default_frame() -> void:
+	for i in get_slide_collision_count():
+		var collision := get_slide_collision(i)
+		var collider := collision.get_collider()
+		if collider == player:
+			if player.has_method("take_damage") and can_hit == true:
+				player.take_damage(2)
+				can_hit = false
+				$HitCooldown.start()
+	var impact_velocity := velocity
+	move_and_slide()
+	Push.apply_slides(self, impact_velocity, push_force)
 
 func _process_idle(delta: float) -> void:
 	charge_timer -= delta
@@ -68,13 +84,21 @@ func _process_idle(delta: float) -> void:
 		var next_path_pos: Vector2 = nav_agent.get_next_path_position()
 		var target_direction: Vector2 = global_position.direction_to(next_path_pos)
 		current_direction = current_direction.lerp(target_direction, TURN_RATE * delta).normalized()
-		velocity = current_direction * wander_speed
+		var desired_velocity: Vector2 = current_direction * wander_speed
+		nav_agent.set_velocity(desired_velocity)
 		rotation = current_direction.angle()
 	else:
-		velocity = Vector2.ZERO
+		nav_agent.set_velocity(Vector2.ZERO)
 
 	if charge_timer <= 0.0:
 		_start_charge()
+
+func _on_velocity_computed(safe_velocity: Vector2) -> void:
+	if state == State.IDLE:
+		velocity = safe_velocity
+		var impact_velocity := velocity
+		move_and_slide()
+		Push.apply_slides(self, impact_velocity, push_force)
 
 func _start_charge() -> void:
 	state = State.CHARGING

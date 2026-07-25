@@ -16,18 +16,22 @@ inertia = 20000.0
 linear_damp = 0.8
 angular_damp = 0.8
 
+[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." unique_id=808009620]
+radius = 145.51
+affect_navigation_mesh = true
+
 [node name="Texture" type="Sprite2D" parent="." unique_id=1196625038]
-position = Vector2(18, 476.5)
+position = Vector2(-7.999996, 1.5000305)
 scale = Vector2(0.325, 0.3921875)
 texture = ExtResource("1_85c7r")
 
 [node name="SoftSide" type="CollisionShape2D" parent="." unique_id=899732242 groups=["soft_side"]]
-position = Vector2(28, 476)
+position = Vector2(2, 1)
 shape = SubResource("RectangleShape2D_4ayxd")
 
 [node name="Spikes" type="Area2D" parent="." unique_id=222734278]
 script = ExtResource("2_727sa")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Spikes" unique_id=1526710865]
-position = Vector2(-6.5, 476)
+position = Vector2(-32.5, 1)
 shape = SubResource("RectangleShape2D_ggs6p")

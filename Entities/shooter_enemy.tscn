@@ -38,6 +38,7 @@ shape = SubResource("RectangleShape2D_3b47u")
 debug_color = Color(0.70154667, 0.49091738, 3.85046e-07, 0.41960785)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1559709499]
+avoidance_enabled = true
 radius = 60.0
 
 [node name="LineOfSightRay" type="RayCast2D" parent="." unique_id=2098760959]

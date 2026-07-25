@@ -32,6 +32,10 @@ size = Vector2(764, 125)
 [node name="TestLevel" type="Node2D" unique_id=242093086]
 script = ExtResource("1_gp5y3")
 
+[node name="BounceKillWall" parent="." unique_id=1846962551 instance=ExtResource("16_jfium")]
+position = Vector2(162, 489)
+mass = 1.435
+
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=1596367850]
 position = Vector2(-11.000004, 4)
 skew = 0.0017453292
@@ -93,12 +97,11 @@ script = ExtResource("17_8sbpl")
 [node name="ChangeScene" parent="." unique_id=1821069760 instance=ExtResource("20_lp5k8")]
 position = Vector2(-526, 266)
 
-[node name="BounceKillWall" parent="." unique_id=1846962551 instance=ExtResource("16_jfium")]
-mass = 1.435
-
 [node name="PauseMenu" parent="." unique_id=1801261525 instance=ExtResource("21_pause")]
+visible = false
 
 [node name="SkillSlotOverlay" type="CanvasLayer" parent="." unique_id=1170597012]
+visible = false
 
 [node name="SkillSlots" parent="SkillSlotOverlay" unique_id=1000498607 instance=ExtResource("17_wenv2")]
 anchors_preset = 2
