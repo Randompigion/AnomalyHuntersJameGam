@@ -1,5 +1,9 @@
 extends Control
 
+## Emitted when the player asks to close the menu. The PauseMenu overlay
+## listens for this and unpauses the tree.
+signal resume_requested
+
 
 @onready var panels: Control = $Panels
 @onready var main_buttons: Control = $MainButtons
@@ -40,7 +44,6 @@ var sfx_bus_id
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	menu_color = Color("ce002fff")
-	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
 	menu_label.set("theme_override_colors/font_color", menu_color)
 	main_buttons.modulate = menu_color
 	panels.modulate = menu_color
@@ -151,10 +154,11 @@ func _on_skills_button_toggled(toggled_on: bool) -> void:
 
 
 func _on_resume_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://Levels/TutorialLevel.tscn")
+	resume_requested.emit()
 
 
 func _on_exit_button_pressed() -> void:
+	get_tree().paused = false
 	get_tree().quit()
 
 

@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cygok7elyblmi" path="res://ObstaclesAndObjects/bounce_kill_wall.tscn" id="16_jfium"]
 [ext_resource type="Script" uid="uid://cmc3as7jogpi4" path="res://Levels/ChunkedSpaceBackground.gd" id="17_8sbpl"]
 [ext_resource type="PackedScene" uid="uid://vkfw2y641iss" path="res://Entities/change_scene.tscn" id="20_lp5k8"]
+[ext_resource type="PackedScene" path="res://UI/Menu/pause_menu.tscn" id="21_pause"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_3ksry"]
 resource_local_to_scene = true
@@ -90,3 +91,5 @@ script = ExtResource("17_8sbpl")
 position = Vector2(-526, 266)
 
 [node name="BounceKillWall" parent="." unique_id=1846962551 instance=ExtResource("16_jfium")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("21_pause")]
