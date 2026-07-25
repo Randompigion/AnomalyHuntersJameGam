@@ -4,6 +4,10 @@ extends HBoxContainer
 @onready var slots: Array = get_children()
 
 func _ready() -> void:
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	for slot in slots:
+		slot.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		slot.focus_mode = Control.FOCUS_NONE
 	update()
 	inventory.updated.connect(update)
 

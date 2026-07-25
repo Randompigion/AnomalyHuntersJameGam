@@ -11,6 +11,8 @@ var index: int
 func insert(isg: ItemsGUI):
 	itemGui = isg
 	container.add_child(itemGui)
+	# TEMP: keep the name tooltip in sync when skills are dragged around.
+	tooltip_text = isg.inventoryItem.name if isg.inventoryItem else ""
 	if !itemGui.inventoryItem || inventory.items[index] == itemGui.inventoryItem:
 		return
 	
@@ -18,7 +20,10 @@ func insert(isg: ItemsGUI):
 	
 func takeItem():
 	var item = itemGui
-	
+
+	# TEMP: slot is about to be empty, so drop its name tooltip.
+	tooltip_text = ""
+
 	inventory.removeSlot(itemGui.inventoryItem)
 	
 	container.remove_child(itemGui)

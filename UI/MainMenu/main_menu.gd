@@ -29,7 +29,9 @@ extends Control
 
 
 var menu_color = Color("ffffffff")
-var is_hovering: bool = false
+var hovered_button: TextureButton = null
+## Bumped on every new shake so any older loop still awaiting can tell it is stale.
+var shake_token: int = 0
 var rand_offset: Vector2
 var this: TextureButton
 var z: int = 0
@@ -64,11 +66,20 @@ func _process(_delta: float) -> void:
 
 
 func shaking(element, og_position) -> void:
-	while is_hovering == true:
+	shake_token += 1
+	var my_token: int = shake_token
+	while hovered_button == element and my_token == shake_token:
 		rand_offset = Vector2(randf_range(min_offset, max_offset), randf_range(min_offset, max_offset))
-		element.position += rand_offset
+		element.position = og_position + rand_offset
 		await get_tree().create_timer(0.1).timeout
 		element.position = og_position
+	element.position = og_position
+
+
+func stop_shaking(element, og_position) -> void:
+	if hovered_button == element:
+		hovered_button = null
+	element.position = og_position
 
 
 func visible(element) -> void:
@@ -79,43 +90,43 @@ func visible(element) -> void:
 
 func _on_settings_button_mouse_entered() -> void:
 	hover_sfx.play()
-	is_hovering = true
+	hovered_button = settings_button
 	this = settings_button
-	shaking(this, settings_og_position)
 	z += 1
 	settings_button.z_index = z
+	shaking(settings_button, settings_og_position)
 
 
 func _on_settings_button_mouse_exited() -> void:
-	is_hovering = false
+	stop_shaking(settings_button, settings_og_position)
 	this = null
 
 
 func _on_volume_button_mouse_entered() -> void:
 	hover_sfx.play()
-	is_hovering = true
+	hovered_button = volume_button
 	this = volume_button
-	shaking(this, volume_og_position)
 	z += 1
 	volume_button.z_index = z
+	shaking(volume_button, volume_og_position)
 
 
 func _on_volume_button_mouse_exited() -> void:
-	is_hovering = false
+	stop_shaking(volume_button, volume_og_position)
 	this = null
 
 
 func _on_play_button_mouse_entered() -> void:
 	hover_sfx.play()
-	is_hovering = true
+	hovered_button = play_button
 	this = play_button
-	shaking(this, play_og_position)
 	z += 1
 	play_button.z_index = z
+	shaking(play_button, play_og_position)
 
 
 func _on_play_button_mouse_exited() -> void:
-	is_hovering = false
+	stop_shaking(play_button, play_og_position)
 	this = null
 
 

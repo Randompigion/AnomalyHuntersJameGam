@@ -101,15 +101,11 @@ position = Vector2(-526, 266)
 visible = false
 
 [node name="SkillSlotOverlay" type="CanvasLayer" parent="." unique_id=1170597012]
-visible = false
 
 [node name="SkillSlots" parent="SkillSlotOverlay" unique_id=1000498607 instance=ExtResource("17_wenv2")]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
+anchors_preset = 0
 offset_left = 25.0
-offset_top = -121.0
+offset_top = 25.0
 offset_right = 297.0
-offset_bottom = -57.0
-grow_vertical = 0
+offset_bottom = 89.0
 scale = Vector2(1.2, 1.2)
