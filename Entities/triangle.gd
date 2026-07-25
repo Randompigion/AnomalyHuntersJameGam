@@ -108,6 +108,18 @@ func _physics_process(delta: float) -> void:
 			Push.spin(self, impact_velocity, bounce_spin_force, bounce_max_spin)
 		_handle_wall_collisions()
 
+func _unhandled_input(_event: InputEvent) -> void:
+	if Input.is_action_just_pressed("skill_1"): use_skill(0)
+	if Input.is_action_just_pressed("skill_2"): use_skill(1)
+	if Input.is_action_just_pressed("skill_3"): use_skill(2)
+
+func use_skill(index: int) -> void:
+	if index >= inventory.items.size(): return
+	var item: InventoryItem = inventory.items[index]
+	if !item or item.name == "": return
+
+	print("slot ", index + 1, " contains: ", item.name)
+
 func _toggle_mode() -> void:
 	if mode == Mode.DASH:
 		mode = Mode.BOUNCE
