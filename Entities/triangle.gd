@@ -50,7 +50,8 @@ var chain_kill_prev_dash_speed = 1050
 var can_blink_dash = true
 var blink_charges = 0
 var blink_prev_speed = 750
-var bounce_lock = falsevar knockback_lock = false
+var bounce_lock = false
+var knockback_lock = false
 enum Mode { DASH, BOUNCE, SPIKEY }
 
 @onready var sprite: AnimatedSprite2D = $Sprite2D
