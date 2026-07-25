@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://rc2q1yiurly7"]
+
+[ext_resource type="Texture2D" uid="uid://btrpjnha2krd0" path="res://empty.png" id="1_c1t8d"]
+[ext_resource type="Texture2D" uid="uid://btbegmafecctp" path="res://endscreen.png" id="1_nm7lk"]
+
+[node name="credits" type="Node2D" unique_id=1799004666]
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1324354970]
+visible = false
+position = Vector2(617, 366.5)
+scale = Vector2(4.1375003, 2.428125)
+texture = ExtResource("1_c1t8d")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=257334005]
+position = Vector2(570, 320)
+texture = ExtResource("1_nm7lk")
