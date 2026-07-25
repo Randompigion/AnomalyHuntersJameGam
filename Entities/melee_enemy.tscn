@@ -35,5 +35,7 @@ debug_color = Color(0.70154667, 0.49091738, 3.85046e-07, 0.41960785)
 wait_time = 3.5
 one_shot = true
 
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=181626630]
+
 [connection signal="body_entered" from="KillZone" to="." method="_on_kill_zone_body_entered"]
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

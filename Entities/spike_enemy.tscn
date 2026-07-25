@@ -8,6 +8,7 @@
 radius = 46.389652
 
 [node name="Spike_enemy" type="CharacterBody2D" unique_id=1347426545]
+visible = false
 script = ExtResource("1_g0vfg")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=209740864]
@@ -30,6 +31,8 @@ stream = ExtResource("3_xuhe8")
 volume_db = 8.0
 max_distance = 200.0
 attenuation = 0.34151006
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=891156906]
 
 [connection signal="timeout" from="HitCooldown" to="." method="_on_hit_cooldown_timeout"]
 [connection signal="timeout" from="OvershootPeriod" to="." method="_on_overshoot_period_timeout"]

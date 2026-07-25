@@ -19,10 +19,11 @@
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_3ksry"]
 resource_local_to_scene = true
-vertices = PackedVector2Array(-1060.6797, 634.53906, -1178.8594, -687.59375, 1126.9375, -674.64844, 1210.6094, 658.4297)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(0, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-1069.8323, 644.45233, 1221.2675, 668.544, 1136.3328, -684.6051, -1189.8047, -697.6548), PackedVector2Array(352.6632, -61.23301, 362.33682, 61.233013, 1129.2493, 60.22919, 1117.1382, -67.25593)])
+vertices = PackedVector2Array(1126.9375, -674.64844, 1210.6094, 658.4297, 1134.1875, 67.71875, 1122.0391, -71.72656, -1060.6797, 634.53906, 355.60938, 67.71875, -1178.8594, -687.59375, 343.46094, -71.72656)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(0, 2, 3), PackedInt32Array(2, 1, 4), PackedInt32Array(5, 2, 4), PackedInt32Array(5, 4, 6), PackedInt32Array(7, 5, 6), PackedInt32Array(7, 6, 0), PackedInt32Array(7, 0, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-1069.8323, 644.45233, 1221.2675, 668.544, 1136.3328, -684.6051, -1189.8047, -697.6548)])
 sample_partition_type = 1
+source_geometry_mode = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_82po7"]
 size = Vector2(758.5, 119)
@@ -57,20 +58,21 @@ position = Vector2(-516.99994, -292.99997)
 scale = Vector2(1, 1)
 
 [node name="Spike_enemy" parent="Entities" unique_id=1347426545 instance=ExtResource("10_wq5b5")]
+visible = true
 position = Vector2(-247, 237)
 
 [node name="Obstacles" type="Node" parent="." unique_id=325095098]
 
 [node name="Prune_walls" parent="Obstacles" unique_id=97728551 instance=ExtResource("10_wenv2")]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Obstacles" unique_id=184795921]
+[node name="StaticBody2D" type="StaticBody2D" parent="Obstacles" unique_id=184795921 groups=["navigation_polygon_source_geometry_group"]]
 
-[node name="Sprite2D" type="Sprite2D" parent="Obstacles/StaticBody2D" unique_id=1010294604]
+[node name="Sprite2D" type="Sprite2D" parent="Obstacles/StaticBody2D" unique_id=1010294604 groups=["navigation_polygon_source_geometry_group"]]
 position = Vector2(731, 4)
 scale = Vector2(6.0625, 1)
 texture = ExtResource("14_s4vsl")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/StaticBody2D" unique_id=1628912657]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Obstacles/StaticBody2D" unique_id=1628912657 groups=["navigation_polygon_source_geometry_group"]]
 position = Vector2(728, 2)
 shape = SubResource("RectangleShape2D_82po7")
 
@@ -91,5 +93,6 @@ script = ExtResource("17_8sbpl")
 position = Vector2(-526, 266)
 
 [node name="BounceKillWall" parent="." unique_id=1846962551 instance=ExtResource("16_jfium")]
+mass = 1.435
 
-[node name="PauseMenu" parent="." instance=ExtResource("21_pause")]
+[node name="PauseMenu" parent="." unique_id=1654049136 instance=ExtResource("21_pause")]
