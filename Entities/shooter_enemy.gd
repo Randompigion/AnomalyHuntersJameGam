@@ -22,6 +22,7 @@ const SHOOT_SOUNDS := [
 @export var burst_cooldown: float = 4.5
 
 @export var missile_scene: PackedScene
+@export var push_force: float = 1.0
 
 enum State { SEEKING_VANTAGE, HOLDING }
 var state: State = State.HOLDING
@@ -67,7 +68,9 @@ func _process_moving(_delta: float) -> void:
 	var next_path_pos: Vector2 = nav_agent.get_next_path_position()
 	var direction: Vector2 = global_position.direction_to(next_path_pos)
 	velocity = direction * move_speed
+	var impact_velocity := velocity
 	move_and_slide()
+	Push.apply_slides(self, impact_velocity, push_force)
 	rotation = direction.angle()
 
 

@@ -7,6 +7,7 @@ extends CharacterBody2D
 @export var recovery_friction: float = 300.0
 @export var wander_speed: float = 450.0
 @export var spin_speed_degrees: float = 720.0
+@export var push_force: float = 1.0
 
 const DEATH_SOUNDS := [
 	preload("res://Assets/Audio/SFX/Enemies/sfx_enemy_death_a.wav"),
@@ -51,7 +52,9 @@ func _physics_process(delta: float) -> void:
 				player.take_damage(2)
 				can_hit = false
 				$HitCooldown.start()
+	var impact_velocity := velocity
 	move_and_slide()
+	Push.apply_slides(self, impact_velocity, push_force)
 
 	if state == State.CHARGING:
 		_check_player_hit()

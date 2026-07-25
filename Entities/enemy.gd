@@ -2,6 +2,7 @@ extends CharacterBody2D
 var player
 var direction
 const SPEED = 200
+const PUSH_FORCE = 1.0
 var can_damage = true
 const DEATH_SOUNDS := [
 	preload("res://Assets/Audio/SFX/Enemies/sfx_enemy_death_a.wav"),
@@ -31,8 +32,10 @@ func _physics_process(_delta: float) -> void:
 		velocity = direction * SPEED
 		rotation = global_position.angle_to_point(player.global_position)
 		
+	var impact_velocity = velocity
 	move_and_slide()
-	
+	Push.apply_slides(self, impact_velocity, PUSH_FORCE)
+
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()

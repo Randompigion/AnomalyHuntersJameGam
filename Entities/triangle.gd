@@ -9,6 +9,7 @@ extends CharacterBody2D
 @export var max_hp: int = 3
 
 @export var bounce_lock_duration = 0.2
+@export var bounce_push_force: float = 2.0
 var hp: int = max_hp
 var is_invincible: bool = false
 var dashing = false
@@ -85,6 +86,7 @@ func _physics_process(delta: float) -> void:
 	if dashing and mode == Mode.BOUNCE:
 		var collision := move_and_collide(velocity * delta)
 		if collision:
+			Push.apply(collision, velocity, bounce_push_force)
 			# BOUNCE mode never kills enemies on contact - always bounce, like a wall.
 			velocity = velocity.bounce(collision.get_normal()) * bounce_speed_retention
 			dash_direction = velocity.normalized()
