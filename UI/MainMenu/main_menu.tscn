@@ -307,14 +307,23 @@ offset_bottom = 67.52064
 theme_override_font_sizes/font_size = 25
 text = "Credits"
 
-[node name="CreditsBody" type="Label" parent="Panels/CreditsPanel" unique_id=758018981]
+[node name="CreditsBody" type="RichTextLabel" parent="Panels/CreditsPanel" unique_id=1902820705]
+custom_maximum_size = Vector2(400, 150)
 layout_mode = 0
 offset_left = 149.14577
 offset_top = 90.0
-offset_right = 452.87674
-offset_bottom = 260.0
-theme_override_font_sizes/font_size = 18
-text = "Add your credits here"
+offset_right = 249.14577
+offset_bottom = 769.0
+theme_override_font_sizes/normal_font_size = 22
+text = "PROGRAMMING:
+Jeremiah \"Bullfrog\" Hollingsworth, yulee, Asier Pernia Soria, robopugo, aeroghurt
+ART:
+Moovintwo, tgs2401, randompigion, Jeremiah \"Bullfrog\" Hollingsworth, aeroghurt, robopugo
+SFX AND MUSIC:
+gamingwithjulesk, Ryder Kao, Jeremiah \"Bullfrog\" Hollingsworth
+CUSTOM FONT:
+Moovintwo"
+fit_content = true
 autowrap_mode = 2
 
 [node name="BackButton" type="Button" parent="Panels/CreditsPanel" unique_id=166908937]
@@ -410,7 +419,9 @@ bus = &"SFX"
 stream = SubResource("AudioStreamRandomizer_shcrt")
 bus = &"SFX"
 
+[connection signal="mouse_entered" from="Panels/PlayPanel/StartButton" to="." method="_on_start_button_mouse_entered"]
 [connection signal="pressed" from="Panels/PlayPanel/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="mouse_entered" from="Panels/PlayPanel/CreditsButton" to="." method="_on_credits_button_mouse_entered"]
 [connection signal="pressed" from="Panels/PlayPanel/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="value_changed" from="Panels/VolumePanel/MasterSlider" to="." method="_on_master_slider_value_changed"]
 [connection signal="value_changed" from="Panels/VolumePanel/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
