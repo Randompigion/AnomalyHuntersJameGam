@@ -14,6 +14,8 @@ extends CharacterBody2D
 
 @export var bounce_lock_duration = 0.2
 @export var bounce_push_force: float = 2.0
+@export var bounce_spin_force: float = 0.08
+@export var bounce_max_spin: float = 6.0
 var hp: int = max_hp
 var is_invincible: bool = false
 var dashing = false
@@ -100,7 +102,10 @@ func _physics_process(delta: float) -> void:
 			_play_bounce()
 			get_tree().create_timer(bounce_lock_duration).timeout.connect(func(): bounce_lock = false)
 	else:
+		var impact_velocity := velocity
 		move_and_slide()
+		if mode == Mode.BOUNCE:
+			Push.spin(self, impact_velocity, bounce_spin_force, bounce_max_spin)
 		_handle_wall_collisions()
 
 func _toggle_mode() -> void:
