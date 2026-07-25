@@ -9,7 +9,7 @@ func _ready() -> void:
 	player = get_node_or_null("../Entities/Triangle") 
 
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if player:
 		var path = player.global_position - global_position
 		direction = path.normalized()

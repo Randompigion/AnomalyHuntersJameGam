@@ -11,8 +11,7 @@ func time_left_to_live():
 	var minutes = floor(time_left/60)
 	var sec = int(time_left) % 60
 	if time_left <= 0:
-		print("GAME OVER")
-		get_tree().reload_current_scene()
+		get_tree().change_scene_to_file("res://UI/MainMenu/main_menu.tscn")
 	return [minutes,sec]
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -22,9 +21,12 @@ func _process(delta: float) -> void:
 
 func add_time(x):
 	if time_left < 120:
+		$AddTimeSfx.play()
 		time_left += x
 	else:
 		pass
 	
 func subtract_time(x):
+	$SubtractTimeSfx.play()
 	time_left -= x
+	

@@ -5,6 +5,11 @@ const DEATH_SOUNDS := [
 	preload("res://Assets/Audio/SFX/Enemies/sfx_enemy_death_b.wav"),
 ]
 
+const SHOOT_SOUNDS := [
+	preload("res://Assets/Audio/SFX/Enemies/sfx_enemy_shoot_bullet_short.wav"),
+	preload("res://Assets/Audio/SFX/Enemies/sfx_enemy_shoot_bullet_long.wav"),
+]
+
 @export var move_speed: float = 150.0
 @export var preferred_distance_min: float = 180.0
 @export var preferred_distance_max: float = 260.0
@@ -17,6 +22,7 @@ const DEATH_SOUNDS := [
 @export var burst_cooldown: float = 4.5
 
 @export var missile_scene: PackedScene
+@export var push_force: float = 1.0
 
 enum State { SEEKING_VANTAGE, HOLDING }
 var state: State = State.HOLDING
@@ -53,7 +59,7 @@ func _physics_process(delta: float) -> void:
 	_check_should_relocate()
 
 
-func _process_moving(delta: float) -> void:
+func _process_moving(_delta: float) -> void:
 	if nav_agent.is_navigation_finished():
 		state = State.HOLDING
 		velocity = Vector2.ZERO
@@ -62,7 +68,9 @@ func _process_moving(delta: float) -> void:
 	var next_path_pos: Vector2 = nav_agent.get_next_path_position()
 	var direction: Vector2 = global_position.direction_to(next_path_pos)
 	velocity = direction * move_speed
+	var impact_velocity := velocity
 	move_and_slide()
+	Push.apply_slides(self, impact_velocity, push_force)
 	rotation = direction.angle()
 
 
@@ -144,6 +152,7 @@ func _fire_missile() -> void:
 	get_tree().current_scene.add_child(missile)
 	missile.global_position = global_position
 	if missile.has_method("set_target"):
+		Sfx.play(SHOOT_SOUNDS.pick_random())
 		missile.set_target(player)
 
 

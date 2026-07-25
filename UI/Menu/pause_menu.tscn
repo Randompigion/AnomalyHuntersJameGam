@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://dqti32tgx54ub"]
+
+[ext_resource type="Script" uid="uid://t4aaos4ptrx1" path="res://UI/Menu/pause_menu.gd" id="1_pause"]
+[ext_resource type="PackedScene" uid="uid://cjp4jtcm2kqrv" path="res://UI/Menu/menu.tscn" id="2_menu"]
+
+[node name="PauseMenu" type="CanvasLayer" unique_id=1870181315]
+process_mode = 3
+layer = 10
+visible = false
+script = ExtResource("1_pause")
+
+[node name="Menu" parent="." unique_id=1049263407 instance=ExtResource("2_menu")]

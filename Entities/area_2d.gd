@@ -13,4 +13,4 @@ func _on_body_entered(body: Node2D) -> void:
 	if target_scene_path == "":
 		push_warning("SceneChangeZone: no se ha asignado target_scene_path")
 		return
-	get_tree().change_scene_to_file(target_scene_path)
+	get_tree().change_scene_to_file.call_deferred(target_scene_path)

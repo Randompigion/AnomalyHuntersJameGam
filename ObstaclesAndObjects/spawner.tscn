@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dalm655w7fluw"]
+
+[ext_resource type="Script" uid="uid://dl5pk2mfo3ojw" path="res://Levels/spawner.gd" id="1_ldp22"]
+
+[node name="spawner" type="Node2D" unique_id=1341342553]
+script = ExtResource("1_ldp22")
+
+[node name="Timer" type="Timer" parent="." unique_id=1700513625]
+wait_time = 10.0
+autostart = true

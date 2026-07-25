@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxiim7kb0j2td"
-path="res://.godot/imported/alarmguy.png-3e7acf3e507cfa9007b819fe67d858f9.ctex"
+uid="uid://dl5hn1btro5a0"
+path="res://.godot/imported/Burst2.png-8e8c4778ccfd078f6a6338c1423a9986.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/enemies/alarmguy.png"
-dest_files=["res://.godot/imported/alarmguy.png-3e7acf3e507cfa9007b819fe67d858f9.ctex"]
+source_file="res://Assets/Textures/Effects/Burst2.png"
+dest_files=["res://.godot/imported/Burst2.png-8e8c4778ccfd078f6a6338c1423a9986.ctex"]
 
 [params]
 

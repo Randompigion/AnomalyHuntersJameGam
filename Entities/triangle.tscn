@@ -1,10 +1,18 @@
 [gd_scene format=3 uid="uid://clu42du2dffit"]
 
 [ext_resource type="Script" uid="uid://pjrosdsmens3" path="res://Entities/triangle.gd" id="1_4roi2"]
-[ext_resource type="Texture2D" uid="uid://bw38507erwnep" path="res://Assets/Textures/player/player_dash.png" id="2_cbtp0"]
-[ext_resource type="Texture2D" uid="uid://boqvrjo70nqrm" path="res://Assets/Textures/player/player_bounce.png" id="3_1l35o"]
+[ext_resource type="Texture2D" uid="uid://ciy4ttwjvdppx" path="res://Assets/Textures/player/player_dash.png" id="2_cbtp0"]
+[ext_resource type="Texture2D" uid="uid://c1jsdgicatm2r" path="res://Assets/Textures/player/player_bounce.png" id="3_1l35o"]
 [ext_resource type="AudioStream" uid="uid://x31a54fy0kw7" path="res://Assets/Audio/SFX/Player/sfx_player_dash_a.mp3" id="5_v4sx1"]
 [ext_resource type="AudioStream" uid="uid://dmercsex6k7kj" path="res://Assets/Audio/SFX/Player/sfx_player_bounce.wav" id="6_bounce"]
+[ext_resource type="Texture2D" uid="uid://cbm281jaqtmu3" path="res://Assets/Textures/Effects/Burst.png" id="6_yfysr"]
+[ext_resource type="Texture2D" uid="uid://kly8xun3f4ln" path="res://Assets/Textures/Effects/Bounce1.png" id="7_p1awi"]
+[ext_resource type="Texture2D" uid="uid://dl5hn1btro5a0" path="res://Assets/Textures/Effects/Burst2.png" id="7_wobkw"]
+[ext_resource type="Texture2D" uid="uid://dl6lccw32aa04" path="res://Assets/Textures/Effects/Bounce2.png" id="8_mefwt"]
+[ext_resource type="Texture2D" uid="uid://w388e3i5fgy8" path="res://Assets/Textures/Effects/Burst3.png" id="8_oh7yv"]
+[ext_resource type="Texture2D" uid="uid://dlxa015m1e1t1" path="res://Assets/Textures/Effects/Bounce3.png" id="9_n3j46"]
+[ext_resource type="Texture2D" uid="uid://dvxb2w0hifns6" path="res://Assets/Textures/Effects/Null.png" id="9_p1awi"]
+[ext_resource type="AudioStream" uid="uid://obgrkrd0cca3" path="res://Assets/Audio/SFX/Player/sfx_player_damaged.wav" id="13_mefwt"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4ayxd"]
 animations = [{
@@ -33,13 +41,58 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_pc3i1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_p1awi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_p1awi")
+}, {
+"duration": 1.5,
+"texture": ExtResource("8_mefwt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_n3j46")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_p1awi")
+}],
+"loop": 0,
+"name": &"Bounce",
+"speed": 16.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_p1awi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_yfysr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_wobkw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_oh7yv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_p1awi")
+}],
+"loop": 0,
+"name": &"Kill",
+"speed": 16.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"Null",
+"speed": 5.0
+}]
+
 [node name="Triangle" type="CharacterBody2D" unique_id=669404060]
 collision_layer = 65535
 collision_mask = 65535
 script = ExtResource("1_4roi2")
-speed = 750.0
-dash_speed = 1200
-bounce_speed_retention = 1.1
 
 [node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1606221345]
 position = Vector2(1.0000005, -0.9999995)
@@ -77,6 +130,18 @@ stream = ExtResource("6_bounce")
 [node name="stunt_timer" type="Timer" parent="." unique_id=1534631604]
 wait_time = 3.0
 one_shot = true
+
+[node name="Effects" type="AnimatedSprite2D" parent="." unique_id=2071686635]
+unique_name_in_owner = true
+position = Vector2(32.000004, 0)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_pc3i1")
+animation = &"Bounce"
+frame = 4
+frame_progress = 1.0
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="." unique_id=362351806]
+stream = ExtResource("13_mefwt")
 
 [connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="dash_cooldown" to="." method="_on_dash_cooldown_timeout"]
