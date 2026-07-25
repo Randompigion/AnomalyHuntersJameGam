@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://by57ttr5jcqc1" path="res://Levels/time_left.gd" id="1_m4hi5"]
 [ext_resource type="FontFile" uid="uid://cwhrnc44j65uh" path="res://Assets/Textures/ui/fonts/PixelOperator8.ttf" id="2_ydg06"]
 [ext_resource type="FontFile" uid="uid://fsbors10b7bh" path="res://Assets/Textures/ui/fonts/GoofyGoober.ttf" id="3_n375d"]
+[ext_resource type="AudioStream" uid="uid://bbxpg7akprhcd" path="res://Assets/Audio/SFX/System/sfx_timer_up.wav" id="4_n375d"]
+[ext_resource type="AudioStream" uid="uid://wmw4fnpo2rt7" path="res://Assets/Audio/SFX/System/sfx_timer_down.wav" id="5_7romh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_3ksry"]
 font = ExtResource("3_n375d")
@@ -33,3 +35,10 @@ theme_override_font_sizes/font_size = 128
 text = "2:00"
 label_settings = SubResource("LabelSettings_3ksry")
 horizontal_alignment = 1
+
+[node name="AddTimeSfx" type="AudioStreamPlayer2D" parent="." unique_id=368122593]
+stream = ExtResource("4_n375d")
+
+[node name="SubtractTimeSfx" type="AudioStreamPlayer2D" parent="." unique_id=570800693]
+stream = ExtResource("5_7romh")
+volume_db = 3.111

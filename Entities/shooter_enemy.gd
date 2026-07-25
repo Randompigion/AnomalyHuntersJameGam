@@ -5,6 +5,11 @@ const DEATH_SOUNDS := [
 	preload("res://Assets/Audio/SFX/Enemies/sfx_enemy_death_b.wav"),
 ]
 
+const SHOOT_SOUNDS := [
+	preload("res://Assets/Audio/SFX/Enemies/sfx_enemy_shoot_bullet_short.wav"),
+	preload("res://Assets/Audio/SFX/Enemies/sfx_enemy_shoot_bullet_long.wav"),
+]
+
 @export var move_speed: float = 150.0
 @export var preferred_distance_min: float = 180.0
 @export var preferred_distance_max: float = 260.0
@@ -144,6 +149,7 @@ func _fire_missile() -> void:
 	get_tree().current_scene.add_child(missile)
 	missile.global_position = global_position
 	if missile.has_method("set_target"):
+		Sfx.play(SHOOT_SOUNDS.pick_random())
 		missile.set_target(player)
 
 

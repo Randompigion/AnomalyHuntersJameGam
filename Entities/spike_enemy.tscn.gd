@@ -8,6 +8,11 @@ extends CharacterBody2D
 @export var wander_speed: float = 450.0
 @export var spin_speed_degrees: float = 720.0
 
+const DEATH_SOUNDS := [
+	preload("res://Assets/Audio/SFX/Enemies/sfx_enemy_death_a.wav"),
+	preload("res://Assets/Audio/SFX/Enemies/sfx_enemy_death_b.wav"),
+]
+
 var can_hit = true
 
 enum State { IDLE, CHARGING, RECOVERING }
@@ -102,6 +107,9 @@ func _process_recovering(delta: float) -> void:
 
 
 func die() -> void:
+	Sfx.play(DEATH_SOUNDS.pick_random())
+	$"../Triangle/Camera2D2".trigger_shake()
+	$"../../TimeLeft".add_time(1)
 	queue_free()
 
 

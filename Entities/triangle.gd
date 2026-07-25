@@ -23,6 +23,10 @@ var mode: Mode = Mode.DASH
 @onready var sprite: AnimatedSprite2D = $Sprite2D
 @onready var stun_timer: Timer = $stunt_timer
 @onready var bounce_sound: AudioStreamPlayer2D = $BounceSound
+const STUN_SOUNDS := [
+	preload("res://Assets/Audio/SFX/Player/sfx_player_damaged.wav"),
+	preload("res://Assets/Audio/SFX/Player/sfx_player_stunned.wav"),
+]
 
 func _ready() -> void:
 	hp = max_hp
@@ -161,6 +165,7 @@ func take_damage(amount: int) -> void:
 	velocity = Vector2.ZERO
 	_apply_stun()
 	$Camera2D2.trigger_shake()
+	Sfx.play(STUN_SOUNDS.pick_random())
 	$"../../TimeLeft".subtract_time(amount * 10)
 	
 	is_invincible = true
