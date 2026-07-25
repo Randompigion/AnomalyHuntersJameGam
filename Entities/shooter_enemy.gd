@@ -24,6 +24,9 @@ const SHOOT_SOUNDS := [
 @export var missile_scene: PackedScene
 @export var push_force: float = 1.0
 
+const TURN_RATE: float = 8.0
+var current_direction: Vector2 = Vector2.RIGHT
+
 enum State { SEEKING_VANTAGE, HOLDING }
 var state: State = State.HOLDING
 
@@ -59,19 +62,20 @@ func _physics_process(delta: float) -> void:
 	_check_should_relocate()
 
 
-func _process_moving(_delta: float) -> void:
+func _process_moving(delta: float) -> void:
 	if nav_agent.is_navigation_finished():
 		state = State.HOLDING
 		velocity = Vector2.ZERO
 		return
 
 	var next_path_pos: Vector2 = nav_agent.get_next_path_position()
-	var direction: Vector2 = global_position.direction_to(next_path_pos)
-	velocity = direction * move_speed
+	var target_direction: Vector2 = global_position.direction_to(next_path_pos)
+	current_direction = current_direction.lerp(target_direction, TURN_RATE * delta).normalized()
+	velocity = current_direction * move_speed
 	var impact_velocity := velocity
 	move_and_slide()
 	Push.apply_slides(self, impact_velocity, push_force)
-	rotation = direction.angle()
+	rotation = current_direction.angle()
 
 
 func _process_holding(delta: float) -> void:
@@ -161,5 +165,3 @@ func die() -> void:
 	Sfx.play(DEATH_SOUNDS.pick_random())
 	$"../../TimeLeft".add_time(10)
 	queue_free()
-	
-	

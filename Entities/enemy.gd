@@ -1,5 +1,4 @@
 extends CharacterBody2D
-
 var player
 var direction
 const SPEED = 200
@@ -7,19 +6,17 @@ const PUSH_FORCE = 1.0
 var can_damage = true
 var path_update_timer: float = 0.0
 const PATH_UPDATE_INTERVAL: float = 0.3
-
+const TURN_RATE: float = 8.0
+var current_direction: Vector2 = Vector2.RIGHT
 const DEATH_SOUNDS := [
 	preload("res://Assets/Audio/SFX/Enemies/sfx_enemy_death_a.wav"),
 	preload("res://Assets/Audio/SFX/Enemies/sfx_enemy_death_b.wav"),
 ]
-
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
-
 
 func _ready() -> void:
 	player = get_node_or_null("../Entities/Triangle")
 	add_to_group("enemy")
-
 
 func _on_kill_zone_body_entered(body: Node2D) -> void:
 	if body == player:
@@ -30,14 +27,11 @@ func _on_kill_zone_body_entered(body: Node2D) -> void:
 				player.take_damage(1)
 				can_damage = false
 				$AttackCooldown.start()
-
-
 func die():
 	Sfx.play(DEATH_SOUNDS.pick_random())
-	$"../TimeLeft".add_time(10)
+	$"../../TimeLeft".add_time(10)
 	$"../Entities/Triangle/Camera2D2".trigger_shake()
 	queue_free()
-
 
 func _physics_process(delta: float) -> void:
 	if player:
@@ -45,16 +39,15 @@ func _physics_process(delta: float) -> void:
 		if path_update_timer <= 0.0:
 			path_update_timer = PATH_UPDATE_INTERVAL
 			nav_agent.target_position = player.global_position
-
 		if not nav_agent.is_navigation_finished():
 			var next_path_pos: Vector2 = nav_agent.get_next_path_position()
-			direction = global_position.direction_to(next_path_pos)
+			var target_direction: Vector2 = global_position.direction_to(next_path_pos)
+			current_direction = current_direction.lerp(target_direction, TURN_RATE * delta).normalized()
+			direction = current_direction
 			velocity = direction * SPEED
 		else:
-			velocity = Vector2.ZERO
-
+			velocity = velocity.move_toward(Vector2.ZERO, SPEED * delta)
 		rotation = global_position.angle_to_point(player.global_position)
-
 	var impact_velocity = velocity
 	move_and_slide()
 	Push.apply_slides(self, impact_velocity, PUSH_FORCE)
@@ -67,7 +60,6 @@ func _physics_process(delta: float) -> void:
 					player.take_damage(1)
 					can_damage = false
 					$AttackCooldown.start()
-
 
 func _on_attack_cooldown_timeout() -> void:
 	can_damage = true

@@ -32,10 +32,6 @@ Sfx="*res://Systems/Audio/sfx.gd"
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
-[global_group]
-
-navigation_polygon_source_geometry_group=""
-
 [gui]
 
 theme/custom_font="uid://fsbors10b7bh"
