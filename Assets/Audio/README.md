@@ -4,10 +4,11 @@ Assets/
 	├── BGM/                            ── Background Music / OST
 	│   ├── bgm_retro_arcade.ogg
 	│   ├── bgm_tutorial_boss.ogg
-	│   ├── (bgm_tutorial.ogg)
-	│   ├── (bgm_cave.ogg)
-	│   ├── (bgm_beach.ogg)
-	│   ├── (bgm_forest.ogg)
+	│   ├── bgm_tutorial.ogg
+	│   ├── bgm_cave.ogg
+	│   ├── bgm_beach.mp3
+	│   ├── bgm_forest.mp3
+	│   ├── bgm_retro.mp3
 	│   ├── (bgm_water.ogg)
 	│   └── (bgm_jazz.ogg)
 	│
@@ -26,6 +27,8 @@ Assets/
 		│   ├── sfx_enemy_death_b.wav
 		│   ├── sfx_enemy_shoot_bullet_long.wav
 		│   ├── sfx_enemy_shoot_bullet_short.wav
+		│   ├── sfx_enemy_attack_a.wav
+		│   ├── sfx_enemy_attack_b.wav
 		│   └── Boss/
 		│       └── (sfx_big_boss_moveset.wav)
 		│
@@ -39,12 +42,23 @@ Assets/
 		│	├── sfx_intro_radio_static.wav
 		│	├── sfx_timer_down.wav
 		│	├── sfx_timer_up.wav
-		│	├── (sfx_background_metronome.wav)
-		│	└── (sfx_glitch.wav)
-		└── UI/                     ── UI
-			├── sfx_ui_hover.wav
-			├── sfx_ui_select.wav
-			├── sfx_ui_back.wav
-			└── sfx_ui_error.wav
+		│	├── sfx_timer_ticktock.wav
+		│	├── sfx_glitch.mp3
+		│	└── sfx_glitch2.ogg
+		├── UI/                     ── UI
+		│	├── sfx_ui_hover.wav
+		│	├── sfx_ui_select.wav
+		│	├── sfx_ui_back.wav
+		│	└── sfx_ui_error.wav
+		└── Voicelines/
+			└──Narrator/
+				├── narratorline_1.wav
+				├── narratorline_2.wav
+				├── narratorline_3.wav
+				├── narratorline_4.wav
+				├── narratorline_5.wav
+				├── narratorline_6.wav
+				├── narratorline_7.wav
+				└── narratorline_8.wav
 
 ```
