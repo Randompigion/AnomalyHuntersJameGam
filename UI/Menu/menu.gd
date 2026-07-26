@@ -47,6 +47,23 @@ var master_bus_id
 var music_bus_id
 var sfx_bus_id
 
+# --- Skill hover description ---
+@onready var textboxes: Node = $Textboxes
+@onready var skill_slots: Array = skills_panel.get_node("InventoryGUI/NinePatchRect/GridContainer").get_children()
+
+const SKILL_NAME_TO_TEXTBOX := {
+	"BlastDash": "BlastDash",
+	"PolySpikes": "PolySpikes",
+	"SpeedBoost": "SpeedBoost",
+	"BlinkDash": "BlinkDash",
+	"ChainKill": "ChainKill",
+	"GotYourBack": "IGYB",
+	"SlideBounce": "SlideBounce",
+	"StunSave": "StunSave",
+	"TemporalTargets": "TemporalTargetKill",
+}
+
+
 func _ready() -> void:
 	$Dim.visible = true
 	menu.visible = false
@@ -68,6 +85,8 @@ func _ready() -> void:
 	master_bus_id = AudioServer.get_bus_index("Master")
 	music_bus_id = AudioServer.get_bus_index("Music")
 	sfx_bus_id = AudioServer.get_bus_index("SFX")
+	_hide_all_descriptions()
+	_connect_skill_hover()
 
 
 func _input(event: InputEvent) -> void:
@@ -237,3 +256,37 @@ func change_color(_color) -> void:
 	volume_panel.modulate = menu_color
 	settings_panel.modulate = menu_color
 	skills_panel.self_modulate = menu_color
+
+
+# --- Skill hover description ---
+
+func _connect_skill_hover() -> void:
+	for slot in skill_slots:
+		if not slot.mouse_entered.is_connected(_on_skill_slot_mouse_entered):
+			slot.mouse_entered.connect(_on_skill_slot_mouse_entered.bind(slot))
+		if not slot.mouse_exited.is_connected(_on_skill_slot_mouse_exited):
+			slot.mouse_exited.connect(_on_skill_slot_mouse_exited.bind(slot))
+
+
+func _on_skill_slot_mouse_entered(slot) -> void:
+	if slot.has_method("isEmpty") and slot.isEmpty():
+		return
+	if slot.itemGui and slot.itemGui.inventoryItem:
+		_show_skill_description(slot.itemGui.inventoryItem.name)
+
+
+func _on_skill_slot_mouse_exited(_slot) -> void:
+	_hide_all_descriptions()
+
+
+func _show_skill_description(skill_name: String) -> void:
+	_hide_all_descriptions()
+	var textbox_name: String = SKILL_NAME_TO_TEXTBOX.get(skill_name, skill_name)
+	var textbox: Node = textboxes.get_node_or_null(textbox_name)
+	if textbox:
+		textbox.visible = true
+
+
+func _hide_all_descriptions() -> void:
+	for child in textboxes.get_children():
+		child.visible = false
