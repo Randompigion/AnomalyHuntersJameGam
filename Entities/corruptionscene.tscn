@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://doia75nfxmo88" path="res://Entities/corruptionscene.gd" id="1_m0ech"]
 [ext_resource type="Texture2D" uid="uid://be0lkxa8bss81" path="res://Assets/Textures/Level/portal.png" id="2_m0ech"]
+[ext_resource type="Script" path="res://Entities/portal_sound.gd" id="portal_sfx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_82po7"]
 size = Vector2(112, 113)
@@ -16,6 +17,7 @@ position = Vector2(2, -2.5)
 shape = SubResource("RectangleShape2D_82po7")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1785116016]
+script = ExtResource("portal_sfx")
 scale = Vector2(2, 2)
 texture = ExtResource("2_m0ech")
 

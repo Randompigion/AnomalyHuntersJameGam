@@ -1,4 +1,7 @@
 extends Node2D
+
+const spilled_water = preload("res://Assets/Audio/NarratorVoiceLines/NewTutorialLevel/SpilledWater(Last Line).mp3")
+
 var triggeredbefore = false
 
 @export var target_scene_path: String = "res://Levels/cave_level.tscn"
@@ -13,5 +16,10 @@ func _on_area_2d_2_body_entered(body: Node2D) -> void:
 		return
 	if triggeredbefore == false:
 		triggeredbefore = true
-		await NarratorSubtitle.speak(self, $waitdidhespillwater, "yo wait, DID THEY JUST SPILL WATER ON THEIR LAPTOP-")
+		var voice := AudioStreamPlayer.new()
+		add_child(voice)
+		await NarratorSubtitle.speak(self, voice, spilled_water, [
+			"Wait, did the developer just spill his coffee on his laptop???",
+		])
+		voice.queue_free()
 		get_tree().change_scene_to_file("res://Levels/forest_level.tscn")
