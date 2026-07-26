@@ -316,11 +316,12 @@ offset_bottom = -57.0
 grow_vertical = 0
 scale = Vector2(1.2, 1.2)
 
-[node name="ChangeScene" parent="." unique_id=1821069760 instance=ExtResource("23_d0omx")]
+[node name="ChangeScenetocave" parent="." unique_id=1821069760 instance=ExtResource("23_d0omx")]
 position = Vector2(2807, 4444)
 script = ExtResource("17_lh430")
+target_scene_path = "res://Levels/change_scene.tscn"
 
-[node name="Sprite2D" type="Sprite2D" parent="ChangeScene" unique_id=1221743990]
+[node name="Sprite2D2" type="Sprite2D" parent="ChangeScenetocave" unique_id=1221743990]
 scale = Vector2(2.875, 2.875)
 texture = ExtResource("18_xcv1x")
 
