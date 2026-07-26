@@ -11,15 +11,27 @@ Pointless is a story adventure game where we follow this one triangle guy and hi
 
 ## Members:
 in alphabetical order
+
 @asier
+
 @gamingwithjulesk
+
 @ghurt
+
 @moovintwo
+
 @randompigion (Aahil Ahsan)
+
 @robopugo
+
 @ruppie (Ruppie09)
+
 @ryder (Ryder Kao)
+
 @syntax (Thinaphat Sooksri)
+
 @thebullfrog2970 (Jeremiah Hollingsworth)
+
 @tgs2401
+
 @yuleedev (Yulee Oh)
