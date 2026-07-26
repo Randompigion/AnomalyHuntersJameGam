@@ -191,6 +191,18 @@ one_shot = true
 [node name="SlideBounceCooldown" type="Timer" parent="AbilityTimers/Cooldowns" unique_id=357441529]
 wait_time = 13.0
 
+[node name="BlastDashCooldown" type="Timer" parent="AbilityTimers/Cooldowns" unique_id=1239298316]
+wait_time = 5.0
+one_shot = true
+
+[node name="TemporalTargetsCooldown" type="Timer" parent="AbilityTimers/Cooldowns" unique_id=1154355961]
+wait_time = 25.0
+one_shot = true
+
+[node name="GotYourBackCooldown" type="Timer" parent="AbilityTimers/Cooldowns" unique_id=1075641926]
+wait_time = 2.0
+one_shot = true
+
 [node name="ActivationTime" type="Node" parent="AbilityTimers" unique_id=443218669]
 
 [node name="SpeedBoost" type="Timer" parent="AbilityTimers/ActivationTime" unique_id=301278983]
@@ -207,6 +219,10 @@ one_shot = true
 
 [node name="SlideBounce" type="Timer" parent="AbilityTimers/ActivationTime" unique_id=851189133]
 wait_time = 10.0
+
+[node name="TemporalTargets" type="Timer" parent="AbilityTimers/ActivationTime" unique_id=135148233]
+wait_time = 5.0
+one_shot = true
 
 [connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="dash_cooldown" to="." method="_on_dash_cooldown_timeout"]

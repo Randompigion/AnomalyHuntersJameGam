@@ -1,0 +1,238 @@
+[gd_scene format=3 uid="uid://clu42du2dffit"]
+
+[ext_resource type="Script" uid="uid://pjrosdsmens3" path="res://Entities/triangle.gd" id="1_4roi2"]
+[ext_resource type="Texture2D" uid="uid://ciy4ttwjvdppx" path="res://Assets/Textures/player/player_dash.png" id="2_cbtp0"]
+[ext_resource type="Resource" uid="uid://i5yyt08wj6f0" path="res://UI/Menu/playerInventory.tres" id="2_n3j46"]
+[ext_resource type="Texture2D" uid="uid://c1jsdgicatm2r" path="res://Assets/Textures/player/player_bounce.png" id="3_1l35o"]
+[ext_resource type="Texture2D" uid="uid://hdjhlv5cxqks" path="res://Assets/Textures/player/spiked_triangle_bounce.png" id="5_h0tan"]
+[ext_resource type="AudioStream" uid="uid://x31a54fy0kw7" path="res://Assets/Audio/SFX/Player/sfx_player_dash_a.mp3" id="5_v4sx1"]
+[ext_resource type="Texture2D" uid="uid://co14m14vx3kuw" path="res://Assets/Textures/player/spiked_triangle_dash.png" id="6_7k82j"]
+[ext_resource type="AudioStream" uid="uid://dmercsex6k7kj" path="res://Assets/Audio/SFX/Player/sfx_player_bounce.wav" id="6_bounce"]
+[ext_resource type="Texture2D" uid="uid://cbm281jaqtmu3" path="res://Assets/Textures/Effects/Burst.png" id="6_yfysr"]
+[ext_resource type="Texture2D" uid="uid://cj63g4tka004v" path="res://Assets/Textures/player/sawblade.png" id="7_7k82j"]
+[ext_resource type="Texture2D" uid="uid://kly8xun3f4ln" path="res://Assets/Textures/Effects/Bounce1.png" id="7_p1awi"]
+[ext_resource type="Texture2D" uid="uid://dl5hn1btro5a0" path="res://Assets/Textures/Effects/Burst2.png" id="7_wobkw"]
+[ext_resource type="Texture2D" uid="uid://dl6lccw32aa04" path="res://Assets/Textures/Effects/Bounce2.png" id="8_mefwt"]
+[ext_resource type="Texture2D" uid="uid://w388e3i5fgy8" path="res://Assets/Textures/Effects/Burst3.png" id="8_oh7yv"]
+[ext_resource type="Texture2D" uid="uid://dlxa015m1e1t1" path="res://Assets/Textures/Effects/Bounce3.png" id="9_n3j46"]
+[ext_resource type="Texture2D" uid="uid://dvxb2w0hifns6" path="res://Assets/Textures/Effects/Null.png" id="9_p1awi"]
+[ext_resource type="AudioStream" uid="uid://obgrkrd0cca3" path="res://Assets/Audio/SFX/Player/sfx_player_damaged.wav" id="13_mefwt"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4ayxd"]
+animations = [{
+"frames": [{
+"duration": 5.0,
+"texture": ExtResource("3_1l35o")
+}],
+"loop": 1,
+"name": &"bounce",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_cbtp0")
+}],
+"loop": 1,
+"name": &"dash",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_h0tan")
+}],
+"loop": 1,
+"name": &"spikeybounce",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_7k82j")
+}],
+"loop": 1,
+"name": &"spikeydash",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_7k82j")
+}],
+"loop": 1,
+"name": &"supermode",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pc3i1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_p1awi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_p1awi")
+}, {
+"duration": 1.5,
+"texture": ExtResource("8_mefwt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_n3j46")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_p1awi")
+}],
+"loop": 0,
+"name": &"Bounce",
+"speed": 16.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_p1awi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_yfysr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_wobkw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_oh7yv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_p1awi")
+}],
+"loop": 0,
+"name": &"Kill",
+"speed": 16.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"Null",
+"speed": 5.0
+}]
+
+[node name="Triangle" type="CharacterBody2D" unique_id=669404060]
+collision_layer = 65535
+collision_mask = 65535
+script = ExtResource("1_4roi2")
+inventory = ExtResource("2_n3j46")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1606221345]
+position = Vector2(1.0000005, -0.9999995)
+scale = Vector2(0.3, 0.3)
+sprite_frames = SubResource("SpriteFrames_4ayxd")
+animation = &"supermode"
+autoplay = "dash"
+
+[node name="stickbox" type="CollisionPolygon2D" parent="." unique_id=155991292]
+position = Vector2(-9.271509, 5.0000005)
+scale = Vector2(1.4627731, 1.2425828)
+polygon = PackedVector2Array(30, -5, 26, -11, 20, -12, 20, 2, 26, 0)
+
+[node name="dash_timer" type="Timer" parent="." unique_id=528950344]
+wait_time = 0.3
+
+[node name="dash_cooldown" type="Timer" parent="." unique_id=1388899622]
+
+[node name="bouncebox" type="CollisionPolygon2D" parent="." unique_id=520423963]
+position = Vector2(1, 0.7168244)
+scale = Vector2(1, 1.0168269)
+polygon = PackedVector2Array(20, -10, 20, 7, -24, 25, -31, 18, -22, -1, -31, -21, -25, -27)
+
+[node name="hurtbox" type="CollisionPolygon2D" parent="." unique_id=2095867258]
+polygon = PackedVector2Array(-25, 24, 32, 4, 32, -7, -25, -26, -31, -20, -22, -2, -30, 18)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=849410662]
+stream = ExtResource("5_v4sx1")
+pitch_scale = 3.35
+attenuation = 0.46651652
+
+[node name="BounceSound" type="AudioStreamPlayer2D" parent="." unique_id=849410663]
+stream = ExtResource("6_bounce")
+
+[node name="stunt_timer" type="Timer" parent="." unique_id=1534631604]
+wait_time = 3.0
+one_shot = true
+
+[node name="Effects" type="AnimatedSprite2D" parent="." unique_id=2071686635]
+unique_name_in_owner = true
+position = Vector2(32.000004, 0)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_pc3i1")
+animation = &"Bounce"
+frame = 4
+frame_progress = 1.0
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="." unique_id=362351806]
+stream = ExtResource("13_mefwt")
+
+[node name="AbilityTimers" type="Node" parent="." unique_id=992794929]
+
+[node name="Cooldowns" type="Node" parent="AbilityTimers" unique_id=253712326]
+
+[node name="SpeedBoostCooldown" type="Timer" parent="AbilityTimers/Cooldowns" unique_id=486510796]
+wait_time = 15.0
+one_shot = true
+
+[node name="PolySpikesCooldown" type="Timer" parent="AbilityTimers/Cooldowns" unique_id=1897337504]
+wait_time = 25.0
+one_shot = true
+
+[node name="StunSaveCooldown" type="Timer" parent="AbilityTimers/Cooldowns" unique_id=1897337505]
+wait_time = 8.0
+one_shot = true
+
+[node name="ChainKillCooldown" type="Timer" parent="AbilityTimers/Cooldowns" unique_id=1897337506]
+wait_time = 15.0
+one_shot = true
+
+[node name="BlinkDashCooldown" type="Timer" parent="AbilityTimers/Cooldowns" unique_id=1897337507]
+wait_time = 8.0
+one_shot = true
+
+[node name="SlideBounceCooldown" type="Timer" parent="AbilityTimers/Cooldowns" unique_id=357441529]
+wait_time = 13.0
+
+[node name="BlastDashCooldown" type="Timer" parent="AbilityTimers/Cooldowns" unique_id=1239298316]
+wait_time = 5.0
+one_shot = true
+
+[node name="TemporalTargetsCooldown" type="Timer" parent="AbilityTimers/Cooldowns" unique_id=1154355961]
+wait_time = 25.0
+one_shot = true
+
+[node name="GotYourBackCooldown" type="Timer" parent="AbilityTimers/Cooldowns" unique_id=1075641926]
+wait_time = 2.0
+one_shot = true
+
+[node name="ActivationTime" type="Node" parent="AbilityTimers" unique_id=443218669]
+
+[node name="SpeedBoost" type="Timer" parent="AbilityTimers/ActivationTime" unique_id=301278983]
+wait_time = 10.0
+one_shot = true
+
+[node name="PolySpikes" type="Timer" parent="AbilityTimers/ActivationTime" unique_id=536185202]
+wait_time = 15.0
+one_shot = true
+
+[node name="StunSave" type="Timer" parent="AbilityTimers/ActivationTime" unique_id=536185203]
+wait_time = 10.0
+one_shot = true
+
+[node name="SlideBounce" type="Timer" parent="AbilityTimers/ActivationTime" unique_id=851189133]
+wait_time = 10.0
+
+[node name="TemporalTargets" type="Timer" parent="AbilityTimers/ActivationTime" unique_id=135148233]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="dash_cooldown" to="." method="_on_dash_cooldown_timeout"]
+[connection signal="timeout" from="AbilityTimers/Cooldowns/SpeedBoostCooldown" to="." method="_on_speed_boost_cooldown_timeout"]
+[connection signal="timeout" from="AbilityTimers/Cooldowns/PolySpikesCooldown" to="." method="_on_poly_spikes_cooldown_timeout"]
+[connection signal="timeout" from="AbilityTimers/Cooldowns/StunSaveCooldown" to="." method="_on_stun_save_cooldown_timeout"]
+[connection signal="timeout" from="AbilityTimers/Cooldowns/ChainKillCooldown" to="." method="_on_chain_kill_cooldown_timeout"]
+[connection signal="timeout" from="AbilityTimers/Cooldowns/BlinkDashCooldown" to="." method="_on_blink_dash_cooldown_timeout"]
+[connection signal="timeout" from="AbilityTimers/Cooldowns/SlideBounceCooldown" to="." method="_on_slide_bounce_cooldown_timeout"]
+[connection signal="timeout" from="AbilityTimers/ActivationTime/SpeedBoost" to="." method="_on_speed_boost_timeout"]
+[connection signal="timeout" from="AbilityTimers/ActivationTime/PolySpikes" to="." method="_on_poly_spikes_timeout"]
+[connection signal="timeout" from="AbilityTimers/ActivationTime/StunSave" to="." method="_on_stun_save_timeout"]
+[connection signal="timeout" from="AbilityTimers/ActivationTime/SlideBounce" to="." method="_on_slide_bounce_timeout"]

@@ -111,6 +111,29 @@ horizontal_alignment = 1
 
 [node name="Triangle" parent="Entities" unique_id=669404060 instance=ExtResource("1_0l1gj")]
 collision_mask = 255
+inventory = null
+speed = null
+dash_speed = null
+friction = null
+bounce_speed_retention = null
+stun_duration = null
+heavy_stun_duration = null
+max_hp = null
+chain_kill_dashes = null
+chain_kill_targets = null
+chain_kill_dash_speed = null
+chain_kill_time_cost = null
+chain_kill_restore_ratio = null
+blink_dash_count = null
+blink_dash_speed = null
+blink_dash_time_cost = null
+bounce_lock_duration = null
+bounce_push_force = null
+bounce_spin_force = null
+bounce_max_spin = null
+vulnerable_knockback_force = null
+vulnerable_knockback_lock_duration = null
+vulnerable_invuln_duration = null
 
 [node name="Camera2D2" type="Camera2D" parent="Entities/Triangle" unique_id=646350420]
 zoom = Vector2(0.5, 0.5)
