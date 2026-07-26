@@ -60,7 +60,7 @@ var knockback_lock = false
 var toggle_counter_one = 0
 var toggle_counter_two = 0
 var toggle_counter_three = 0
-enum Mode {DASH, BOUNCE, SPIKEY }
+enum Mode {DASH, BOUNCE, SPIKEY, SUPER}
 var mode = Mode.DASH
 @onready var sprite: AnimatedSprite2D = $Sprite2D
 @onready var stun_timer: Timer = $stunt_timer
@@ -120,7 +120,10 @@ func _physics_process(delta: float) -> void:
 					_spend_chain_kill_dash()
 
 	if Input.is_action_just_pressed("toggle_mode"):
+		if !is_ability_max and !is_dash_unlimited and !is_limiter_off:
+			sprite.play("supermode")
 		_toggle_mode()
+		
 
 	if can_move:
 		if dashing:
@@ -243,7 +246,7 @@ func limiter_off():
 		bounce_speed_retention = 2.5
 
 func ability_maximum():
-	print("ABILTIYMAX")
+	is_ability_max = true
 
 func blast_dash():
 	print("blast dash!")
@@ -359,7 +362,9 @@ func _toggle_mode() -> void:
 		else:
 			mode = Mode.DASH
 			if sprite.sprite_frames and sprite.sprite_frames.has_animation("dash"):
-				sprite.play("dash")
+					sprite.play("dash")
+		if is_ability_max and is_limiter_off and is_dash_unlimited:
+			sprite.play("supermode")
 
 func _check_spike_contact() -> void:
 	if is_invincible or not can_move:

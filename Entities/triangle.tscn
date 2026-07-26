@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://co14m14vx3kuw" path="res://Assets/Textures/player/spiked_triangle_dash.png" id="6_7k82j"]
 [ext_resource type="AudioStream" uid="uid://dmercsex6k7kj" path="res://Assets/Audio/SFX/Player/sfx_player_bounce.wav" id="6_bounce"]
 [ext_resource type="Texture2D" uid="uid://cbm281jaqtmu3" path="res://Assets/Textures/Effects/Burst.png" id="6_yfysr"]
+[ext_resource type="Texture2D" uid="uid://cj63g4tka004v" path="res://Assets/Textures/player/sawblade.png" id="7_7k82j"]
 [ext_resource type="Texture2D" uid="uid://kly8xun3f4ln" path="res://Assets/Textures/Effects/Bounce1.png" id="7_p1awi"]
 [ext_resource type="Texture2D" uid="uid://dl5hn1btro5a0" path="res://Assets/Textures/Effects/Burst2.png" id="7_wobkw"]
 [ext_resource type="Texture2D" uid="uid://dl6lccw32aa04" path="res://Assets/Textures/Effects/Bounce2.png" id="8_mefwt"]
@@ -49,6 +50,14 @@ animations = [{
 }],
 "loop": 1,
 "name": &"spikeydash",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_7k82j")
+}],
+"loop": 1,
+"name": &"supermode",
 "speed": 5.0
 }]
 
@@ -110,7 +119,7 @@ inventory = ExtResource("2_n3j46")
 position = Vector2(1.0000005, -0.9999995)
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_4ayxd")
-animation = &"spikeydash"
+animation = &"supermode"
 autoplay = "dash"
 
 [node name="stickbox" type="CollisionPolygon2D" parent="." unique_id=155991292]
