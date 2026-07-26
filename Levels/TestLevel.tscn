@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cygok7elyblmi" path="res://ObstaclesAndObjects/bounce_kill_wall.tscn" id="16_jfium"]
 [ext_resource type="Script" uid="uid://cmc3as7jogpi4" path="res://Levels/ChunkedSpaceBackground.gd" id="17_8sbpl"]
 [ext_resource type="PackedScene" uid="uid://7fan8v5wrpob" path="res://UI/SkillSlots/visible_skill_slots.tscn" id="17_wenv2"]
+[ext_resource type="AudioStream" uid="uid://p6l7s1tf7suy" path="res://Assets/Audio/SFX/Abilities/sfx_super_mode_enter.wav" id="18_wq5b5"]
 [ext_resource type="PackedScene" uid="uid://vkfw2y641iss" path="res://Entities/change_scene.tscn" id="20_lp5k8"]
 [ext_resource type="PackedScene" uid="uid://dqti32tgx54ub" path="res://UI/Menu/pause_menu.tscn" id="21_pause"]
 
@@ -108,3 +109,6 @@ offset_top = 26.0
 offset_right = 297.0
 offset_bottom = 90.0
 scale = Vector2(0.9, 0.9)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1175144559]
+stream = ExtResource("18_wq5b5")

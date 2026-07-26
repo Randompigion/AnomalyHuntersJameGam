@@ -103,7 +103,6 @@ const STUN_SOUNDS := [
 ]
 
 @onready var activateSound: AudioStreamPlayer2D = $SfxAbilityActivate
-@onready var blastSound: AudioStreamPlayer2D = $SfxAbilityBlastActivate
 @onready var deactivateSound: AudioStreamPlayer2D = $SfxAbilityDeactivate
 @onready var spikesSound: AudioStreamPlayer2D = $SfxAbilitySpikes
 @onready var teleportSound: AudioStreamPlayer2D = $SfxAbilityTeleport
@@ -292,12 +291,20 @@ func use_skill(index: int) -> void:
 func dash_unlimited():
 	is_dash_unlimited = true
 	if is_ability_max and is_limiter_off and is_dash_unlimited:
-		$AudioStreamPlayer2D3.play()
+		$"../../AudioStreamPlayer2D".play()
+		if mode == Mode.DASH:
+			sprite.play("supermodedash")
+		if mode == Mode.BOUNCE:
+			sprite.play("supermodebounce")
 	
 func limiter_off():
 	is_limiter_off = true
 	if is_ability_max and is_limiter_off and is_dash_unlimited:
-		$AudioStreamPlayer2D3.play()
+		$"../../AudioStreamPlayer2D".play()
+		if mode == Mode.DASH:
+			sprite.play("supermodedash")
+		if mode == Mode.BOUNCE:
+			sprite.play("supermodebounce")
 	if is_limiter_off:
 		speed = 2250
 		dash_speed = 2550
@@ -306,7 +313,11 @@ func limiter_off():
 func ability_maximum() -> void:
 	is_ability_max = true
 	if is_ability_max and is_limiter_off and is_dash_unlimited:
-		$AudioStreamPlayer2D3.play()
+		$"../../AudioStreamPlayer2D".play()
+		if mode == Mode.DASH:
+			sprite.play("supermodedash")
+		if mode == Mode.BOUNCE:
+			sprite.play("supermodebounce")
 	mode = Mode.SPIKEY
 	chain_kill(true)
 	stun_save(true)
@@ -341,7 +352,6 @@ func _spend_blast_dash_dash() -> void:
 		is_blast_dash_maxed = false
 
 func _trigger_blast_shockwave() -> void:
-	blastSound.play()
 	$Camera2D2.trigger_shake()
 	var radius: float = blast_dash_shockwave_radius
 	if is_blast_dash_maxed:
