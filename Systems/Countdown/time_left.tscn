@@ -9,9 +9,9 @@
 [sub_resource type="LabelSettings" id="LabelSettings_3ksry"]
 font = ExtResource("3_n375d")
 font_size = 27
-font_color = Color(0.95686275, 0.92156863, 0.8784314, 1)
-outline_size = 3
-outline_color = Color(0.09019608, 0.023529412, 0.03137255, 1)
+font_color = Color(0.6156863, 0.08627451, 0.08627451, 1)
+outline_size = 6
+outline_color = Color(0.95686275, 0.92156863, 0.8784314, 1)
 shadow_size = 10
 shadow_color = Color(0.6156863, 0.08627451, 0.08627451, 0.7529412)
 
