@@ -9,27 +9,17 @@ A Game made by Anomaly Hunters for the GMTK 2026 Game Jam
 Pointless is a story adventure game where we follow this one triangle guy and his adventure to save another circle thing. And the guy in lore playing the game spilled water on his PC :(
 
 
-## members:
-
-randompigion
-Aahil Ahsan
-
-robopugo
-
-ruppie
-Ruppie09
-
-Ryder
-Ryder Kao
-
-Syntax
-Thinaphat Sooksri
-
-tgs2401
-Channel Manager
-
-thebullfrog2709
-Jeremiah Hollingsworth
-
-yulee
-a self appointed game dev
+## Members:
+in alphabetical order
+@asier
+@gamingwithjulesk
+@ghurt
+@moovintwo
+@randompigion (Aahil Ahsan)
+@robopugo
+@ruppie (Ruppie09)
+@ryder (Ryder Kao)
+@syntax (Thinaphat Sooksri)
+@thebullfrog2970 (Jeremiah Hollingsworth)
+@tgs2401
+@yuleedev (Yulee Oh)
