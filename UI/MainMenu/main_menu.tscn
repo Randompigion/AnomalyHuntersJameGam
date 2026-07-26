@@ -279,11 +279,10 @@ offset_left = 247.7041
 offset_top = 44.228508
 offset_right = 320.0965
 offset_bottom = 69.501945
-color = Color(0.80784315, 0, 0.18431373, 1)
+color = Color(0.11764706, 0.11764706, 0.18039216, 1)
 script = ExtResource("4_avu7c")
 
 [node name="CreditsPanel" type="Panel" parent="Panels" unique_id=1826364587]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -334,6 +333,15 @@ offset_right = 320.0965
 offset_bottom = 310.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_nrnbx")
 text = "Back"
+
+[node name="c+" type="Button" parent="Panels/CreditsPanel" unique_id=540487244]
+layout_mode = 0
+offset_left = 350.6234
+offset_top = 269.8842
+offset_right = 521.57416
+offset_bottom = 309.8842
+theme_override_styles/normal = SubResource("StyleBoxFlat_nrnbx")
+text = "credits+"
 
 [node name="MainButtons" type="Control" parent="." unique_id=144274320]
 anchors_preset = 0
@@ -428,6 +436,7 @@ bus = &"SFX"
 [connection signal="value_changed" from="Panels/VolumePanel/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="color_changed" from="Panels/SettingsPanel/ColorPickerButton" to="." method="_on_color_picker_button_color_changed"]
 [connection signal="pressed" from="Panels/CreditsPanel/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="Panels/CreditsPanel/c+" to="." method="_on_c_pressed"]
 [connection signal="mouse_entered" from="MainButtons/PlayButton" to="." method="_on_play_button_mouse_entered"]
 [connection signal="mouse_exited" from="MainButtons/PlayButton" to="." method="_on_play_button_mouse_exited"]
 [connection signal="toggled" from="MainButtons/PlayButton" to="." method="_on_play_button_toggled"]

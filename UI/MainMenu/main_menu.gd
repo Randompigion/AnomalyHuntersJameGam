@@ -198,3 +198,8 @@ func _on_credits_button_mouse_entered() -> void:
 
 func _on_start_button_mouse_entered() -> void:
 	hover_sfx.play()
+
+
+func _on_c_pressed() -> void:
+	hide()
+	get_tree().root.add_child(preload("res://credits.tscn").instantiate())
