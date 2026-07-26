@@ -1,10 +1,10 @@
 [gd_resource type="Resource" script_class="InventoryItem" format=3 uid="uid://c3crsr7bxgwqs"]
 
 [ext_resource type="Script" uid="uid://drwsv0ukjlv5f" path="res://InventoryItem.gd" id="1_10s8p"]
-[ext_resource type="Texture2D" uid="uid://bn1525ulmm017" path="res://Assets/Textures/icon.svg" id="2_dln1e"]
+[ext_resource type="Texture2D" uid="uid://bfa6wvqxufhxg" path="res://Assets/Textures/ui/skills/hour_icon.png" id="2_10s8p"]
 
 [resource]
 script = ExtResource("1_10s8p")
 name = "DashUnlimited"
-texture = ExtResource("2_dln1e")
+texture = ExtResource("2_10s8p")
 metadata/_custom_type_script = "uid://drwsv0ukjlv5f"
