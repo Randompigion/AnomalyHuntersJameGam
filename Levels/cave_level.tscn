@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://clu42du2dffit" path="res://Entities/triangle.tscn" id="8_tfwo2"]
 [ext_resource type="Script" uid="uid://u6gq3mopm0mq" path="res://Levels/camera_shake.gd" id="9_10kov"]
 [ext_resource type="PackedScene" uid="uid://c6ylojwgct72c" path="res://Entities/shooter_enemy.tscn" id="9_55uyj"]
+[ext_resource type="PackedScene" uid="uid://btom6c0vo0wji" path="res://Entities/spike_enemy.tscn" id="9_ivxmm"]
 [ext_resource type="Texture2D" uid="uid://b0lyd0ppu4n31" path="res://Assets/Textures/Level/TutorialTiles.png" id="10_i3lsh"]
 [ext_resource type="Texture2D" uid="uid://de71rnwtb3p7w" path="res://Assets/Textures/Level/CaveTiles.png" id="10_wxrsp"]
 [ext_resource type="Texture2D" uid="uid://b15bdt7ts8d0n" path="res://Assets/Textures/Level/CaveTilesCorrupt.png" id="12_g1a4q"]
@@ -302,6 +303,9 @@ position = Vector2(7043.0005, 3055.0002)
 
 [node name="ShooterEnemy7" parent="Entities" unique_id=1515488888 instance=ExtResource("9_55uyj")]
 position = Vector2(5816, 4721)
+
+[node name="Spike_enemy" parent="Entities" unique_id=1347426545 instance=ExtResource("9_ivxmm")]
+position = Vector2(7372, 2497)
 
 [node name="Obstacles" type="Node" parent="." unique_id=1626155225]
 
