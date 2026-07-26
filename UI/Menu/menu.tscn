@@ -445,7 +445,7 @@ offset_right = 271.0
 offset_bottom = 254.0
 theme_override_font_sizes/font_size = 14
 text = "POLY SPIKES
-Adds SPIKES to TRIANGLE so it will KILL anything that contacts it (including spiked enemy). Drawback: 30% Reduced Movement Speed + No Dash while skill is ACTIVE. This lasts for 15 seconds and reduces timer by 35 seconds when skill ends. Cooldown: 10 seconds"
+   Adds SPIKES to TRIANGLE so it will KILL anything that contacts it (including spiked enemy). Drawback: 30% Reduced Movement Speed + No Dash while skill is ACTIVE. This lasts for 15 seconds and reduces timer by 35 seconds when skill ends. Cooldown: 10 seconds"
 autowrap_mode = 3
 
 [node name="ChainKill" type="NinePatchRect" parent="Textboxes" unique_id=1165905820]
@@ -472,7 +472,7 @@ offset_right = 313.0
 offset_bottom = 211.0
 theme_override_font_sizes/font_size = 14
 text = "CHAIN KILL
-For the next 5 dashes, DASHING into an enemy will SLASH the 2 NEAREST enemies as well. Drawback: Timer reduces by 5 seconds/dash + Dash Speed is reduced + Chained enemy kills have less time restoration. Cooldown: 15 Seconds
+   For the next 5 dashes, DASHING into an enemy will SLASH the 2 NEAREST enemies as well. Drawback: Timer reduces by 5 seconds/dash + Dash Speed is reduced + Chained enemy kills have less time restoration. Cooldown: 15 Seconds
 "
 autowrap_mode = 3
 
@@ -500,7 +500,7 @@ offset_right = 291.0
 offset_bottom = 292.0
 theme_override_font_sizes/font_size = 14
 text = "BLAST DASH
-For the next THREE dashes, DASHING into a wall no longer STUNS, but instead creates a SHOCKWAVE that KILLS all nearby enemies (excluding spike enemy) and pushes back PROJECTILES. Drawback: Reduced Dash Movement Speed + No Bounce while skill is Active. Reduces timer by 10 seconds per dash until skill runs out. Cooldown: 5 seconds (Doesn't start until all 3 blast dashes are used)"
+   For the next THREE dashes, DASHING into a wall no longer STUNS, but instead creates a SHOCKWAVE that KILLS all nearby enemies (excluding spike enemy) and pushes back PROJECTILES. Drawback: Reduced Dash Movement Speed + No Bounce while skill is Active. Reduces timer by 10 seconds per dash until skill runs out. Cooldown: 5 seconds (Doesn't start until all 3 blast dashes are used)"
 autowrap_mode = 3
 
 [node name="SpeedBoost" type="NinePatchRect" parent="Textboxes" unique_id=1251841929]
@@ -527,7 +527,7 @@ offset_right = 327.0
 offset_bottom = 182.0
 theme_override_font_sizes/font_size = 14
 text = "SPEED BOOST
-Increases DASH SPEED, BOUNCE SPEED, and base SPEED by 50%. Drawback: Somewhat uncontrollable, especially in windy levels. This lasts for 10 seconds and reduces timer by 20 seconds when skill deactivates. Cooldown:  15 seconds"
+   Increases DASH SPEED, BOUNCE SPEED, and base SPEED by 50%. Drawback: Somewhat uncontrollable, especially in windy levels. This lasts for 10 seconds and reduces timer by 20 seconds when skill deactivates. Cooldown:  15 seconds"
 autowrap_mode = 3
 
 [node name="TemporalTargetKill" type="NinePatchRect" parent="Textboxes" unique_id=259118959]
@@ -553,7 +553,8 @@ offset_top = 19.0
 offset_right = 283.0
 offset_bottom = 238.0
 theme_override_font_sizes/font_size = 14
-text = "Temporal Target Kill - Time FREEZES for 5 seconds allowing you to CLICK on any enemy within VIEW. Once time RESUMES, all enemies that were clicked gets SLASHED and DIES. Drawback: Timer is reduced by 45 seconds + enemy deaths only restore 15% of normal time restoration. Cooldown: 25 seconds"
+text = "TEMPORAL TARGETS
+   Time FREEZES for 5 seconds allowing you to CLICK on any enemy within VIEW. Once time RESUMES, all enemies that were clicked gets SLASHED and DIES. Drawback: Timer is reduced by 45 seconds + enemy deaths only restore 15% of normal time restoration. Cooldown: 25 seconds"
 autowrap_mode = 3
 
 [node name="StunSave" type="NinePatchRect" parent="Textboxes" unique_id=1129003275]
@@ -580,7 +581,7 @@ offset_right = 297.0
 offset_bottom = 184.0
 theme_override_font_sizes/font_size = 14
 text = "STUN SAVE
-Stuns from ALL ENEMY attacks and DASHING into a WALL are disabled. Drawback: +10 Second Timer reduction when an enemy hits you or when dashing into a wall. This lasts for 10 seconds. Cooldown: 8 seconds"
+   Stuns from ALL ENEMY attacks and DASHING into a WALL are disabled. Drawback: +10 Second Timer reduction when an enemy hits you or when dashing into a wall. This lasts for 10 seconds. Cooldown: 8 seconds"
 autowrap_mode = 3
 
 [node name="SlideBounce" type="NinePatchRect" parent="Textboxes" unique_id=640117041]
@@ -607,7 +608,7 @@ offset_right = 337.0
 offset_bottom = 202.0
 theme_override_font_sizes/font_size = 14
 text = "SLIDE BOUNCE
-BOUNCE slides you PERPENDICULAR to a surface at HIGH SPEEDS instead of BOUNCING off of it. Drawback: Can no longer bounce spike wall objects. This lasts for 20 seconds and reduces the timer by 10 seconds. Cooldown: 5 Seconds
+   BOUNCE slides you PERPENDICULAR to a surface at HIGH SPEEDS instead of BOUNCING off of it. Drawback: Can no longer bounce spike wall objects. This lasts for 20 seconds and reduces the timer by 10 seconds. Cooldown: 5 Seconds
 "
 autowrap_mode = 3
 
@@ -635,7 +636,7 @@ offset_right = 354.0
 offset_bottom = 215.0
 theme_override_font_sizes/font_size = 14
 text = "BLINK DASH
-TELEPORT wherever you CLICK for THREE DASHES instead of dashing. Drawback: Range is only as far as a normal dash will take you + base movement speed is reduced until the ability ends + impossible to dash kill enemies. Timer is reduced by 20 seconds. Cooldown: 8 seconds
+   TELEPORT wherever you CLICK for THREE DASHES instead of dashing. Drawback: Range is only as far as a normal dash will take you + base movement speed is reduced until the ability ends + impossible to dash kill enemies. Timer is reduced by 20 seconds. Cooldown: 8 seconds
 "
 autowrap_mode = 3
 
@@ -663,7 +664,7 @@ offset_right = 267.0
 offset_bottom = 236.0
 theme_override_font_sizes/font_size = 14
 text = "I GOT YOUR BACK
-CIRCLE emits a yellow FORCEFIELD that can SURVIVE three MELEE or PROJECTILE hits, or two CHARGE attacks. Drawback:  Enemy hit cooldown is reduced + enemy movement speed is increased + can't kill enemies with dash. Cooldown: 2 Seconds"
+   CIRCLE emits a yellow FORCEFIELD that can SURVIVE three MELEE or PROJECTILE hits, or two CHARGE attacks. Drawback:  Enemy hit cooldown is reduced + enemy movement speed is increased + can't kill enemies with dash. Cooldown: 2 Seconds"
 autowrap_mode = 3
 
 [node name="DashUnlimited" type="NinePatchRect" parent="Textboxes" unique_id=993525076]
@@ -690,7 +691,7 @@ offset_right = 267.0
 offset_bottom = 236.0
 theme_override_font_sizes/font_size = 14
 text = "DASH UNLIMITED
-Player can dash infinitely with no cooldown. Zero Drawbacks, Always Active."
+   Player can dash infinitely with no cooldown. Zero Drawbacks, Always Active."
 autowrap_mode = 3
 
 [node name="LimiterOff" type="NinePatchRect" parent="Textboxes" unique_id=1856009358]
@@ -717,7 +718,7 @@ offset_right = 267.0
 offset_bottom = 236.0
 theme_override_font_sizes/font_size = 14
 text = "LIMITER OFF
-Speed and Strength across all qualities are cranked up as high as the player can control it. Zero Drawbacks, Always Active."
+   Speed and Strength across all qualities are cranked up as high as the player can control it. Zero Drawbacks, Always Active."
 autowrap_mode = 3
 
 [node name="AbilityMaximum2" type="NinePatchRect" parent="Textboxes" unique_id=1608951021]
@@ -743,7 +744,7 @@ offset_right = 267.0
 offset_bottom = 236.0
 theme_override_font_sizes/font_size = 14
 text = "DASH UNLIMITED
-Player can dash infinitely with no cooldown. Zero Drawbacks, Always Active."
+   Player can dash infinitely with no cooldown. Zero Drawbacks, Always Active."
 autowrap_mode = 3
 
 [connection signal="pressed" from="Panels/PlayPanel/ResumeButton" to="." method="_on_resume_button_pressed"]

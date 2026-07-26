@@ -53,7 +53,7 @@ var blink_prev_speed = 750
 var bounce_lock = false
 var knockback_lock = false
 enum Mode {DASH, BOUNCE, SPIKEY }
-var mode
+var mode = Mode.DASH
 @onready var sprite: AnimatedSprite2D = $Sprite2D
 @onready var stun_timer: Timer = $stunt_timer
 @onready var bounce_sound: AudioStreamPlayer2D = $BounceSound
@@ -105,7 +105,8 @@ func _physics_process(delta: float) -> void:
 			$dash_timer.start()
 			$dash_cooldown.start()
 			if chain_kill_charges > 0:
-				_spend_chain_kill_dash()
+				if mode != Mode.BOUNCE:
+					_spend_chain_kill_dash()
 
 	if Input.is_action_just_pressed("toggle_mode"):
 		_toggle_mode()
@@ -170,20 +171,18 @@ func blast_dash():
 	print("blast dash!")
 
 func poly_spikes():
-	if mode == Mode.DASH:
+	if can_poly_spike:
+		mode = Mode.DASH
 		if sprite.sprite_frames and sprite.sprite_frames.has_animation("spikeydash"):
 				sprite.play("spikeydash")
-	if mode == Mode.BOUNCE:
-		if sprite.sprite_frames and sprite.sprite_frames.has_animation("spikeybounce"):
-				sprite.play("spikeybounce")
-	sprite.scale = Vector2(1.55, 1.55)
-	mode = Mode.SPIKEY
-	can_dash = false
-	can_toggle = false
-	speed = 550
-	$AbilityTimers/ActivationTime/PolySpikes.start()
-	can_poly_spike = false
-	$AbilityTimers/Cooldowns/PolySpikesCooldown.start()
+		sprite.scale = Vector2(1.55, 1.55)
+		mode = Mode.SPIKEY
+		can_dash = false
+		can_toggle = false
+		speed = 550
+		$AbilityTimers/ActivationTime/PolySpikes.start()
+		can_poly_spike = false
+		$AbilityTimers/Cooldowns/PolySpikesCooldown.start()
 	
 	
 func speed_boost():
@@ -208,7 +207,7 @@ func blink_dash():
 		$AbilityTimers/Cooldowns/BlinkDashCooldown.start()
 
 func _blink() -> void:
-	var max_distance: float = dash_speed * $dash_timer.wait_time
+	var max_distance: float = (dash_speed * $dash_timer.wait_time) * 2
 	var offset: Vector2 = (get_global_mouse_position() - global_position).limit_length(max_distance)
 	move_and_collide(offset)
 	velocity = Vector2.ZERO
@@ -222,8 +221,8 @@ func chain_kill():
 		can_chain_kill = false
 		chain_kill_charges = chain_kill_dashes
 		chain_kill_prev_dash_speed = dash_speed
-		dash_speed = chain_kill_dash_speed
-		$AbilityTimers/Cooldowns/ChainKillCooldown.start()
+		dash_speed = chain_kill_dash_speed 
+		
 	
 func got_your_back():
 	print("got your back!")
@@ -281,6 +280,19 @@ func _toggle_mode() -> void:
 				sprite.play("dash")
 
 func _handle_wall_collisions() -> void:
+	if mode == Mode.SPIKEY:
+		for i in get_slide_collision_count():
+			var collision := get_slide_collision(i)
+			var collider := collision.get_collider()
+			var normal := collision.get_normal()
+			
+			if collider and collider.is_in_group("spiky_enemy"):
+				_kill_enemy(collider)
+			if collider and collider.is_in_group("enemy"):
+				_kill_enemy(collider)
+			break
+			
+			
 	if not dashing:
 		return
 	for i in get_slide_collision_count():
@@ -357,6 +369,7 @@ func _end_chain_dash() -> void:
 	chain_dash_active = false
 	if chain_kill_charges <= 0:
 		dash_speed = chain_kill_prev_dash_speed
+		$AbilityTimers/Cooldowns/ChainKillCooldown.start()
 
 func _chain_slash_nearest(source: Node, origin: Vector2) -> void:
 	var others: Array = []
