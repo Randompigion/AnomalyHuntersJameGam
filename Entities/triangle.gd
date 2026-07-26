@@ -165,7 +165,19 @@ func use_skill(index: int) -> void:
 		"SlideBounce":     slide_bounce()
 		"StunSave":        stun_save()
 		"TemporalTargets": temporal_targets()
+		"DashUnlimited":   dash_unlimited()
+		"LimiterOff":      limiter_off()
+		"AbilityMaximum":  ability_maximum()
 		_: push_warning("No ability hooked up for: %s" % item.name)
+
+func dash_unlimited():
+	print("DASHUNLIMITED")
+	
+func limiter_off():
+	print("LIMTIEROFF")
+
+func ability_maximum():
+	print("ABILTIYMAX")
 
 func blast_dash():
 	print("blast dash!")

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InventoryItem" format=3 uid="uid://cf8q11soq423v"]
+
+[ext_resource type="Script" uid="uid://drwsv0ukjlv5f" path="res://InventoryItem.gd" id="1_bv2vu"]
+[ext_resource type="Texture2D" uid="uid://bn1525ulmm017" path="res://Assets/Textures/icon.svg" id="2_y4jq5"]
+
+[resource]
+script = ExtResource("1_bv2vu")
+name = "AbilityMaximum"
+texture = ExtResource("2_y4jq5")
+metadata/_custom_type_script = "uid://drwsv0ukjlv5f"

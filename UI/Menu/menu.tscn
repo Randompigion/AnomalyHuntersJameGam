@@ -504,11 +504,10 @@ text = "BLAST DASH
 autowrap_mode = 3
 
 [node name="SpeedBoost" type="NinePatchRect" parent="Textboxes" unique_id=1251841929]
-visible = false
 offset_left = 474.0
 offset_top = 436.0
 offset_right = 813.0
-offset_bottom = 633.0
+offset_bottom = 637.0
 texture = ExtResource("19_to3yq")
 region_rect = Rect2(0, 0, 96, 96)
 patch_margin_left = 15
@@ -522,9 +521,9 @@ custom_minimum_size = Vector2(110, 0)
 custom_maximum_size = Vector2(310, -1)
 layout_mode = 0
 offset_left = 17.0
-offset_top = 17.0
+offset_top = 15.0
 offset_right = 327.0
-offset_bottom = 182.0
+offset_bottom = 189.0
 theme_override_font_sizes/font_size = 14
 text = "SPEED BOOST
    Increases DASH SPEED, BOUNCE SPEED, and base SPEED by 50%. Drawback: Somewhat uncontrollable, especially in windy levels. This lasts for 10 seconds and reduces timer by 20 seconds when skill deactivates. Cooldown:  15 seconds"
@@ -617,7 +616,7 @@ visible = false
 offset_left = 456.0
 offset_top = 433.0
 offset_right = 811.0
-offset_bottom = 635.0
+offset_bottom = 652.0
 texture = ExtResource("19_to3yq")
 region_rect = Rect2(0, 0, 96, 96)
 patch_margin_left = 15
@@ -671,8 +670,8 @@ autowrap_mode = 3
 visible = false
 offset_left = 506.0
 offset_top = 451.0
-offset_right = 763.0
-offset_bottom = 564.0
+offset_right = 784.0
+offset_bottom = 578.0
 texture = ExtResource("19_to3yq")
 region_rect = Rect2(0, 0, 96, 96)
 patch_margin_left = 15
@@ -686,20 +685,20 @@ custom_minimum_size = Vector2(80, 0)
 custom_maximum_size = Vector2(250, -1)
 layout_mode = 0
 offset_left = 17.0
-offset_top = 19.0
+offset_top = 17.0
 offset_right = 267.0
-offset_bottom = 236.0
+offset_bottom = 234.0
 theme_override_font_sizes/font_size = 14
 text = "DASH UNLIMITED
-   Player can dash infinitely with no cooldown. Zero Drawbacks, Always Active."
+   Player can DASH infinitely with no COOLDOWN. ZERO drawbacks, ALWAYS Active."
 autowrap_mode = 3
 
 [node name="LimiterOff" type="NinePatchRect" parent="Textboxes" unique_id=1856009358]
 visible = false
 offset_left = 506.0
 offset_top = 451.0
-offset_right = 763.0
-offset_bottom = 611.0
+offset_right = 783.0
+offset_bottom = 614.0
 texture = ExtResource("19_to3yq")
 region_rect = Rect2(0, 0, 96, 96)
 patch_margin_left = 15
@@ -713,19 +712,20 @@ custom_minimum_size = Vector2(80, 0)
 custom_maximum_size = Vector2(250, -1)
 layout_mode = 0
 offset_left = 17.0
-offset_top = 19.0
+offset_top = 16.0
 offset_right = 267.0
-offset_bottom = 236.0
+offset_bottom = 233.0
 theme_override_font_sizes/font_size = 14
 text = "LIMITER OFF
-   Speed and Strength across all qualities are cranked up as high as the player can control it. Zero Drawbacks, Always Active."
+   SPEED and STRENGTH across ALL qualities are cranked up as HIGH as the player can control it. ZERO Drawbacks, ALWAYS Active."
 autowrap_mode = 3
 
-[node name="AbilityMaximum2" type="NinePatchRect" parent="Textboxes" unique_id=1608951021]
+[node name="AbilityMaximum" type="NinePatchRect" parent="Textboxes" unique_id=1608951021]
+visible = false
 offset_left = 506.0
 offset_top = 451.0
-offset_right = 771.0
-offset_bottom = 564.0
+offset_right = 768.0
+offset_bottom = 647.0
 texture = ExtResource("19_to3yq")
 region_rect = Rect2(0, 0, 96, 96)
 patch_margin_left = 15
@@ -733,18 +733,19 @@ patch_margin_top = 15
 patch_margin_right = 15
 patch_margin_bottom = 30
 
-[node name="Label" type="Label" parent="Textboxes/AbilityMaximum2" unique_id=1027321166]
+[node name="Label" type="Label" parent="Textboxes/AbilityMaximum" unique_id=1027321166]
 texture_filter = 1
 custom_minimum_size = Vector2(80, 0)
 custom_maximum_size = Vector2(250, -1)
 layout_mode = 0
 offset_left = 17.0
-offset_top = 19.0
+offset_top = 18.0
 offset_right = 267.0
-offset_bottom = 236.0
+offset_bottom = 235.0
 theme_override_font_sizes/font_size = 14
-text = "DASH UNLIMITED
-   Player can dash infinitely with no cooldown. Zero Drawbacks, Always Active."
+text = "ABILITY MAXIMUM
+   Every time this ability is activated a RANDOM ability that doesn't affect SPEED, STRENGTH, or DASH MECHANICS is activated without any of the DRAWBACKS and no COOLDOWN.
+"
 autowrap_mode = 3
 
 [connection signal="pressed" from="Panels/PlayPanel/ResumeButton" to="." method="_on_resume_button_pressed"]

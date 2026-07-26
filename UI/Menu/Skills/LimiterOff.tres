@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InventoryItem" format=3 uid="uid://brw5efrr5wus0"]
+
+[ext_resource type="Script" uid="uid://drwsv0ukjlv5f" path="res://InventoryItem.gd" id="1_pofxl"]
+[ext_resource type="Texture2D" uid="uid://bn1525ulmm017" path="res://Assets/Textures/icon.svg" id="2_mxtno"]
+
+[resource]
+script = ExtResource("1_pofxl")
+name = "LimiterOff"
+texture = ExtResource("2_mxtno")
+metadata/_custom_type_script = "uid://drwsv0ukjlv5f"
