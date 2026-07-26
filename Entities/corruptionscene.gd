@@ -1,7 +1,7 @@
 extends Node2D
 var triggeredbefore = false
 
-@export var target_scene_path: String = "res://Levels/change_scene.tscn"
+@export var target_scene_path: String = "res://Levels/cave_level.tscn"
 @export var only_player: bool = true
 
 

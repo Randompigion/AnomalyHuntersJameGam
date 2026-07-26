@@ -8,11 +8,16 @@ var life_timer: float = 0.0
 func _ready() -> void:
 	life_timer = LIFETIME
 	body_entered.connect(_on_body_entered)
+	add_to_group("projectile")
 func set_target(new_target: Node2D) -> void:
 	target = new_target
 	if target:
 		move_direction = global_position.direction_to(target.global_position)
 		rotation = move_direction.angle()
+func repel(source_position: Vector2) -> void:
+	target = null
+	move_direction = (global_position - source_position).normalized()
+	rotation = move_direction.angle()
 func _physics_process(delta: float) -> void:
 	life_timer -= delta
 	if life_timer <= 0.0:
