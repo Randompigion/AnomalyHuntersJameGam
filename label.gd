@@ -1,7 +1,8 @@
 extends Label
 var timerwork = false
 var textspeed = 23.0
-var reveal_time = 0.0
+var line_durations : Array = []
+var line_elapsed = 0.0
 #var sprite_location = "left"
 #I planned to make it so the sprite would move based on who's talking, but didn't code it.
 var dialogue_text : Array = []
@@ -20,13 +21,27 @@ func newDialouge(Text,Speaker,Sprite):
 	progress = 0.0
 	showline()
 
-func newVoiceline(Text,Speaker,Sprite,Player):
-	newDialouge([Text],[Speaker],[Sprite])
+#Subtitles for one voice line. Several strings share the clip, split by how long each one is.
+func newVoiceline(Lines,Speaker,Sprite,duration):
+	var speakers = []
+	var sprites = []
+	for i in Lines.size():
+		speakers.append(Speaker)
+		sprites.append(Sprite)
+	line_durations = _split_duration(Lines, duration)
+	line_elapsed = 0.0
+	newDialouge(Lines,speakers,sprites)
 	auto_advance = true
-	if is_instance_valid(Player):
-		if Player.stream:
-			reveal_time = Player.stream.get_length() * 0.75
-		Player.finished.connect(_on_voiceline_finished, CONNECT_ONE_SHOT)
+
+
+func _split_duration(Lines, duration: float) -> Array:
+	var total = 0
+	for line in Lines:
+		total += max(line.length(), 1)
+	var out = []
+	for line in Lines:
+		out.append(duration * max(line.length(), 1) / total)
+	return out
 
 #Puts the line on screen hidden, so it never flashes fully typed before it starts typing
 func showline():
@@ -43,9 +58,15 @@ func showline():
 
 #How long the whole line takes to type out
 func linetime() -> float:
-	if reveal_time > 0:
-		return reveal_time
+	if auto_advance:
+		return max(_current_duration() * 0.75, 0.1)
 	return max(text.length(), 1) / textspeed
+
+
+func _current_duration() -> float:
+	if dialogue_index < line_durations.size():
+		return line_durations[dialogue_index]
+	return 0.0
 
 #Adds a delay so you don't skip all the lines when you press!
 func newline():
@@ -61,6 +82,13 @@ func _process(delta: float) -> void:
 			visible_ratio = min(progress, 1.0)
 		elif not auto_advance:
 			newline()
+		if auto_advance:
+			line_elapsed += delta
+			if line_elapsed >= _current_duration():
+				dialogue_index += 1
+				progress = 0.0
+				line_elapsed = 0.0
+				showline()
 	else:
 		text = ""
 		%NameLabel.text = ""
@@ -70,12 +98,6 @@ func _process(delta: float) -> void:
 
 # Waits until the delay is over to start a new line
 func _on_delay_timeout() -> void:
-	dialogue_index += 1
-	progress = 0.0
-	showline()
-
-
-func _on_voiceline_finished() -> void:
 	dialogue_index += 1
 	progress = 0.0
 	showline()

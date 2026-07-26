@@ -3,11 +3,15 @@ extends RefCounted
 
 const textboxlocation = preload("res://Systems/Dialouge/DialougeManager.tscn")
 const design_zoom = 0.5
+const read_speed = 15.0
 
 
-static func speak(host: Node, player: AudioStreamPlayer, line: String) -> void:
-	if not is_instance_valid(host) or not is_instance_valid(player) or not host.is_inside_tree():
+static func speak(host: Node, player: AudioStreamPlayer, stream: AudioStream, lines: Array) -> void:
+	if not is_instance_valid(host) or not host.is_inside_tree() or lines.is_empty():
 		return
+
+	var voiced := stream != null and is_instance_valid(player)
+	var duration := stream.get_length() if voiced else _reading_time(lines)
 
 	var layer := CanvasLayer.new()
 	layer.layer = 2
@@ -24,10 +28,22 @@ static func speak(host: Node, player: AudioStreamPlayer, line: String) -> void:
 	screen.add_child(middle)
 
 	var textbox := textboxlocation.instantiate()
-	player.play()
-	textbox.newVoiceline(line, "Narrator", "Null", player)
+	if voiced:
+		player.stream = stream
+		player.play()
+	textbox.newVoiceline(lines, "Narrator", "Null", duration)
 	middle.add_child(textbox)
 	host.add_child(layer)
 
-	await player.finished
+	if voiced:
+		await player.finished
+	else:
+		await host.get_tree().create_timer(duration).timeout
 	layer.queue_free()
+
+
+static func _reading_time(lines: Array) -> float:
+	var characters := 0
+	for line in lines:
+		characters += line.length()
+	return max(2.0, characters / read_speed)

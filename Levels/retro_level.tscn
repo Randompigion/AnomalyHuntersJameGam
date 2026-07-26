@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://btk5elwjhwo6c"]
 
-[ext_resource type="Script" uid="uid://yky6dk5p37v2" path="res://Levels/tutorial_level.gd" id="1_ghjl3"]
+[ext_resource type="Script" path="res://Levels/retro_level.gd" id="1_ghjl3"]
 [ext_resource type="PackedScene" uid="uid://cygok7elyblmi" path="res://ObstaclesAndObjects/bounce_kill_wall.tscn" id="2_lhsyd"]
 [ext_resource type="PackedScene" uid="uid://crnq3mfkg43su" path="res://Systems/Cursor/cursor.tscn" id="3_f8ny1"]
 [ext_resource type="PackedScene" uid="uid://oyxscbdrv47i" path="res://Systems/Countdown/time_left.tscn" id="4_ym3bq"]
@@ -316,11 +316,12 @@ offset_bottom = -57.0
 grow_vertical = 0
 scale = Vector2(1.2, 1.2)
 
-[node name="ChangeScene" parent="." unique_id=1821069760 instance=ExtResource("23_d0omx")]
+[node name="ChangeScenetocave" parent="." unique_id=1821069760 instance=ExtResource("23_d0omx")]
 position = Vector2(2807, 4444)
 script = ExtResource("17_lh430")
+target_scene_path = "res://Levels/change_scene.tscn"
 
-[node name="Sprite2D" type="Sprite2D" parent="ChangeScene" unique_id=1221743990]
+[node name="Sprite2D2" type="Sprite2D" parent="ChangeScenetocave" unique_id=1221743990]
 scale = Vector2(2.875, 2.875)
 texture = ExtResource("18_xcv1x")
 
