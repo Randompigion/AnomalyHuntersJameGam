@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cwvsvi2ntbrf3"
-path="res://.godot/imported/bgtile.png-39d179df7ab295ebed7b373665048274.ctex"
+uid="uid://dk22fjaiv7lfw"
+path="res://.godot/imported/sawblade_blue.png-e108069b2cdb632994a4951340b0cda4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/Level/bgtile.png"
-dest_files=["res://.godot/imported/bgtile.png-39d179df7ab295ebed7b373665048274.ctex"]
+source_file="res://Assets/Textures/player/sawblade_blue.png"
+dest_files=["res://.godot/imported/sawblade_blue.png-e108069b2cdb632994a4951340b0cda4.ctex"]
 
 [params]
 
