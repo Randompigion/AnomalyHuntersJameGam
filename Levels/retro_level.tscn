@@ -409,3 +409,5 @@ offset_bottom = 5048.0
 mouse_filter = 2
 texture = ExtResource("20_xcv1x")
 stretch_mode = 1
+
+[node name="NarratorVoice" type="AudioStreamPlayer" parent="." unique_id=1471895931]
