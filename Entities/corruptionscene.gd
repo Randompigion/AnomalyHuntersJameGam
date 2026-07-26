@@ -13,6 +13,5 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		return
 	if triggeredbefore == false:
 		triggeredbefore = true
-		$waitdidhespillwater.play()
-		await $waitdidhespillwater.finished
+		await NarratorSubtitle.speak(self, $waitdidhespillwater, "yo wait, DID THEY JUST SPILL WATER ON THEIR LAPTOP-")
 		get_tree().change_scene_to_file.call_deferred(target_scene_path)
