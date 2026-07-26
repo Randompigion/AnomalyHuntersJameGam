@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://btk5elwjhwo6c"]
 
-[ext_resource type="Script" uid="uid://yky6dk5p37v2" path="res://Levels/tutorial_level.gd" id="1_ghjl3"]
+[ext_resource type="Script" path="res://Levels/retro_level.gd" id="1_ghjl3"]
 [ext_resource type="PackedScene" uid="uid://cygok7elyblmi" path="res://ObstaclesAndObjects/bounce_kill_wall.tscn" id="2_lhsyd"]
 [ext_resource type="PackedScene" uid="uid://crnq3mfkg43su" path="res://Systems/Cursor/cursor.tscn" id="3_f8ny1"]
 [ext_resource type="PackedScene" uid="uid://oyxscbdrv47i" path="res://Systems/Countdown/time_left.tscn" id="4_ym3bq"]

@@ -8,13 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://4n68niwvspg0" path="res://Entities/tutorial_enemy.tscn" id="7_dg6a4"]
 [ext_resource type="Texture2D" uid="uid://b0lyd0ppu4n31" path="res://Assets/Textures/Level/TutorialTiles.png" id="12_2fh6c"]
 [ext_resource type="AudioStream" uid="uid://blpv3e23avhpy" path="res://Assets/Audio/BGM/tutorial theme maybe.ogg" id="12_c3uso"]
-[ext_resource type="AudioStream" uid="uid://cnibdht5p4g4o" path="res://Assets/Audio/NarratorVoiceLines/NewTutorialLevel/Intoduction(FirstLine).mp3" id="13_fsspb"]
-[ext_resource type="AudioStream" uid="uid://dwbfo5ntsfdq1" path="res://Assets/Audio/NarratorVoiceLines/NewTutorialLevel/DashVsBounceMode.mp3" id="14_aowvf"]
-[ext_resource type="AudioStream" uid="uid://bu0qim51h7rpa" path="res://Assets/Audio/NarratorVoiceLines/NewTutorialLevel/UseWhatYou'veLearned.mp3" id="16_dg6a4"]
 [ext_resource type="PackedScene" uid="uid://dqti32tgx54ub" path="res://UI/Menu/pause_menu.tscn" id="16_ryava"]
-[ext_resource type="AudioStream" uid="uid://iqo0adlhqcs7" path="res://Assets/Audio/NarratorVoiceLines/NewTutorialLevel/TutorialEnemy.mp3" id="17_u8mgs"]
 [ext_resource type="PackedScene" uid="uid://7fan8v5wrpob" path="res://UI/SkillSlots/visible_skill_slots.tscn" id="17_upscq"]
-[ext_resource type="AudioStream" uid="uid://bdwagfxnppoad" path="res://Assets/Audio/SFX/Voicelines/Narrator/narratorline_3.wav" id="20_c3uso"]
 [ext_resource type="Texture2D" uid="uid://be0lkxa8bss81" path="res://Assets/Textures/Level/portal.png" id="20_u0bdf"]
 [ext_resource type="Texture2D" uid="uid://r7f3cf3moco0" path="res://Assets/Textures/Level/bgtile_seamlessDesaturated.png" id="24_527ar"]
 [ext_resource type="Shader" uid="uid://bw3ug0ludn1tb" path="res://Levels/tutorial_level.gdshader" id="24_u0bdf"]
@@ -165,20 +160,7 @@ position = Vector2(-1901, 10.5)
 shape = SubResource("RectangleShape2D_pc3i1")
 debug_color = Color(0.66688454, 0.51118696, 0.020332739, 0.41960785)
 
-[node name="Narrator1" type="AudioStreamPlayer" parent="AudioTriggers" unique_id=1471895930]
-stream = ExtResource("13_fsspb")
-
-[node name="Narrator2" type="AudioStreamPlayer" parent="AudioTriggers" unique_id=1469953]
-stream = ExtResource("14_aowvf")
-
-[node name="Narrator3" type="AudioStreamPlayer" parent="AudioTriggers" unique_id=1965822599]
-stream = ExtResource("20_c3uso")
-
-[node name="Narrator4" type="AudioStreamPlayer" parent="AudioTriggers" unique_id=774443029]
-stream = ExtResource("16_dg6a4")
-
-[node name="Narrator5" type="AudioStreamPlayer" parent="AudioTriggers" unique_id=1719175493]
-stream = ExtResource("17_u8mgs")
+[node name="NarratorVoice" type="AudioStreamPlayer" parent="AudioTriggers" unique_id=1471895930]
 
 [node name="Narrator4Trigger" type="Area2D" parent="AudioTriggers" unique_id=1419027778]
 position = Vector2(6523, -1661)
