@@ -239,7 +239,14 @@ func limiter_off_deactivate():
 		speed = 750
 		dash_speed = 1050
 		bounce_speed_retention = 0.6
-	
+		
+func ability_maximum_deactivate():
+	if is_ability_max:
+		is_ability_max = false
+		chain_kill(false)
+		stun_save(false)
+		mode = Mode.DASH
+		
 
 
 func deactivate_skill(index: int) -> void:
@@ -251,7 +258,7 @@ func deactivate_skill(index: int) -> void:
 	match item.name:
 		"DashUnlimited":   dash_unlimited_deactivate()
 		"LimiterOff":      limiter_off_deactivate()
-		"AbilityMaximum":  pass
+		"AbilityMaximum":  ability_maximum_deactivate()
 
 func use_skill(index: int) -> void:
 	if index >= inventory.items.size(): return
@@ -274,9 +281,13 @@ func use_skill(index: int) -> void:
 
 func dash_unlimited():
 	is_dash_unlimited = true
+	if is_ability_max and is_limiter_off and is_dash_unlimited:
+		$AudioStreamPlayer2D3.play()
 	
 func limiter_off():
 	is_limiter_off = true
+	if is_ability_max and is_limiter_off and is_dash_unlimited:
+		$AudioStreamPlayer2D3.play()
 	if is_limiter_off:
 		speed = 2250
 		dash_speed = 2550
@@ -284,12 +295,11 @@ func limiter_off():
 
 func ability_maximum() -> void:
 	is_ability_max = true
-	var eligible := ["PolySpikes", "ChainKill", "StunSave"]
-	var choice: String = eligible.pick_random()
-	match choice:
-		"PolySpikes": _poly_spikes_maxed()
-		"ChainKill": chain_kill(true)
-		"StunSave": stun_save(true)
+	if is_ability_max and is_limiter_off and is_dash_unlimited:
+		$AudioStreamPlayer2D3.play()
+	mode = Mode.SPIKEY
+	chain_kill(true)
+	stun_save(true)
 
 func blast_dash(maxed: bool = false) -> void:
 	if not maxed and not can_blast_dash:
@@ -360,16 +370,6 @@ func poly_spikes():
 
 func _poly_spikes_maxed() -> void:
 	mode = Mode.SPIKEY
-	if sprite.sprite_frames and sprite.sprite_frames.has_animation("spikeydash"):
-		sprite.play("spikeydash")
-	sprite.scale = Vector2(2.4, 2.4)
-	var timer := get_tree().create_timer(15.0)
-	timer.timeout.connect(func():
-		if mode == Mode.SPIKEY:
-			sprite.play("dash")
-			sprite.scale = Vector2(0.3, 0.3)
-			mode = Mode.DASH
-	)
 	
 	
 func speed_boost():

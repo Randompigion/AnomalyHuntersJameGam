@@ -667,11 +667,10 @@ text = "I GOT YOUR BACK
 autowrap_mode = 3
 
 [node name="DashUnlimited" type="NinePatchRect" parent="Textboxes" unique_id=993525076]
-visible = false
 offset_left = 506.0
-offset_top = 451.0
+offset_top = 438.0
 offset_right = 784.0
-offset_bottom = 578.0
+offset_bottom = 565.0
 texture = ExtResource("19_to3yq")
 region_rect = Rect2(0, 0, 96, 96)
 patch_margin_left = 15
@@ -696,9 +695,9 @@ autowrap_mode = 3
 [node name="LimiterOff" type="NinePatchRect" parent="Textboxes" unique_id=1856009358]
 visible = false
 offset_left = 506.0
-offset_top = 451.0
+offset_top = 440.0
 offset_right = 783.0
-offset_bottom = 614.0
+offset_bottom = 603.0
 texture = ExtResource("19_to3yq")
 region_rect = Rect2(0, 0, 96, 96)
 patch_margin_left = 15
@@ -723,9 +722,9 @@ autowrap_mode = 3
 [node name="AbilityMaximum" type="NinePatchRect" parent="Textboxes" unique_id=1608951021]
 visible = false
 offset_left = 506.0
-offset_top = 451.0
+offset_top = 441.0
 offset_right = 768.0
-offset_bottom = 647.0
+offset_bottom = 637.0
 texture = ExtResource("19_to3yq")
 region_rect = Rect2(0, 0, 96, 96)
 patch_margin_left = 15
@@ -744,7 +743,7 @@ offset_right = 267.0
 offset_bottom = 235.0
 theme_override_font_sizes/font_size = 14
 text = "ABILITY MAXIMUM
-   Every time this ability is activated a RANDOM ability that doesn't affect SPEED, STRENGTH, or DASH MECHANICS is activated without any of the DRAWBACKS and no COOLDOWN.
+   Every time this ability is activated ALL abilities that don't affect SPEED, STRENGTH, or DASH MECHANICS is activated without any of the DRAWBACKS and ALWAYS active.
 "
 autowrap_mode = 3
 

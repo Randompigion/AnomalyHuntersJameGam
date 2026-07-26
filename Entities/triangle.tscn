@@ -18,6 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://dlxa015m1e1t1" path="res://Assets/Textures/Effects/Bounce3.png" id="9_n3j46"]
 [ext_resource type="Texture2D" uid="uid://dvxb2w0hifns6" path="res://Assets/Textures/Effects/Null.png" id="9_p1awi"]
 [ext_resource type="AudioStream" uid="uid://obgrkrd0cca3" path="res://Assets/Audio/SFX/Player/sfx_player_damaged.wav" id="13_mefwt"]
+[ext_resource type="AudioStream" uid="uid://p6l7s1tf7suy" path="res://Assets/Audio/SFX/Abilities/sfx_super_mode_enter.wav" id="19_stoj2"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4ayxd"]
 animations = [{
@@ -232,6 +233,9 @@ wait_time = 10.0
 [node name="TemporalTargets" type="Timer" parent="AbilityTimers/ActivationTime" unique_id=135148233]
 wait_time = 5.0
 one_shot = true
+
+[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="." unique_id=1403172585]
+stream = ExtResource("19_stoj2")
 
 [connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="dash_cooldown" to="." method="_on_dash_cooldown_timeout"]
