@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://7fan8v5wrpob" path="res://UI/SkillSlots/visible_skill_slots.tscn" id="14_ucmaq"]
 [ext_resource type="Script" uid="uid://cpo36qmmaxhde" path="res://Entities/changescene.gd" id="17_lh430"]
 [ext_resource type="Texture2D" uid="uid://be0lkxa8bss81" path="res://Assets/Textures/Level/portal.png" id="18_xcv1x"]
+[ext_resource type="Texture2D" uid="uid://r7f3cf3moco0" path="res://Assets/Textures/Level/bgtile_seamlessDesaturated.png" id="20_xcv1x"]
 [ext_resource type="PackedScene" uid="uid://dp485aju8fxxd" path="res://Entities/corruptionscene.tscn" id="23_d0omx"]
 [ext_resource type="Shader" uid="uid://bw3ug0ludn1tb" path="res://Levels/tutorial_level.gdshader" id="24_mv4qg"]
 [ext_resource type="Script" uid="uid://blu0hi47bace6" path="res://Entities/portal_sound.gd" id="portal_sfx"]
@@ -398,3 +399,13 @@ offset_left = 4.0
 offset_top = -196.0
 offset_right = 8694.0
 offset_bottom = 755.0
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=863688946]
+z_index = -99
+offset_left = -3959.0
+offset_top = -1079.5
+offset_right = 12240.0
+offset_bottom = 5048.0
+mouse_filter = 2
+texture = ExtResource("20_xcv1x")
+stretch_mode = 1
