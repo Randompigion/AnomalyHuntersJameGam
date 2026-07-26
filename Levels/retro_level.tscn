@@ -305,7 +305,6 @@ script = ExtResource("12_nodxj")
 visible = false
 
 [node name="SkillSlotOverlay" type="CanvasLayer" parent="." unique_id=2087597759]
-visible = false
 
 [node name="SkillSlots" parent="SkillSlotOverlay" unique_id=1000498607 instance=ExtResource("14_ucmaq")]
 anchors_preset = 2
