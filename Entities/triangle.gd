@@ -104,7 +104,7 @@ const STUN_SOUNDS := [
 
 @onready var activateSound: AudioStreamPlayer2D = $SfxAbilityActivate
 @onready var blastSound: AudioStreamPlayer2D = $SfxAbilityBlastActivate
-@onready var deactivateSound: AudioStreamPlayer2D = $SfxAbilityDeactivateActivate
+@onready var deactivateSound: AudioStreamPlayer2D = $SfxAbilityDeactivate
 @onready var spikesSound: AudioStreamPlayer2D = $SfxAbilitySpikes
 @onready var teleportSound: AudioStreamPlayer2D = $SfxAbilityTeleport
 @onready var freezeSound: AudioStreamPlayer2D = $SfxAbilityTimeFreeze
@@ -155,7 +155,7 @@ func _physics_process(delta: float) -> void:
 			dashing = true
 			dash_direction = dir
 			rotation = dash_direction.angle()
-			$AudioStreamPlayer2D.play()
+			$DashSound.play()
 			$dash_timer.start()
 			if !is_dash_unlimited:
 				can_dash = false
