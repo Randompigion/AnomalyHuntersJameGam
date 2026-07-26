@@ -102,6 +102,14 @@ const STUN_SOUNDS := [
 	preload("res://Assets/Audio/SFX/Player/sfx_player_stunned.wav"),
 ]
 
+@onready var activateSound: AudioStreamPlayer2D = $SfxAbilityActivate
+@onready var blastSound: AudioStreamPlayer2D = $SfxAbilityBlastActivate
+@onready var deactivateSound: AudioStreamPlayer2D = $SfxAbilityDeactivate
+@onready var spikesSound: AudioStreamPlayer2D = $SfxAbilitySpikes
+@onready var teleportSound: AudioStreamPlayer2D = $SfxAbilityTeleport
+@onready var freezeSound: AudioStreamPlayer2D = $SfxAbilityTimeFreeze
+@onready var superModeSound: AudioStreamPlayer2D = $SfxSuperModeEnter
+
 func _ready() -> void:
 	add_to_group("player")
 	hp = max_hp
@@ -147,7 +155,7 @@ func _physics_process(delta: float) -> void:
 			dashing = true
 			dash_direction = dir
 			rotation = dash_direction.angle()
-			$AudioStreamPlayer2D.play()
+			$DashSound.play()
 			$dash_timer.start()
 			if !is_dash_unlimited:
 				can_dash = false
@@ -246,6 +254,7 @@ func deactivate_skill(index: int) -> void:
 	if index >= inventory.items.size(): return
 	var item: InventoryItem = inventory.items[index]
 	if !item or item.name == "": return
+	deactivateSound.play()
 
 	
 	match item.name:
@@ -257,6 +266,7 @@ func use_skill(index: int) -> void:
 	if index >= inventory.items.size(): return
 	var item: InventoryItem = inventory.items[index]
 	if !item or item.name == "": return
+	activateSound.play()
 
 	
 	
@@ -321,6 +331,7 @@ func _spend_blast_dash_dash() -> void:
 		is_blast_dash_maxed = false
 
 func _trigger_blast_shockwave() -> void:
+	blastSound.play()
 	$Camera2D2.trigger_shake()
 	var radius: float = blast_dash_shockwave_radius
 	if is_blast_dash_maxed:
@@ -357,6 +368,7 @@ func poly_spikes():
 		$AbilityTimers/ActivationTime/PolySpikes.start()
 		can_poly_spike = false
 		$AbilityTimers/Cooldowns/PolySpikesCooldown.start()
+		spikesSound.play()
 
 func _poly_spikes_maxed() -> void:
 	mode = Mode.SPIKEY
@@ -506,6 +518,7 @@ func _freeze_world() -> void:
 		if is_instance_valid(n):
 			n.set_process(false)
 			n.set_physics_process(false)
+	freezeSound.play()
 
 func _unfreeze_world() -> void:
 	for n in frozen_nodes:
