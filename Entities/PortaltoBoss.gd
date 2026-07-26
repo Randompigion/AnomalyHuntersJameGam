@@ -13,4 +13,4 @@ func _on_area_2d_2_body_entered(body: Node2D) -> void:
 		return
 	if triggeredbefore == false:
 		triggeredbefore = true
-		get_tree().change_scene_to_file("res://Levels/forest_level.tscn")
+		get_tree().change_scene_to_file("res://Entities/boss_fight.tscn")
