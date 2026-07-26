@@ -31,6 +31,16 @@ extends CharacterBody2D
 @export var vulnerable_knockback_lock_duration: float = 0.3
 @export var vulnerable_invuln_duration: float = 1.5
 
+@export var blast_dash_charges_count: int = 3
+@export var blast_dash_speed_multiplier: float = 0.7
+@export var blast_dash_shockwave_radius: float = 250.0
+@export var blast_dash_time_cost: float = 10.0
+
+@export var temporal_target_time_cost: float = 45.0
+@export var temporal_target_restore_ratio: float = 0.15
+
+@export var got_your_back_shield_capacity: float = 3.0
+
 var hp: int = max_hp
 var is_invincible: bool = false
 var dashing = false
@@ -43,10 +53,12 @@ var can_speed_boost = true
 var can_poly_spike = true
 var can_stun_save = true
 var stun_save_active = false
+var is_stun_save_maxed: bool = false
 var can_chain_kill = true
 var chain_kill_charges = 0
 var chain_dash_active = false
 var chain_kill_prev_dash_speed = 1050
+var is_chain_kill_maxed: bool = false
 var can_blink_dash = true
 var blink_charges = 0
 var blink_prev_speed = 750
@@ -60,6 +72,26 @@ var knockback_lock = false
 var toggle_counter_one = 0
 var toggle_counter_two = 0
 var toggle_counter_three = 0
+
+var can_blast_dash: bool = true
+var is_blast_dash_active: bool = false
+var is_blast_dash_maxed: bool = false
+var blast_dash_charges: int = 0
+var blast_dash_prev_dash_speed: float = 1050
+
+var can_temporal_target: bool = true
+var is_temporal_freeze: bool = false
+var is_temporal_targets_maxed: bool = false
+var temporal_targets_selected: Array = []
+var frozen_nodes: Array = []
+
+var can_got_your_back: bool = true
+var is_got_your_back_active: bool = false
+var is_got_your_back_maxed: bool = false
+var got_your_back_shield: float = 0.0
+var got_your_back_enemy_speed_backup: Dictionary = {}
+var got_your_back_cooldown_backup: Dictionary = {}
+
 enum Mode {DASH, BOUNCE, SPIKEY, SUPER}
 var mode = Mode.DASH
 @onready var sprite: AnimatedSprite2D = $Sprite2D
@@ -118,6 +150,8 @@ func _physics_process(delta: float) -> void:
 			if chain_kill_charges > 0:
 				if mode != Mode.BOUNCE:
 					_spend_chain_kill_dash()
+			if blast_dash_charges > 0 and is_blast_dash_active:
+				_spend_blast_dash_dash()
 
 	if Input.is_action_just_pressed("toggle_mode"):
 		if !is_ability_max and !is_dash_unlimited and !is_limiter_off:
@@ -186,7 +220,9 @@ func _unhandled_input(_event: InputEvent) -> void:
 				use_skill(0)
 			if toggle_counter_three % 2 == 0: deactivate_skill(2)
 
-	
+	if is_temporal_freeze and _event is InputEventMouseButton and _event.pressed and _event.button_index == MOUSE_BUTTON_LEFT:
+		_try_select_temporal_target(get_global_mouse_position())
+
 
 func dash_unlimited_deactivate():
 	if is_dash_unlimited:
@@ -245,11 +281,69 @@ func limiter_off():
 		dash_speed = 2550
 		bounce_speed_retention = 2.5
 
-func ability_maximum():
-	is_ability_max = true
+func ability_maximum() -> void:
+	var eligible := ["PolySpikes", "BlastDash", "TemporalTargets", "ChainKill", "StunSave", "GotYourBack"]
+	var choice: String = eligible.pick_random()
+	match choice:
+		"PolySpikes": _poly_spikes_maxed()
+		"BlastDash": blast_dash(true)
+		"TemporalTargets": temporal_targets(true)
+		"ChainKill": chain_kill(true)
+		"StunSave": stun_save(true)
+		"GotYourBack": got_your_back(true)
 
-func blast_dash():
-	print("blast dash!")
+func blast_dash(maxed: bool = false) -> void:
+	if not maxed and not can_blast_dash:
+		return
+	if not maxed:
+		can_blast_dash = false
+	is_blast_dash_active = true
+	is_blast_dash_maxed = maxed
+	blast_dash_charges = blast_dash_charges_count
+	if mode == Mode.BOUNCE:
+		mode = Mode.DASH
+		if sprite.sprite_frames and sprite.sprite_frames.has_animation("dash"):
+			sprite.play("dash")
+	if not maxed:
+		blast_dash_prev_dash_speed = dash_speed
+		dash_speed *= blast_dash_speed_multiplier
+
+func _spend_blast_dash_dash() -> void:
+	blast_dash_charges -= 1
+	if not is_blast_dash_maxed:
+		var time_left = get_tree().get_first_node_in_group("time_left")
+		if time_left:
+			time_left.subtract_time(blast_dash_time_cost)
+	if blast_dash_charges <= 0:
+		is_blast_dash_active = false
+		if not is_blast_dash_maxed:
+			dash_speed = blast_dash_prev_dash_speed
+			$AbilityTimers/Cooldowns/BlastDashCooldown.start()
+		is_blast_dash_maxed = false
+
+func _trigger_blast_shockwave() -> void:
+	$Camera2D2.trigger_shake()
+	var radius: float = blast_dash_shockwave_radius
+	if is_blast_dash_maxed:
+		radius *= 1.8
+
+	for enemy in get_tree().get_nodes_in_group("enemy"):
+		if not is_instance_valid(enemy):
+			continue
+		if enemy.is_in_group("spiky_enemy"):
+			continue
+		if global_position.distance_to(enemy.global_position) <= radius:
+			if enemy.has_method("die"):
+				enemy.die()
+			else:
+				enemy.queue_free()
+
+	for projectile in get_tree().get_nodes_in_group("projectile"):
+		if not is_instance_valid(projectile):
+			continue
+		if global_position.distance_to(projectile.global_position) <= radius:
+			if projectile.has_method("repel"):
+				projectile.repel(global_position)
 
 func poly_spikes():
 	if can_poly_spike:
@@ -264,6 +358,19 @@ func poly_spikes():
 		$AbilityTimers/ActivationTime/PolySpikes.start()
 		can_poly_spike = false
 		$AbilityTimers/Cooldowns/PolySpikesCooldown.start()
+
+func _poly_spikes_maxed() -> void:
+	mode = Mode.SPIKEY
+	if sprite.sprite_frames and sprite.sprite_frames.has_animation("spikeydash"):
+		sprite.play("spikeydash")
+	sprite.scale = Vector2(2.4, 2.4)
+	var timer := get_tree().create_timer(15.0)
+	timer.timeout.connect(func():
+		if mode == Mode.SPIKEY:
+			sprite.play("dash")
+			sprite.scale = Vector2(0.3, 0.3)
+			mode = Mode.DASH
+	)
 	
 	
 func speed_boost():
@@ -297,17 +404,67 @@ func _blink() -> void:
 	if blink_charges <= 0:
 		speed = blink_prev_speed
 	
-func chain_kill():
-	if can_chain_kill:
+func chain_kill(maxed: bool = false) -> void:
+	if not maxed and not can_chain_kill:
+		return
+	if not maxed:
 		can_chain_kill = false
-		chain_kill_charges = chain_kill_dashes
-		chain_kill_prev_dash_speed = dash_speed
-		dash_speed = chain_kill_dash_speed 
-		
+	is_chain_kill_maxed = maxed
+	chain_kill_charges = chain_kill_dashes
+	chain_kill_prev_dash_speed = dash_speed
+	if not maxed:
+		dash_speed = chain_kill_dash_speed
 	
-func got_your_back():
-	print("got your back!")
-	
+func got_your_back(maxed: bool = false) -> void:
+	if not maxed and not can_got_your_back:
+		return
+	if not maxed:
+		can_got_your_back = false
+		$AbilityTimers/Cooldowns/GotYourBackCooldown.start()
+		_apply_got_your_back_drawback()
+	is_got_your_back_active = true
+	is_got_your_back_maxed = maxed
+	got_your_back_shield = got_your_back_shield_capacity * (2.0 if maxed else 1.0)
+	_set_circle_shield(true)
+
+func _apply_got_your_back_drawback() -> void:
+	got_your_back_enemy_speed_backup.clear()
+	got_your_back_cooldown_backup.clear()
+	for enemy in get_tree().get_nodes_in_group("enemy"):
+		if not is_instance_valid(enemy):
+			continue
+		if "speed" in enemy:
+			got_your_back_enemy_speed_backup[enemy] = enemy.speed
+			enemy.speed *= 1.4
+		var cooldown := enemy.get_node_or_null("AttackCooldown")
+		if cooldown:
+			got_your_back_cooldown_backup[enemy] = cooldown.wait_time
+			cooldown.wait_time *= 0.5
+
+func _revert_got_your_back_drawback() -> void:
+	for enemy in got_your_back_enemy_speed_backup.keys():
+		if is_instance_valid(enemy) and "speed" in enemy:
+			enemy.speed = got_your_back_enemy_speed_backup[enemy]
+	for enemy in got_your_back_cooldown_backup.keys():
+		if is_instance_valid(enemy):
+			var cooldown : Timer = enemy.get_node_or_null("AttackCooldown")
+			if cooldown:
+				cooldown.wait_time = got_your_back_cooldown_backup[enemy]
+	got_your_back_enemy_speed_backup.clear()
+	got_your_back_cooldown_backup.clear()
+
+func _end_got_your_back() -> void:
+	is_got_your_back_active = false
+	if not is_got_your_back_maxed:
+		_revert_got_your_back_drawback()
+	is_got_your_back_maxed = false
+	_set_circle_shield(false)
+
+func _set_circle_shield(active: bool) -> void:
+	var circle = get_tree().get_first_node_in_group("circle")
+	if circle and circle.has_method("show_shield"):
+		circle.show_shield(active)
+
 func slide_bounce():
 	if can_slide_bounce:
 		can_slide_bounce = false
@@ -315,15 +472,63 @@ func slide_bounce():
 		$AbilityTimers/ActivationTime/SlideBounce.start()
 		$AbilityTimers/Cooldowns/SlideBounceCooldown.start()
 		
-func stun_save():
-	if can_stun_save:
-		stun_save_active = true
+func stun_save(maxed: bool = false) -> void:
+	if not maxed and not can_stun_save:
+		return
+	stun_save_active = true
+	is_stun_save_maxed = maxed
+	var activation_timer: Timer = $AbilityTimers/ActivationTime/StunSave
+	if not maxed:
 		can_stun_save = false
-		$AbilityTimers/ActivationTime/StunSave.start()
 		$AbilityTimers/Cooldowns/StunSaveCooldown.start()
+		activation_timer.start()
+	else:
+		activation_timer.start(activation_timer.wait_time * 2.0)
 	
-func temporal_targets():
-	print("temporal targets!")
+func temporal_targets(maxed: bool = false) -> void:
+	if not maxed and not can_temporal_target:
+		return
+	if not maxed:
+		can_temporal_target = false
+		$AbilityTimers/Cooldowns/TemporalTargetsCooldown.start()
+	is_temporal_targets_maxed = maxed
+	temporal_targets_selected.clear()
+	is_temporal_freeze = true
+	_freeze_world()
+	var activation_timer: Timer = $AbilityTimers/ActivationTime/TemporalTargets
+	if maxed:
+		activation_timer.start(activation_timer.wait_time * 1.6)
+	else:
+		activation_timer.start()
+
+func _freeze_world() -> void:
+	frozen_nodes = get_tree().get_nodes_in_group("enemy") + get_tree().get_nodes_in_group("projectile") + get_tree().get_nodes_in_group("boss")
+	for n in frozen_nodes:
+		if is_instance_valid(n):
+			n.set_process(false)
+			n.set_physics_process(false)
+
+func _unfreeze_world() -> void:
+	for n in frozen_nodes:
+		if is_instance_valid(n):
+			n.set_process(true)
+			n.set_physics_process(true)
+	frozen_nodes.clear()
+
+func _try_select_temporal_target(pos: Vector2) -> void:
+	var space_state := get_world_2d().direct_space_state
+	var query := PhysicsPointQueryParameters2D.new()
+	query.position = pos
+	query.collide_with_bodies = true
+	query.collide_with_areas = true
+	var results := space_state.intersect_point(query, 8)
+	for result in results:
+		var collider = result.collider
+		if collider and collider.is_in_group("enemy") and not temporal_targets_selected.has(collider):
+			temporal_targets_selected.append(collider)
+			if "modulate" in collider:
+				collider.modulate = Color(1.0, 1.0, 0.3, 1.0)
+			break
 
 func get_skill_status(skill: String) -> Dictionary:
 	match skill:
@@ -337,6 +542,12 @@ func get_skill_status(skill: String) -> Dictionary:
 			return _charged_skill_status(blink_charges, $AbilityTimers/Cooldowns/BlinkDashCooldown)
 		"ChainKill":
 			return _charged_skill_status(chain_kill_charges, $AbilityTimers/Cooldowns/ChainKillCooldown)
+		"BlastDash":
+			return _charged_skill_status(blast_dash_charges, $AbilityTimers/Cooldowns/BlastDashCooldown)
+		"TemporalTargets":
+			return _timed_skill_status($AbilityTimers/ActivationTime/TemporalTargets, $AbilityTimers/Cooldowns/TemporalTargetsCooldown)
+		"GotYourBack":
+			return _charged_skill_status(int(got_your_back_shield), $AbilityTimers/Cooldowns/GotYourBackCooldown)
 	return {"state": "none", "value": 0.0}
 
 func _timed_skill_status(activation: Timer, cooldown: Timer) -> Dictionary:
@@ -356,6 +567,8 @@ func _charged_skill_status(charges: int, cooldown: Timer) -> Dictionary:
 func _toggle_mode() -> void:
 	if can_toggle:
 		if mode == Mode.DASH:
+			if is_blast_dash_active:
+				return
 			mode = Mode.BOUNCE
 			if sprite.sprite_frames and sprite.sprite_frames.has_animation("bounce"):
 				sprite.play("bounce")
@@ -437,7 +650,7 @@ func _handle_wall_collisions() -> void:
 			break
 
 		if collider and collider.is_in_group("enemy"):
-			if mode == Mode.DASH:
+			if mode == Mode.DASH and not is_got_your_back_active:
 				_kill_enemy(collider)
 			continue
 
@@ -455,7 +668,10 @@ func _handle_wall_collisions() -> void:
 		else:
 			dashing = false
 			velocity = Vector2.ZERO
-			take_damage(1)
+			if is_blast_dash_active:
+				_trigger_blast_shockwave()
+			else:
+				take_damage(1)
 		break
 
 func _play_bounce() -> void:
@@ -476,15 +692,18 @@ func _kill_enemy(enemy: Node) -> void:
 func _spend_chain_kill_dash() -> void:
 	chain_kill_charges -= 1
 	chain_dash_active = true
-	var time_left = get_tree().get_first_node_in_group("time_left")
-	if time_left:
-		time_left.subtract_time(chain_kill_time_cost)
+	if not is_chain_kill_maxed:
+		var time_left = get_tree().get_first_node_in_group("time_left")
+		if time_left:
+			time_left.subtract_time(chain_kill_time_cost)
 
 func _end_chain_dash() -> void:
 	chain_dash_active = false
 	if chain_kill_charges <= 0:
-		dash_speed = chain_kill_prev_dash_speed
-		$AbilityTimers/Cooldowns/ChainKillCooldown.start()
+		if not is_chain_kill_maxed:
+			dash_speed = chain_kill_prev_dash_speed
+			$AbilityTimers/Cooldowns/ChainKillCooldown.start()
+		is_chain_kill_maxed = false
 
 func _chain_slash_nearest(source: Node, origin: Vector2) -> void:
 	var others: Array = []
@@ -495,8 +714,9 @@ func _chain_slash_nearest(source: Node, origin: Vector2) -> void:
 	others.sort_custom(func(a, b):
 		return origin.distance_squared_to(a.global_position) < origin.distance_squared_to(b.global_position))
 
+	var targets_to_hit: int = chain_kill_targets * 2 if is_chain_kill_maxed else chain_kill_targets
 	var time_left = get_tree().get_first_node_in_group("time_left")
-	for i in range(min(chain_kill_targets, others.size())):
+	for i in range(min(targets_to_hit, others.size())):
 		var target = others[i]
 		var before: float = time_left.time_left if time_left else 0.0
 		%Effects.play("Kill")
@@ -511,6 +731,14 @@ func _chain_slash_nearest(source: Node, origin: Vector2) -> void:
 
 func take_damage(amount: int) -> void:
 	if is_invincible:
+		return
+
+	if is_got_your_back_active and got_your_back_shield > 0.0:
+		got_your_back_shield -= float(amount)
+		$Camera2D2.trigger_shake()
+		Sfx.play(STUN_SOUNDS.pick_random())
+		if got_your_back_shield <= 0.0:
+			_end_got_your_back()
 		return
 
 	dashing = false
@@ -617,6 +845,7 @@ func _on_poly_spikes_cooldown_timeout() -> void:
 
 func _on_stun_save_timeout() -> void:
 	stun_save_active = false
+	is_stun_save_maxed = false
 
 
 func _on_stun_save_cooldown_timeout() -> void:
@@ -640,3 +869,37 @@ func _on_slide_bounce_timeout() -> void:
 
 func _on_slide_bounce_cooldown_timeout() -> void:
 	can_slide_bounce = true
+
+
+func _on_blast_dash_cooldown_timeout() -> void:
+	can_blast_dash = true
+
+
+func _on_temporal_targets_timeout() -> void:
+	is_temporal_freeze = false
+	_unfreeze_world()
+	var time_left = get_tree().get_first_node_in_group("time_left")
+	if time_left and not is_temporal_targets_maxed:
+		time_left.subtract_time(temporal_target_time_cost)
+	var restore_ratio: float = 1.0 if is_temporal_targets_maxed else temporal_target_restore_ratio
+	for target in temporal_targets_selected:
+		if is_instance_valid(target):
+			var before: float = time_left.time_left if time_left else 0.0
+			if target.has_method("die"):
+				target.die()
+			else:
+				target.queue_free()
+			if time_left:
+				var gained: float = time_left.time_left - before
+				if gained > 0.0:
+					time_left.time_left = before + gained * restore_ratio
+	temporal_targets_selected.clear()
+	is_temporal_targets_maxed = false
+
+
+func _on_temporal_targets_cooldown_timeout() -> void:
+	can_temporal_target = true
+
+
+func _on_got_your_back_cooldown_timeout() -> void:
+	can_got_your_back = true
