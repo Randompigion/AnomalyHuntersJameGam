@@ -25,6 +25,14 @@ const narrator_beats = [
 		],
 	},
 	{
+		"stream": preload(voice_path + "InventoryUsage_AfterGettingUpgradesByCircle__converted_by_soundandgo.com_.mp3"),
+		"lines": [
+			"Open up the upgrade menu looking thing!",
+			"It looks like those red slots are where you put in upgrades for the user.",
+			"Try clicking on an upgrade and moving it into a different slot to see how it works.",
+		],
+	},
+	{
 		"stream": preload(voice_path + "LetsGo_AtEndOfLevel__converted_by_soundandgo.com_.mp3"),
 		"lines": [
 			"Nice job! I can see the portal right there, let's go!",
@@ -46,7 +54,7 @@ func _ready():
 	_queue_beats([0, 1, 2])
 
 
-#The last line reacts to the fight being over, so it waits for the level to be emptied.
+#The last two lines react to the fight being over, so they wait for the level to be emptied.
 func _process(_delta: float) -> void:
 	if cleared_line_queued:
 		return
@@ -55,7 +63,7 @@ func _process(_delta: float) -> void:
 		enemies_seen = true
 	elif enemies_seen:
 		cleared_line_queued = true
-		_queue_beats([3])
+		_queue_beats([3, 4])
 
 
 func _queue_beats(indices: Array) -> void:
