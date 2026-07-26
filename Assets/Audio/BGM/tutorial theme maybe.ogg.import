@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://blpv3e23avhpy"
+path="res://.godot/imported/tutorial theme maybe.ogg-2823a27cf7d079245d9e75270dbf4c15.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Audio/BGM/tutorial theme maybe.ogg"
+dest_files=["res://.godot/imported/tutorial theme maybe.ogg-2823a27cf7d079245d9e75270dbf4c15.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
