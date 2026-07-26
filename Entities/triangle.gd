@@ -241,6 +241,34 @@ func stun_save():
 func temporal_targets():
 	print("temporal targets!")
 
+func get_skill_status(skill: String) -> Dictionary:
+	match skill:
+		"PolySpikes":
+			return _timed_skill_status($AbilityTimers/ActivationTime/PolySpikes, $AbilityTimers/Cooldowns/PolySpikesCooldown)
+		"SpeedBoost":
+			return _timed_skill_status($AbilityTimers/ActivationTime/SpeedBoost, $AbilityTimers/Cooldowns/SpeedBoostCooldown)
+		"StunSave":
+			return _timed_skill_status($AbilityTimers/ActivationTime/StunSave, $AbilityTimers/Cooldowns/StunSaveCooldown)
+		"BlinkDash":
+			return _charged_skill_status(blink_charges, $AbilityTimers/Cooldowns/BlinkDashCooldown)
+		"ChainKill":
+			return _charged_skill_status(chain_kill_charges, $AbilityTimers/Cooldowns/ChainKillCooldown)
+	return {"state": "none", "value": 0.0}
+
+func _timed_skill_status(activation: Timer, cooldown: Timer) -> Dictionary:
+	if not activation.is_stopped():
+		return {"state": "active", "value": activation.time_left}
+	if not cooldown.is_stopped():
+		return {"state": "cooldown", "value": cooldown.time_left}
+	return {"state": "ready", "value": 0.0}
+
+func _charged_skill_status(charges: int, cooldown: Timer) -> Dictionary:
+	if charges > 0:
+		return {"state": "charges", "value": charges}
+	if not cooldown.is_stopped():
+		return {"state": "cooldown", "value": cooldown.time_left}
+	return {"state": "ready", "value": 0.0}
+
 func _toggle_mode() -> void:
 	if can_toggle:
 		if mode == Mode.DASH:

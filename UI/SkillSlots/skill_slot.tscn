@@ -3,6 +3,13 @@
 [ext_resource type="Script" uid="uid://c0xtu5o4r6liu" path="res://UI/SkillSlots/skill_slot.gd" id="1_ndoki"]
 [ext_resource type="Texture2D" uid="uid://35j2hru6vjv0" path="res://Assets/Textures/ui/hud/skill_slot_active.png" id="2_ndoki"]
 [ext_resource type="PackedScene" uid="uid://dfqle42b1yeoi" path="res://UI/Menu/items_gui.tscn" id="3_scmdj"]
+[ext_resource type="FontFile" uid="uid://fsbors10b7bh" path="res://Assets/Textures/ui/fonts/GoofyGoober.ttf" id="4_stlbl"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_status"]
+font = ExtResource("4_stlbl")
+font_size = 16
+outline_size = 3
+outline_color = Color(0.05882353, 0.05882353, 0.078431375, 1)
 
 [node name="SkillSlot" type="Button" unique_id=686352741]
 self_modulate = Color(1, 1, 1, 0)
@@ -28,3 +35,19 @@ offset_bottom = 65.0
 
 [node name="Panel" parent="CenterContainer" unique_id=588660235 instance=ExtResource("3_scmdj")]
 layout_mode = 2
+
+[node name="StatusLabel" type="Label" parent="." unique_id=1607574139]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -40.0
+offset_top = -24.0
+offset_right = 40.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+label_settings = SubResource("LabelSettings_status")
+horizontal_alignment = 1
+vertical_alignment = 1
