@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcv3qhmq41dwx"
-path="res://.godot/imported/bgtile_seamless.png-425f8556c5acda7edd6f26548ebcf46f.ctex"
+uid="uid://bcbj14tha13yy"
+path="res://.godot/imported/super_icon.png-47fca3bcd0a676ae454f75308fa427aa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Textures/Level/bgtile_seamless.png"
-dest_files=["res://.godot/imported/bgtile_seamless.png-425f8556c5acda7edd6f26548ebcf46f.ctex"]
+source_file="res://Assets/Textures/ui/skills/super_icon.png"
+dest_files=["res://.godot/imported/super_icon.png-47fca3bcd0a676ae454f75308fa427aa.ctex"]
 
 [params]
 

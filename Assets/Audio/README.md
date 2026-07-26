@@ -12,7 +12,7 @@ Assets/
 	│   ├── (bgm_water.ogg)
 	│   └── (bgm_jazz.ogg)
 	│
-	└── SFX/                            ── Sound Effects (.wav)
+	└── SFX/
 		├── Player/                     ── Player Abilities & Movement
 		│   ├── sfx_player_dash_a.mp3
 		│   ├── sfx_player_dash_b.wav
@@ -50,6 +50,16 @@ Assets/
 		│	├── sfx_ui_select.wav
 		│	├── sfx_ui_back.wav
 		│	└── sfx_ui_error.wav
+		│
+		├── Abilities/
+		│	├── sfx_ability_activate.wav
+		│	├── sfx_ability_deactivate.wav
+		│	├── sfx_super_mode_enter.wav
+		│	├── sfx_ability_blast_shockwave.wav
+		│	├── sfx_ability_teleport.wav
+		│	├── sfx_ability_time_freeze.wav
+		│	└── sfx_ability_spikes.wav
+		│
 		└── Voicelines/
 			└──Narrator/
 				├── narratorline_1.wav

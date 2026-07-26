@@ -1,6 +1,6 @@
 extends Label
 var timerwork = false
-var textspeed = 18.0
+var textspeed = 23.0
 var reveal_time = 0.0
 #var sprite_location = "left"
 #I planned to make it so the sprite would move based on who's talking, but didn't code it.
