@@ -202,7 +202,7 @@ sources/8 = SubResource("TileSetAtlasSource_yvtli")
 sources/9 = SubResource("TileSetAtlasSource_yhoml")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pc3i1"]
-radius = 61.39218
+radius = 110.0
 
 [node name="CaveLevel" type="Node2D" unique_id=1052034539]
 script = ExtResource("1_lm0tp")
@@ -398,6 +398,7 @@ scale = Vector2(1.2, 1.2)
 [node name="PortalToBoss" parent="." unique_id=1821069760 instance=ExtResource("19_lm538")]
 position = Vector2(18655, 1893)
 script = ExtResource("26_8ucit")
+target_scene_path = "res://Entities/boss_fight.tscn"
 
 [node name="Area2D2" type="Area2D" parent="PortalToBoss" unique_id=1856756531]
 
