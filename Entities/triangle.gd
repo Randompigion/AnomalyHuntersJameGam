@@ -251,7 +251,7 @@ func ability_maximum_deactivate():
 	if is_ability_max:
 		is_ability_max = false
 		chain_kill(false)
-		stun_save(false)
+		is_invincible = false
 		mode = Mode.DASH
 		
 
@@ -318,9 +318,9 @@ func ability_maximum() -> void:
 			sprite.play("supermodedash")
 		if mode == Mode.BOUNCE:
 			sprite.play("supermodebounce")
-	mode = Mode.SPIKEY
-	chain_kill(true)
-	stun_save(true)
+	if is_ability_max:
+		chain_kill(true)
+		is_invincible = true
 
 func blast_dash(maxed: bool = false) -> void:
 	if not maxed and not can_blast_dash:
@@ -435,6 +435,8 @@ func chain_kill(maxed: bool = false) -> void:
 	chain_kill_prev_dash_speed = dash_speed
 	if not maxed:
 		dash_speed = chain_kill_dash_speed
+	if maxed:
+		can_chain_kill = true
 	
 func got_your_back(maxed: bool = false) -> void:
 	if not maxed and not can_got_your_back:
@@ -493,18 +495,13 @@ func slide_bounce():
 		$AbilityTimers/ActivationTime/SlideBounce.start()
 		$AbilityTimers/Cooldowns/SlideBounceCooldown.start()
 		
-func stun_save(maxed: bool = false) -> void:
-	if not maxed and not can_stun_save:
-		return
-	stun_save_active = true
-	is_stun_save_maxed = maxed
-	var activation_timer: Timer = $AbilityTimers/ActivationTime/StunSave
-	if not maxed:
+func stun_save() -> void:
+	if can_stun_save:
+		is_invincible = true
 		can_stun_save = false
 		$AbilityTimers/Cooldowns/StunSaveCooldown.start()
-		activation_timer.start()
-	else:
-		activation_timer.start(activation_timer.wait_time * 2.0)
+		$AbilityTimers/ActivationTime/StunSave.start()
+
 	
 func temporal_targets(maxed: bool = false) -> void:
 	if not maxed and not can_temporal_target:
@@ -613,7 +610,7 @@ func _check_spike_contact() -> void:
 			return
 
 func _handle_wall_collisions() -> void:
-	if mode == Mode.SPIKEY:
+	if mode == Mode.SPIKEY or is_ability_max:
 		for i in get_slide_collision_count():
 			var collision := get_slide_collision(i)
 			var collider := collision.get_collider()
@@ -621,8 +618,14 @@ func _handle_wall_collisions() -> void:
 			
 			if collider and collider.is_in_group("spiky_enemy"):
 				_kill_enemy(collider)
+				var time_left = get_tree().get_first_node_in_group("time_left")
+				if time_left:
+					time_left.add_time(5)
 			if collider and collider.is_in_group("enemy"):
 				_kill_enemy(collider)
+				var time_left = get_tree().get_first_node_in_group("time_left")
+				if time_left:
+					time_left.add_time(5)
 			break
 			
 			
@@ -868,8 +871,7 @@ func _on_poly_spikes_cooldown_timeout() -> void:
 
 
 func _on_stun_save_timeout() -> void:
-	stun_save_active = false
-	is_stun_save_maxed = false
+	is_invincible = false
 
 
 func _on_stun_save_cooldown_timeout() -> void:
