@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://4n68niwvspg0" path="res://Entities/tutorial_enemy.tscn" id="7_dg6a4"]
 [ext_resource type="Texture2D" uid="uid://b0lyd0ppu4n31" path="res://Assets/Textures/Level/TutorialTiles.png" id="12_2fh6c"]
 [ext_resource type="AudioStream" uid="uid://blpv3e23avhpy" path="res://Assets/Audio/BGM/tutorial theme maybe.ogg" id="12_c3uso"]
-[ext_resource type="PackedScene" uid="uid://dqti32tgx54ub" path="res://UI/Menu/pause_menu.tscn" id="16_ryava"]
+[ext_resource type="PackedScene" path="res://UI/Menu/pause_menu.tscn" id="16_ryava"]
 [ext_resource type="PackedScene" uid="uid://7fan8v5wrpob" path="res://UI/SkillSlots/visible_skill_slots.tscn" id="17_upscq"]
 [ext_resource type="Texture2D" uid="uid://be0lkxa8bss81" path="res://Assets/Textures/Level/portal.png" id="20_u0bdf"]
 [ext_resource type="Texture2D" uid="uid://r7f3cf3moco0" path="res://Assets/Textures/Level/bgtile_seamlessDesaturated.png" id="24_527ar"]
@@ -245,6 +245,21 @@ scale = Vector2(2, 2)
 texture = ExtResource("20_u0bdf")
 
 [node name="TextureRect" type="TextureRect" parent="Portal" unique_id=615386069]
+z_index = -99
+offset_left = -3959.0
+offset_top = -1079.5
+offset_right = 2237.0
+offset_bottom = 1111.0
+mouse_filter = 2
+texture = ExtResource("24_527ar")
+stretch_mode = 1
+
+[node name="Portal2" type="Sprite2D" parent="." unique_id=1038072134]
+position = Vector2(3400, 300)
+scale = Vector2(2, 2)
+texture = ExtResource("20_u0bdf")
+
+[node name="TextureRect" type="TextureRect" parent="Portal2" unique_id=1000256699]
 z_index = -99
 offset_left = -3959.0
 offset_top = -1079.5
