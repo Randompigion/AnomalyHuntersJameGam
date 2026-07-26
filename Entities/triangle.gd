@@ -50,6 +50,8 @@ var chain_kill_prev_dash_speed = 1050
 var can_blink_dash = true
 var blink_charges = 0
 var blink_prev_speed = 750
+var can_slide_bounce = true
+var is_slide_bounce = false
 var is_dash_unlimited = false
 var is_limiter_off = false
 var is_ability_max = false
@@ -135,7 +137,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity = Vector2.ZERO
 
-	if dashing and mode == Mode.BOUNCE:
+	if dashing and mode == Mode.BOUNCE and not is_slide_bounce:
 		var collision := move_and_collide(velocity * delta)
 		if collision:
 			Push.apply(collision, velocity, bounce_push_force)
@@ -304,8 +306,12 @@ func got_your_back():
 	print("got your back!")
 	
 func slide_bounce():
-	print("slide bounce!")
-	
+	if can_slide_bounce:
+		can_slide_bounce = false
+		is_slide_bounce = true
+		$AbilityTimers/ActivationTime/SlideBounce.start()
+		$AbilityTimers/Cooldowns/SlideBounceCooldown.start()
+		
 func stun_save():
 	if can_stun_save:
 		stun_save_active = true
@@ -395,10 +401,16 @@ func _handle_wall_collisions() -> void:
 					velocity = Vector2.ZERO
 					take_damage(1)
 			else:
-				velocity = velocity.bounce(normal) * bounce_speed_retention
-				dash_direction = velocity.normalized()
-				rotation = dash_direction.angle()
-				_play_bounce()
+				if !is_slide_bounce:
+					velocity = velocity.bounce(normal) * bounce_speed_retention
+					dash_direction = velocity.normalized()
+					rotation = dash_direction.angle()
+					_play_bounce()
+				if is_slide_bounce:
+					velocity = velocity.bounce(normal) * 13.5
+					dash_direction = velocity.normalized()
+					rotation = dash_direction.angle()
+					_play_bounce()
 			break
 
 		if collider and collider.is_in_group("spiky_enemy"):
@@ -407,10 +419,16 @@ func _handle_wall_collisions() -> void:
 				velocity = Vector2.ZERO
 				_apply_heavy_stun()
 			else:
-				velocity = velocity.bounce(normal) * bounce_speed_retention
-				dash_direction = velocity.normalized()
-				rotation = dash_direction.angle()
-				_play_bounce()
+				if !is_slide_bounce:
+					velocity = velocity.bounce(normal) * bounce_speed_retention
+					dash_direction = velocity.normalized()
+					rotation = dash_direction.angle()
+					_play_bounce()
+				if is_slide_bounce:
+					velocity = velocity.bounce(normal) * 13.5
+					dash_direction = velocity.normalized()
+					rotation = dash_direction.angle()
+					_play_bounce()
 			break
 
 		if collider and collider.is_in_group("enemy"):
@@ -419,10 +437,16 @@ func _handle_wall_collisions() -> void:
 			continue
 
 		if mode == Mode.BOUNCE:
-			velocity = velocity.bounce(normal) * bounce_speed_retention
-			dash_direction = velocity.normalized()
-			rotation = dash_direction.angle()
-			_play_bounce()
+			if !is_slide_bounce:
+					velocity = velocity.bounce(normal) * bounce_speed_retention
+					dash_direction = velocity.normalized()
+					rotation = dash_direction.angle()
+					_play_bounce()
+			if is_slide_bounce:
+					velocity = velocity.bounce(normal) * 13.5
+					dash_direction = velocity.normalized()
+					rotation = dash_direction.angle()
+					_play_bounce()
 		else:
 			dashing = false
 			velocity = Vector2.ZERO
@@ -600,3 +624,14 @@ func _on_chain_kill_cooldown_timeout() -> void:
 
 func _on_blink_dash_cooldown_timeout() -> void:
 	can_blink_dash = true
+
+
+func _on_slide_bounce_timeout() -> void:
+	is_slide_bounce = false
+	var time_left = get_tree().get_first_node_in_group("time_left")
+	if time_left:
+		time_left.subtract_time(10)
+	
+
+func _on_slide_bounce_cooldown_timeout() -> void:
+	can_slide_bounce = true
