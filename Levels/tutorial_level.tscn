@@ -107,16 +107,6 @@ position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 script = ExtResource("6_aowvf")
 
-[node name="TextureRect" type="TextureRect" parent="Entities/Triangle/Camera2D2" unique_id=615386069]
-z_index = -99
-offset_left = -1333.0
-offset_top = -807.0
-offset_right = 1625.4717
-offset_bottom = 785.0
-mouse_filter = 2
-texture = ExtResource("24_527ar")
-stretch_mode = 1
-
 [node name="Obstacles" type="Node" parent="." unique_id=1626155225]
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="Obstacles" unique_id=133033223]
@@ -274,6 +264,16 @@ rotation = -1.5707964
 position = Vector2(6585, 1352)
 scale = Vector2(2, 2)
 texture = ExtResource("20_u0bdf")
+
+[node name="TextureRect" type="TextureRect" parent="Portal" unique_id=615386069]
+z_index = -99
+offset_left = -3959.0
+offset_top = -1079.5
+offset_right = 2237.0
+offset_bottom = 1111.0
+mouse_filter = 2
+texture = ExtResource("24_527ar")
+stretch_mode = 1
 
 [connection signal="body_entered" from="AudioTriggers/Narrator2Trigger" to="." method="_on_narrator_4_trigger_body_entered"]
 [connection signal="body_entered" from="AudioTriggers/Narrator3Trigger" to="." method="_on_narrator_5_trigger_body_entered"]

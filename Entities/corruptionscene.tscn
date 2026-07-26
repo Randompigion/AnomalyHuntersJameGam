@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dp485aju8fxxd"]
 
 [ext_resource type="Script" uid="uid://doia75nfxmo88" path="res://Entities/corruptionscene.gd" id="1_m0ech"]
-[ext_resource type="AudioStream" uid="uid://b88x886e3mqfw" path="res://Assets/Audio/SFX/Voicelines/Narrator/narratorline_7.wav" id="2_m0ech"]
+[ext_resource type="AudioStream" uid="uid://dff5nvkx7nvy" path="res://Assets/Audio/NarratorVoiceLines/NewTutorialLevel/SpilledWater(Last Line).mp3" id="2_m0ech"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_82po7"]
 size = Vector2(112, 113)
