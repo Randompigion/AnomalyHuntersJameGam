@@ -196,7 +196,7 @@ wait_time = 25.0
 one_shot = true
 
 [node name="StunSaveCooldown" type="Timer" parent="AbilityTimers/Cooldowns" unique_id=1897337505]
-wait_time = 8.0
+wait_time = 15.0
 one_shot = true
 
 [node name="ChainKillCooldown" type="Timer" parent="AbilityTimers/Cooldowns" unique_id=1897337506]
