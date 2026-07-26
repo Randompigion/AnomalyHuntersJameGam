@@ -9,11 +9,12 @@
 [ext_resource type="Texture2D" uid="uid://co14m14vx3kuw" path="res://Assets/Textures/player/spiked_triangle_dash.png" id="6_7k82j"]
 [ext_resource type="AudioStream" uid="uid://dmercsex6k7kj" path="res://Assets/Audio/SFX/Player/sfx_player_bounce.wav" id="6_bounce"]
 [ext_resource type="Texture2D" uid="uid://cbm281jaqtmu3" path="res://Assets/Textures/Effects/Burst.png" id="6_yfysr"]
-[ext_resource type="Texture2D" uid="uid://cj63g4tka004v" path="res://Assets/Textures/player/sawblade.png" id="7_7k82j"]
 [ext_resource type="Texture2D" uid="uid://kly8xun3f4ln" path="res://Assets/Textures/Effects/Bounce1.png" id="7_p1awi"]
+[ext_resource type="Texture2D" uid="uid://dk22fjaiv7lfw" path="res://Assets/Textures/player/sawblade_blue.png" id="7_v3ep7"]
 [ext_resource type="Texture2D" uid="uid://dl5hn1btro5a0" path="res://Assets/Textures/Effects/Burst2.png" id="7_wobkw"]
 [ext_resource type="Texture2D" uid="uid://dl6lccw32aa04" path="res://Assets/Textures/Effects/Bounce2.png" id="8_mefwt"]
 [ext_resource type="Texture2D" uid="uid://w388e3i5fgy8" path="res://Assets/Textures/Effects/Burst3.png" id="8_oh7yv"]
+[ext_resource type="Texture2D" uid="uid://cqnd2nfu37563" path="res://Assets/Textures/player/sawblade_red.png" id="8_stoj2"]
 [ext_resource type="Texture2D" uid="uid://dlxa015m1e1t1" path="res://Assets/Textures/Effects/Bounce3.png" id="9_n3j46"]
 [ext_resource type="Texture2D" uid="uid://dvxb2w0hifns6" path="res://Assets/Textures/Effects/Null.png" id="9_p1awi"]
 [ext_resource type="AudioStream" uid="uid://obgrkrd0cca3" path="res://Assets/Audio/SFX/Player/sfx_player_damaged.wav" id="13_mefwt"]
@@ -54,10 +55,18 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("7_7k82j")
+"texture": ExtResource("7_v3ep7")
 }],
 "loop": 1,
-"name": &"supermode",
+"name": &"supermodebounce",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_stoj2")
+}],
+"loop": 1,
+"name": &"supermodedash",
 "speed": 5.0
 }]
 
@@ -119,7 +128,7 @@ inventory = ExtResource("2_n3j46")
 position = Vector2(1.0000005, -0.9999995)
 scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_4ayxd")
-animation = &"supermode"
+animation = &"supermodebounce"
 autoplay = "dash"
 
 [node name="stickbox" type="CollisionPolygon2D" parent="." unique_id=155991292]

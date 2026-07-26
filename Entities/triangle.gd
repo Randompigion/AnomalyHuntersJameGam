@@ -154,8 +154,6 @@ func _physics_process(delta: float) -> void:
 				_spend_blast_dash_dash()
 
 	if Input.is_action_just_pressed("toggle_mode"):
-		if !is_ability_max and !is_dash_unlimited and !is_limiter_off:
-			sprite.play("supermode")
 		_toggle_mode()
 		
 
@@ -247,7 +245,7 @@ func deactivate_skill(index: int) -> void:
 	match item.name:
 		"DashUnlimited":   dash_unlimited_deactivate()
 		"LimiterOff":      limiter_off_deactivate()
-		"AbilityMaximum":  print("hi")
+		"AbilityMaximum":  pass
 
 func use_skill(index: int) -> void:
 	if index >= inventory.items.size(): return
@@ -282,6 +280,7 @@ func limiter_off():
 		bounce_speed_retention = 2.5
 
 func ability_maximum() -> void:
+	is_ability_max = true
 	var eligible := ["PolySpikes", "BlastDash", "TemporalTargets", "ChainKill", "StunSave", "GotYourBack"]
 	var choice: String = eligible.pick_random()
 	match choice:
@@ -572,12 +571,14 @@ func _toggle_mode() -> void:
 			mode = Mode.BOUNCE
 			if sprite.sprite_frames and sprite.sprite_frames.has_animation("bounce"):
 				sprite.play("bounce")
+			if is_ability_max and is_limiter_off and is_dash_unlimited:
+				sprite.play("supermodebounce")
 		else:
 			mode = Mode.DASH
 			if sprite.sprite_frames and sprite.sprite_frames.has_animation("dash"):
 					sprite.play("dash")
-		if is_ability_max and is_limiter_off and is_dash_unlimited:
-			sprite.play("supermode")
+			if is_ability_max and is_limiter_off and is_dash_unlimited:
+				sprite.play("supermodedash")
 
 func _check_spike_contact() -> void:
 	if is_invincible or not can_move:
