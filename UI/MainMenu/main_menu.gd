@@ -151,7 +151,7 @@ func _on_settings_button_toggled(_toggled_on: bool) -> void:
 
 func _on_start_button_pressed() -> void:
 	back_sfx.play()
-	get_tree().change_scene_to_file("res://Levels/TestLevel.tscn")
+	get_tree().change_scene_to_file("res://Levels/tutorial_level.tscn")
 
 
 func _on_credits_button_pressed() -> void:

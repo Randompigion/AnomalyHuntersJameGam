@@ -1,9 +1,12 @@
 extends Node2D
-
-@onready var enemy_template: Node2D = $"../../Entities/Enemy"
+@onready var enemy_template: Node2D = get_node_or_null("../../Entities/Enemy")
 @onready var timer: Timer = $Timer
 
 func _ready() -> void:
+	if not enemy_template:
+		push_error("EnemySpawner: no se encontró 'Enemy' en la ruta esperada. Revisa la ruta relativa.")
+		return
+
 	enemy_template.visible = false
 	enemy_template.set_process(false)
 	enemy_template.set_physics_process(false)

@@ -178,7 +178,7 @@ position = Vector2(-6.5, 476)
 shape = SubResource("RectangleShape2D_ggs6p")
 
 [node name="ChangeScene" parent="." unique_id=1821069760 instance=ExtResource("19_qeo6u")]
-position = Vector2(-526, 266)
+position = Vector2(-517, 339)
 
 [connection signal="body_entered" from="Enemy/KillZone" to="Enemy" method="_on_kill_zone_body_entered"]
 [connection signal="timeout" from="Enemy/AttackCooldown" to="Enemy" method="_on_attack_cooldown_timeout"]

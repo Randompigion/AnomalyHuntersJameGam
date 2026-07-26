@@ -283,6 +283,7 @@ color = Color(0.11764706, 0.11764706, 0.18039216, 1)
 script = ExtResource("4_avu7c")
 
 [node name="CreditsPanel" type="Panel" parent="Panels" unique_id=1826364587]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5

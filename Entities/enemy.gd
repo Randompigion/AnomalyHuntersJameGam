@@ -12,14 +12,29 @@ const DEATH_SOUNDS := [
 	preload("res://Assets/Audio/SFX/Enemies/sfx_enemy_death_a.wav"),
 	preload("res://Assets/Audio/SFX/Enemies/sfx_enemy_death_b.wav"),
 ]
-@onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
+var nav_agent: NavigationAgent2D
 
 func _ready() -> void:
 	add_to_group("enemy")
 	player = get_tree().get_first_node_in_group("player")
 	if not player:
 		player = get_tree().root.find_child("Triangle", true, false)
+
+	nav_agent = _find_or_create_nav_agent()
 	nav_agent.velocity_computed.connect(_on_velocity_computed)
+
+
+func _find_or_create_nav_agent() -> NavigationAgent2D:
+	var existing := find_child("NavigationAgent2D", true, false)
+	if existing and existing is NavigationAgent2D:
+		return existing
+
+	push_warning("Enemy: no se encontró NavigationAgent2D en la escena, creando uno por código")
+	var agent := NavigationAgent2D.new()
+	agent.name = "NavigationAgent2D"
+	add_child(agent)
+	return agent
+
 
 func _on_kill_zone_body_entered(body: Node2D) -> void:
 	if body == player:
@@ -30,7 +45,6 @@ func _on_kill_zone_body_entered(body: Node2D) -> void:
 				player.take_damage(1)
 				can_damage = false
 				$AttackCooldown.start()
-
 func die():
 	Sfx.play(DEATH_SOUNDS.pick_random())
 	var time_left = get_tree().get_first_node_in_group("time_left")
@@ -39,7 +53,6 @@ func die():
 	if player and player.has_node("Camera2D2"):
 		player.get_node("Camera2D2").trigger_shake()
 	queue_free()
-
 func _physics_process(delta: float) -> void:
 	if not player:
 		player = get_tree().get_first_node_in_group("player")
@@ -71,9 +84,7 @@ func _physics_process(delta: float) -> void:
 					player.take_damage(1)
 					can_damage = false
 					$AttackCooldown.start()
-
 func _on_velocity_computed(safe_velocity: Vector2) -> void:
 	velocity = safe_velocity
-
 func _on_attack_cooldown_timeout() -> void:
 	can_damage = true
