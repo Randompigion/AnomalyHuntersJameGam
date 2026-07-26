@@ -40,8 +40,8 @@ func _drain_queue() -> void:
 	speaking = false
 
 
-func _on_narrator_4_trigger_body_entered(body: Node2D) -> void:
-	_queue_line(4)
+func _on_narrator_2_trigger_body_entered(body: Node2D) -> void:
+	_queue_line(2)
 
 
 func _on_narrator_5_trigger_body_entered(body: Node2D) -> void:
