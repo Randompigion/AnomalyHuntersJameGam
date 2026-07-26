@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dp485aju8fxxd"]
+
+[ext_resource type="Script" uid="uid://doia75nfxmo88" path="res://Entities/corruptionscene.gd" id="1_m0ech"]
+[ext_resource type="AudioStream" uid="uid://b88x886e3mqfw" path="res://Assets/Audio/SFX/Voicelines/Narrator/narratorline_7.wav" id="2_m0ech"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_82po7"]
+size = Vector2(112, 113)
+
+[node name="ChangeScene" type="Node2D" unique_id=1821069760]
+script = ExtResource("1_m0ech")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=226305572]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=486386032]
+position = Vector2(2, -2.5)
+shape = SubResource("RectangleShape2D_82po7")
+
+[node name="waitdidhespillwater" type="AudioStreamPlayer" parent="." unique_id=1145980824]
+stream = ExtResource("2_m0ech")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://b714rh82v5l5s"]
+
+[ext_resource type="Script" uid="uid://cuhgotjrgks0r" path="res://Entities/dummy_enemy.gd" id="1_vih2q"]
+[ext_resource type="Texture2D" uid="uid://dxxsul2os64dr" path="res://Assets/Textures/enemies/wallguy.png" id="2_5vfid"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pc3i1"]
+size = Vector2(102.94092, 102.94098)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8x2xb"]
+radius = 45.68291
+
+[node name="dummyEnemy" type="CharacterBody2D" unique_id=774776700]
+position = Vector2(728, 287.00003)
+scale = Vector2(0.68000126, 0.68000126)
+collision_layer = 7
+script = ExtResource("1_vih2q")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=7682331]
+modulate = Color(0.98763007, 0.6124308, 0.7294911, 1)
+scale = Vector2(2, 1.659)
+texture = ExtResource("2_5vfid")
+
+[node name="KillZone" type="Area2D" parent="." unique_id=1037207263]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone" unique_id=1131250064]
+scale = Vector2(0.9999999, 0.9999999)
+shape = SubResource("RectangleShape2D_pc3i1")
+debug_color = Color(0.81223476, 0.3731758, 0.45894426, 0.41960785)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1365881953]
+scale = Vector2(0.9999999, 0.9999999)
+shape = SubResource("CircleShape2D_8x2xb")
+debug_color = Color(0.70154667, 0.49091738, 3.85046e-07, 0.41960785)
+
+[node name="AttackCooldown" type="Timer" parent="." unique_id=1180089868]
+wait_time = 3.5
+one_shot = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=181626630]
+avoidance_enabled = true
+radius = 70.0
+
+[connection signal="body_entered" from="KillZone" to="." method="_on_kill_zone_body_entered"]
+[connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

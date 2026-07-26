@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bonu7oi4ft8q4"]
 
-[ext_resource type="Script" uid="uid://yky6dk5p37v2" path="res://Levels/tutorial_level.gd" id="1_gp5y3"]
+[ext_resource type="Script" uid="uid://dhujgshj4oobi" path="res://Levels/test_level.gd" id="1_wenv2"]
 [ext_resource type="PackedScene" uid="uid://crnq3mfkg43su" path="res://Systems/Cursor/cursor.tscn" id="2_w8qko"]
 [ext_resource type="PackedScene" uid="uid://oyxscbdrv47i" path="res://Systems/Countdown/time_left.tscn" id="4_wenv2"]
 [ext_resource type="PackedScene" uid="uid://clu42du2dffit" path="res://Entities/triangle.tscn" id="9_8pteh"]
@@ -30,7 +30,7 @@ agent_radius = 28.06
 size = Vector2(764, 125)
 
 [node name="TestLevel" type="Node2D" unique_id=242093086]
-script = ExtResource("1_gp5y3")
+script = ExtResource("1_wenv2")
 
 [node name="BounceKillWall" parent="." unique_id=1846962551 instance=ExtResource("16_jfium")]
 position = Vector2(162, 489)
@@ -103,7 +103,6 @@ visible = false
 [node name="SkillSlotOverlay" type="CanvasLayer" parent="." unique_id=1170597012]
 
 [node name="SkillSlots" parent="SkillSlotOverlay" unique_id=1000498607 instance=ExtResource("17_wenv2")]
-anchors_preset = 0
 offset_left = 25.0
 offset_top = 25.0
 offset_right = 297.0
