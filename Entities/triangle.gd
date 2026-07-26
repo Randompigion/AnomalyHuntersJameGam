@@ -557,6 +557,8 @@ func get_skill_status(skill: String) -> Dictionary:
 			return _timed_skill_status($AbilityTimers/ActivationTime/SpeedBoost, $AbilityTimers/Cooldowns/SpeedBoostCooldown)
 		"StunSave":
 			return _timed_skill_status($AbilityTimers/ActivationTime/StunSave, $AbilityTimers/Cooldowns/StunSaveCooldown)
+		"SlideBounce":
+			return _timed_skill_status($AbilityTimers/ActivationTime/SlideBounce, $AbilityTimers/Cooldowns/SlideBounceCooldown)
 		"BlinkDash":
 			return _charged_skill_status(blink_charges, $AbilityTimers/Cooldowns/BlinkDashCooldown)
 		"ChainKill":
