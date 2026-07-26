@@ -9,6 +9,8 @@ var itemInHand: ItemsGUI
 func _ready() -> void:
 	connect_slots()
 	update()
+	if !inventory.updated.is_connected(update):
+		inventory.updated.connect(update)
 	
 func connect_slots():
 	for i in range(slots.size()):
@@ -22,20 +24,22 @@ func connect_slots():
 func update():
 	for i in range(min(inventory.items.size(), slots.size())):
 		var inventoryItem: InventoryItem = inventory.items[i]
-		
-		if !inventoryItem: continue
-		
+
+		if !inventoryItem or inventoryItem.name == "":
+			slots[i].clear()
+			continue
+
 		var itemGui: ItemsGUI = slots[i].itemGui
 		if !itemGui:
 			itemGui = ItemGuiClass.instantiate()
 			slots[i].insert(itemGui)
-			
+
 		itemGui.inventoryItem = inventoryItem
 		itemGui.update()
 		# TEMP: hover a slot to see which skill the icon is.
 		slots[i].tooltip_text = inventoryItem.name
-			
-		
+
+	
 func onSlotClicked(slot):
 	if slot.isEmpty():
 		if !itemInHand: return

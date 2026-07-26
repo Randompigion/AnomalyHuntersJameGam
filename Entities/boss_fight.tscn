@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://bwfjm4df6ykex" path="res://Assets/Textures/Level/CrystalTiles.png" id="19_0a5sd"]
 [ext_resource type="AudioStream" uid="uid://cgkdvqcb1on45" path="res://Assets/Audio/BGM/audiomass-output-2_XS8PiyWq.mp3" id="20_58jsx"]
 [ext_resource type="Script" uid="uid://cmc3as7jogpi4" path="res://Levels/ChunkedSpaceBackground.gd" id="21_dwwon"]
+[ext_resource type="PackedScene" uid="uid://7fan8v5wrpob" path="res://UI/SkillSlots/visible_skill_slots.tscn" id="22_sk1ls"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_82po7"]
 vertices = PackedVector2Array(1723.3281, 1056.9531, -1213.5469, 1044.0391, -1140.4219, -641.09375, 1781.6484, -668.89844)
@@ -304,3 +305,16 @@ parameters/looping = true
 
 [node name="SpaceBackgroundManager" type="Node2D" parent="." unique_id=278688802]
 script = ExtResource("21_dwwon")
+
+[node name="SkillSlotOverlay" type="CanvasLayer" parent="." unique_id=2087597759]
+
+[node name="SkillSlots" parent="SkillSlotOverlay" unique_id=1000498607 instance=ExtResource("22_sk1ls")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 25.0
+offset_top = -121.0
+offset_right = 297.0
+offset_bottom = -57.0
+grow_vertical = 0
+scale = Vector2(1.2, 1.2)

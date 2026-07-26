@@ -29,6 +29,7 @@ func toggle() -> void:
 func pause() -> void:
 	is_paused = true
 	visible = true
+	menu.visible = true
 	get_tree().paused = true
 	set_game_cursor_visible(false)
 	Input.mouse_mode = Input.MOUSE_MODE_CONFINED
@@ -37,6 +38,7 @@ func pause() -> void:
 func resume() -> void:
 	is_paused = false
 	visible = false
+	menu.visible = false
 	get_tree().paused = false
 	set_game_cursor_visible(true)
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN

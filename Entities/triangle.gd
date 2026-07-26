@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+const BOSS_FIGHT_SCENE := "res://Entities/boss_fight.tscn"
+
 @export var inventory: Inventory
 
 
@@ -116,6 +118,12 @@ func _ready() -> void:
 	if not stun_timer.timeout.is_connected(_on_stun_timer_timeout):
 		stun_timer.timeout.connect(_on_stun_timer_timeout)
 	dir = (get_global_mouse_position() - global_position).normalized()
+	if inventory:
+		inventory.setOverpoweredUnlocked(is_boss_fight())
+
+func is_boss_fight() -> bool:
+	var scene: Node = get_tree().current_scene
+	return scene != null and scene.scene_file_path == BOSS_FIGHT_SCENE
 
 var dir = Vector2.ZERO
 var input = "a"

@@ -89,17 +89,6 @@ func _ready() -> void:
 	_connect_skill_hover()
 
 
-func _input(event: InputEvent) -> void:
-	if Input.is_action_just_pressed("pause"):
-		if get_tree().paused:
-			menu.visible = false
-			get_tree().paused = false
-		else:
-			menu.visible = true
-			get_tree().paused = true
-			Input.mouse_mode = Input.MOUSE_MODE_CONFINED
-
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if selected != null:
@@ -123,7 +112,7 @@ func stop_shaking(element, og_position) -> void:
 	element.position = og_position
 
 
-func visible(element) -> void:
+func show_panel(element) -> void:
 	for i in range(0, panels.get_children().size()):
 		panels.get_child(i).visible = false
 	panels.get_child(element).visible = true
@@ -189,7 +178,7 @@ func _on_play_button_toggled(_toggled_on: bool) -> void:
 	select_sfx.play()
 	selected = play_button
 	element = selected.get_index()
-	visible(element)
+	show_panel(element)
 	menu_label.text = "Menu"
 
 
@@ -197,7 +186,7 @@ func _on_volume_button_toggled(_toggled_on: bool) -> void:
 	select_sfx.play()
 	selected = volume_button
 	element = selected.get_index()
-	visible(element)
+	show_panel(element)
 	menu_label.text = "Sound Control"
 
 
@@ -205,7 +194,7 @@ func _on_settings_button_toggled(_toggled_on: bool) -> void:
 	select_sfx.play()
 	selected = settings_button
 	element = selected.get_index()
-	visible(element)
+	show_panel(element)
 	menu_label.text = "Settings"
 
 
@@ -213,20 +202,13 @@ func _on_skills_button_toggled(toggled_on: bool) -> void:
 	select_sfx.play()
 	selected = skills_button
 	element = selected.get_index()
-	visible(element)
+	show_panel(element)
 	menu_label.text = "Skills"
 
 
 func _on_exit_button_pressed() -> void:
 	back_sfx.play()
 	get_tree().quit()
-
-
-func _on_resume_button_pressed() -> void:
-	back_sfx.play()
-	$Dim.visible = false
-	menu.visible = false
-	get_tree().paused = false
 
 
 func _on_master_slider_value_changed(value: float) -> void:

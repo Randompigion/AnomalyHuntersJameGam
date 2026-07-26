@@ -18,17 +18,25 @@ func insert(isg: ItemsGUI):
 	
 	inventory.insertItem(index, itemGui.inventoryItem)
 	
+func clear():
+	if !itemGui: return
+
+	tooltip_text = ""
+	container.remove_child(itemGui)
+	itemGui.queue_free()
+	itemGui = null
+
 func takeItem():
 	var item = itemGui
 
 	# TEMP: slot is about to be empty, so drop its name tooltip.
 	tooltip_text = ""
 
-	inventory.removeSlot(itemGui.inventoryItem)
-	
 	container.remove_child(itemGui)
 	itemGui = null
-	
+
+	inventory.removeSlot(item.inventoryItem)
+
 	return item
 	
 func isEmpty():
