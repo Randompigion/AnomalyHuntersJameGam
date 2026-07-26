@@ -53,7 +53,7 @@ var blink_prev_speed = 750
 var bounce_lock = false
 var knockback_lock = false
 enum Mode {DASH, BOUNCE, SPIKEY }
-var mode
+var mode = Mode.DASH
 @onready var sprite: AnimatedSprite2D = $Sprite2D
 @onready var stun_timer: Timer = $stunt_timer
 @onready var bounce_sound: AudioStreamPlayer2D = $BounceSound
@@ -280,8 +280,18 @@ func _toggle_mode() -> void:
 			if sprite.sprite_frames and sprite.sprite_frames.has_animation("dash"):
 				sprite.play("dash")
 
+func _check_spike_contact() -> void:
+	if is_invincible or not can_move:
+		return
+	for i in get_slide_collision_count():
+		var collider := get_slide_collision(i).get_collider()
+		if collider and collider.is_in_group("spiky_enemy"):
+			take_damage(1)
+			return
+
 func _handle_wall_collisions() -> void:
 	if not dashing:
+		_check_spike_contact()
 		return
 	for i in get_slide_collision_count():
 		var collision := get_slide_collision(i)
