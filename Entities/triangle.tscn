@@ -169,6 +169,14 @@ wait_time = 25.0
 wait_time = 8.0
 one_shot = true
 
+[node name="ChainKillCooldown" type="Timer" parent="AbilityTimers/Cooldowns" unique_id=1897337506]
+wait_time = 15.0
+one_shot = true
+
+[node name="BlinkDashCooldown" type="Timer" parent="AbilityTimers/Cooldowns" unique_id=1897337507]
+wait_time = 8.0
+one_shot = true
+
 [node name="ActivationTime" type="Node" parent="AbilityTimers" unique_id=443218669]
 
 [node name="SpeedBoost" type="Timer" parent="AbilityTimers/ActivationTime" unique_id=301278983]
@@ -189,3 +197,5 @@ one_shot = true
 [connection signal="timeout" from="AbilityTimers/ActivationTime/PolySpikes" to="." method="_on_poly_spikes_timeout"]
 [connection signal="timeout" from="AbilityTimers/Cooldowns/StunSaveCooldown" to="." method="_on_stun_save_cooldown_timeout"]
 [connection signal="timeout" from="AbilityTimers/ActivationTime/StunSave" to="." method="_on_stun_save_timeout"]
+[connection signal="timeout" from="AbilityTimers/Cooldowns/ChainKillCooldown" to="." method="_on_chain_kill_cooldown_timeout"]
+[connection signal="timeout" from="AbilityTimers/Cooldowns/BlinkDashCooldown" to="." method="_on_blink_dash_cooldown_timeout"]

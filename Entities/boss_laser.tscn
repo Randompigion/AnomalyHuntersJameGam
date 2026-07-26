@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dyv6uexr2p0cu"]
+
+[ext_resource type="Script" uid="uid://dotc2kcso6f8n" path="res://boss_laser.gd" id="1_ox6c4"]
+
+[node name="BossLaser" type="Node2D" unique_id=789507903]
+script = ExtResource("1_ox6c4")
+
+[node name="Line2D" type="Line2D" parent="." unique_id=459518524]

@@ -4,10 +4,19 @@ extends CharacterBody2D
 var hp: int
 
 @export var attack_cooldown: float = 2.0
+
+@export var vulnerable_duration: float = 2.0
+@export var invulnerable_duration: float = 1.5
 @export var weak_point_angle_width_degrees: float = 60.0
-@export var weak_point_rotation_speed_degrees: float = 25.0
-@export var weak_point_active_duration: float = 2.0
-@export var weak_point_inactive_duration: float = 1.5
+@export var vulnerable_tint: Color = Color(1.0, 0.3, 0.3, 1.0)
+@export var invulnerable_tint: Color = Color(1.0, 1.0, 1.0, 1.0)
+@export var tint_pulse_speed: float = 4.0
+
+@export var spin_interval_min: float = 3.0
+@export var spin_interval_max: float = 6.0
+@export var spin_extra_turns_min: int = 0
+@export var spin_extra_turns_max: int = 3
+@export var spin_duration: float = 1.0
 
 @export var missile_scene: PackedScene
 @export var missile_burst_count: int = 5
@@ -22,43 +31,46 @@ var hp: int
 @export var ring_gap_degrees: float = 50.0
 @export var ring_chance: float = 1.0 / 7.0
 
-@export var laser_telegraph_duration: float = 2.0
-@export var laser_active_duration: float = 0.6
+@export var laser_scene: PackedScene
+@export var laser_telegraph_duration: float = 1.2
+@export var laser_active_duration: float = 0.3
 @export var laser_length: float = 2000.0
 @export var laser_count: int = 6
 @export var laser_spread_degrees: float = 60.0
 @export var laser_width: float = 18.0
+@export var laser_stagger: float = 0.06
 
 @export var enemy_scenes: Array[PackedScene] = []
 @export var enemy_spawn_count: int = 3
 @export var enemy_spawn_radius: float = 200.0
+@export var max_enemies_on_screen: int = 10
+
+@export var death_shake_strength: float = 250.0
 
 enum AttackType { HOMING_MISSILES, LASER, SPAWN }
 enum State { IDLE, ATTACKING }
 var state: State = State.IDLE
 
 var player: Node2D
-var weak_point_angle: float = 0.0
 var attack_timer: float = 0.0
-var weak_point_active: bool = true
-var weak_point_timer: float = 0.0
 var random_missile_loop_active: bool = false
 
-@onready var laser_preview: Line2D = $LaserPreview
-@onready var laser_beam: Line2D = $LaserBeam
-@onready var weak_point_marker: Node2D = $WeakPointMarker
+var is_vulnerable: bool = false
+var vulnerable_timer: float = 0.0
+
+var spin_timer: float = 0.0
+var spinning: bool = false
+
+@onready var sprite: Sprite2D = $Sprite2D
 
 
 func _ready() -> void:
 	hp = max_hp
 	add_to_group("boss")
 	attack_timer = attack_cooldown
-	laser_preview.visible = false
-	laser_beam.visible = false
-	laser_preview.width = laser_width * 0.5
-	laser_beam.width = laser_width
-	weak_point_timer = weak_point_active_duration
-	_update_weak_point_shader()
+	vulnerable_timer = vulnerable_duration
+	spin_timer = randf_range(spin_interval_min, spin_interval_max)
+	_update_tint(0.0)
 	if random_missile_loop:
 		_start_random_missile_loop()
 
@@ -71,22 +83,17 @@ func _physics_process(delta: float) -> void:
 		if not player:
 			return
 
-	weak_point_angle = wrapf(
-		weak_point_angle + deg_to_rad(weak_point_rotation_speed_degrees) * delta,
-		0.0, TAU
-	)
-	weak_point_marker.position = Vector2(80, 0).rotated(weak_point_angle)
+	vulnerable_timer -= delta
+	if vulnerable_timer <= 0.0:
+		is_vulnerable = not is_vulnerable
+		vulnerable_timer = vulnerable_duration if is_vulnerable else invulnerable_duration
 
-	weak_point_timer -= delta
-	if weak_point_timer <= 0.0:
-		if weak_point_active:
-			weak_point_active = false
-			weak_point_angle = randf() * TAU
-			weak_point_timer = weak_point_inactive_duration
-		else:
-			weak_point_active = true
-			weak_point_timer = weak_point_active_duration
-		_update_weak_point_shader()
+	_update_tint(delta)
+
+	if not spinning:
+		spin_timer -= delta
+		if spin_timer <= 0.0:
+			_start_random_spin()
 
 	if state == State.IDLE:
 		attack_timer -= delta
@@ -94,8 +101,29 @@ func _physics_process(delta: float) -> void:
 			_start_random_attack()
 
 
-func _update_weak_point_shader() -> void:
-	weak_point_marker.visible = weak_point_active
+func _update_tint(delta: float) -> void:
+	if is_vulnerable:
+		var pulse: float = 0.5 + 0.5 * sin(Time.get_ticks_msec() / 1000.0 * tint_pulse_speed)
+		sprite.modulate = invulnerable_tint.lerp(vulnerable_tint, 0.6 + pulse * 0.4)
+	else:
+		sprite.modulate = invulnerable_tint
+
+
+func _start_random_spin() -> void:
+	spinning = true
+	var extra_turns: int = randi_range(spin_extra_turns_min, spin_extra_turns_max)
+	var direction_sign: float = 1.0 if randf() < 0.5 else -1.0
+	var extra_angle: float = randf_range(0.0, TAU)
+	var total_rotation: float = direction_sign * ((float(extra_turns) * TAU) + extra_angle)
+
+	var tween := create_tween()
+	tween.tween_property(self, "rotation", rotation + total_rotation, spin_duration)
+	tween.finished.connect(_on_spin_finished)
+
+
+func _on_spin_finished() -> void:
+	spinning = false
+	spin_timer = randf_range(spin_interval_min, spin_interval_max)
 
 
 func _start_random_attack() -> void:
@@ -211,7 +239,7 @@ func _exclude_enemies_from_missile(missile: Node2D) -> void:
 
 
 func _do_laser_attack() -> void:
-	if not player:
+	if not player or not laser_scene:
 		_end_attack()
 		return
 
@@ -227,38 +255,31 @@ func _do_laser_attack() -> void:
 			var t: float = float(i) / float(laser_count - 1)
 			angles.append(base_angle + lerp(-spread, spread, t) + randf_range(-deg_to_rad(8), deg_to_rad(8)))
 
-	laser_preview.visible = true
-	laser_preview.modulate.a = 0.25
-	laser_preview.default_color = Color(1.0, 0.2, 0.2)
-
-	var countdown_steps: int = 4
-	var step_duration: float = laser_telegraph_duration / float(countdown_steps)
-
-	for step in countdown_steps:
-		var progress: float = float(step + 1) / float(countdown_steps)
-		laser_preview.modulate.a = lerp(0.2, 0.85, progress)
-		laser_preview.width = lerp(laser_width * 0.3, laser_width * 0.8, progress)
-		laser_preview.points = [Vector2.ZERO, Vector2.from_angle(angles[0]) * laser_length]
-		await get_tree().create_timer(step_duration).timeout
-
-	laser_preview.visible = false
-	laser_beam.default_color = Color(1.0, 0.1, 0.1)
-	laser_beam.width = laser_width
-
 	for angle in angles:
-		var aim_direction: Vector2 = Vector2.from_angle(angle)
-		laser_beam.visible = true
-		laser_beam.points = [Vector2.ZERO, aim_direction * laser_length]
-		_check_laser_hit(aim_direction)
-		await get_tree().create_timer(0.1).timeout
-		laser_beam.visible = false
-		await get_tree().create_timer(0.04).timeout
+		var laser: Node2D = laser_scene.instantiate()
+		get_tree().current_scene.add_child(laser)
+		laser.telegraph_duration = laser_telegraph_duration
+		laser.active_duration = laser_active_duration
+		laser.length = laser_length
+		laser.width = laser_width
+		laser.setup(self, Vector2.from_angle(angle), player)
+		laser.fire()
+		await get_tree().create_timer(laser_stagger).timeout
 
 	_end_attack()
 
 
 func _do_spawn_attack() -> void:
-	for i in enemy_spawn_count:
+	var current_enemy_count: int = get_tree().get_nodes_in_group("enemy").size()
+	var available_slots: int = max_enemies_on_screen - current_enemy_count
+
+	if available_slots <= 0:
+		_end_attack()
+		return
+
+	var spawn_count: int = min(enemy_spawn_count, available_slots)
+
+	for i in spawn_count:
 		var scene: PackedScene = enemy_scenes.pick_random()
 		if not scene:
 			continue
@@ -271,22 +292,10 @@ func _do_spawn_attack() -> void:
 	_end_attack()
 
 
-func _check_laser_hit(aim_direction: Vector2) -> void:
-	var space_state := get_world_2d().direct_space_state
-	var query := PhysicsRayQueryParameters2D.create(
-		global_position,
-		global_position + aim_direction * laser_length
-	)
-	query.exclude = [self]
-	var result := space_state.intersect_ray(query)
-	if result and result.collider == player:
-		if player.has_method("take_damage"):
-			player.take_damage(1)
-
-
 func try_hit_weak_point(hit_angle: float) -> bool:
-	if not weak_point_active:
+	if not is_vulnerable:
 		return false
+	var weak_point_angle: float = wrapf(rotation + PI, 0.0, TAU)
 	var angle_diff: float = abs(wrapf(hit_angle - weak_point_angle, -PI, PI))
 	if angle_diff <= deg_to_rad(weak_point_angle_width_degrees * 0.5):
 		_take_damage(1)
@@ -302,4 +311,11 @@ func _take_damage(amount: int) -> void:
 
 func die() -> void:
 	random_missile_loop_active = false
+	_shake_camera_hard()
 	queue_free()
+
+
+func _shake_camera_hard() -> void:
+	var camera := get_viewport().get_camera_2d()
+	if camera and camera.has_method("trigger_shake"):
+		camera.trigger_shake(death_shake_strength)

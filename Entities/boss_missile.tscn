@@ -4,9 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://ya73f3d21tgm" path="res://Assets/Textures/player/bullet.png" id="2_0wluh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_82po7"]
-size = Vector2(22.421087, 13.085878)
+size = Vector2(30, 17)
 
-[node name="Missile" type="Area2D" unique_id=803181640]
+[node name="Missile2" type="Area2D" unique_id=803181640]
 scale = Vector2(2.39, 2.39)
 script = ExtResource("1_66j57")
 

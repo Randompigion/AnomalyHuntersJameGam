@@ -5,17 +5,14 @@ const LIFETIME: float = 4.0
 var target: Node2D
 var move_direction: Vector2 = Vector2.RIGHT
 var life_timer: float = 0.0
-
 func _ready() -> void:
 	life_timer = LIFETIME
 	body_entered.connect(_on_body_entered)
-
 func set_target(new_target: Node2D) -> void:
 	target = new_target
 	if target:
 		move_direction = global_position.direction_to(target.global_position)
 		rotation = move_direction.angle()
-
 func _physics_process(delta: float) -> void:
 	life_timer -= delta
 	if life_timer <= 0.0:
@@ -28,9 +25,10 @@ func _physics_process(delta: float) -> void:
 		move_direction = move_direction.rotated(clampf(angle_diff, -max_turn, max_turn))
 	global_position += move_direction * SPEED * delta
 	rotation = move_direction.angle()
-
 func _on_body_entered(body: Node) -> void:
 	if body.is_in_group("boss"):
+		return
+	if body.is_in_group("enemy"):
 		return
 	if body.has_method("take_damage"):
 		body.take_damage(1)

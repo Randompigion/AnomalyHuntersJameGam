@@ -2,26 +2,19 @@
 
 [ext_resource type="Script" uid="uid://cfwmumc0mw0vu" path="res://boss.gd" id="1_pmuss"]
 [ext_resource type="Texture2D" uid="uid://7mgsmwc2pbo3" path="res://Assets/Textures/enemies/tutorial_boss.png" id="2_cav2n"]
+[ext_resource type="PackedScene" uid="uid://drytfobpdkmi3" path="res://Entities/missile.tscn" id="2_jdh1n"]
 [ext_resource type="PackedScene" uid="uid://cfab1qxv5l0xn" path="res://Entities/melee_enemy.tscn" id="2_mkohp"]
-[ext_resource type="Shader" uid="uid://dc8wabxewsiix" path="res://Entities/weak_point.gdshader" id="3_vj33t"]
+[ext_resource type="PackedScene" uid="uid://dyv6uexr2p0cu" path="res://Entities/boss_laser.tscn" id="3_0c61q"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cav2n"]
 radius = 152.56755
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5fwtu"]
-shader = ExtResource("3_vj33t")
-shader_parameter/pulse_speed = 2.0
-
 [node name="Boss" type="CharacterBody2D" unique_id=334736359]
 scale = Vector2(1.355, 1.355)
 script = ExtResource("1_pmuss")
+missile_scene = ExtResource("2_jdh1n")
+laser_scene = ExtResource("3_0c61q")
 enemy_scenes = Array[PackedScene]([ExtResource("2_mkohp")])
-
-[node name="LaserPreview" type="Line2D" parent="." unique_id=1966914004]
-scale = Vector2(1.355, 1.355)
-
-[node name="LaserBeam" type="Line2D" parent="." unique_id=1900511451]
-scale = Vector2(1.355, 1.355)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1144773823]
 position = Vector2(4.7683716e-07, 4.999999)
@@ -31,9 +24,3 @@ texture = ExtResource("2_cav2n")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=549209407 groups=["navigation_polygon_source_geometry_group"]]
 scale = Vector2(1.355, 1.355)
 shape = SubResource("CircleShape2D_cav2n")
-
-[node name="WeakPointMarker" type="Node2D" parent="." unique_id=174381352]
-scale = Vector2(1.355, 1.355)
-
-[node name="Sprite2D" type="Sprite2D" parent="WeakPointMarker" unique_id=82256433]
-material = SubResource("ShaderMaterial_5fwtu")
