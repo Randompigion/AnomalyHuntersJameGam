@@ -1,4 +1,4 @@
-extends Area2D
+extends Node2D
 
 @export var target_scene_path: String = "res://Levels/change_scene.tscn"
 @export var only_player: bool = true
