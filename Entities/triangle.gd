@@ -50,8 +50,14 @@ var chain_kill_prev_dash_speed = 1050
 var can_blink_dash = true
 var blink_charges = 0
 var blink_prev_speed = 750
+var is_dash_unlimited = false
+var is_limiter_off = false
+var is_ability_max = false
 var bounce_lock = false
 var knockback_lock = false
+var toggle_counter_one = 0
+var toggle_counter_two = 0
+var toggle_counter_three = 0
 enum Mode {DASH, BOUNCE, SPIKEY }
 var mode = Mode.DASH
 @onready var sprite: AnimatedSprite2D = $Sprite2D
@@ -94,16 +100,19 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("dash") and can_dash and can_move:
 		if blink_charges > 0:
 			_blink()
-			can_dash = false
-			$dash_cooldown.start()
+			if !is_dash_unlimited:
+				can_dash = false
+				$dash_cooldown.start()
 		else:
 			dashing = true
 			dash_direction = dir
 			rotation = dash_direction.angle()
 			$AudioStreamPlayer2D.play()
-			can_dash = false
 			$dash_timer.start()
-			$dash_cooldown.start()
+			if !is_dash_unlimited:
+				can_dash = false
+				$dash_timer.start()
+				$dash_cooldown.start()
 			if chain_kill_charges > 0:
 				if mode != Mode.BOUNCE:
 					_spend_chain_kill_dash()
@@ -144,17 +153,68 @@ func _physics_process(delta: float) -> void:
 		if mode == Mode.BOUNCE:
 			Push.spin(self, impact_velocity, bounce_spin_force, bounce_max_spin)
 		_handle_wall_collisions()
+	
 
 func _unhandled_input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed("skill_1"): use_skill(0)
-	if Input.is_action_just_pressed("skill_2"): use_skill(1)
-	if Input.is_action_just_pressed("skill_3"): use_skill(2)
+	if not is_ability_max or not is_dash_unlimited or not is_limiter_off:
+		if Input.is_action_just_pressed("skill_1"): use_skill(0)
+	if is_dash_unlimited or is_ability_max or is_limiter_off:
+		if Input.is_action_just_pressed("skill_1"): 
+			toggle_counter_one += 1
+			if toggle_counter_one % 2 == 1:
+				use_skill(0)
+			if toggle_counter_one % 2 == 0: deactivate_skill(0)
+	if not is_ability_max or not is_dash_unlimited or not is_limiter_off:
+		if Input.is_action_just_pressed("skill_2"): use_skill(1)
+	if is_dash_unlimited or is_ability_max or is_limiter_off:
+		if Input.is_action_just_pressed("skill_2"): 
+			toggle_counter_two += 1
+			if toggle_counter_two % 2 == 1:
+				use_skill(0)
+			if toggle_counter_two % 2 == 0: deactivate_skill(1)
+	if not is_ability_max or not is_dash_unlimited or not is_limiter_off:
+		if Input.is_action_just_pressed("skill_3"): use_skill(2)
+	if is_dash_unlimited or is_ability_max or is_limiter_off:
+		if Input.is_action_just_pressed("skill_3"): 
+			toggle_counter_three += 1
+			if toggle_counter_three % 2 == 1:
+				use_skill(0)
+			if toggle_counter_three % 2 == 0: deactivate_skill(2)
+
+	
+
+func dash_unlimited_deactivate():
+	if is_dash_unlimited:
+		is_dash_unlimited = false
+
+func limiter_off_deactivate():
+	if is_limiter_off:
+		is_limiter_off = false
+	if not is_limiter_off:
+		speed = 750
+		dash_speed = 1050
+		bounce_speed_retention = 0.6
+	
+
+
+func deactivate_skill(index: int) -> void:
+	if index >= inventory.items.size(): return
+	var item: InventoryItem = inventory.items[index]
+	if !item or item.name == "": return
+
+	
+	match item.name:
+		"DashUnlimited":   dash_unlimited_deactivate()
+		"LimiterOff":      limiter_off_deactivate()
+		"AbilityMaximum":  print("hi")
 
 func use_skill(index: int) -> void:
 	if index >= inventory.items.size(): return
 	var item: InventoryItem = inventory.items[index]
 	if !item or item.name == "": return
 
+	
+	
 	match item.name:
 		"BlastDash":       blast_dash()
 		"PolySpikes":      poly_spikes()
@@ -171,10 +231,14 @@ func use_skill(index: int) -> void:
 		_: push_warning("No ability hooked up for: %s" % item.name)
 
 func dash_unlimited():
-	print("DASHUNLIMITED")
+	is_dash_unlimited = true
 	
 func limiter_off():
-	print("LIMTIEROFF")
+	is_limiter_off = true
+	if is_limiter_off:
+		speed = 2250
+		dash_speed = 2550
+		bounce_speed_retention = 2.5
 
 func ability_maximum():
 	print("ABILTIYMAX")
