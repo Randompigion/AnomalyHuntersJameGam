@@ -18,9 +18,6 @@
 [ext_resource type="Texture2D" uid="uid://dlxa015m1e1t1" path="res://Assets/Textures/Effects/Bounce3.png" id="9_n3j46"]
 [ext_resource type="Texture2D" uid="uid://dvxb2w0hifns6" path="res://Assets/Textures/Effects/Null.png" id="9_p1awi"]
 [ext_resource type="AudioStream" uid="uid://obgrkrd0cca3" path="res://Assets/Audio/SFX/Player/sfx_player_damaged.wav" id="13_mefwt"]
-<<<<<<< HEAD
-[ext_resource type="AudioStream" uid="uid://p6l7s1tf7suy" path="res://Assets/Audio/SFX/Abilities/sfx_super_mode_enter.wav" id="19_stoj2"]
-=======
 [ext_resource type="AudioStream" uid="uid://b2xxt6yp5u0df" path="res://Assets/Audio/SFX/Abilities/sfx_ability_activate.wav" id="19_fg7bi"]
 [ext_resource type="AudioStream" uid="uid://skj804nghuuf" path="res://Assets/Audio/SFX/Abilities/sfx_ability_blast_shockwave.wav" id="20_s8eq5"]
 [ext_resource type="AudioStream" uid="uid://b5a0n0an2lcr2" path="res://Assets/Audio/SFX/Abilities/sfx_ability_deactivate.wav" id="21_a3bcl"]
@@ -28,7 +25,6 @@
 [ext_resource type="AudioStream" uid="uid://c5qcp7iathtda" path="res://Assets/Audio/SFX/Abilities/sfx_ability_teleport.wav" id="23_0uea4"]
 [ext_resource type="AudioStream" uid="uid://iux5tbb5uxpb" path="res://Assets/Audio/SFX/Abilities/sfx_ability_time_freeze.wav" id="24_1w47t"]
 [ext_resource type="AudioStream" uid="uid://p6l7s1tf7suy" path="res://Assets/Audio/SFX/Abilities/sfx_super_mode_enter.wav" id="25_yrcrb"]
->>>>>>> 735c8614f448514dac48f25c00eb77cf2e78709a
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4ayxd"]
 animations = [{
@@ -247,10 +243,6 @@ wait_time = 10.0
 wait_time = 5.0
 one_shot = true
 
-<<<<<<< HEAD
-[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="." unique_id=1403172585]
-stream = ExtResource("19_stoj2")
-=======
 [node name="SfxAbilityActivate" type="AudioStreamPlayer2D" parent="." unique_id=869409326]
 stream = ExtResource("19_fg7bi")
 
@@ -271,7 +263,6 @@ stream = ExtResource("24_1w47t")
 
 [node name="SfxSuperModeEnter" type="AudioStreamPlayer2D" parent="." unique_id=904723385]
 stream = ExtResource("25_yrcrb")
->>>>>>> 735c8614f448514dac48f25c00eb77cf2e78709a
 
 [connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="dash_cooldown" to="." method="_on_dash_cooldown_timeout"]
