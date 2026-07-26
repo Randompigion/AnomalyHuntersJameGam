@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://yky6dk5p37v2" path="res://Levels/tutorial_level.gd" id="1_fxxny"]
 [ext_resource type="PackedScene" uid="uid://cygok7elyblmi" path="res://ObstaclesAndObjects/bounce_kill_wall.tscn" id="2_ho0ey"]
 [ext_resource type="PackedScene" uid="uid://crnq3mfkg43su" path="res://Systems/Cursor/cursor.tscn" id="3_2fh6c"]
-[ext_resource type="PackedScene" uid="uid://oyxscbdrv47i" path="res://Systems/Countdown/time_left.tscn" id="4_u55ro"]
 [ext_resource type="PackedScene" uid="uid://clu42du2dffit" path="res://Entities/triangle.tscn" id="5_fsspb"]
 [ext_resource type="Script" uid="uid://u6gq3mopm0mq" path="res://Levels/camera_shake.gd" id="6_aowvf"]
 [ext_resource type="PackedScene" uid="uid://4n68niwvspg0" path="res://Entities/tutorial_enemy.tscn" id="7_dg6a4"]
@@ -88,8 +87,6 @@ rotation = 1.5707964
 mass = 1.435
 
 [node name="cursor" parent="." unique_id=1436806802 instance=ExtResource("3_2fh6c")]
-
-[node name="TimeLeft" parent="." unique_id=209138868 instance=ExtResource("4_u55ro")]
 
 [node name="Entities" type="Node" parent="." unique_id=801213462]
 

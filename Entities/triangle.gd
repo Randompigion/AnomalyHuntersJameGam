@@ -123,6 +123,12 @@ var input = "a"
 
 @warning_ignore("unused_parameter")
 func _process(delta: float) -> void:
+	if mode == Mode.BOUNCE:
+		if is_ability_max and is_limiter_off and is_dash_unlimited:
+					sprite.play("supermodebounce")
+	if mode == Mode.DASH:
+		if is_ability_max and is_limiter_off and is_dash_unlimited:
+					sprite.play("supermodedash")
 	if mode == Mode.DASH:
 		if not dashing:
 			if dir != Vector2.ZERO:
@@ -265,15 +271,12 @@ func use_skill(index: int) -> void:
 	
 	
 	match item.name:
-		"BlastDash":       blast_dash()
 		"PolySpikes":      poly_spikes()
 		"SpeedBoost":      speed_boost()
 		"BlinkDash":       blink_dash()
 		"ChainKill":       chain_kill()
-		"GotYourBack":     got_your_back()
 		"SlideBounce":     slide_bounce()
 		"StunSave":        stun_save()
-		"TemporalTargets": temporal_targets()
 		"DashUnlimited":   dash_unlimited()
 		"LimiterOff":      limiter_off()
 		"AbilityMaximum":  ability_maximum()
@@ -291,15 +294,12 @@ func limiter_off():
 
 func ability_maximum() -> void:
 	is_ability_max = true
-	var eligible := ["PolySpikes", "BlastDash", "TemporalTargets", "ChainKill", "StunSave", "GotYourBack"]
+	var eligible := ["PolySpikes", "ChainKill", "StunSave"]
 	var choice: String = eligible.pick_random()
 	match choice:
 		"PolySpikes": _poly_spikes_maxed()
-		"BlastDash": blast_dash(true)
-		"TemporalTargets": temporal_targets(true)
 		"ChainKill": chain_kill(true)
 		"StunSave": stun_save(true)
-		"GotYourBack": got_your_back(true)
 
 func blast_dash(maxed: bool = false) -> void:
 	if not maxed and not can_blast_dash:

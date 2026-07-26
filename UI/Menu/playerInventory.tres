@@ -1,21 +1,18 @@
 [gd_resource type="Resource" script_class="Inventory" format=3 uid="uid://i5yyt08wj6f0"]
 
 [ext_resource type="Script" uid="uid://drwsv0ukjlv5f" path="res://InventoryItem.gd" id="1_ycpav"]
-[ext_resource type="Resource" uid="uid://b7ysgftfr57cx" path="res://UI/Menu/Skills/BlastDash.tres" id="2_4uhrv"]
 [ext_resource type="Resource" uid="uid://d1asffq5r60mr" path="res://UI/Menu/Skills/PolySpikes.tres" id="3_aitww"]
 [ext_resource type="Resource" uid="uid://dut087rcc4c7x" path="res://UI/Menu/Skills/SpeedBoost.tres" id="4_6bhr3"]
 [ext_resource type="Resource" uid="uid://c66acp28dnhfq" path="res://UI/Menu/Skills/BlinkDash.tres" id="5_maeap"]
 [ext_resource type="Script" uid="uid://c8jp7me8fja16" path="res://UI/Menu/inventory.gd" id="6_maeap"]
 [ext_resource type="Resource" uid="uid://dv4unw2friukc" path="res://UI/Menu/Skills/ChainKill.tres" id="6_wsnfn"]
-[ext_resource type="Resource" uid="uid://bp6gb6qrcbvcf" path="res://UI/Menu/Skills/GotYourBack.tres" id="7_3ocwg"]
 [ext_resource type="Resource" uid="uid://cv7v7okjm3b3i" path="res://UI/Menu/Skills/SlideBounce.tres" id="8_ihl1f"]
 [ext_resource type="Resource" uid="uid://btxq7opxo77lr" path="res://UI/Menu/Skills/StunSave.tres" id="9_mdmuv"]
-[ext_resource type="Resource" uid="uid://3cbs7w3nxmxx" path="res://UI/Menu/Skills/TemporalTargets.tres" id="10_wqsvt"]
 [ext_resource type="Resource" uid="uid://c3crsr7bxgwqs" path="res://UI/Menu/Skills/DashUnlimited.tres" id="11_ihl1f"]
 [ext_resource type="Resource" uid="uid://brw5efrr5wus0" path="res://UI/Menu/Skills/LimiterOff.tres" id="12_mdmuv"]
 [ext_resource type="Resource" uid="uid://cf8q11soq423v" path="res://UI/Menu/Skills/AbilitiyMaximum.tres" id="13_wqsvt"]
 
 [resource]
 script = ExtResource("6_maeap")
-items = Array[ExtResource("1_ycpav")]([ExtResource("2_4uhrv"), ExtResource("3_aitww"), ExtResource("4_6bhr3"), ExtResource("5_maeap"), ExtResource("6_wsnfn"), ExtResource("7_3ocwg"), ExtResource("8_ihl1f"), ExtResource("9_mdmuv"), ExtResource("10_wqsvt"), ExtResource("11_ihl1f"), ExtResource("12_mdmuv"), ExtResource("13_wqsvt")])
+items = Array[ExtResource("1_ycpav")]([null, null, null, ExtResource("3_aitww"), ExtResource("4_6bhr3"), ExtResource("5_maeap"), ExtResource("6_wsnfn"), ExtResource("8_ihl1f"), ExtResource("9_mdmuv"), ExtResource("11_ihl1f"), ExtResource("12_mdmuv"), ExtResource("13_wqsvt")])
 metadata/_custom_type_script = "uid://c8jp7me8fja16"
