@@ -1,13 +1,15 @@
 # Pointless
-A Game made by Anomaly Hunters for the GMTK 2026 Game Jam
-
+A game made in Godot by the Anomaly Hunters team for the GMTK 2026 Game Jam.
+![thumbnail image with robber illuminated by flashlight](Assets/thumbnail.png)
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
-
 
 ## About
 
-Pointless is a story adventure game where we follow this one triangle guy and his adventure to save another circle thing. And the guy in lore playing the game spilled water on his PC :(
+Pointless is a 2d top-down action game about a triangle making his way through a world that is corrupting (after the person playing it spilled water on his PC). Movement switches between a dash mode and a bounce mode while a countdown to full corruption runs in the background, and every hit costs seconds.
 
+Custom abilities like Poly Spikes, Blink Dash, Chain Kill and Stun Save each carry their own cooldowns and charges. Three can be equipped at a time, dragged from the inventory in the pause menu into the active slots on the HUD. The final boss strips that loadout out and hands over three overpowered abilities instead, which toggle on and off and combine into a super mode.
+
+Play it here: https://thebuiifrog.itch.io/pointless
 
 ## Members:
 in alphabetical order
