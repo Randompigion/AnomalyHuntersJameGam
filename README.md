@@ -32,8 +32,8 @@ in alphabetical order
 
 @syntax (Thinaphat Sooksri)
 
-@thebullfrog2970 (Jeremiah Hollingsworth)
-
 @tgs2401
+
+@thebullfrog2970 (Jeremiah Hollingsworth)
 
 @yuleedev (Yulee Oh)
