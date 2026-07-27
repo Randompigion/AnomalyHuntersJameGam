@@ -1,7 +1,7 @@
 # Pointless
 ![thumbnail image](Assets/cover.png)<br>
+Made for the 2026 GMTK Game Jam by the Anomaly Hunters<br>
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
-Made for the 2026 GMTK Game Jam by the Anomaly Hunters
 
 ## About
 
