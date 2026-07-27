@@ -1,6 +1,6 @@
 # Pointless
 A game made in Godot by the Anomaly Hunters team for the GMTK 2026 Game Jam.
-![thumbnail image with robber illuminated by flashlight](Assets/thumbnail.png)
+![thumbnail image](Assets/cover.png)
 [![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
 ## About
